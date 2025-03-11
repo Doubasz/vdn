@@ -11,3 +11,8 @@ Decor::Decor(){
     rect.w = 50;
     rect.h = 100;
 }
+
+
+SDL_Rect Decor::getRect(){
+    return rect;
+}

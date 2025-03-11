@@ -2,7 +2,7 @@
 #define PARTIE_H
 
 
-#include "Joueur.h"
+#include "Player.h"
 #include "Ennemi.h"
 #include "Decor.h"
 
@@ -21,17 +21,22 @@ class Partie{
     
     SDL_Texture* background;
 
-    Joueur joueur;
+    Player player;
     std::vector<Ennemi> ennemies;
     std::vector<Decor> decors;
     
 
     public:
         Partie();
-        void draw();
+        Partie(int lvl);
+
+        void draw(SDL_Renderer* renderer);
         void checkCollision();
         void deroulementPartie();
-
+        void handleInput(SDL_Keycode key);
+        bool isPlayerInTheAir();
+        bool playerOutOfBonds();
 };
+
 
 #endif

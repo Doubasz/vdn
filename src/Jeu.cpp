@@ -9,6 +9,8 @@ Jeu::Jeu(){
     int windowFlags = 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED;
 
+    quit = false;
+
 
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -33,14 +35,19 @@ Jeu::Jeu(){
         std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
         exit(-1);
     }
+
+    currentPartie = Partie(DESERT);
+
 }
 
 
 
 void Jeu::draw(){
     drawBackground(renderer);
+    currentPartie.draw(renderer);
 
     //currentPartie.draw();
+    SDL_RenderPresent(renderer);
 }
 
 
@@ -59,6 +66,13 @@ void Jeu::input(){
                 quit = true;
                 exit(0);
                 break;
+
+            case SDL_KEYDOWN:
+                currentPartie.handleInput(event.key.keysym.sym);
+                break;
+            
+            default:
+                break;
         }
     }
 }
@@ -76,6 +90,7 @@ void Jeu::gameLoop(){
 
         draw();
         input();
+        currentPartie.deroulementPartie();
         
 
             // Cap FPS

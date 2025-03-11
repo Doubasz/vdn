@@ -12,6 +12,7 @@ class Decor{
         Decor();
         void draw();
 
+        SDL_Rect getRect();
 };
 
 

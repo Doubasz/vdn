@@ -17,7 +17,7 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path){
 
 void drawBackground(SDL_Renderer*& renderer){
 
-    Color bg = Color(0xFF4c4f54);
+    Color bg = Color(0xFF9c7714);
 
     SDL_SetRenderDrawColor(renderer, bg.b, bg.g, bg.r, 255);
     SDL_RenderClear(renderer);
