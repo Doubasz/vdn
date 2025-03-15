@@ -30,11 +30,11 @@ Jeu::Jeu(){
 
     //textures = loadAllTexture(renderer);
 
-    TTF_Font* fontInit = TTF_OpenFont("/usr/share/fonts/truetype/Gargi/Gargi.ttf", 64);
+    /*TTF_Font* fontInit = TTF_OpenFont("/usr/share/fonts/truetype/Gargi/Gargi.ttf", 64);
     if (!fontInit) {
         std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
         exit(-1);
-    }
+    }*/
 
     currentPartie = Partie(DESERT);
 
@@ -68,13 +68,16 @@ void Jeu::input(){
                 break;
 
             case SDL_KEYDOWN:
-                currentPartie.handleInput(event.key.keysym.sym);
+                
                 break;
             
             default:
                 break;
         }
     }
+
+    const Uint8* keys = SDL_GetKeyboardState(NULL);
+    currentPartie.handleInput(keys);
 }
 
 void Jeu::gameLoop(){

@@ -33,7 +33,7 @@ class Partie{
         void draw(SDL_Renderer* renderer);
         void checkCollision();
         void deroulementPartie();
-        void handleInput(SDL_Keycode key);
+        void handleInput(const Uint8* key);
         bool isPlayerInTheAir();
         bool playerOutOfBonds();
 };

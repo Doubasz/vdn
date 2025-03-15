@@ -11,11 +11,10 @@ Player::Player(){
     rect.w = 50;
     rect.h = 100;
 
-    gravity = 0;
-    velocity = 0;
+    velocity = {0.0, 0.0};
     accel = 1;
     munition = 0;
-    etat = 0;
+    state = 0;
 
 }
 
@@ -35,36 +34,54 @@ void Player::changePosition(Vec2 pos){
 
 
 void Player::sauter(){
-    gravity = -20;
+    if(state != JUMP){
+        velocity.y = -20;
+    }
 }
 
-void Player::seDeplacer(SDL_Keycode key){
+void Player::update(){
+    rect.x += velocity.x;
+    rect.y += velocity.y;
+}
 
-    int level_width = 1000;
 
-    switch(key){
-        case SDLK_d:
-        case SDLK_RIGHT:{
-            if(rect.x < level_width) rect.x += velocity;
-            break;
+void Player::seDeplacer(const Uint8* key){  
+
+    if(key[SDL_SCANCODE_RIGHT] || key[SDL_SCANCODE_D]){
+        velocity.x += ACCEL;
+        if(velocity.x > MAX_SPEED) velocity.x = MAX_SPEED;
+    }
+    else if(key[SDL_SCANCODE_LEFT] || key[SDL_SCANCODE_Q]){
+
+        velocity.x -= ACCEL;
+        if(velocity.x < -MAX_SPEED) velocity.x = -MAX_SPEED;
+    }
+    else{
+        if(state == NEUTRAL){
+            if(velocity.x > 0){
+                velocity.x -= FRICTION;
+                if(velocity.x < 0) velocity.x = 0;
+            }
+            if(velocity.x < 0){
+                velocity.x += FRICTION;
+                if(velocity.x > 0) velocity.x = 0;
         }
-        case SDLK_q:
-        case SDLK_LEFT:{
-            if(rect.x > 0) rect.x -= velocity;
-            break;
+        
         }
     }
 }
 
 void Player::updateGravity(){
-    rect.y += gravity;
-    gravity += 1;
+    velocity.y += GRAVITY;
+    state = JUMP;
 }
 
 void Player::resetGravity(){
-    gravity = 0;
+    velocity.y = 0;
+    rect.y = 700 - rect.h;
+    state = NEUTRAL; 
 }
 
-SDL_Rect Player::getRect(){
+SDL_Rect& Player::getRect(){
     return rect;
 }

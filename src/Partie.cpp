@@ -35,26 +35,12 @@ Partie::Partie(int lvl){
 }
 
 
-void Partie::handleInput(SDL_Keycode key){
-    switch(key){
-        case SDLK_LEFT:
-        case SDLK_RIGHT:
-        case SDLK_UP:
-        case SDLK_DOWN:
-        case SDLK_z:
-        case SDLK_q:
-        case SDLK_s:
-        case SDLK_d:{
-            player.seDeplacer(key);
-            break;
-        }
+void Partie::handleInput(const Uint8* key){
 
-        case SDLK_SPACE:
-            player.sauter();
-            break;
+    player.seDeplacer(key);
 
-        default:
-            break;
+    if(key[SDL_SCANCODE_SPACE]){
+        player.sauter();
     }
 }
 
@@ -66,7 +52,9 @@ void Partie::draw(SDL_Renderer* renderer){
 
 void Partie::deroulementPartie(){
 
-    if(isPlayerInTheAir() && !playerOutOfBonds()){
+    player.update();
+
+    if(!playerOutOfBonds()){
         player.updateGravity();
     }
     else{
@@ -91,5 +79,5 @@ bool Partie::isPlayerInTheAir(){
 
 bool Partie::playerOutOfBonds(){
     SDL_Rect playRect = player.getRect();
-    return playRect.y + 10 > 900; 
+    return playRect.y + playRect.h > 700; 
 }

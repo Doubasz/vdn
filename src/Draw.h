@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "Vec2.h"
+#include "Vec2f.h"
 #include "Color.h"
 
 
