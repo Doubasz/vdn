@@ -45,9 +45,6 @@ void Partie::handleInput(const Uint8* key){
 }
 
 
-void Partie::draw(SDL_Renderer* renderer){
-    player.draw(renderer);
-}
 
 
 void Partie::deroulementPartie(){

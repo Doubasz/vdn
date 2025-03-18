@@ -1,7 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Draw.h"
+#include "Vec2.h"
+#include "Vec2f.h"
 
 enum Etat{
     QAHWA,
@@ -21,10 +22,9 @@ enum PlayerState{
 
 class Player{
 
-    SDL_Rect rect;
-    SDL_Texture* texture;
-
+    Vec2 position;
     Vec2f velocity;
+
     float accel;
     float friction;
     int munition;
@@ -33,12 +33,10 @@ class Player{
     public:
         Player();
 
-        SDL_Rect& getRect();
-
         void sauter();
         void lancerPierre();
-        void seDeplacer(const Uint8* key);
-        void draw(SDL_Renderer* renderer);
+        //void seDeplacer(const Uint8* key);
+        //void draw(SDL_Renderer* renderer);
         void changePosition(Vec2 pos);
         void updateGravity();
         void resetGravity();

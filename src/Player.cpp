@@ -6,11 +6,7 @@
 
 Player::Player(){
 
-    rect.x = 50;
-    rect.y = 400;
-    rect.w = 50;
-    rect.h = 100;
-
+    position = {0, 0};
     velocity = {0.0, 0.0};
     accel = 1;
     munition = 0;
@@ -19,17 +15,10 @@ Player::Player(){
 }
 
 
-void Player::draw(SDL_Renderer* renderer){
-    Color color = Color(0xFF523e08);
-
-    drawRect(renderer, rect, color, false);
-}
-
-
 
 void Player::changePosition(Vec2 pos){
-    rect.x = pos.x;
-    rect.y = pos.y;
+
+    position = pos;
 }
 
 
@@ -40,12 +29,12 @@ void Player::sauter(){
 }
 
 void Player::update(){
-    rect.x += velocity.x;
-    rect.y += velocity.y;
+    position.x += velocity.x;
+    position.y += velocity.y;
 }
 
 
-void Player::seDeplacer(const Uint8* key){  
+/*void Player::seDeplacer(const Uint8* key){  
 
     if(key[SDL_SCANCODE_RIGHT] || key[SDL_SCANCODE_D]){
         velocity.x += ACCEL;
@@ -69,7 +58,7 @@ void Player::seDeplacer(const Uint8* key){
         
         }
     }
-}
+}*/
 
 void Player::updateGravity(){
     velocity.y += GRAVITY;
@@ -78,10 +67,6 @@ void Player::updateGravity(){
 
 void Player::resetGravity(){
     velocity.y = 0;
-    rect.y = 700 - rect.h;
+    //rect.y = 700 - rect.h;
     state = NEUTRAL; 
-}
-
-SDL_Rect& Player::getRect(){
-    return rect;
 }

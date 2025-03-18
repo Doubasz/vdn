@@ -1,10 +1,10 @@
 
 
-#include "Jeu.h"
+#include "RenderJeu.h"
 
 int main(void){
 
-    Jeu jeu;
+    RenderJeu jeu;
 
     jeu.gameLoop();
 

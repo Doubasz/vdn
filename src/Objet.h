@@ -6,6 +6,7 @@
 
 class Objet{
 
+    Vec2 position;
     SDL_Rect rect;
     SDL_Texture* texture;
 

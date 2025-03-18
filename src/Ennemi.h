@@ -10,6 +10,8 @@ enum Type{
 
 class Ennemi{
 
+    Vec2 position;
+    
     int type;
     SDL_Rect rect;
     SDL_Texture* texture;
