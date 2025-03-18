@@ -35,11 +35,11 @@ Partie::Partie(int lvl){
 }
 
 
-void Partie::handleInput(const Uint8* key){
+void Partie::handleInput(const char key){
 
     player.seDeplacer(key);
 
-    if(key[SDL_SCANCODE_SPACE]){
+    if(key == ' '){
         player.sauter();
     }
 }
@@ -47,7 +47,7 @@ void Partie::handleInput(const Uint8* key){
 
 
 
-void Partie::deroulementPartie(){
+/*void Partie::deroulementPartie(){
 
     player.update();
 
@@ -57,24 +57,12 @@ void Partie::deroulementPartie(){
     else{
         player.resetGravity();
     }
-}
+}*/
 
 
 bool Partie::isPlayerInTheAir(){
 
-    SDL_Rect playRect = player.getRect();
-
-    for(Decor decor : decors){
-        SDL_Rect decrRect = decor.getRect();
-
-        if(SDL_HasIntersection(&playRect, &decrRect)){
-            return false;
-        }
-    }
-    return true;
+    Vec2 playPos = player.getPos();
+    return false;
 } 
 
-bool Partie::playerOutOfBonds(){
-    SDL_Rect playRect = player.getRect();
-    return playRect.y + playRect.h > 700; 
-}

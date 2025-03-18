@@ -21,10 +21,13 @@ void Player::changePosition(Vec2 pos){
     position = pos;
 }
 
+Vec2 Player::getPos(){
+    return position;
+}
 
 void Player::sauter(){
     if(state != JUMP){
-        velocity.y = -20;
+        velocity.y -=3;
     }
 }
 
@@ -34,31 +37,19 @@ void Player::update(){
 }
 
 
-/*void Player::seDeplacer(const Uint8* key){  
+ void Player::seDeplacer(const char key){  
 
-    if(key[SDL_SCANCODE_RIGHT] || key[SDL_SCANCODE_D]){
-        velocity.x += ACCEL;
+    if(key == 'D' || key == 'd' ){
+        velocity.x += 1;
         if(velocity.x > MAX_SPEED) velocity.x = MAX_SPEED;
     }
-    else if(key[SDL_SCANCODE_LEFT] || key[SDL_SCANCODE_Q]){
+    else if( key == 'Q' || key == 'q'){
 
-        velocity.x -= ACCEL;
+        velocity.x -= 1;
         if(velocity.x < -MAX_SPEED) velocity.x = -MAX_SPEED;
     }
-    else{
-        if(state == NEUTRAL){
-            if(velocity.x > 0){
-                velocity.x -= FRICTION;
-                if(velocity.x < 0) velocity.x = 0;
-            }
-            if(velocity.x < 0){
-                velocity.x += FRICTION;
-                if(velocity.x > 0) velocity.x = 0;
-        }
-        
-        }
-    }
-}*/
+    
+}
 
 void Player::updateGravity(){
     velocity.y += GRAVITY;

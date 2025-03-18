@@ -12,6 +12,7 @@ enum Niveau{
     VILLE
 };
 
+#define HAUTEURINIT 3
 class Partie{
 
     int niveau;
@@ -19,7 +20,7 @@ class Partie{
     int nbLife;
     bool isFini;
     
-    SDL_Texture* background;
+ 
 
     Player player;
     std::vector<Ennemi> ennemies;
@@ -30,10 +31,9 @@ class Partie{
         Partie();
         Partie(int lvl);
 
-        void draw(SDL_Renderer* renderer);
         void checkCollision();
         void deroulementPartie();
-        void handleInput(const Uint8* key);
+        void handleInput(const char key);
         bool isPlayerInTheAir();
         bool playerOutOfBonds();
 };

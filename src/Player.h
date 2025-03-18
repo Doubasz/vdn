@@ -34,8 +34,9 @@ class Player{
         Player();
 
         void sauter();
+        Vec2 getPos();
         void lancerPierre();
-        //void seDeplacer(const Uint8* key);
+        void seDeplacer(const char key);
         //void draw(SDL_Renderer* renderer);
         void changePosition(Vec2 pos);
         void updateGravity();

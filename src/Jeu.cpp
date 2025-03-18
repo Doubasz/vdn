@@ -1,4 +1,4 @@
-
+/*
 
 #include "Jeu.h"
 #include "Vec2.h"
@@ -36,8 +36,8 @@ Jeu::Jeu(){
         exit(-1);
     }*/
 
-    currentPartie = Partie(DESERT);
-
+   // currentPartie = Partie(DESERT);
+/*
 }
 
 
@@ -102,4 +102,4 @@ void Jeu::gameLoop(){
             SDL_Delay(frameDelay - frameTime);  // Wait for next frame
         }
     }
-}
+}*/

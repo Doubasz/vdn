@@ -1,12 +1,13 @@
 
 
-#include "RenderJeu.h"
+#include "Niveau.h"
 
 int main(void){
 
-    RenderJeu jeu;
+    Niveau niveau;
+    niveau.afficher();
 
-    jeu.gameLoop();
+    
 
     return 0;
 }
