@@ -7,6 +7,11 @@
 #include "Niveau.h"
 
 
+enum Niveauu{
+    DESERT,
+    FORET,
+    VILLE
+};
 
 class Partie{
 
@@ -31,6 +36,7 @@ class Partie{
         Player& getPlayer();
         bool isPlayerInTheAir();
         bool playerOutOfBonds();
+        int getPlayerState();
 };
 
 

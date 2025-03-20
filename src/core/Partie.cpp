@@ -52,3 +52,7 @@ bool Partie::isPlayerInTheAir(){
     return false;
 } 
 
+
+int Partie::getPlayerState(){
+    return player.getState();
+}

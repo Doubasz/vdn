@@ -12,6 +12,8 @@ enum Etat{
 
 enum PlayerState{
     NEUTRAL,
+    LEFT,
+    RIGHT,
     JUMP,
 };
 
@@ -41,6 +43,8 @@ class Player{
         void changePosition(Vec2 pos);
         void updateGravity();
         void resetGravity();
+        void update();
+        int getState();
 
 };
 

@@ -62,3 +62,8 @@ void Player::resetGravity(){
     //rect.y = 700 - rect.h;
     state = NEUTRAL; 
 }
+
+
+int Player::getState(){
+    return state;
+}
