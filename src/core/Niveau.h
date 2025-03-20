@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include "Ennemi.h" // Ensure Ennemi class is defined and included properly
 using namespace std;
 
 class Niveau{
@@ -16,15 +17,17 @@ class Niveau{
 
         int n_dimx,n_dimy;
         TypeCase n_ter[100][100];
-
+        vector<Ennemi> ennemis; // Ensure Ennemi class is correctly defined
         
 
     public :
         Niveau();
+        int getWidth() const;
+        int getHeight() const;
         void afficher();
         bool estPositionPersoValide(const int x, const int y)const;
-        vector<char> &getGrille();
+        char getCase(const int x, const int y) const;
+        void ennemiBougeAuto();
 };
-
 
 #endif

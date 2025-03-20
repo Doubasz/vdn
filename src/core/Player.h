@@ -3,6 +3,7 @@
 
 #include "Vec2.h"
 #include "Vec2f.h"
+#include "Niveau.h"
 
 enum Etat{
     QAHWA,
@@ -35,13 +36,11 @@ class Player{
 
         void sauter();
         Vec2 getPos();
-        void lancerPierre();
-        void seDeplacer(const char key);
+        void seDeplacer(const char key,const Niveau &niv);
         //void draw(SDL_Renderer* renderer);
         void changePosition(Vec2 pos);
         void updateGravity();
         void resetGravity();
-        void update();
 
 };
 

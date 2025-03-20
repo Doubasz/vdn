@@ -3,7 +3,7 @@
 
 #define ENNEMI_H
 
-#include "Niveau.h"
+
 
 
 
@@ -27,13 +27,20 @@ public:
 
 Ennemi();
 
+int getX() const;
+void setX(int x);
+
+int getY() const;
+void setY(int y);
+
+int getDir() const;
+void setDir(int dir);
 
 
-void bougeAuto(const Niveau &t);
 
 
 
-~Ennemi();
+
 
 
 

@@ -4,9 +4,10 @@
 #include "Player.h"
 
 
+
 Player::Player(){
 
-    position = {0, 0};
+    position = {1, 1};
     velocity = {0.0, 0.0};
     accel = 1;
     munition = 0;
@@ -31,22 +32,22 @@ void Player::sauter(){
     }
 }
 
-void Player::update(){
-    position.x += velocity.x;
-    position.y += velocity.y;
-}
 
 
- void Player::seDeplacer(const char key){  
+ void Player::seDeplacer(const char key, const Niveau &niv){  
 
     if(key == 'D' || key == 'd' ){
-        velocity.x += 1;
-        if(velocity.x > MAX_SPEED) velocity.x = MAX_SPEED;
+       
+        if(niv.estPositionPersoValide(position.x + 1,position.y))
+            position.x += 1;
+        
     }
     else if( key == 'Q' || key == 'q'){
 
-        velocity.x -= 1;
-        if(velocity.x < -MAX_SPEED) velocity.x = -MAX_SPEED;
+        if(niv.estPositionPersoValide(position.x - 1,position.y))
+            position.x -=1;
+        
+        
     }
     
 }

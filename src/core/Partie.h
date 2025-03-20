@@ -4,15 +4,10 @@
 
 #include "Player.h"
 #include "Ennemi.h"
-#include "Decor.h"
+#include "Niveau.h"
 
-enum Niveau{
-    DESERT,
-    FORET,
-    VILLE
-};
 
-#define HAUTEURINIT 3
+
 class Partie{
 
     int niveau;
@@ -20,20 +15,20 @@ class Partie{
     int nbLife;
     bool isFini;
     
+    vector<Niveau> niveaux;
  
 
     Player player;
-    std::vector<Ennemi> ennemies;
-    std::vector<Decor> decors;
-    
+
 
     public:
         Partie();
         Partie(int lvl);
-
+        vector<Niveau> getNiveaux();
         void checkCollision();
         void deroulementPartie();
-        void handleInput(const char key);
+        void handleInput(const char key,const Niveau &n);
+        Player& getPlayer();
         bool isPlayerInTheAir();
         bool playerOutOfBonds();
 };

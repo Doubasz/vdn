@@ -1,20 +1,37 @@
 # Variables
 CXX = g++
-CXXFLAGS = -Wall -g
-SDL2_FLAGS = `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_ttf
+CXXFLAGS = -std=c++17 -Wall -Wextra -I./src/core -I./src/txt
+SRX_CORE = src/core
+SRX_TXT = src/txt
+BIN_DIR = bin
 
-# Target
-TARGET = vdn
-SRCS_DIR = src
-SRCS = $(wildcard $(SRCS_DIR)/*.cpp)
+# Liste des fichiers sources et objets
+CORE_SRC = $(wildcard $(SRX_CORE)/*.cpp)
+TXT_SRC = $(wildcard $(SRX_TXT)/*.cpp)
+OBJS = $(CORE_SRC:.cpp=.o) $(TXT_SRC:.cpp=.o)
 
-# Build rules
-all: $(TARGET)
+# Nom de l'exécutable
+EXEC = $(BIN_DIR)/jeu
 
-$(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET) $(SDL2_FLAGS)
+# Règle principale
+all: $(EXEC)
 
+# Génération de l'exécutable
+$(EXEC): $(OBJS)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# Compilation des fichiers objets
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Nettoyage
 clean:
-	rm -f $(TARGET)
+	rm -f $(SRX_CORE)/*.o $(SRX_TXT)/*.o
+	rm -f $(EXEC)
 
-.PHONY: all clean
+# Nettoyage complet (avec le dossier bin)
+distclean: clean
+	rm -rf $(BIN_DIR)
+
+# Phony targets
+.PHONY: all clean distclean

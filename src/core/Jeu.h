@@ -2,16 +2,11 @@
 #define JEU_H
 
 
-#define WIDTH 1400
-#define HEIGHT 900
-
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
 #include <vector>
 #include <iostream>
 
 #include "Partie.h"
+#include "Niveau.h"
 
 enum State{
     MENU_PRINCIPALE,
@@ -23,10 +18,7 @@ enum State{
 
 class Jeu{
 
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    std::vector<SDL_Texture*> textures;
-
+    
     Partie currentPartie;
 
     int state;
@@ -34,6 +26,8 @@ class Jeu{
 
     public:
         Jeu();
+
+        void actionAuto();
 
         void gameLoop();
         void draw();

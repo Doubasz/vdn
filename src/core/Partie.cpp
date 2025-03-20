@@ -6,47 +6,33 @@
 
 Partie::Partie(){
 
-    niveau = DESERT;
     score = 0;
+
     nbLife = 5;
     isFini = false;
-    
-}
-
-
-Partie::Partie(int lvl){
-
-    niveau = lvl;
     player = Player();
-    isFini = false;
-    nbLife = 5;
-    score = 0;
-
-    switch(niveau){
-        case DESERT:{
-            player.changePosition(Vec2{40, 450});
-            
-        }
-
-        default:
-            break;
-    }
-
 }
 
 
-void Partie::handleInput(const char key){
 
-    player.seDeplacer(key);
+
+
+void Partie::handleInput(const char key,const Niveau &n){
+
+    player.seDeplacer(key,n);
 
     if(key == ' '){
         player.sauter();
     }
 }
 
+Player& Partie::getPlayer(){
+    return player;
+}
 
-
-
+vector<Niveau> Partie::getNiveaux() {
+    return niveaux;
+}
 /*void Partie::deroulementPartie(){
 
     player.update();
