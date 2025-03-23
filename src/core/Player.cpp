@@ -44,20 +44,22 @@ void Player::update(){
 
 void Player::seDeplacer(std::string input){
 
-    if(!input.empty()){
-        if(contains(input, 'd')){
-            velocity.x += accel;
-            if(velocity.x > maxSpeed) velocity.x = maxSpeed;
-        }
-        if(contains(input, 'q')){
-            velocity.x -= accel;
-            if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
-        }
-        if(contains(input, ' ')){
-            sauter();
-        }
+    std::cout << "input: " << input << std::endl;
+
+    if(contains(input, 'd')){
+        velocity.x += accel;
+        if(velocity.x > maxSpeed) velocity.x = maxSpeed;
     }
-    else{
+    if(contains(input, 'q')){
+        velocity.x -= accel;
+        if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
+    }
+    if(contains(input, ' ')){
+        sauter();
+    }
+    
+    if(!(contains(input, 'd')  || contains(input, 'q'))){
+
         if(state == NEUTRAL){
             if(velocity.x > 0){
                 velocity.x -= friction;
@@ -66,12 +68,18 @@ void Player::seDeplacer(std::string input){
             if(velocity.x < 0){
                 velocity.x += friction;
                 if(velocity.x > 0) velocity.x = 0;
-        }
-        
+            }
+                
         }
     }
+        
+    
 }
 
+
+void Player::changeVelocity(int x, int y){
+    velocity = {x, y};
+}
 
 
 bool contains(std::string s, char target){

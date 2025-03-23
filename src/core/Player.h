@@ -43,6 +43,8 @@ public:
     void changePosition(Vec2 pos);
     void changePosition(int x, int y);
 
+    void changeVelocity(int x, int y);
+
     void updateGravity();
     void resetGravity();
 

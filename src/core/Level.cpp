@@ -201,9 +201,9 @@ void Level::checkCollisionPlayerPlatform(){
             if(playerTop <= platformBottom && (playerRight >= platformLeft && playerLeft <= platformRight)){
                 player.changePosition(playerPos.x, platformPos.y + 1);
             }
-        }*/
+        }
 
-        /*if(playerRight >= platformLeft && (playerTop <= platformBottom && playerBottom >= platformTop)){
+        if(playerRight >= platformLeft && (playerTop <= platformBottom && playerBottom >= platformTop)){
             player.changePosition(platformLeft - 1, playerPos.y);
         }
         if(playerLeft >= platformRight && (playerTop <= platformBottom && playerBottom >= platformTop)){
