@@ -1,11 +1,12 @@
-#include "jeuTxt.h"
+#include "txtJeu.h"
+#include "winTxt.h"
 
 int main() {
-    // Création de l'instance du jeu en mode texte
-    JeuTxt jeuTxt;
 
-    // Démarrage de la boucle principale du jeu
-    jeuTxt.boucleDeJeu();
+    termClear();
+
+    Jeu jeu;
+    txtBoucle(jeu);
 
     return 0;
 }

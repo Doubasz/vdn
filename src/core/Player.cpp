@@ -5,56 +5,86 @@
 
 
 
-Player::Player(){
+Player::Player(): Entity(){
 
-    position = {1, 1};
-    velocity = {0.0, 0.0};
     accel = 1;
-    munition = 0;
-    state = 0;
+    friction = 1;
+    maxSpeed = 1;
+    maxFall = 1;
+    gravity = 1;
+    dimension = {0, 0};
+    velocity = {0, 0};
 
+    munition = 0;
+    state = NEUTRAL;
 }
 
 
 
 void Player::changePosition(Vec2 pos){
-
     position = pos;
 }
 
-Vec2 Player::getPos(){
-    return position;
+void Player::changePosition(int x, int y){
+    position = {x, y};
 }
 
 void Player::sauter(){
     if(state != JUMP){
-        velocity.y -=3;
+        velocity.y -= 2;
+        state = JUMP;
+    }
+}
+
+void Player::update(){
+    position.x += velocity.x;
+    position.y += velocity.y;
+}
+
+
+void Player::seDeplacer(std::string input){
+
+    if(!input.empty()){
+        if(contains(input, 'd')){
+            velocity.x += accel;
+            if(velocity.x > maxSpeed) velocity.x = maxSpeed;
+        }
+        if(contains(input, 'q')){
+            velocity.x -= accel;
+            if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
+        }
+        if(contains(input, ' ')){
+            sauter();
+        }
+    }
+    else{
+        if(state == NEUTRAL){
+            if(velocity.x > 0){
+                velocity.x -= friction;
+                if(velocity.x < 0) velocity.x = 0;
+            }
+            if(velocity.x < 0){
+                velocity.x += friction;
+                if(velocity.x > 0) velocity.x = 0;
+        }
+        
+        }
     }
 }
 
 
 
- void Player::seDeplacer(const char key, const Niveau &niv){  
+bool contains(std::string s, char target){
 
-    if(key == 'D' || key == 'd' ){
-       
-        if(niv.estPositionPersoValide(position.x + 1,position.y))
-            position.x += 1;
-        
+    for(char c : s){
+        if(c == target) return true;
     }
-    else if( key == 'Q' || key == 'q'){
-
-        if(niv.estPositionPersoValide(position.x - 1,position.y))
-            position.x -=1;
-        
-        
-    }
-    
+    return false;
 }
 
 void Player::updateGravity(){
-    velocity.y += GRAVITY;
-    state = JUMP;
+    velocity.y += gravity;
+    if(velocity.y > maxFall) velocity.y = maxFall;
 }
 
 void Player::resetGravity(){

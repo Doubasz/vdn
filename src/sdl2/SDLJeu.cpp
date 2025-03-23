@@ -36,7 +36,7 @@ SDLJeu::SDLJeu(){
         exit(-1);
     }*/
 
-   currentPartie = Partie(DESERT);
+   currentLevel = Level(DESERT);
 
 }
 
@@ -55,7 +55,7 @@ void SDLJeu::gameLoop(){
 
         draw();
         input();
-        currentPartie.deroulementPartie();
+        
         
 
             // Cap FPS
@@ -72,6 +72,8 @@ void SDLJeu::input(){
 
     Vec2 mouse;
     SDL_GetMouseState(&mouse.x, &mouse.y);
+
+    std::string input;
 
     SDL_Event event;
 
@@ -93,7 +95,17 @@ void SDLJeu::input(){
     }
 
     const Uint8* keys = SDL_GetKeyboardState(NULL);
-    //currentPartie.handleInput(keys);
+
+    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
+        input += 'd';
+    }
+    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
+        input += 'q';
+    }
+    if(keys[SDL_SCANCODE_SPACE]){
+        input += ' ';
+    }
+    currentLevel.deroulementLevel(input);
 }
 
 
@@ -108,7 +120,7 @@ void SDLJeu::draw(){
 
 void SDLJeu::drawPlayer(){
 
-    int playerState = currentPartie.getPlayerState();
+    int playerState = currentLevel.getPlayerState();
     drawTexture(renderer, playerTexture[playerState], playerRect);
 }
 

@@ -1,9 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Vec2.h"
-#include "Vec2f.h"
-#include "Niveau.h"
+#include "Entity.h"
 
 enum Etat{
     QAHWA,
@@ -23,31 +21,37 @@ enum PlayerState{
 #define MAX_SPEED 5.0f
 
 
-class Player{
+class Player : public Entity{
 
-    Vec2 position;
-    Vec2f velocity;
 
+private:
     float accel;
     float friction;
+    float maxSpeed;
+    float maxFall;
+    float gravity;
     int munition;
     int state;
 
-    public:
-        Player();
+public:
+    Player();
 
-        void sauter();
-        Vec2 getPos();
-        void seDeplacer(const char key,const Niveau &niv);
-        //void draw(SDL_Renderer* renderer);
-        void changePosition(Vec2 pos);
-        void updateGravity();
-        void resetGravity();
-        void update();
-        int getState();
+    void sauter();
+
+    void seDeplacer(std::string input);
+
+    void changePosition(Vec2 pos);
+    void changePosition(int x, int y);
+
+    void updateGravity();
+    void resetGravity();
+
+    void update() override;
+
+    int getState();
 
 };
 
-
+bool contains(std::string input, char target);
 
 #endif

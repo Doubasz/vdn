@@ -6,7 +6,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <vector>
-#include "../core/Partie.h"
+#include "../core/Level.h"
 
 
 #define SCREEN_WIDTH 1400
@@ -28,7 +28,7 @@ class SDLJeu{
     std::vector<SDL_Texture*> ennemyTexture;
     std::vector<SDL_Rect> ennemyRect;
 
-    Partie currentPartie;
+    Level currentLevel;
 
     Vec2 camera;
 

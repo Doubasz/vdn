@@ -5,11 +5,10 @@
 #include <vector>
 #include <iostream>
 
-#include "Partie.h"
-#include "Niveau.h"
+#include "Level.h"
 
 enum State{
-    MENU_PRINCIPALE,
+    MENU_PRINCIPAL,
     CHOIX_NIVEAU,
     NIVEAU,
     MENU_NIVEAU,
@@ -18,20 +17,16 @@ enum State{
 
 class Jeu{
 
-    
-    Partie currentPartie;
 
+    Level currentLevel;
     int state;
-    bool quit;
 
     public:
+
         Jeu();
-
-        void actionAuto();
-
         void gameLoop();
-        void draw();
-        void input();
+
+        Level& getCurrentLevel();
 
 };
 
