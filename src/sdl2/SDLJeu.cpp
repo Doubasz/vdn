@@ -22,7 +22,7 @@ SDLJeu::SDLJeu(){
     }
 
     if (TTF_Init() == -1) {
-        Log::error("SDLJeu::SDLJeu() Couldn't init TTF");
+        Log::error("SDLJeu::SDLJeu() Couldn't init TTF" );
         Log::error(std::string (TTF_GetError()));
         exit(1);
     }

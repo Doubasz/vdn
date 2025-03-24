@@ -56,7 +56,7 @@ void Level::loadTileMap(){
 
     switch(level){
         case DESERT:
-            path = "src/mapGeneration/map1.txt";
+            path = "scripts/mapGeneration/map1.txt";
     }
 
     if(!path.empty()){
@@ -91,7 +91,7 @@ void Level::loadGameMap(){
 
     switch(level){
         case DESERT:
-            path = "src/mapGeneration/gameMap1.txt";
+            path = "scripts/mapGeneration/gameMap1.txt";
     }
 
     std::ifstream file(path);
