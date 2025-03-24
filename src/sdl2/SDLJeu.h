@@ -3,16 +3,20 @@
 
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <vector>
-#include "../core/Level.h"
+#include "../core/Jeu.h"
+#include "../core/Log.h"
 
 
 #define SCREEN_WIDTH 1400
 #define SCREEN_HEIGHT 900
 
 class SDLJeu{
+
+    Jeu jeu;
 
     SDL_Window* window;
     SDL_Renderer* renderer;
@@ -36,15 +40,17 @@ class SDLJeu{
     bool quit;
 
 
-    public:
-        SDLJeu();
+public:
+    SDLJeu();
 
-        void gameLoop();
-        void input();
+    void gameLoop();
+    void input();
 
-        void draw();
-        void drawPlayer();
-        void drawBackground();
+    void draw();
+    void drawPlayer();
+    void drawBackground();
+
+    void loadPlayerTextures();
 };
 
 

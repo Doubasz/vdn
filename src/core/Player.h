@@ -15,6 +15,11 @@ enum PlayerState{
     JUMP,
 };
 
+
+enum PlayerTexture{
+
+};
+
 #define ACCEL 0.5f
 #define FRICTION 0.3f
 #define GRAVITY 0.8f

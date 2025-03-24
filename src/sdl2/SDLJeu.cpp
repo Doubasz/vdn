@@ -6,6 +6,8 @@
 
 SDLJeu::SDLJeu(){
 
+    jeu = Jeu();
+
     int windowFlags = 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED;
 
@@ -14,19 +16,24 @@ SDLJeu::SDLJeu(){
 
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
-        std::cout << "Couldn't init SDL" << std::endl;
+        Log::error("SDLJeu::SDLJeu() Couldn't init SDL");
+        Log::error(std::string (SDL_GetError()));
         exit(1);
     }
 
     if (TTF_Init() == -1) {
-        std::cerr << "TTF_Init failed: " << TTF_GetError() << std::endl;
+        Log::error("SDLJeu::SDLJeu() Couldn't init TTF");
+        Log::error(std::string (TTF_GetError()));
         exit(1);
     }
 
-    window = SDL_CreateWindow("Chess", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+    window = SDL_CreateWindow("Vent du Nord", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
     renderer = SDL_CreateRenderer(window, -1, rendererFlags);
 
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+
+
+    loadPlayerTextures();
 
     //textures = loadAllTexture(renderer);
 
@@ -113,6 +120,32 @@ void SDLJeu::input(){
 
 void SDLJeu::draw(){
 
+    std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
+	Player &player = jeu.getCurrentLevel().getPlayer();
+	std::vector<Ennemy> &ennemies = jeu.getCurrentLevel().getEnnemies();
+
+    SDL_Texture* currentTexture;
+
+    for (int x = 0; x < tileMap[0].size(); ++x){
+        for (int y = 0; y < tileMap.size(); ++y){
+                char c;
+                int tile = tileMap[y][x];
+                switch(tileMap[y][x]){
+                    case SANDBLOCK:
+                        currentTexture = platformTexture[SANDBLOCK];
+                        break;
+                    case AIR:
+                        c = ' ';
+                        break;
+                    default:
+                        c = '?';
+                        break;
+                }
+   
+        }
+    }
+
+
     drawPlayer();
     drawBackground();
 }
@@ -141,4 +174,24 @@ void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect){
     int textureWidth, textureHeight;
     SDL_QueryTexture(texture, NULL, NULL, &textureWidth, &textureHeight);
     SDL_RenderCopy(renderer, texture, NULL, &rect);
+}
+
+SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path){
+    SDL_Texture* texture;
+
+    //SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);
+    Log::log("Loading " + std::string(path));
+
+    texture = IMG_LoadTexture(renderer, path);
+
+    return texture;
+}
+
+
+void SDLJeu::loadPlayerTextures(){
+
+    for(int i = 0; i < PLAYER_TEXTURE; i++){
+        SDL_Texture* temp = loadTexture(renderer, PLAYER_TEXTURE[i]);
+        playerTexture.push_back(temp);
+    }
 }
