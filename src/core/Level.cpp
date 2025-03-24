@@ -174,12 +174,11 @@ bool Level::playerOnPlatform(){
             return true;
         }
     }
-    return false;
+    return false; 
 }
 
 
-void Level::checkCollisionPlayerPlatform(){
-
+void Level::checkCollisionPlayerPlatform() {
     Vec2 playerPos = player.getPos();
     Vec2 playerDim = player.getDim();
 
@@ -188,7 +187,7 @@ void Level::checkCollisionPlayerPlatform(){
     int playerRight = playerPos.x + playerDim.x;
     int playerLeft = playerPos.x;
 
-    for(Platform p : platforms){
+    for (Platform p : platforms) {
         Vec2 platformPos = p.getPos();
         Vec2 platformDim = p.getDim();
 
@@ -196,34 +195,22 @@ void Level::checkCollisionPlayerPlatform(){
         int platformTop = platformPos.y;
         int platformRight = platformPos.x + platformDim.x;
         int platformLeft = platformPos.x;
-
-        /*if(player.getState() == JUMP){
-            if(playerTop <= platformBottom && (playerRight >= platformLeft && playerLeft <= platformRight)){
-                player.changePosition(playerPos.x, platformPos.y + 1);
-            }
-        }
-
-        if(playerRight >= platformLeft && (playerTop <= platformBottom && playerBottom >= platformTop)){
-            player.changePosition(platformLeft - 1, playerPos.y);
-        }
-        if(playerLeft >= platformRight && (playerTop <= platformBottom && playerBottom >= platformTop)){
-            player.changePosition(platformRight + 1, playerPos.y);
-        }*/
     }
-
-    
 }
 
-void Level::checkOutOfBonds(){
+void Level::checkOutOfBonds() {
     Vec2 playerPos = player.getPos();
     Vec2 playerDim = player.getDim();
 
-    if(playerPos.x < 0){
+    // Bord gauche
+    if (playerPos.x < 0) {
         player.changePosition(0, playerPos.y);
     }
-    if(playerPos.x + playerDim.x >= gameMap[0].size()){
-        player.changePosition(gameMap[0].size() - playerDim.x, playerPos.y);
+    // Bord droit
+    else if (playerPos.x + playerDim.x >= gameMap[0].size()) {
+        player.changePosition(gameMap[0].size() - playerDim.x - 1, playerPos.y); // -1 pour éviter le dépassement
     }
+
 }
 
 

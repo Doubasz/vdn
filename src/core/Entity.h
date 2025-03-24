@@ -25,7 +25,7 @@ public:
     Vec2 getPos() const {return position;}
     Vec2 getDim() const {return dimension;}
     
-    bool checkCollision(const Entity& other) const;
+    bool checkCollision(const Entity& other) ;
 
     
         

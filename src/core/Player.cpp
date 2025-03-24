@@ -31,7 +31,7 @@ void Player::changePosition(int x, int y){
 
 void Player::sauter(){
     if(state != JUMP){
-        velocity.y -= 2;
+        velocity.y = -2;
         state = JUMP;
     }
 }
