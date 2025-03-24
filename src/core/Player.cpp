@@ -44,8 +44,6 @@ void Player::update(){
 
 void Player::seDeplacer(std::string input){
 
-    std::cout << "input: " << input << std::endl;
-
     if(contains(input, 'd')){
         velocity.x += accel;
         if(velocity.x > maxSpeed) velocity.x = maxSpeed;
