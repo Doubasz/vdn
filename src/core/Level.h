@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include <memory>
+#include <algorithm>
 
 
 enum Niveauu{
@@ -65,12 +66,16 @@ public:
     std::vector<Ennemy>& getEnnemies();
     std::vector<Platform>& getPlatforms();
     std::vector<std::vector<int>>& getTileMap(); 
+    std::vector<std::vector<int>>& getGameMap(); 
 
     bool playerOnPlatform();
     void checkCollisionPlayerPlatform();
+    void playerCheckMovement();
     int getPlayerState();
     int getLevel();
     bool isLevelFinished();
+
+    void scale(int x);
 };
 
 void displayMap(const std::vector<std::vector<int>>& vec);

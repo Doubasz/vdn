@@ -25,6 +25,7 @@ class Jeu{
 
         Jeu();
         void gameLoop();
+        void scale(int x);
 
         Level& getCurrentLevel();
         void handleInput(std::string input);

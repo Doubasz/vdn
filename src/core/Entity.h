@@ -24,7 +24,8 @@ public:
 
     Vec2 getPos() const {return position;}
     Vec2 getDim() const {return dimension;}
-    
+    Vec2f getVel() const {return velocity;}
+
     void setPos(int x, int y);
     void setDim(int x, int y);
     void setVel(int x, int y);

@@ -6,7 +6,7 @@
 
 Platform::Platform() : Entity(){
     velocity = {0, 0};
-    dimension = {0, 0};
+    dimension = {1, 1};
     type = SAND;
 }
 

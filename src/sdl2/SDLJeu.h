@@ -65,6 +65,7 @@ public:
 };
 
 
+
 void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect);
 void drawRect(SDL_Renderer*& renderer, SDL_Rect rect, SDL_Color color);
 

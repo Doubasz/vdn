@@ -9,7 +9,7 @@ SDLJeu::SDLJeu(){
 
     jeu = Jeu();
 
-    
+    Player& player = jeu.getCurrentLevel().getPlayer();
 
     int windowFlags = 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED;
@@ -21,22 +21,37 @@ SDLJeu::SDLJeu(){
     Vec2 playerPos = jeu.getCurrentLevel().getPlayer().getPos();
     Vec2 playerDim = jeu.getCurrentLevel().getPlayer().getDim();
 
+    std::cout << "player pos: " << player.getPos().x << ", " << player.getPos().y << std::endl;
+
+    //jeu.scale(tileSize);
+
     jeu.getCurrentLevel().getPlayer().setPos(playerPos.x * tileSize, playerPos.y * tileSize);
+
+    
+    std::cout << "player dim: " << player.getDim().x << ", " << player.getDim().y << std::endl;
+
     jeu.getCurrentLevel().getPlayer().setDim(playerDim.x * tileSize, playerDim.y * tileSize);
+
+    std::cout << "player pos: " << player.getDim().x << ", " << player.getDim().y << std::endl;
     jeu.getCurrentLevel().getPlayer().setJumpBoost(-1 * (tileSize / 2));
 
-    std::vector<Ennemy> ennemies = jeu.getCurrentLevel().getEnnemies();
+    std::vector<Ennemy>& ennemies = jeu.getCurrentLevel().getEnnemies();
 
     for(Ennemy& e : ennemies){
         e.setPos(e.getPos().x * tileSize, e.getPos().y * tileSize);
         e.setDim(e.getDim().x * tileSize, e.getDim().y * tileSize);
     }
 
-    std::vector<Platform> platforms = jeu.getCurrentLevel().getPlatforms();
+    std::vector<Platform>& platforms = jeu.getCurrentLevel().getPlatforms();
 
     for(Platform& p : platforms){
+
+        std::cout << "platform pos: " << p.getPos().x << ", " << p.getPos().y << std::endl;
+
         p.setPos(p.getPos().x * tileSize, p.getPos().y * tileSize);
         p.setDim(p.getDim().x * tileSize, p.getDim().y * tileSize);
+
+        std::cout << "platform pos apres scale: " << p.getPos().x << ", " << p.getPos().y << std::endl;
     }
     
 
@@ -58,6 +73,10 @@ SDLJeu::SDLJeu(){
 
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 
+    std::vector<std::vector<int>>& gameMap = jeu.getCurrentLevel().getGameMap();
+
+    displayMap(gameMap);
+
 
     /*loadPlayerTextures();
     loadPlatformTextures();
@@ -72,6 +91,18 @@ SDLJeu::SDLJeu(){
 
 
 }
+
+/*void displayMap(const std::vector<std::vector<int>>& vec){
+
+    std::cout << "GameMap" << std::endl;
+    for (const auto& row : vec) {
+        for (int tile : row) {
+            std::cout << tile << " ";
+        }
+        std::cout << std::endl;
+    }
+}*/
+
 
 
 

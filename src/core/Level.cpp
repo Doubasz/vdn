@@ -54,6 +54,10 @@ std::vector<std::vector<int>>& Level::getTileMap(){
     return tileMap;
 }
 
+std::vector<std::vector<int>>& Level::getGameMap(){
+    return gameMap;
+}
+
 void Level::loadTileMap(){
 
     std::string path = "";
@@ -149,8 +153,12 @@ void Level::actionAuto(){
 
 void Level::deroulementLevel(std::string input){
 
-    player.seDeplacer(input);
     player.update();
+
+    player.seDeplacer(input);
+
+    //playerCheckMovement();
+
 
     actionAuto();
     checkCollisionPlayerPlatform();
@@ -160,7 +168,16 @@ void Level::deroulementLevel(std::string input){
         player.updateGravity();
     }
     else{
-        player.resetGravity();
+        //player.resetGravity();
+    }
+}
+
+void Level::playerCheckMovement(){
+    Vec2 playerPos = player.getPos();
+    Vec2 playerVel = player.getPos();
+
+    if(gameMap[playerPos.x + playerVel.x][playerPos.y + playerVel.y] != NONE){
+        player.setVel(0, 0);
     }
 }
 
@@ -191,20 +208,57 @@ bool Level::playerOnPlatform(){
 void Level::checkCollisionPlayerPlatform() {
     Vec2 playerPos = player.getPos();
     Vec2 playerDim = player.getDim();
+    Vec2f playerVel = player.getVel(); // Assuming you add a getVel() method to Entity
 
-    int playerBottom = playerPos.y + playerDim.y;
-    int playerTop = playerPos.y;
-    int playerRight = playerPos.x + playerDim.x;
-    int playerLeft = playerPos.x;
+    
 
-    for (Platform p : platforms) {
-        Vec2 platformPos = p.getPos();
-        Vec2 platformDim = p.getDim();
+    // Expanded collision check with more precise collision resolution
+    for (Platform& platform : platforms) {
+        Vec2 platformPos = platform.getPos();
+        Vec2 platformDim = platform.getDim();
 
-        int platformBottom = platformPos.y + platformDim.y;
-        int platformTop = platformPos.y;
-        int platformRight = platformPos.x + platformDim.x;
-        int platformLeft = platformPos.x;
+
+        // Collision detection using Axis-Aligned Bounding Box (AABB)
+        bool collisionX = (playerPos.x + playerDim.x >= platformPos.x) && 
+                          (platformPos.x + platformDim.x >= playerPos.x);
+        bool collisionY = (playerPos.y + playerDim.y >= platformPos.y) && 
+                          (platformPos.y + platformDim.y >= playerPos.y);
+
+        if (collisionX && collisionY) {
+            // Calculate overlap on each axis
+            int overlapX = std::min(
+                std::abs((playerPos.x + playerDim.x) - platformPos.x),
+                std::abs(playerPos.x - (platformPos.x + platformDim.x))
+            );
+            int overlapY = std::min(
+                std::abs((playerPos.y + playerDim.y) - platformPos.y),
+                std::abs(playerPos.y - (platformPos.y + platformDim.y))
+            );
+
+            // Resolve collision by moving out of the platform
+            if (overlapX < overlapY) {
+                // Horizontal collision
+                if (playerPos.x < platformPos.x) {
+                    // Collision from left
+                    player.changePosition(platformPos.x - playerDim.x, playerPos.y);
+                } else {
+                    // Collision from right
+                    player.changePosition(platformPos.x + playerDim.x, playerPos.y);
+                }
+                player.changeVelocity(0, playerVel.y);
+            } else {
+                // Vertical collision
+                if (playerPos.y < platformPos.y) {
+                    // Collision from top
+                    player.changePosition(playerPos.x, platformPos.y - playerDim.y);
+                    player.resetGravity(); // Landing on platform
+                } else {
+                    // Collision from bottom
+                    player.changePosition(playerPos.x, platformPos.y + platformDim.y);
+                    player.changeVelocity(playerVel.x, 0);
+                }
+            }
+        }
     }
 }
 
@@ -236,4 +290,10 @@ int Level::getLevel(){
 
 bool Level::isLevelFinished(){
     return isLevelCompleted;
+}
+
+
+void Level::scale(int x){
+
+    player.setPos(player.getPos().x * x, player.getPos().y * x);
 }

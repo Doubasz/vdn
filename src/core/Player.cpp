@@ -9,11 +9,11 @@ Player::Player(): Entity(){
 
     accel = 1;
     friction = 1;
-    maxSpeed = 1;
-    maxFall = 1;
+    maxSpeed = 5;
+    maxFall = 5;
     gravity = 1;
     jumpBoost = -2;
-    dimension = {0, 0};
+    dimension = {1, 1};
     velocity = {0, 0};
 
     munition = 0;

@@ -27,3 +27,9 @@ Level& Jeu::getCurrentLevel(){
 void Jeu::handleInput(std::string input){
     currentLevel.deroulementLevel(input);
 }
+
+
+void Jeu::scale(int x){
+
+    currentLevel.scale(x);
+}
