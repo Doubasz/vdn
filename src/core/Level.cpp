@@ -182,28 +182,37 @@ void Level::playerCheckMovement(){
 }
 
 
-bool Level::playerOnPlatform(){
-
+bool Level::playerOnPlatform() {
     Vec2 playerPos = player.getPos();
     Vec2 playerDim = player.getDim();
 
+    // Ajustez ces valeurs si nécessaire
     int playerBottom = playerPos.y + playerDim.y;
     int playerRight = playerPos.x + playerDim.x;
     int playerLeft = playerPos.x;
 
-
-    for(Platform p : platforms){
+    for (Platform& p : platforms) {
         Vec2 platformPos = p.getPos();
         Vec2 platformDim = p.getDim();
 
-        if((playerBottom >= platformPos.y && !(playerBottom > platformPos.y + platformDim.y + 1)) && (playerRight >= platformPos.x && playerLeft <= platformPos.x + platformDim.x)){
-            player.changePosition(playerPos.x, platformPos.y - playerDim.y - 1);
+        // Conditions de collision plus tolérantes
+        bool horizontalOverlap = 
+            playerRight > platformPos.x && 
+            playerLeft < platformPos.x + platformDim.x;
+
+        bool verticalContact = 
+            playerBottom >= platformPos.y && 
+            playerBottom <= platformPos.y + 2; // Augmentez cette valeur pour plus de tolérance
+
+        if (horizontalOverlap && verticalContact) {
+            // Repositionnement précis
+            player.changePosition(playerPos.x, platformPos.y - playerDim.y);
+            player.resetGravity(); // Réinitialise la gravité
             return true;
         }
     }
     return false; 
 }
-
 
 void Level::checkCollisionPlayerPlatform() {
     Vec2 playerPos = player.getPos();
@@ -270,10 +279,7 @@ void Level::checkOutOfBonds() {
     if (playerPos.x < 0) {
         player.changePosition(0, playerPos.y);
     }
-    // Bord droit
-    else if (playerPos.x + playerDim.x >= gameMap[0].size()) {
-        player.changePosition(gameMap[0].size() - playerDim.x - 1, playerPos.y); // -1 pour éviter le dépassement
-    }
+    
 
 }
 

@@ -7,7 +7,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <fstream>
-#include <nlohmann/json.hpp>
+
 #include <vector>
 #include "../core/Jeu.h"
 #include "../core/Log.h"

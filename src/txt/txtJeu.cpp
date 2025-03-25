@@ -37,7 +37,8 @@ void txtAff(WinTXT &win, Jeu &jeu)
     }
 		
     Vec2 playerPos = player.getPos();
-
+	Vec2 playerDim = player.getDim();
+	
 	
 	win.print(playerPos.x, playerPos.y, 'P');
 	
