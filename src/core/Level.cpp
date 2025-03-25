@@ -21,6 +21,10 @@ Level::Level(){
     initEntities();
 }
 
+Level::Level(int lvl) : Level(){
+    level = lvl;
+}
+
 void displayMap(const std::vector<std::vector<int>>& vec){
 
     std::cout << "GameMap" << std::endl;
@@ -30,10 +34,6 @@ void displayMap(const std::vector<std::vector<int>>& vec){
         }
         std::cout << std::endl;
     }
-}
-
-Level::Level(int lvl) : Level(){
-    level = lvl;
 }
 
 
@@ -46,6 +46,10 @@ std::vector<Ennemy>& Level::getEnnemies(){
     return ennemies;
 }
 
+std::vector<Platform>& Level::getPlatforms(){
+    return platforms;
+}
+
 std::vector<std::vector<int>>& Level::getTileMap(){
     return tileMap;
 }
@@ -56,7 +60,7 @@ void Level::loadTileMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/map2.txt";
+            path = "scripts/mapGeneration/map1.txt";
     }
 
     if(!path.empty()){
@@ -91,7 +95,7 @@ void Level::loadGameMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/gameMap3.txt";
+            path = "scripts/mapGeneration/gameMap1.txt";
     }
 
     std::ifstream file(path);
@@ -175,8 +179,8 @@ bool Level::playerOnPlatform(){
         Vec2 platformPos = p.getPos();
         Vec2 platformDim = p.getDim();
 
-        if((playerBottom >= platformPos.y && !(playerBottom > platformPos.y + platformDim.y)) && (playerRight >= platformPos.x && playerLeft <= platformPos.x + platformDim.x)){
-            player.changePosition(playerPos.x, platformPos.y - 1);
+        if((playerBottom >= platformPos.y && !(playerBottom > platformPos.y + platformDim.y + 1)) && (playerRight >= platformPos.x && playerLeft <= platformPos.x + platformDim.x)){
+            player.changePosition(playerPos.x, platformPos.y - playerDim.y - 1);
             return true;
         }
     }

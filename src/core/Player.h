@@ -16,9 +16,7 @@ enum PlayerState{
 };
 
 
-enum PlayerTexture{
 
-};
 
 #define ACCEL 0.5f
 #define FRICTION 0.3f
@@ -36,6 +34,7 @@ private:
     float maxFall;
     float gravity;
     int munition;
+    int jumpBoost;
     int state;
 
 public:
@@ -56,6 +55,7 @@ public:
     void update() override;
 
     int getState();
+    void setJumpBoost(int j);
 
 };
 

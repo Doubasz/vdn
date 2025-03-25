@@ -12,6 +12,7 @@ Player::Player(): Entity(){
     maxSpeed = 1;
     maxFall = 1;
     gravity = 1;
+    jumpBoost = -2;
     dimension = {0, 0};
     velocity = {0, 0};
 
@@ -31,7 +32,7 @@ void Player::changePosition(int x, int y){
 
 void Player::sauter(){
     if(state != JUMP){
-        velocity.y = -2;
+        velocity.y = jumpBoost;
         state = JUMP;
     }
 }
@@ -102,4 +103,8 @@ void Player::resetGravity(){
 
 int Player::getState(){
     return state;
+}
+
+void Player::setJumpBoost(int j){
+    jumpBoost = j;
 }

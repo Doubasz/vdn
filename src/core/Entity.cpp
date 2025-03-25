@@ -62,3 +62,15 @@ bool Entity::checkCollision(const Entity& other){
     return false; // Pas de collision
 }
 
+
+void Entity::setPos(int x, int y){
+    position = {x, y};
+}
+
+void Entity::setDim(int x, int y){
+    dimension = {x, y};
+}
+
+void Entity::setVel(int x, int y){
+    velocity = {x, y};
+}

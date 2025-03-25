@@ -63,6 +63,7 @@ public:
 
     Player& getPlayer();
     std::vector<Ennemy>& getEnnemies();
+    std::vector<Platform>& getPlatforms();
     std::vector<std::vector<int>>& getTileMap(); 
 
     bool playerOnPlatform();

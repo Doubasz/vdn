@@ -11,6 +11,8 @@ Jeu::Jeu(){
 }
 
 
+
+
 void Jeu::gameLoop(){
 
     if(currentLevel.isLevelFinished()){
@@ -20,4 +22,8 @@ void Jeu::gameLoop(){
 
 Level& Jeu::getCurrentLevel(){
     return currentLevel;
+}
+
+void Jeu::handleInput(std::string input){
+    currentLevel.deroulementLevel(input);
 }

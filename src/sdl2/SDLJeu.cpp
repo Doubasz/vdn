@@ -1,6 +1,7 @@
 
 
 #include "SDLJeu.h"
+#include <string>
 
 
 
@@ -8,11 +9,36 @@ SDLJeu::SDLJeu(){
 
     jeu = Jeu();
 
+    
+
     int windowFlags = 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED;
 
+    tileSize = 32;
+
     quit = false;
 
+    Vec2 playerPos = jeu.getCurrentLevel().getPlayer().getPos();
+    Vec2 playerDim = jeu.getCurrentLevel().getPlayer().getDim();
+
+    jeu.getCurrentLevel().getPlayer().setPos(playerPos.x * tileSize, playerPos.y * tileSize);
+    jeu.getCurrentLevel().getPlayer().setDim(playerDim.x * tileSize, playerDim.y * tileSize);
+    jeu.getCurrentLevel().getPlayer().setJumpBoost(-1 * (tileSize / 2));
+
+    std::vector<Ennemy> ennemies = jeu.getCurrentLevel().getEnnemies();
+
+    for(Ennemy& e : ennemies){
+        e.setPos(e.getPos().x * tileSize, e.getPos().y * tileSize);
+        e.setDim(e.getDim().x * tileSize, e.getDim().y * tileSize);
+    }
+
+    std::vector<Platform> platforms = jeu.getCurrentLevel().getPlatforms();
+
+    for(Platform& p : platforms){
+        p.setPos(p.getPos().x * tileSize, p.getPos().y * tileSize);
+        p.setDim(p.getDim().x * tileSize, p.getDim().y * tileSize);
+    }
+    
 
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -33,8 +59,9 @@ SDLJeu::SDLJeu(){
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 
 
-    loadPlayerTextures();
-
+    /*loadPlayerTextures();
+    loadPlatformTextures();
+*/
     //textures = loadAllTexture(renderer);
 
     /*TTF_Font* fontInit = TTF_OpenFont("/usr/share/fonts/truetype/Gargi/Gargi.ttf", 64);
@@ -43,7 +70,6 @@ SDLJeu::SDLJeu(){
         exit(-1);
     }*/
 
-   currentLevel = Level(DESERT);
 
 }
 
@@ -103,16 +129,20 @@ void SDLJeu::input(){
 
     const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
-        input += 'd';
+    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]){
+        Log::log("q pressed");
+        jeu.getCurrentLevel().getPlayer().seDeplacer("q");
+        input += "q";
     }
     if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
-        input += 'q';
+        jeu.getCurrentLevel().getPlayer().seDeplacer("d");
+        input += "d";
     }
     if(keys[SDL_SCANCODE_SPACE]){
-        input += ' ';
+        jeu.getCurrentLevel().getPlayer().sauter();
+        input += " ";
     }
-    currentLevel.deroulementLevel(input);
+    jeu.handleInput(input);
 }
 
 
@@ -120,7 +150,7 @@ void SDLJeu::input(){
 
 void SDLJeu::draw(){
 
-    std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
+    /*std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
 	Player &player = jeu.getCurrentLevel().getPlayer();
 	std::vector<Ennemy> &ennemies = jeu.getCurrentLevel().getEnnemies();
 
@@ -128,44 +158,98 @@ void SDLJeu::draw(){
 
     for (int x = 0; x < tileMap[0].size(); ++x){
         for (int y = 0; y < tileMap.size(); ++y){
-                char c;
-                int tile = tileMap[y][x];
-                switch(tileMap[y][x]){
-                    case SANDBLOCK:
-                        currentTexture = platformTexture[SANDBLOCK];
-                        break;
-                    case AIR:
-                        c = ' ';
-                        break;
-                    default:
-                        c = '?';
-                        break;
-                }
+
+            char c;
+            int tile = tileMap[y][x];
+            switch(tileMap[y][x]){
+                case SANDBLOCK:
+                    currentTexture = platformTexture[SANDBLOCK];
+                    break;
+                case AIR:
+                    c = ' ';
+                    break;
+                default:
+                    c = '?';
+                    break;
+            }
    
         }
-    }
+    }*/
 
 
-    drawPlayer();
     drawBackground();
+    drawTiles();
+    drawPlayer();
+    
+
+    SDL_RenderPresent(renderer);
 }
 
 
 void SDLJeu::drawPlayer(){
 
-    int playerState = currentLevel.getPlayerState();
-    drawTexture(renderer, playerTexture[playerState], playerRect);
+    SDL_Rect rect = SDL_Rect{32, 32, 32, 32};
+    rect.x = jeu.getCurrentLevel().getPlayer().getPos().x;
+    //Log::log("rect.x " + rect.x);
+    //std::cout << rect.x << std::endl;
+    rect.y = jeu.getCurrentLevel().getPlayer().getPos().y;
+    
+
+    /*int playerState = jeu.getCurrentLevel().getPlayerState();
+    drawTexture(renderer, playerTexture[playerState], playerRect);*/
+
+    drawRect(renderer, rect, SDL_Color{0, 255, 0});
+}
+
+
+void SDLJeu::drawTiles(){
+    std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
+
+    if (tileMap.empty() || tileMap[0].empty()) {
+        Log::error("SDLJeu::drawTiles tileMap empty");
+        return;
+    }
+
+    SDL_Color color;
+
+    SDL_Rect rect = SDL_Rect{0, 0, 32, 32};
+    
+
+    for(int i = 0; i < tileMap[0].size(); i++){
+        
+        for(int j = 0; j < tileMap.size(); j++){
+
+            rect.x = (i * tileSize);
+            rect.y = (j * tileSize);
+
+            switch(tileMap[j][i]){
+                case SANDBLOCK:
+                    color = SDL_Color{200, 100, 0};
+                    break;
+                case AIR:
+                    color = SDL_Color{100, 100, 200};
+                    break;
+            }
+
+            drawRect(renderer, rect, color);
+        }
+    }
+    
 }
 
 
 void SDLJeu::drawBackground(){
 
-    // Define the portion of the background to render
+    /*
     SDL_Rect srcRect = {camera.x, camera.y, SCREEN_WIDTH, SCREEN_HEIGHT};
     SDL_Rect destRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
 
-    // Render the background
-    SDL_RenderCopy(renderer, background, &srcRect, &destRect);
+
+    SDL_RenderCopy(renderer, background, &srcRect, &destRect);*/
+
+    SDL_SetRenderDrawColor(renderer, 230, 200, 100, 255);
+    SDL_RenderClear(renderer);
+
 }
 
 
@@ -190,8 +274,18 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path){
 
 void SDLJeu::loadPlayerTextures(){
 
-    for(int i = 0; i < PLAYER_TEXTURE; i++){
-        SDL_Texture* temp = loadTexture(renderer, PLAYER_TEXTURE[i]);
-        playerTexture.push_back(temp);
-    }
+    playerTexture.push_back(loadTexture(renderer, "textures/player.png"));
+    playerTexture.push_back(loadTexture(renderer, "textures/pebble.png"));
+}
+
+void SDLJeu::loadPlatformTextures(){
+
+    platformTexture.push_back(loadTexture(renderer, "textures/platform.png"));
+}
+
+void drawRect(SDL_Renderer*& renderer, SDL_Rect rect, SDL_Color color){
+
+    SDL_SetRenderDrawColor(renderer, color.b, color.g, color.r, 255);
+    SDL_RenderFillRect(renderer, &rect);
+    
 }
