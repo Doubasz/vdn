@@ -21,6 +21,10 @@ public:
     Ennemy();
     Ennemy(int x, int y);
 
+    void changePosition(int x, int y);
+
+    void moveAuto();
+
     void update() override;
 
 };

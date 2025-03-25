@@ -55,6 +55,8 @@ public:
 
     void initEntities();
 
+    void actionAuto();
+
     void checkCollision();
     void checkOutOfBonds();
     void deroulementLevel(std::string input);

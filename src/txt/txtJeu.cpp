@@ -38,9 +38,9 @@ void txtAff(WinTXT &win, Jeu &jeu)
 		
     Vec2 playerPos = player.getPos();
 
-	// Affichage de Pacman
+	
 	win.print(playerPos.x, playerPos.y, 'P');
-	// Affichage du Fantome
+	
     for(const Ennemy& e : ennemies){
         win.print(e.getPos().x, e.getPos().y, 'E');
     }

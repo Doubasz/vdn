@@ -56,7 +56,7 @@ void Level::loadTileMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/map1.txt";
+            path = "scripts/mapGeneration/map2.txt";
     }
 
     if(!path.empty()){
@@ -91,7 +91,7 @@ void Level::loadGameMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/gameMap1.txt";
+            path = "scripts/mapGeneration/gameMap3.txt";
     }
 
     std::ifstream file(path);
@@ -131,18 +131,24 @@ void Level::initEntities(){
                 case PLATFORM:
                     platforms.push_back(Platform(i, j));
             }
+
         }
     }
 
 }
 
+void Level::actionAuto(){
+    for(Ennemy e : ennemies){
+        e.moveAuto();
+    }
+}
 
 void Level::deroulementLevel(std::string input){
 
     player.seDeplacer(input);
     player.update();
 
-
+    actionAuto();
     checkCollisionPlayerPlatform();
     checkOutOfBonds();
 

@@ -8,7 +8,7 @@
 
 Entity::Entity(){
     position = {0, 0};
-    dimension = {0, 0};
+    dimension = {1, 1};
     velocity = {0, 0};
 }
 
