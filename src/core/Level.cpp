@@ -152,16 +152,35 @@ void Level::actionAuto(){
 }
 
 void Level::deroulementLevel(std::string input){
+    // try{
 
-    player.update();
+    //         if(gameMap[std::abs(player.getPos().x + player.getVel().x)][std::abs(player.getPos().y + player.getVel().y)] != 0){
+    //             std::cout << "prochain pos est " << player.getPos().x/32 + player.getVel().x << " , " << player.getPos().y/32 + player.getVel().y << std::endl;
+    //             std::cout <<"size gamemap est de " << gameMap.size() << " , " << gameMap[0].size() << std::endl;
+    //             std::cout << "vitesse :: " << player.getVel().x << std::endl;
+    //             player.update();
+    //         }else{
+    //             std::cout << "obstacle" << std::endl;
+    //         }
+    // }
+    // catch (const std::exception& e){
 
+    //     std::cerr << "Exception caught: " << e.what() << std::endl;
+    //     std::cout << "prochain pos est " << player.getPos().x + player.getVel().x << " , " << player.getPos().y + player.getVel().y << std::endl;
+    //     std::cout <<"size gamemap est de " << gameMap.size() << " , " << gameMap[0].size() << std::endl;
+    //     std::cout << "vitesse :: " << player.getVel().x << std::endl;
+    // }
+    std::cout << "prochain pos est " << player.getPos().x + player.getVel().x << " , " << player.getPos().y + player.getVel().y << std::endl;
+    std::cout <<"size gamemap est de " << gameMap[0].size() << " , " << gameMap.size() << std::endl;
+    std::cout << "vitesse :: " << player.getVel().x << std::endl;
+    player.checkAndUpdate(gameMap);
     player.seDeplacer(input);
 
     //playerCheckMovement();
 
 
     actionAuto();
-    checkCollisionPlayerPlatform();
+    
     checkOutOfBonds();
 
     if(!playerOnPlatform()){
@@ -172,14 +191,6 @@ void Level::deroulementLevel(std::string input){
     }
 }
 
-void Level::playerCheckMovement(){
-    Vec2 playerPos = player.getPos();
-    Vec2 playerVel = player.getPos();
-
-    if(gameMap[playerPos.x + playerVel.x][playerPos.y + playerVel.y] != NONE){
-        player.setVel(0, 0);
-    }
-}
 
 
 bool Level::playerOnPlatform() {
@@ -202,7 +213,7 @@ bool Level::playerOnPlatform() {
 
         bool verticalContact = 
             playerBottom >= platformPos.y && 
-            playerBottom <= platformPos.y + 2; // Augmentez cette valeur pour plus de tolérance
+            playerBottom <= platformPos.y + 3; // Augmentez cette valeur pour plus de tolérance
 
         if (horizontalOverlap && verticalContact) {
             // Repositionnement précis
@@ -214,62 +225,7 @@ bool Level::playerOnPlatform() {
     return false; 
 }
 
-void Level::checkCollisionPlayerPlatform() {
-    Vec2 playerPos = player.getPos();
-    Vec2 playerDim = player.getDim();
-    Vec2f playerVel = player.getVel(); // Assuming you add a getVel() method to Entity
 
-    
-
-    // Expanded collision check with more precise collision resolution
-    for (Platform& platform : platforms) {
-        Vec2 platformPos = platform.getPos();
-        Vec2 platformDim = platform.getDim();
-
-
-        // Collision detection using Axis-Aligned Bounding Box (AABB)
-        bool collisionX = (playerPos.x + playerDim.x >= platformPos.x) && 
-                          (platformPos.x + platformDim.x >= playerPos.x);
-        bool collisionY = (playerPos.y + playerDim.y >= platformPos.y) && 
-                          (platformPos.y + platformDim.y >= playerPos.y);
-
-        if (collisionX && collisionY) {
-            // Calculate overlap on each axis
-            int overlapX = std::min(
-                std::abs((playerPos.x + playerDim.x) - platformPos.x),
-                std::abs(playerPos.x - (platformPos.x + platformDim.x))
-            );
-            int overlapY = std::min(
-                std::abs((playerPos.y + playerDim.y) - platformPos.y),
-                std::abs(playerPos.y - (platformPos.y + platformDim.y))
-            );
-
-            // Resolve collision by moving out of the platform
-            if (overlapX < overlapY) {
-                // Horizontal collision
-                if (playerPos.x < platformPos.x) {
-                    // Collision from left
-                    player.changePosition(platformPos.x - playerDim.x, playerPos.y);
-                } else {
-                    // Collision from right
-                    player.changePosition(platformPos.x + playerDim.x, playerPos.y);
-                }
-                player.changeVelocity(0, playerVel.y);
-            } else {
-                // Vertical collision
-                if (playerPos.y < platformPos.y) {
-                    // Collision from top
-                    player.changePosition(playerPos.x, platformPos.y - playerDim.y);
-                    player.resetGravity(); // Landing on platform
-                } else {
-                    // Collision from bottom
-                    player.changePosition(playerPos.x, platformPos.y + platformDim.y);
-                    player.changeVelocity(playerVel.x, 0);
-                }
-            }
-        }
-    }
-}
 
 void Level::checkOutOfBonds() {
     Vec2 playerPos = player.getPos();

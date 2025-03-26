@@ -54,6 +54,8 @@ public:
 
     void update() override;
 
+    void checkAndUpdate(std::vector<std::vector<int>> &gameMap);
+
     int getState();
     void setJumpBoost(int j);
 

@@ -9,10 +9,10 @@ Player::Player(): Entity(){
 
     accel = 1;
     friction = 1;
-    maxSpeed = 5;
+    maxSpeed = 1;
     maxFall = 5;
     gravity = 1;
-    jumpBoost = -2;
+    jumpBoost = -3;
     dimension = {1, 1};
     velocity = {0, 0};
 
@@ -42,6 +42,63 @@ void Player::update(){
     position.y += velocity.y;
 }
 
+void Player::checkAndUpdate(std::vector<std::vector<int>> &gameMap) {
+    bool updat = true;
+
+    if (velocity.x > 0) {
+        if (velocity.y > 0) {
+            if (gameMap[position.x / 32 + 1][position.y / 32 + 1] == 0 || 
+                gameMap[position.x / 32][position.y / 32 + 1] == 0 || 
+                gameMap[position.x / 32 + 1][position.y / 32] == 0) {
+                updat = false;
+            }
+        } else if (velocity.y < 0) {
+            if (gameMap[position.x / 32 + 1][position.y / 32 - 1] == 0 || 
+                gameMap[position.x / 32][position.y / 32 - 1] == 0 || 
+                gameMap[position.x / 32 + 1][position.y / 32] == 0) {
+                updat = false;
+            }
+        } else {
+            if (gameMap[position.x / 32 + 1][position.y / 32] == 0) {
+                updat = false;
+            }
+        }
+    } else if (velocity.x < 0) {
+        if (velocity.y > 0) {
+            if (gameMap[position.x / 32 - 1][position.y / 32 + 1] == 0 || 
+                gameMap[position.x / 32][position.y / 32 + 1] == 0 || 
+                gameMap[position.x / 32 - 1][position.y / 32] == 0) {
+                updat = false;
+            }
+        } else if (velocity.y < 0) {
+            if (gameMap[position.x / 32 - 1][position.y / 32 - 1] == 0 || 
+                gameMap[position.x / 32][position.y / 32 - 1] == 0 || 
+                gameMap[position.x / 32 - 1][position.y / 32] == 0) {
+                updat = false;
+            }
+        } else {
+            if (gameMap[position.x / 32 - 1][position.y / 32] == 0) {
+                updat = false;
+            }
+        }
+    } else {
+        if (velocity.y > 0) {
+            if (gameMap[position.x / 32][position.y / 32 + 1] == 0) {
+                updat = false;
+            }
+        } else if (velocity.y < 0) {
+            if (gameMap[position.x / 32][position.y / 32 - 1] == 0) {
+                updat = false;
+            }
+        }
+    }
+
+    if (updat) {
+        update();
+    } else {
+        velocity = {0, 0};
+    }  
+}
 
 void Player::seDeplacer(std::string input){
 
