@@ -4,9 +4,8 @@
 #include "Vec2.h"
 
 
-Jeu::Jeu(){
+Jeu::Jeu() : currentLevel(DESERT){
 
-    currentLevel = Level(DESERT);
     state = NIVEAU;
 }
 

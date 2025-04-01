@@ -76,6 +76,10 @@ public:
     bool isLevelFinished();
 
     void scale(int x);
+    void updateEnemies(float deltaTime);
+    const std::vector<Ennemy>& getEnnemies() const { return ennemies; }
+    void updateEnemies();
+    void checkEnemyCollisions();
 };
 
 void displayMap(const std::vector<std::vector<int>>& vec);

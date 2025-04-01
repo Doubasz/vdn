@@ -125,24 +125,27 @@ void Level::loadGameMap(){
     file.close();
 }
 
-void Level::initEntities(){
+void Level::initEntities() {
+    ennemies.clear(); // Nettoyer avant de remplir
 
-    for(int i = 0; i < gameMap[0].size(); i++){
-        for(int j = 0; j < gameMap.size(); j++){
-            switch(gameMap[j][i]){
+    for(int y = 0; y < gameMap.size(); y++) {
+        for(int x = 0; x < gameMap[y].size(); x++) {
+            switch(gameMap[y][x]) {
                 case PLAYER:
-                    player.changePosition({i, j});
+                    player.changePosition(x , y );
+                  
                     break;
                 case ENNEMY:
-                    ennemies.push_back(Ennemy(i, j));
+                    ennemies.push_back(Ennemy(x,y));
+                    
                     break;
                 case PLATFORM:
-                    platforms.push_back(Platform(i, j));
+                    platforms.push_back(Platform(x,y));
+                  
+                    break;
             }
-
         }
     }
-
 }
 
 void Level::actionAuto(){
@@ -170,9 +173,7 @@ void Level::deroulementLevel(std::string input){
     //     std::cout <<"size gamemap est de " << gameMap.size() << " , " << gameMap[0].size() << std::endl;
     //     std::cout << "vitesse :: " << player.getVel().x << std::endl;
     // }
-    std::cout << "prochain pos est " << player.getPos().x + player.getVel().x << " , " << player.getPos().y + player.getVel().y << std::endl;
-    std::cout <<"size gamemap est de " << gameMap[0].size() << " , " << gameMap.size() << std::endl;
-    std::cout << "vitesse :: " << player.getVel().x << std::endl;
+    
     player.checkAndUpdate(gameMap);
     player.seDeplacer(input);
 
@@ -194,35 +195,34 @@ void Level::deroulementLevel(std::string input){
 
 
 bool Level::playerOnPlatform() {
+    // const Vec2 playerPos = player.getPos();
+    // const Vec2 playerDim = player.getDim();
+    // const Vec2 playerFeet = {playerPos.x + playerDim.x/2, playerPos.y + playerDim.y};
+    // const float detectionRange = 5.0f; // Tolérance en pixels
+
+    // for (const Platform& p : platforms) {
+    //     const Vec2 platformPos = p.getPos();
+    //     const Vec2 platformDim = p.getDim();
+
+    //     // Zone de détection élargie
+    //     const bool xCollision = (playerPos.x + playerDim.x > platformPos.x) && 
+    //                            (playerPos.x < platformPos.x + platformDim.x);
+    //     const bool yCollision = (playerFeet.y >= platformPos.y) && 
+    //                            (playerFeet.y <= platformPos.y + detectionRange);
+
+    //     if (xCollision && yCollision) {
+    //         // Positionnement précis au-dessus de la plateforme
+    //         player.setPos(playerPos.x, platformPos.y - playerDim.y);
+    //         player.resetGravity();
+    //         player.setIsgrounded(true);
+    //         return true;
+    //     }
+    // }
+    
+    // player.setIsgrounded(false);
+    // return false;
     Vec2 playerPos = player.getPos();
-    Vec2 playerDim = player.getDim();
-
-    // Ajustez ces valeurs si nécessaire
-    int playerBottom = playerPos.y + playerDim.y;
-    int playerRight = playerPos.x + playerDim.x;
-    int playerLeft = playerPos.x;
-
-    for (Platform& p : platforms) {
-        Vec2 platformPos = p.getPos();
-        Vec2 platformDim = p.getDim();
-
-        // Conditions de collision plus tolérantes
-        bool horizontalOverlap = 
-            playerRight > platformPos.x && 
-            playerLeft < platformPos.x + platformDim.x;
-
-        bool verticalContact = 
-            playerBottom >= platformPos.y && 
-            playerBottom <= platformPos.y + 3; // Augmentez cette valeur pour plus de tolérance
-
-        if (horizontalOverlap && verticalContact) {
-            // Repositionnement précis
-            player.changePosition(playerPos.x, platformPos.y - playerDim.y);
-            player.resetGravity(); // Réinitialise la gravité
-            return true;
-        }
-    }
-    return false; 
+    
 }
 
 

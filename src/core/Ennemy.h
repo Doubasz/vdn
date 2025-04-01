@@ -1,35 +1,30 @@
 #ifndef ENNEMY_H
 #define ENNEMY_H
 
-
 #include "Entity.h"
 
-enum TypeEnnemy{
+enum EnemyType {
     SCORPION,
-    KALB,
+    SNAKE,
+    VULTURE
 };
 
-class Ennemy : public Entity{
-
-private:    
-    int type;
-    float gravity;
-    int state;
-
-
+class Ennemy : public Entity {
 public:
     Ennemy();
     Ennemy(int x, int y);
-
-    void changePosition(int x, int y);
-
-    void moveAuto();
-
+    
     void update() override;
+    void moveAuto();
+    void changePosition(int x, int y);
+    
+    EnemyType getType() const { return type; }
+    void setType(EnemyType newType) { type = newType; }
 
+private:
+    EnemyType type;
+    int moveCounter = 0; // Pour gérer les mouvements
+    bool movingRight = true; // Direction du mouvement
 };
 
-
-
 #endif
-

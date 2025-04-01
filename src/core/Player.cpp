@@ -10,9 +10,9 @@ Player::Player(): Entity(){
     accel = 1;
     friction = 1;
     maxSpeed = 1;
-    maxFall = 5;
+    maxFall = 15;
     gravity = 1;
-    jumpBoost = -3;
+    jumpBoost = -10;
     dimension = {1, 1};
     velocity = {0, 0};
 
@@ -29,10 +29,19 @@ void Player::changePosition(Vec2 pos){
 void Player::changePosition(int x, int y){
     position = {x, y};
 }
+bool Player::getIsgrounded() const {
+    return isgrounded;
+}
+
+
+void Player::setIsgrounded(bool grounded){
+isgrounded=grounded;
+}
 
 void Player::sauter(){
-    if(state != JUMP){
+    if(isgrounded){
         velocity.y = jumpBoost;
+        isgrounded = false ;
         state = JUMP;
     }
 }
@@ -42,62 +51,28 @@ void Player::update(){
     position.y += velocity.y;
 }
 
-void Player::checkAndUpdate(std::vector<std::vector<int>> &gameMap) {
-    bool updat = true;
 
-    if (velocity.x > 0) {
-        if (velocity.y > 0) {
-            if (gameMap[position.x / 32 + 1][position.y / 32 + 1] == 0 || 
-                gameMap[position.x / 32][position.y / 32 + 1] == 0 || 
-                gameMap[position.x / 32 + 1][position.y / 32] == 0) {
-                updat = false;
-            }
-        } else if (velocity.y < 0) {
-            if (gameMap[position.x / 32 + 1][position.y / 32 - 1] == 0 || 
-                gameMap[position.x / 32][position.y / 32 - 1] == 0 || 
-                gameMap[position.x / 32 + 1][position.y / 32] == 0) {
-                updat = false;
-            }
-        } else {
-            if (gameMap[position.x / 32 + 1][position.y / 32] == 0) {
-                updat = false;
-            }
-        }
-    } else if (velocity.x < 0) {
-        if (velocity.y > 0) {
-            if (gameMap[position.x / 32 - 1][position.y / 32 + 1] == 0 || 
-                gameMap[position.x / 32][position.y / 32 + 1] == 0 || 
-                gameMap[position.x / 32 - 1][position.y / 32] == 0) {
-                updat = false;
-            }
-        } else if (velocity.y < 0) {
-            if (gameMap[position.x / 32 - 1][position.y / 32 - 1] == 0 || 
-                gameMap[position.x / 32][position.y / 32 - 1] == 0 || 
-                gameMap[position.x / 32 - 1][position.y / 32] == 0) {
-                updat = false;
-            }
-        } else {
-            if (gameMap[position.x / 32 - 1][position.y / 32] == 0) {
-                updat = false;
-            }
-        }
-    } else {
-        if (velocity.y > 0) {
-            if (gameMap[position.x / 32][position.y / 32 + 1] == 0) {
-                updat = false;
-            }
-        } else if (velocity.y < 0) {
-            if (gameMap[position.x / 32][position.y / 32 - 1] == 0) {
-                updat = false;
-            }
-        }
+void Player::checkAndUpdate(std::vector<std::vector<int>> &gameMap) {
+    // Vérifier d'abord les limites du tableau
+    int mapWidth = gameMap[0].size();
+    int mapHeight = gameMap.size();
+    
+    int newPosX = position.x + velocity.x;
+    int newPosY = position.y + velocity.y;
+    
+    // Vérifier les bords
+    if (newPosX < 0 || newPosX >= mapWidth || 
+        newPosY < 0 || newPosY >= mapHeight) {
+        velocity = {0, 0};
+        return;
     }
 
-    if (updat) {
-        update();
-    } else {
+    // Vérifier les collisions seulement si dans les limites
+    if (gameMap[newPosY][newPosX] == 0) {
         velocity = {0, 0};
-    }  
+    } else {
+        update();
+    }
 }
 
 void Player::seDeplacer(std::string input){
@@ -111,6 +86,7 @@ void Player::seDeplacer(std::string input){
         if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
     }
     if(contains(input, ' ')){
+        std::cout << "saute" ;
         sauter();
     }
     
@@ -146,9 +122,11 @@ bool contains(std::string s, char target){
     return false;
 }
 
-void Player::updateGravity(){
-    velocity.y += gravity;
-    if(velocity.y > maxFall) velocity.y = maxFall;
+void Player::updateGravity() {
+    if (!isgrounded) {
+        velocity.y += gravity;
+        velocity.y = std::min(velocity.y, maxFall);
+    }
 }
 
 void Player::resetGravity(){

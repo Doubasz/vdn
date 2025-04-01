@@ -36,10 +36,12 @@ private:
     int munition;
     int jumpBoost;
     int state;
+    bool isgrounded;
 
 public:
     Player();
-
+    bool getIsgrounded() const;
+    void setIsgrounded(bool grounded);
     void sauter();
 
     void seDeplacer(std::string input);

@@ -19,6 +19,7 @@ void txtAff(WinTXT &win, Jeu &jeu)
 	// Affichage des murs et des pastilles
 	for (int x = 0; x < tileMap[0].size(); ++x){
         for (int y = 0; y < tileMap.size(); ++y){
+			
                 char c;
                 switch(tileMap[y][x]){
                     case SANDBLOCK:
@@ -90,6 +91,9 @@ void txtBoucle(Jeu &jeu)
 		case 'q':
 			ok = false;
 			break;
+		case ' ' :
+			input = ' ';
+		break;
 		}
 
         jeu.getCurrentLevel().deroulementLevel(input);
