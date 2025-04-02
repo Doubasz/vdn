@@ -18,41 +18,6 @@ SDLJeu::SDLJeu(){
 
     quit = false;
 
-    Vec2 playerPos = jeu.getCurrentLevel().getPlayer().getPos();
-    Vec2 playerDim = jeu.getCurrentLevel().getPlayer().getDim();
-
-    std::cout << "player pos: " << player.getPos().x << ", " << player.getPos().y << std::endl;
-
-    //jeu.scale(tileSize);
-
-    jeu.getCurrentLevel().getPlayer().setPos(playerPos.x * tileSize, playerPos.y * tileSize);
-
-    
-    std::cout << "player dim: " << player.getDim().x << ", " << player.getDim().y << std::endl;
-
-    jeu.getCurrentLevel().getPlayer().setDim(playerDim.x * tileSize, playerDim.y * tileSize);
-
-    std::cout << "player pos: " << player.getDim().x << ", " << player.getDim().y << std::endl;
-    jeu.getCurrentLevel().getPlayer().setJumpBoost(-1 * (tileSize / 2));
-
-    std::vector<Ennemy>& ennemies = jeu.getCurrentLevel().getEnnemies();
-
-    for(Ennemy& e : ennemies){
-        e.setPos(e.getPos().x * tileSize, e.getPos().y * tileSize);
-        e.setDim(e.getDim().x * tileSize, e.getDim().y * tileSize);
-    }
-
-    std::vector<Platform>& platforms = jeu.getCurrentLevel().getPlatforms();
-
-    for(Platform& p : platforms){
-
-        std::cout << "platform pos: " << p.getPos().x << ", " << p.getPos().y << std::endl;
-
-        p.setPos(p.getPos().x * tileSize, p.getPos().y * tileSize);
-        p.setDim(p.getDim().x * tileSize, p.getDim().y * tileSize);
-
-        std::cout << "platform pos apres scale: " << p.getPos().x << ", " << p.getPos().y << std::endl;
-    }
     
 
 
@@ -161,7 +126,7 @@ void SDLJeu::input(){
     const Uint8* keys = SDL_GetKeyboardState(NULL);
 
     if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]){
-        Log::log("q pressed");
+        //Log::log("q pressed");
         jeu.getCurrentLevel().getPlayer().seDeplacer("q");
         input += "q";
     }
@@ -220,10 +185,10 @@ void SDLJeu::draw(){
 void SDLJeu::drawPlayer(){
 
     SDL_Rect rect = SDL_Rect{32, 32, 32, 32};
-    rect.x = jeu.getCurrentLevel().getPlayer().getPos().x;
+    rect.x = jeu.getCurrentLevel().getPlayer().box.x;
     //Log::log("rect.x " + rect.x);
     //std::cout << rect.x << std::endl;
-    rect.y = jeu.getCurrentLevel().getPlayer().getPos().y;
+    rect.y = jeu.getCurrentLevel().getPlayer().box.y;
     
 
     /*int playerState = jeu.getCurrentLevel().getPlayerState();

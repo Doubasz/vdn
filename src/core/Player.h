@@ -49,6 +49,8 @@ public:
 
     void changeVelocity(int x, int y);
 
+    bool checkCollisionPlatform(Entity& platform);
+
     void updateGravity();
     void resetGravity();
 
@@ -56,9 +58,14 @@ public:
 
     int getState();
     void setJumpBoost(int j);
+    void goLeft();
+    void goRight();
+    void sufferFriction();
+
+    void setState(int s){this->state = s;}
 
 };
 
 bool contains(std::string input, char target);
 
-#endif
+#endif 

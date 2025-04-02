@@ -5,10 +5,17 @@
 #include "Vec2.h"
 #include "Vec2f.h"
 
+#include "Shapes.h"
+
 
 class Entity{
 
+public:
+    Rectangle box;
+
 protected:
+    
+
     Vec2 position;
     Vec2 dimension;
     Vec2f velocity;
@@ -32,7 +39,7 @@ public:
     
     bool checkCollision(const Entity& other) ;
 
-    
+    Rectangle getBox() const {return this->box;}
         
 };
 

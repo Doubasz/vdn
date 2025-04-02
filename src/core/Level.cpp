@@ -127,22 +127,23 @@ void Level::loadGameMap(){
 
 void Level::initEntities(){
 
+    int tileSize = 32;
+
     for(int i = 0; i < gameMap[0].size(); i++){
         for(int j = 0; j < gameMap.size(); j++){
             switch(gameMap[j][i]){
                 case PLAYER:
-                    player.changePosition({i, j});
+                    player.changePosition({i * tileSize, j * tileSize});
                     break;
                 case ENNEMY:
-                    ennemies.push_back(Ennemy(i, j));
+                    ennemies.push_back(Ennemy(i * tileSize, j * tileSize));
                     break;
                 case PLATFORM:
-                    platforms.push_back(Platform(i, j));
+                    platforms.push_back(Platform(i * tileSize, j * tileSize));
             }
 
         }
     }
-
 }
 
 void Level::actionAuto(){
@@ -153,23 +154,29 @@ void Level::actionAuto(){
 
 void Level::deroulementLevel(std::string input){
 
-    player.update();
-
     player.seDeplacer(input);
 
+    player.update();
+
     //playerCheckMovement();
+    
+    player.updateGravity();
 
 
-    actionAuto();
-    checkCollisionPlayerPlatform();
-    checkOutOfBonds();
-
-    if(!playerOnPlatform()){
-        player.updateGravity();
+    bool playerOnGround = false;
+    //actionAuto();
+    for(Platform p : platforms){
+        if(player.checkCollisionPlatform(p)){
+            playerOnGround = true;
+        }
     }
-    else{
-        //player.resetGravity();
+
+    if(!playerOnGround){
+        player.setState(JUMP);
     }
+    
+    //checkOutOfBonds();
+
 }
 
 void Level::playerCheckMovement(){
