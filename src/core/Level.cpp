@@ -195,35 +195,38 @@ void Level::deroulementLevel(std::string input){
 
 
 bool Level::playerOnPlatform() {
-    // const Vec2 playerPos = player.getPos();
-    // const Vec2 playerDim = player.getDim();
-    // const Vec2 playerFeet = {playerPos.x + playerDim.x/2, playerPos.y + playerDim.y};
-    // const float detectionRange = 5.0f; // Tolérance en pixels
+    const Vec2 playerPos = player.getPos();
+    const Vec2 playerDim = player.getDim();
+    const Vec2 playerFeet = {playerPos.x + playerDim.x / 2, playerPos.y + playerDim.y};
+    const float detectionRange = 0.0f; // Tolérance en pixels
 
-    // for (const Platform& p : platforms) {
-    //     const Vec2 platformPos = p.getPos();
-    //     const Vec2 platformDim = p.getDim();
+    for (const Platform& p : platforms) {
+        const Vec2 platformPos = p.getPos();
+        const Vec2 platformDim = p.getDim();
 
-    //     // Zone de détection élargie
-    //     const bool xCollision = (playerPos.x + playerDim.x > platformPos.x) && 
-    //                            (playerPos.x < platformPos.x + platformDim.x);
-    //     const bool yCollision = (playerFeet.y >= platformPos.y) && 
-    //                            (playerFeet.y <= platformPos.y + detectionRange);
+        // Vérifie si le joueur est dans la largeur de la plateforme
+        const bool xCollision = (playerPos.x + playerDim.x > platformPos.x) && 
+                                (playerPos.x < platformPos.x + platformDim.x);
+        
+        // Vérifie si les pieds du joueur touchent le haut de la plateforme
+        const bool yCollision = (playerFeet.y >= platformPos.y) && 
+                                (playerFeet.y <= platformPos.y + detectionRange);
 
-    //     if (xCollision && yCollision) {
-    //         // Positionnement précis au-dessus de la plateforme
-    //         player.setPos(playerPos.x, platformPos.y - playerDim.y);
-    //         player.resetGravity();
-    //         player.setIsgrounded(true);
-    //         return true;
-    //     }
-    // }
-    
-    // player.setIsgrounded(false);
-    // return false;
-    Vec2 playerPos = player.getPos();
-    
+        if (xCollision && yCollision) {
+            // Vérifie si le joueur tombe avant de le repositionner
+            if (player.getVel().y >= 0) {
+                player.setPos(playerPos.x, platformPos.y - playerDim.y);
+                player.resetGravity(); //    Remet la vitesse verticale à zéro
+                player.setIsgrounded(true);
+                return true;
+            }
+        }
+    }
+
+    player.setIsgrounded(false);
+    return false;
 }
+
 
 
 
