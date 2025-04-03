@@ -11,6 +11,7 @@
 #include <vector>
 #include "../core/Jeu.h"
 #include "../core/Log.h"
+#include "Camera.h"
 
 
 #define SCREEN_WIDTH 1400
@@ -41,7 +42,7 @@ class SDLJeu{
     std::vector<SDL_Rect> ennemyRect;
 
 
-    Vec2 camera;
+    Camera camera;
 
     int tileSize;
 
@@ -52,6 +53,8 @@ class SDLJeu{
 public:
     SDLJeu();
 
+    void scale();
+
     void gameLoop();
     void input();
 
@@ -60,6 +63,9 @@ public:
     void drawTiles();
     void drawBackground();
 
+    void cameraUpdate();
+    void update();
+
     void loadPlayerTextures();
     void loadPlatformTextures();
 };
@@ -67,6 +73,6 @@ public:
 
 
 void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect);
-void drawRect(SDL_Renderer*& renderer, SDL_Rect rect, SDL_Color color);
+void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color);
 
 #endif

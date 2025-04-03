@@ -18,7 +18,7 @@ SDLJeu::SDLJeu(){
 
     quit = false;
 
-    
+    camera = Camera(1400, 900, 3400, 1900);
 
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -39,6 +39,8 @@ SDLJeu::SDLJeu(){
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 
     std::vector<std::vector<int>>& gameMap = jeu.getCurrentLevel().getGameMap();
+
+
 
     displayMap(gameMap);
 
@@ -69,11 +71,32 @@ SDLJeu::SDLJeu(){
 }*/
 
 
+void SDLJeu::scale(){
 
+
+    Player &player = jeu.getCurrentLevel().getPlayer();
+
+    player.getBox().setX(player.getBox().x * 32);
+    player.getBox().setY(player.getBox().y * 32);
+    player.setDim(player.getDim().x * 32, player.getDim().y * 32);
+
+
+    std::vector<Platform>& platforms = jeu.getCurrentLevel().getPlatforms();
+
+    for (Platform& p : platforms){
+
+        p.getBox().setX(p.getBox().x * 32);
+        p.getBox().setY(p.getBox().y * 32);
+    
+        p.setDim(p.getDim().x * 32, p.getDim().y * 32);
+    }
+
+
+}
 
 void SDLJeu::gameLoop(){
 
-    const int FPS = 60;
+    const int FPS = 30;
     const int frameDelay = 1000 / FPS; 
 
     Uint32 frameStart;
@@ -84,7 +107,7 @@ void SDLJeu::gameLoop(){
 
         draw();
         input();
-        
+        update();
         
 
             // Cap FPS
@@ -95,6 +118,15 @@ void SDLJeu::gameLoop(){
     }
 }
 
+void SDLJeu::update(){
+
+    Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
+
+    float playerCenterX = (playerRect.x + (playerRect.w / 2)) * tileSize;
+    float playerCenterY = (playerRect.y + (playerRect.h / 2)) * tileSize;
+
+    camera.update(playerCenterX, playerCenterY);
+}
 
 
 void SDLJeu::input(){
@@ -184,11 +216,13 @@ void SDLJeu::draw(){
 
 void SDLJeu::drawPlayer(){
 
-    SDL_Rect rect = SDL_Rect{32, 32, 32, 32};
-    rect.x = jeu.getCurrentLevel().getPlayer().box.x;
-    //Log::log("rect.x " + rect.x);
-    //std::cout << rect.x << std::endl;
-    rect.y = jeu.getCurrentLevel().getPlayer().box.y;
+    Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
+
+    SDL_Rect rect = SDL_Rect{
+        (int)(playerRect.x * tileSize - camera.x),
+        (int)(playerRect.y * tileSize - camera.y),
+         32, 32};
+
     
 
     /*int playerState = jeu.getCurrentLevel().getPlayerState();
@@ -196,6 +230,7 @@ void SDLJeu::drawPlayer(){
 
     drawRect(renderer, rect, SDL_Color{0, 255, 0});
 }
+
 
 
 void SDLJeu::drawTiles(){
@@ -215,8 +250,8 @@ void SDLJeu::drawTiles(){
         
         for(int j = 0; j < tileMap.size(); j++){
 
-            rect.x = (i * tileSize);
-            rect.y = (j * tileSize);
+            rect.x = (int)((i * tileSize) - camera.x);
+            rect.y = (int)((j * tileSize) - camera.y);
 
             switch(tileMap[j][i]){
                 case SANDBLOCK:
@@ -279,7 +314,7 @@ void SDLJeu::loadPlatformTextures(){
     platformTexture.push_back(loadTexture(renderer, "textures/platform.png"));
 }
 
-void drawRect(SDL_Renderer*& renderer, SDL_Rect rect, SDL_Color color){
+void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color){
 
     SDL_SetRenderDrawColor(renderer, color.b, color.g, color.r, 255);
     SDL_RenderFillRect(renderer, &rect);
