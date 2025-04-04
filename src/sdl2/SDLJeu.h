@@ -54,7 +54,7 @@ public:
     SDLJeu();
 
     void gameLoop();
-    void input();
+    void input(float deltaTime);
 
     void draw();
     void drawPlayer();

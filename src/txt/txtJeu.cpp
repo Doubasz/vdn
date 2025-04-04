@@ -91,7 +91,7 @@ void txtBoucle(Jeu &jeu)
 			break;
 		}
 
-        jeu.getCurrentLevel().deroulementLevel(input);
+        jeu.getCurrentLevel().deroulementLevel(input, 1.0);
 
 	} while (ok);
 }

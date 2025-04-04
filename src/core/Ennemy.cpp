@@ -29,7 +29,3 @@ void Ennemy::moveAuto(){
 
 
 }
-
-void Ennemy::update(){
-
-}

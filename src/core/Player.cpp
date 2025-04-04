@@ -10,9 +10,9 @@ Player::Player(): Entity(){
     accel = 1;
     friction = 1;
     maxSpeed = 5;
-    maxFall = 5;
-    gravity = 1;
-    jumpBoost = -15;
+    maxFall = 10;
+    gravity = 1.5;
+    jumpBoost = -20;
     dimension = {32, 32};
     velocity = {0, 0};
     box = Rectangle(0, 0, 32, 32);
@@ -42,9 +42,9 @@ void Player::sauter(){
     }
 }
 
-void Player::update(){
-    position.x += velocity.x;
-    position.y += velocity.y;
+void Player::update(float deltaTime){
+    position.x += velocity.x * deltaTime;
+    position.y += velocity.y * deltaTime;
 
     box.setX(box.x + velocity.x);
     box.setY(box.y + velocity.y);
@@ -91,7 +91,6 @@ void Player::seDeplacer(std::string input){
     }
     
     if(!(contains(input, 'd')  || contains(input, 'q'))){
-        if(state == NEUTRAL){
             if(velocity.x > 0){
                 velocity.x -= friction;
                 if(velocity.x < 0) velocity.x = 0;
@@ -101,7 +100,7 @@ void Player::seDeplacer(std::string input){
                 if(velocity.x > 0) velocity.x = 0;
             }
                 
-        }
+        
         
     }
         

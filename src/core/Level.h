@@ -60,7 +60,7 @@ public:
 
     void checkCollision();
     void checkOutOfBonds();
-    void deroulementLevel(std::string input);
+    void deroulementLevel(std::string input, float deltaTime);
 
     Player& getPlayer();
     std::vector<Ennemy>& getEnnemies();

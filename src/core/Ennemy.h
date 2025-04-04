@@ -25,7 +25,6 @@ public:
 
     void moveAuto();
 
-    void update() override;
 
 };
 

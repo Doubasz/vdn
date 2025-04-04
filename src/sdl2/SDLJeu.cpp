@@ -81,14 +81,20 @@ void SDLJeu::gameLoop(){
     Uint32 frameStart;
     int frameTime;
 
+    Uint32 lastTime = SDL_GetTicks();
+
     while(!quit){
+
         frameStart = SDL_GetTicks();
 
-        draw();
-        input();
+        Uint32 currentTime = SDL_GetTicks();
+        float deltaTime = (currentTime - lastTime) / 1000.0f;
+        lastTime = currentTime;
+
+        
+        input(deltaTime);
         update();
-        
-        
+        draw();
         
 
             // Cap FPS
@@ -111,7 +117,7 @@ void SDLJeu::update(){
 
 
 
-void SDLJeu::input(){
+void SDLJeu::input(float deltaTime){
 
     Vec2 mouse;
     SDL_GetMouseState(&mouse.x, &mouse.y);
@@ -152,7 +158,7 @@ void SDLJeu::input(){
         jeu.getCurrentLevel().getPlayer().sauter();
         input += " ";
     }
-    jeu.handleInput(input);
+    jeu.handleInput(input, deltaTime);
 }
 
 
@@ -213,7 +219,7 @@ void SDLJeu::drawPlayer(){
     SDL_Rect rect = SDL_Rect{
         (int)(playerRect.x - camera.x),
         (int)(playerRect.y - camera.y),
-         32, 32};
+         tileSize, tileSize};
 
     
 
@@ -234,7 +240,7 @@ void SDLJeu::drawTiles(){
 
     SDL_Color color;
 
-    SDL_Rect rect = SDL_Rect{0, 0, 32, 32};
+    SDL_Rect rect = SDL_Rect{0, 0, tileSize, tileSize};
     
 
     for(int i = 0; i < tileMap[0].size(); i++){

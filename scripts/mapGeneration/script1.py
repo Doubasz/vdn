@@ -17,7 +17,7 @@ def add_zero_to_digits(file_path):
             if temp:
                 temp2 = int(temp)
 
-                if temp2 == 35:
+                if temp2 == 58:
                     updated_content += "00"
                 elif temp2 == 0:
                     updated_content += "-1"
@@ -36,7 +36,7 @@ def add_zero_to_digits(file_path):
     # Handle any remaining number at the end
     if temp:
         temp2 = int(temp)
-        if temp2 == 35:
+        if temp2 == 58:
             updated_content += "0"
         elif temp2 == 0:
             updated_content += "-1"
@@ -55,5 +55,5 @@ def add_zero_to_digits(file_path):
     print("All one-digit numbers have been updated with a '0' behind them.")
 
 # Example usage
-file_path = 'gameMap3.txt'
+file_path = 'gameMap4.txt'
 add_zero_to_digits(file_path)

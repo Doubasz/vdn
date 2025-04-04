@@ -54,7 +54,7 @@ public:
     void updateGravity();
     void resetGravity();
 
-    void update() override;
+    void update(float deltaTime);
 
     int getState();
     void setJumpBoost(int j);
