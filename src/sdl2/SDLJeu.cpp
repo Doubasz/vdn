@@ -208,6 +208,7 @@ void SDLJeu::draw(){
     drawBackground();
     drawTiles();
     drawPlayer();
+    drawEnnemy();
     
 
     SDL_RenderPresent(renderer);
@@ -231,7 +232,18 @@ void SDLJeu::drawPlayer(){
     drawRect(renderer, rect, SDL_Color{0, 255, 0});
 }
 
+void SDLJeu::drawEnnemy(){
+    std::vector<Ennemy> ennemies = jeu.getCurrentLevel().getEnnemies();
 
+    for (Ennemy& e : ennemies){
+        SDL_Rect rect = SDL_Rect{
+            (int)(e.box.x * tileSize - camera.x),
+            (int)(e.box.y * tileSize - camera.y),
+            tileSize, tileSize
+        };
+        drawRect(renderer,rect, SDL_Color{0,255,255});
+    }
+}
 
 void SDLJeu::drawTiles(){
     std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();

@@ -146,17 +146,14 @@ void Level::initEntities(){
     }
 }
 
-void Level::actionAuto(){
-    for(Ennemy e : ennemies){
-        e.moveAuto();
-    }
-}
+
 
 void Level::deroulementLevel(std::string input){
 
     player.seDeplacer(input);
     player.updateGravity();
     player.update();
+
 
     //playerCheckMovement();
     
@@ -169,11 +166,25 @@ void Level::deroulementLevel(std::string input){
         if(player.checkCollisionPlatform(p)){
             playerOnGround = true;
         }
+        
     }
 
     if(!playerOnGround){
         player.setState(JUMP);
     }
+    float deltaTime = 0.016f;
+    for(Ennemy& e : ennemies){
+        player.checkCollisionEnnemy(e);
+    }
+    bool hitwall = false;
+    for(Ennemy & e : ennemies){
+        for(Platform p : platforms){
+           hitwall = e.hitWall(p);
+        }
+        e.update();
+    }
+    
+    
     
     //checkOutOfBonds();
 

@@ -55,6 +55,8 @@ public:
 
     bool checkCollisionPlatform(Entity& platform);
 
+    void checkCollisionEnnemy(Entity& ennemy);
+
     void updateGravity();
     void resetGravity();
 

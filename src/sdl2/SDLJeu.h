@@ -60,6 +60,7 @@ public:
 
     void draw();
     void drawPlayer();
+    void drawEnnemy();
     void drawTiles();
     void drawBackground();
 
