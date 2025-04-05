@@ -96,7 +96,7 @@ void SDLJeu::scale(){
 
 void SDLJeu::gameLoop(){
 
-    const int FPS = 30;
+    const int FPS = 60;
     const int frameDelay = 1000 / FPS; 
 
     Uint32 frameStart;
@@ -221,7 +221,7 @@ void SDLJeu::drawPlayer(){
     SDL_Rect rect = SDL_Rect{
         (int)(playerRect.x * tileSize - camera.x),
         (int)(playerRect.y * tileSize - camera.y),
-         32, 32};
+         tileSize, tileSize};
 
     
 
@@ -243,7 +243,7 @@ void SDLJeu::drawTiles(){
 
     SDL_Color color;
 
-    SDL_Rect rect = SDL_Rect{0, 0, 32, 32};
+    SDL_Rect rect = SDL_Rect{0, 0, tileSize, tileSize};
     
 
     for(int i = 0; i < tileMap[0].size(); i++){

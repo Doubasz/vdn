@@ -64,7 +64,7 @@ void Level::loadTileMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/map1.txt";
+            path = "scripts/mapGeneration/map3.txt";
     }
 
     if(!path.empty()){
@@ -99,7 +99,7 @@ void Level::loadGameMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/gameMap1.txt";
+            path = "scripts/mapGeneration/gameMap4.txt";
     }
 
     std::ifstream file(path);
@@ -155,12 +155,12 @@ void Level::actionAuto(){
 void Level::deroulementLevel(std::string input){
 
     player.seDeplacer(input);
-
+    player.updateGravity();
     player.update();
 
     //playerCheckMovement();
     
-    player.updateGravity();
+    
 
 
     bool playerOnGround = false;
