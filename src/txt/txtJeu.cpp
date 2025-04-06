@@ -32,11 +32,11 @@ void txtAff(WinTXT &win, Jeu &jeu)
                         break;
                 }
 
-                win.print(x, y, c);      
+               win.print(x, y, c);      
         }
     }
 		
-    Vec2 playerPos = player.getPos();
+    Rectangle playerPos = player.getBox();
 
 	
 	win.print(playerPos.x, playerPos.y, 'P');
@@ -48,6 +48,7 @@ void txtAff(WinTXT &win, Jeu &jeu)
 
 	win.draw();
 }
+
 
 void txtBoucle(Jeu &jeu)
 {
@@ -73,7 +74,7 @@ void txtBoucle(Jeu &jeu)
 #ifdef _WIN32
 		Sleep(100);
 #else
-		usleep(100000);
+		usleep(10000);
 #endif // WIN32
 
 		std::string input = "";
@@ -92,6 +93,14 @@ void txtBoucle(Jeu &jeu)
 		}
 
         jeu.getCurrentLevel().deroulementLevel(input, 1.0);
+
+		Player &player = jeu.getCurrentLevel().getPlayer();
+		Rectangle playerRect = player.getBox();
+
+		float playerCenterX = (playerRect.x + (playerRect.w / 2));
+		float playerCenterY = (playerRect.y + (playerRect.h / 2));
+
+		win.camera.update(playerCenterX, playerCenterY);
 
 	} while (ok);
 }

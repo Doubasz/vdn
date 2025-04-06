@@ -7,7 +7,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <fstream>
-#include <nlohmann/json.hpp>
+
 #include <vector>
 #include "../core/Jeu.h"
 #include "../core/Log.h"
@@ -53,11 +53,14 @@ class SDLJeu{
 public:
     SDLJeu();
 
+    void scale();
+
     void gameLoop();
     void input(float deltaTime);
 
     void draw();
     void drawPlayer();
+    void drawEnnemy();
     void drawTiles();
     void drawBackground();
 

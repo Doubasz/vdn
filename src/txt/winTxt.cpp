@@ -81,8 +81,10 @@ WinTXT::WinTXT(int dx, int dy)
     dimx = dx;
     dimy = dy;
     win = new char[dimx * dimy];
-    clear();
+    termClear();
     termInit();
+
+    camera = Camera(40, 20, dimx, dimy);
 }
 
 void WinTXT::clear(char c)
@@ -117,10 +119,17 @@ void WinTXT::print(int x, int y, char *c)
 
 void WinTXT::draw(int x, int y)
 {
+    int tempX = camera.x + camera.w;
+    int tempY = camera.y + camera.h;
+
+    if(tempX > dimx) tempX = dimx;
+    if(tempY > dimy) tempY = dimy; 
+    
+    termClear();
     termMove(0, 0);
-    for (int j = 0; j < dimy; ++j)
+    for (int j = camera.y; j < tempY; ++j)
     {
-        for (int i = 0; i < dimx; ++i)
+        for (int i = camera.x; i < tempX; ++i)
             printf("%c", win[j * dimx + i]);
         printf("\n");
     }

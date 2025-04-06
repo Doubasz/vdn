@@ -135,24 +135,20 @@ void Level::initEntities(){
             std::cout<< "i : " << i << " j : " << j << std::endl;
             switch(gameMap[j][i]){
                 case PLAYER:
-                    player.changePosition({i * tileSize, j * tileSize});
+                    player.changePosition({i , j });
                     break;
                 case ENNEMY:
-                    ennemies.push_back(Ennemy(i * tileSize, j * tileSize));
+                    ennemies.push_back(Ennemy(i , j ));
                     break;
                 case PLATFORM:
-                    platforms.push_back(Platform(i * tileSize, j * tileSize));
+                    platforms.push_back(Platform(i , j ));
             }
 
         }
     }
 }
 
-void Level::actionAuto(){
-    for(Ennemy e : ennemies){
-        e.moveAuto();
-    }
-}
+
 
 void Level::deroulementLevel(std::string input, float deltaTime){
 
@@ -170,12 +166,28 @@ void Level::deroulementLevel(std::string input, float deltaTime){
         if(player.checkPlatformCollision(p)) {
             playerOnGround = true;
         }
+        
     }
     
     // 6. Update player state
     if(!playerOnGround) {
         player.setState(JUMP);
     }
+    //float deltaTime = 0.016f;
+    for(Ennemy& e : ennemies){
+        player.checkCollisionEnnemy(e);
+    }
+    bool hitwall = false;
+    for(Ennemy & e : ennemies){
+        for(Platform p : platforms){
+           hitwall = e.hitWall(p);
+        }
+        e.update();
+    }
+    
+    
+    
+    //checkOutOfBonds();
 
 }
 

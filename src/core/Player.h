@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include "Entity.h"
+#include "Timer.h"
 
 enum Etat{
     QAHWA,
@@ -30,12 +31,15 @@ class Player : public Entity{
 private:
     float accel;
     float friction;
+    float frictionAir;
     float maxSpeed;
     float maxFall;
     float gravity;
+    float jumpBoost;
     int munition;
-    int jumpBoost;
     int state;
+
+    Timer moveTimer;
 
 public:
     Player();
@@ -50,6 +54,8 @@ public:
     void changeVelocity(int x, int y);
 
     bool checkPlatformCollision(Entity& platform);
+
+    void checkCollisionEnnemy(Entity& ennemy);
 
     void updateGravity();
     void resetGravity();

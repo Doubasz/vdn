@@ -19,7 +19,6 @@ SDLJeu::SDLJeu(){
     quit = false;
 
     camera = Camera(1400, 900, 3400, 1900);
-    
 
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -40,6 +39,8 @@ SDLJeu::SDLJeu(){
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 
     std::vector<std::vector<int>>& gameMap = jeu.getCurrentLevel().getGameMap();
+
+
 
     displayMap(gameMap);
 
@@ -71,7 +72,28 @@ SDLJeu::SDLJeu(){
 }*/
 
 
+void SDLJeu::scale(){
 
+
+    Player &player = jeu.getCurrentLevel().getPlayer();
+
+    player.getBox().setX(player.getBox().x * 32);
+    player.getBox().setY(player.getBox().y * 32);
+    player.setDim(player.getDim().x * 32, player.getDim().y * 32);
+
+
+    std::vector<Platform>& platforms = jeu.getCurrentLevel().getPlatforms();
+
+    for (Platform& p : platforms){
+
+        p.getBox().setX(p.getBox().x * 32);
+        p.getBox().setY(p.getBox().y * 32);
+    
+        p.setDim(p.getDim().x * 32, p.getDim().y * 32);
+    }
+
+
+}
 
 void SDLJeu::gameLoop(){
 
@@ -109,8 +131,8 @@ void SDLJeu::update(){
 
     Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
 
-    float playerCenterX = playerRect.x + (playerRect.w / 2);
-    float playerCenterY = playerRect.y + (playerRect.h / 2);
+    float playerCenterX = (playerRect.x + (playerRect.w / 2)) * tileSize;
+    float playerCenterY = (playerRect.y + (playerRect.h / 2)) * tileSize;
 
     camera.update(playerCenterX, playerCenterY);
 }
@@ -196,6 +218,7 @@ void SDLJeu::draw(){
     drawBackground();
     drawTiles();
     drawPlayer();
+    drawEnnemy();
     
 
     SDL_RenderPresent(renderer);
@@ -217,8 +240,8 @@ void SDLJeu::drawPlayer(){
     Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
 
     SDL_Rect rect = SDL_Rect{
-        (int)(playerRect.x - camera.x),
-        (int)(playerRect.y - camera.y),
+        (int)(playerRect.x * tileSize - camera.x),
+        (int)(playerRect.y * tileSize - camera.y),
          tileSize, tileSize};
 
     
@@ -229,6 +252,18 @@ void SDLJeu::drawPlayer(){
     drawRect(renderer, rect, SDL_Color{0, 255, 0});
 }
 
+void SDLJeu::drawEnnemy(){
+    std::vector<Ennemy> ennemies = jeu.getCurrentLevel().getEnnemies();
+
+    for (Ennemy& e : ennemies){
+        SDL_Rect rect = SDL_Rect{
+            (int)(e.box.x * tileSize - camera.x),
+            (int)(e.box.y * tileSize - camera.y),
+            tileSize, tileSize
+        };
+        drawRect(renderer,rect, SDL_Color{0,255,255});
+    }
+}
 
 void SDLJeu::drawTiles(){
     std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
