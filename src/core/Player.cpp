@@ -12,7 +12,7 @@ Player::Player(): Entity(){
     maxSpeed = 5;
     maxFall = 10;
     gravity = 1.5;
-    jumpBoost = -20;
+    jumpBoost = -23;
     dimension = {32, 32};
     velocity = {0, 0};
     box = Rectangle(0, 0, 32, 32);
@@ -50,29 +50,78 @@ void Player::update(float deltaTime){
     box.setY(box.y + velocity.y);
 }
 
-void Player::goLeft(){
-    velocity.x -= accel;
-    if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
+void Player::updateHorizontalMovement(float deltaTime){
+    box.setX(box.x + velocity.x);
 }
 
-void Player::goRight(){
-    velocity.x += accel;
-    if(velocity.x > maxSpeed) velocity.x = maxSpeed;
+void Player::updateVerticalMovement(float deltaTime){
+    box.setY(box.y + velocity.y);
 }
 
-void Player::sufferFriction(){
+void Player::checkHorizontalCollision(Entity& platform){
 
-    if(state == NEUTRAL){
-        if(velocity.x > 0){
-            velocity.x -= friction;
-            if(velocity.x < 0) velocity.x = 0;
+    float prevRight = this->box.rightMost - velocity.x;
+    float prevLeft = this->box.leftMost - velocity.x;
+
+    // Moving right into platform
+    if(this->box.overlaps(platform.box)){
+        if (velocity.x > 0 && prevRight <= platform.box.leftMost) {
+            this->box.setX(platform.box.leftMost - (this->box.w + .001));
+            velocity.x = 0;
+
+            std::cout << "Collided with left of platform : " << platform.box.toString() << std::endl;
+        } 
+        // Moving left into platform
+        else if (velocity.x < 0 && prevLeft >= platform.box.rightMost) {
+            this->box.setX(platform.box.rightMost + .001);
+            velocity.x = 0;
+
+            std::cout << "Collided with right of platform : " << platform.box.toString() << std::endl;
         }
-        if(velocity.x < 0){
-            velocity.x += friction;
-            if(velocity.x > 0) velocity.x = 0;
-        }
-            
     }
+    
+}
+
+bool Player::checkVerticalCollision(Entity& platform){
+    // No collision at all
+    if (!this->box.overlaps(platform.box)) {
+        return false;
+    }
+    
+    // Calculate how much player overlaps with each side of the platform
+    float overlapTop = this->box.bottom - platform.box.top;
+    float overlapBottom = platform.box.bottom - this->box.top;
+    float overlapLeft = this->box.rightMost - platform.box.leftMost;
+    float overlapRight = platform.box.rightMost - this->box.leftMost;
+    
+    // Previous frame positions
+    bool wasAbove = (this->box.bottom - velocity.y) <= platform.box.top;
+    bool wasBelow = (this->box.top - velocity.y) >= platform.box.bottom;
+    bool wasLeftOf = (this->box.rightMost - velocity.x) <= platform.box.leftMost;
+    bool wasRightOf = (this->box.leftMost - velocity.x) >= platform.box.rightMost;
+    
+    // IMPORTANT: First check if player was above before any other collision
+    if (wasAbove) {
+        this->box.setY(platform.box.top - this->box.h);
+        velocity.y = 0;
+        state = NEUTRAL;
+        return true; // Player is on ground
+    }
+    
+    // Only check other collisions if player was NOT above
+    if (wasBelow) {
+        this->box.setY(platform.box.bottom);
+        velocity.y = 0;
+    } else if (wasLeftOf) {
+        this->box.setX(platform.box.leftMost - this->box.w);
+        velocity.x = 0;
+    } else if (wasRightOf) {
+        this->box.setX(platform.box.rightMost);
+        velocity.x = 0;
+    }
+    
+    return false; // Not on ground for other collisions
+
 }
 
 
@@ -145,38 +194,45 @@ void Player::setJumpBoost(int j){
 }
 
 
-bool Player::checkCollisionPlatform(Entity& platform){
+bool Player::checkPlatformCollision(Entity& platform){
 
-    bool onGround = false;
-
-    if(this->box.overlaps(platform.box)){
-        if(this->box.bottom - velocity.y <= platform.box.top){
-            this->box.setY(platform.box.top - this->box.h);
-            velocity.y = 0;
-            state = NEUTRAL;
-            onGround = true;
-
-            std::cout << "Collided with top of platform : " << platform.box.toString() << std::endl;
-        }
-        else if(this->box.top - velocity.y >= platform.box.bottom){
-            this->box.setY(platform.box.bottom);
-            velocity.y = 0;
-
-            std::cout << "Collided with bottom of platform : " << platform.box.toString() << std::endl;
-        }
-        else if(this->box.rightMost - velocity.x <= platform.box.leftMost){
-            this->box.setX(platform.box.leftMost - (this->box.h + 1));
-            velocity.x = 0;
-
-            std::cout << "Collided with left of platform : " << platform.box.toString() << std::endl;
-        }
-        else if(this->box.leftMost - velocity.x >= platform.box.rightMost){
-            this->box.setX(platform.box.rightMost + 1);
-            velocity.x = 0;
-
-            std::cout << "Collided with right of platform : " << platform.box.toString() << std::endl;
-        }
+    // No collision at all
+    if (!this->box.overlaps(platform.box)) {
+        return false;
     }
-
-    return onGround;
+    
+    // Calculate how much player overlaps with each side of the platform
+    float overlapTop = this->box.bottom - platform.box.top;
+    float overlapBottom = platform.box.bottom - this->box.top;
+    float overlapLeft = this->box.rightMost - platform.box.leftMost;
+    float overlapRight = platform.box.rightMost - this->box.leftMost;
+    
+    // Previous frame positions
+    bool wasAbove = (this->box.bottom - velocity.y) <= platform.box.top;
+    bool wasBelow = (this->box.top - velocity.y) >= platform.box.bottom;
+    bool wasLeftOf = (this->box.rightMost - velocity.x) <= platform.box.leftMost;
+    bool wasRightOf = (this->box.leftMost - velocity.x) >= platform.box.rightMost;
+    
+    // IMPORTANT: First check if player was above before any other collision
+    if (wasAbove) {
+        this->box.setY(platform.box.top - this->box.h);
+        velocity.y = 0;
+        state = NEUTRAL;
+        return true; // Player is on ground
+    }
+    
+    // Only check other collisions if player was NOT above
+    if (wasBelow) {
+        this->box.setY(platform.box.bottom);
+        velocity.y = 0;
+    } else if (wasLeftOf) {
+        this->box.setX(platform.box.leftMost - (this->box.w + 1));
+        velocity.x = 0;
+    } else if (wasRightOf) {
+        this->box.setX(platform.box.rightMost + 1);
+        velocity.x = 0;
+    }
+    
+    return false; // Not on ground for other collisions
+    
 }

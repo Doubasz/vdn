@@ -6,6 +6,7 @@
 #include "Vec2f.h"
 
 #include "Shapes.h"
+#include <algorithm>
 
 
 class Entity{

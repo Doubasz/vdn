@@ -49,12 +49,17 @@ public:
 
     void changeVelocity(int x, int y);
 
-    bool checkCollisionPlatform(Entity& platform);
+    bool checkPlatformCollision(Entity& platform);
 
     void updateGravity();
     void resetGravity();
 
     void update(float deltaTime);
+    void updateHorizontalMovement(float deltaTime);
+    void updateVerticalMovement(float deltaTime);
+
+    void checkHorizontalCollision(Entity& platform);
+    bool checkVerticalCollision(Entity& platform);
 
     int getState();
     void setJumpBoost(int j);

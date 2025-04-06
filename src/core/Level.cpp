@@ -158,26 +158,24 @@ void Level::deroulementLevel(std::string input, float deltaTime){
 
     player.seDeplacer(input);
 
-    player.update(deltaTime);
-
-    //playerCheckMovement();
     
+    
+    // 4. Apply gravity and vertical movement
     player.updateGravity();
-
-
+    player.update(deltaTime);
+    
+    // 5. Check vertical collisions
     bool playerOnGround = false;
-    //actionAuto();
-    for(Platform p : platforms){
-        if(player.checkCollisionPlatform(p)){
+    for(Platform& p : platforms) {
+        if(player.checkPlatformCollision(p)) {
             playerOnGround = true;
         }
     }
-
-    if(!playerOnGround){
+    
+    // 6. Update player state
+    if(!playerOnGround) {
         player.setState(JUMP);
     }
-    
-    //checkOutOfBonds();
 
 }
 

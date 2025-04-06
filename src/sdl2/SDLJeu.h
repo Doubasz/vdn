@@ -11,7 +11,7 @@
 #include <vector>
 #include "../core/Jeu.h"
 #include "../core/Log.h"
-#include "Camera.h"
+#include "../core/Camera.h"
 
 
 #define SCREEN_WIDTH 1400
