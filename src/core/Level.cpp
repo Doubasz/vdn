@@ -99,7 +99,7 @@ void Level::loadGameMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/gameMap4.txt";
+            path = "scripts/mapGeneration/level1.txt";
     }
 
     std::ifstream file(path);
@@ -125,23 +125,52 @@ void Level::loadGameMap(){
     file.close();
 }
 
+// Check if a coordinate is inside the map bounds
+bool inBounds(int i, int j, const std::vector<std::vector<int>>& map) {
+    return i >= 0 && j >= 0 && i < map.size() && j < map[0].size();
+}
+
+// Check if any of the 4 neighbors of (i, j) are NONE
+bool neighborIsNone(const std::vector<std::vector<int>>& map, int i, int j) {
+    const std::vector<std::pair<int, int>> directions = {
+        { -1,  0 }, // north
+        {  1,  0 }, // south
+        {  0, -1 }, // west
+        {  0,  1 }  // east
+    };
+
+    for (const auto& [di, dj] : directions) {
+        int ni = i + di;
+        int nj = j + dj;
+        if (inBounds(ni, nj, map) && map[ni][nj] == NONE)
+            return true;
+    }
+
+    return false;
+}
+
 void Level::initEntities(){
 
     int tileSize = 32;
 
     for(int i = 0; i < gameMap[0].size(); i++){
         for(int j = 0; j < gameMap.size(); j++){
-            std:: cout << "x : " << gameMap.size() << " y : " << gameMap[0].size() << std::endl;
-            std::cout<< "i : " << i << " j : " << j << std::endl;
+            //std:: cout << "x : " << gameMap.size() << " y : " << gameMap[0].size() << std::endl;
+            //std::cout<< "i : " << i << " j : " << j << std::endl;
             switch(gameMap[j][i]){
                 case PLAYER:
-                    player.changePosition({i , j });
+                    player.changePosition({i , j});
+                    gameMap[j][i] = NONE;
                     break;
                 case ENNEMY:
-                    ennemies.push_back(Ennemy(i , j ));
+                    ennemies.push_back(Ennemy(i , j));
                     break;
-                case PLATFORM:
-                    platforms.push_back(Platform(i , j ));
+            }
+
+            if(gameMap[j][i] != NONE && gameMap[j][i] != PLAYER && gameMap[j][i] != ENNEMY){
+                if(neighborIsNone(gameMap, j, i)){
+                    platforms.push_back(Platform(i, j));
+                }
             }
 
         }

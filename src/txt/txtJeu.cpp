@@ -10,17 +10,17 @@
 
 void txtAff(WinTXT &win, Jeu &jeu)
 {
-	std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
+	std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
 	Player &player = jeu.getCurrentLevel().getPlayer();
 	std::vector<Ennemy> &ennemies = jeu.getCurrentLevel().getEnnemies();
 
 	win.clear();
 
 	// Affichage des murs et des pastilles
-	for (int x = 0; x < tileMap[0].size(); ++x){
-        for (int y = 0; y < tileMap.size(); ++y){
+	for (int x = 0; x < gameMap[0].size(); ++x){
+        for (int y = 0; y < gameMap.size(); ++y){
                 char c;
-                switch(tileMap[y][x]){
+                /*switch(gameMap[y][x]){
                     case SANDBLOCK:
                         c = '#';
                         break;
@@ -30,7 +30,13 @@ void txtAff(WinTXT &win, Jeu &jeu)
                     default:
                         c = '?';
                         break;
-                }
+                }*/
+				if(gameMap[y][x] != NONE){
+					c = '#';
+				}
+				else{
+					c = ' ';
+				}
 
                win.print(x, y, c);      
         }

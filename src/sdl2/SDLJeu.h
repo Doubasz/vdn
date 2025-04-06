@@ -31,6 +31,7 @@ class SDLJeu{
     SDL_Renderer* renderer;
 
     SDL_Texture* background;
+    SDL_Texture* tileSet;
 
     std::vector<SDL_Texture*> playerTexture;
     SDL_Rect playerRect;
@@ -52,6 +53,7 @@ class SDLJeu{
 
 public:
     SDLJeu();
+    ~SDLJeu();
 
     void scale();
 
@@ -69,10 +71,11 @@ public:
 
     void loadPlayerTextures();
     void loadPlatformTextures();
+    void loadTextures();
 };
 
 
-
+SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path);
 void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect);
 void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color);
 

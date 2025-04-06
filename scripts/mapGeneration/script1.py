@@ -9,7 +9,7 @@ def add_zero_to_digits(file_path):
     updated_content = ''
     temp = ""
     
-    for i in range(len(content)):
+    '''for i in range(len(content)):
         if content[i].isdigit():
             temp += content[i]
         else:
@@ -46,14 +46,14 @@ def add_zero_to_digits(file_path):
             updated_content += "2"
         else:
             updated_content += "?"
-            
+            '''
 
     # Write the updated content back to the file
     with open(file_path, 'w') as file:
-        file.write(updated_content)
+        file.write(content)
 
     print("All one-digit numbers have been updated with a '0' behind them.")
 
 # Example usage
-file_path = 'gameMap4.txt'
+file_path = 'level1.txt'
 add_zero_to_digits(file_path)

@@ -40,7 +40,7 @@ SDLJeu::SDLJeu(){
 
     std::vector<std::vector<int>>& gameMap = jeu.getCurrentLevel().getGameMap();
 
-
+    loadTextures();
 
     displayMap(gameMap);
 
@@ -58,6 +58,19 @@ SDLJeu::SDLJeu(){
     }*/
 
 
+}
+
+SDLJeu::~SDLJeu(){
+    SDL_DestroyTexture(tileSet);
+}
+
+void SDLJeu::loadTextures(){
+
+    char* path = "textures/assets/Tiles/Assets/Assets2x.png";
+    char* pathBg = "textures/backgroundForest.jpg";
+
+    tileSet = loadTexture(renderer, path);
+    background = loadTexture(renderer, pathBg);
 }
 
 /*void displayMap(const std::vector<std::vector<int>>& vec){
@@ -214,6 +227,7 @@ void SDLJeu::draw(){
         }
     }*/
 
+    //SDL_RenderClear(renderer);
 
     drawBackground();
     drawTiles();
@@ -226,12 +240,19 @@ void SDLJeu::draw(){
 
 void SDLJeu::cameraUpdate(){
     Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
+    std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
 
     camera.x = (playerRect.x + (playerRect.w / 2)) - (camera.w / 2);
     camera.y = (playerRect.y + (playerRect.h / 2)) - (camera.h / 2);
 
     if (camera.x < 0) camera.x = 0;
     if (camera.y < 0) camera.y = 0;
+
+    int width = gameMap[0].size() * tileSize;
+    int height = gameMap.size() * tileSize;
+
+    if(camera.x > width - camera.w) camera.x = width - camera.w;
+    if(camera.y > height - camera.h) camera.y = height - camera.h;
 }
 
 
@@ -266,9 +287,9 @@ void SDLJeu::drawEnnemy(){
 }
 
 void SDLJeu::drawTiles(){
-    std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
+    std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
 
-    if (tileMap.empty() || tileMap[0].empty()) {
+    if (gameMap.empty() || gameMap[0].empty()) {
         Log::error("SDLJeu::drawTiles tileMap empty");
         return;
     }
@@ -276,25 +297,43 @@ void SDLJeu::drawTiles(){
     SDL_Color color;
 
     SDL_Rect rect = SDL_Rect{0, 0, tileSize, tileSize};
+
+    int tilesetTextureWidth = 800;
+    int tilesetWidthInTiles = tilesetTextureWidth / tileSize;
+
     
 
-    for(int i = 0; i < tileMap[0].size(); i++){
+    for(int i = 0; i < gameMap[0].size(); i++){
         
-        for(int j = 0; j < tileMap.size(); j++){
+        for(int j = 0; j < gameMap.size(); j++){
 
-            rect.x = (int)((i * tileSize) - camera.x);
+            int tileID = gameMap[j][i];
+            if(tileID == NONE || tileID == PLAYER) continue;
+
+            int tileIndex = tileID;
+            int srcX = (tileIndex % tilesetWidthInTiles) * tileSize;
+            int srcY = (tileIndex / tilesetWidthInTiles) * tileSize;
+
+            /*rect.x = (int)((i * tileSize) - camera.x);
             rect.y = (int)((j * tileSize) - camera.y);
 
-            switch(tileMap[j][i]){
-                case SANDBLOCK:
-                    color = SDL_Color{200, 100, 0};
-                    break;
-                case AIR:
+            switch(gameMap[j][i]){
+                case NONE:
                     color = SDL_Color{100, 100, 200};
                     break;
             }
 
-            drawRect(renderer, rect, color);
+            if(gameMap[j][i] != NONE && gameMap[j][i] != PLAYER){
+                color = SDL_Color{200, 100, 0};
+            }
+            
+
+            drawRect(renderer, rect, color);*/
+
+            SDL_Rect srcRect = { srcX, srcY, tileSize, tileSize };
+            SDL_Rect dstRect = { i * tileSize - camera.x, j * tileSize - camera.y, tileSize, tileSize };
+
+            SDL_RenderCopy(renderer, tileSet, &srcRect, &dstRect);
         }
     }
     
@@ -303,15 +342,23 @@ void SDLJeu::drawTiles(){
 
 void SDLJeu::drawBackground(){
 
-    /*
-    SDL_Rect srcRect = {camera.x, camera.y, SCREEN_WIDTH, SCREEN_HEIGHT};
-    SDL_Rect destRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
-
-
-    SDL_RenderCopy(renderer, background, &srcRect, &destRect);*/
-
-    SDL_SetRenderDrawColor(renderer, 230, 200, 100, 255);
+    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderClear(renderer);
+
+    std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
+
+    
+
+    int width = gameMap[0].size() * tileSize;
+    int height = gameMap.size() * tileSize;
+
+    SDL_Rect destRect = { 0, 0, width, height};
+
+    
+
+    int textureWidth, textureHeight;
+    SDL_QueryTexture(background, NULL, NULL, &textureWidth, &textureHeight);
+    SDL_RenderCopy(renderer, background, NULL, &destRect);
 
 }
 
@@ -323,17 +370,23 @@ void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect){
     SDL_RenderCopy(renderer, texture, NULL, &rect);
 }
 
+
 SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path){
     SDL_Texture* texture;
 
-    //SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);
-    Log::log("Loading " + std::string(path));
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);
+    //Log::log("Loading " + std::string(path));
 
     texture = IMG_LoadTexture(renderer, path);
 
+    if (!texture) {
+        std::cerr << "Failed to load texture: " << path << "\n";
+        std::cerr << "Error: " << IMG_GetError() << "\n"; // More accurate than SDL_GetError() for images
+        exit(1);
+    }
+
     return texture;
 }
-
 
 void SDLJeu::loadPlayerTextures(){
 
