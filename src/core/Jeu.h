@@ -28,7 +28,7 @@ class Jeu{
         void scale(int x);
 
         Level& getCurrentLevel();
-        void handleInput(std::string input);
+        void handleInput(std::string input, float deltaTime);
 
 };
 

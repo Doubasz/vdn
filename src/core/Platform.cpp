@@ -18,6 +18,3 @@ Platform::Platform(int x, int y) : Platform(){
     box.setY(y);
 }
 
-void Platform::update(){
-    
-}

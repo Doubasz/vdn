@@ -24,8 +24,8 @@ Level& Jeu::getCurrentLevel(){
     return currentLevel;
 }
 
-void Jeu::handleInput(std::string input){
-    currentLevel.deroulementLevel(input);
+void Jeu::handleInput(std::string input, float deltaTime){
+    currentLevel.deroulementLevel(input, deltaTime);
 }
 
 

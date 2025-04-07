@@ -37,6 +37,7 @@ private:
     float gravity;
     float jumpBoost;
     int munition;
+    int direction;
     int state;
 
     Timer moveTimer;
@@ -53,14 +54,19 @@ public:
 
     void changeVelocity(int x, int y);
 
-    bool checkCollisionPlatform(Entity& platform);
+    bool checkPlatformCollision(Entity& platform);
 
     void checkCollisionEnnemy(Entity& ennemy);
 
     void updateGravity();
     void resetGravity();
 
-    void update() override;
+    void update(float deltaTime);
+    void updateHorizontalMovement(float deltaTime);
+    void updateVerticalMovement(float deltaTime);
+
+    void checkHorizontalCollision(Entity& platform);
+    bool checkVerticalCollision(Entity& platform);
 
     int getState();
     void setJumpBoost(int j);
@@ -68,10 +74,12 @@ public:
     void goRight();
     void sufferFriction();
 
+    int getDirection() {return this->direction;}
+    
     void setState(int s){this->state = s;}
 
 };
 
 bool contains(std::string input, char target);
 
-#endif 
+#endif

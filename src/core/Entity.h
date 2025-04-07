@@ -6,6 +6,7 @@
 #include "Vec2f.h"
 
 #include "Shapes.h"
+#include <algorithm>
 
 
 class Entity{
@@ -27,7 +28,6 @@ public:
 
     virtual ~Entity();
 
-    virtual void update() = 0;
 
     Vec2 getPos() const {return position;}
     Vec2 getDim() const {return dimension;}

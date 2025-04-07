@@ -18,7 +18,7 @@ public:
     Platform();
     Platform(int x, int y);
 
-    void update() override;
+
 
 };
 

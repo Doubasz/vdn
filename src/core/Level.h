@@ -21,8 +21,8 @@ enum Niveauu{
 enum Entities{
     NONE = -1,
     PLATFORM,
-    PLAYER,
-    ENNEMY,
+    PLAYER = -2,
+    ENNEMY = -3,
 };
 
 enum Tiles{
@@ -60,7 +60,7 @@ public:
 
     void checkCollision();
     void checkOutOfBonds();
-    void deroulementLevel(std::string input);
+    void deroulementLevel(std::string input, float deltaTime);
 
     Player& getPlayer();
     std::vector<Ennemy>& getEnnemies();
@@ -79,5 +79,7 @@ public:
 };
 
 void displayMap(const std::vector<std::vector<int>>& vec);
+bool inBounds(int i, int j, const std::vector<std::vector<int>>& map);
+bool neighborIsNone(const std::vector<std::vector<int>>& map, int i, int j);
 
 #endif

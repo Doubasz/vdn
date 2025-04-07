@@ -19,8 +19,11 @@ void Camera::update(float targetX, float targetY) {
         y = this->targetY;
     }
     
-    if(x < 0) x = 0;
-    if(y < 0) y = 0;
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+
+    if(x > levelWidth - w) x = levelWidth - w;
+    if(y > levelHeight - h) y = levelHeight - h;
 
     //x = std::clamp(x, 0.0f, static_cast<float>(levelWidth - w));
     //y = std::clamp(y, 0.0f, static_cast<float>(levelHeight - h));

@@ -21,6 +21,6 @@ def process_file(input_file, output_file=None):
         print(f"An error occurred: {e}")
 
 # Example usage
-input_file = "gameMap3.txt"  # Replace with your input file path
-output_file = "map2.txt"  # Optional: Replace with your desired output file path
+input_file = "gameMap4.txt"  # Replace with your input file path
+output_file = "map3.txt"  # Optional: Replace with your desired output file path
 process_file(input_file, output_file)

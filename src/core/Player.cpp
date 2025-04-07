@@ -21,6 +21,7 @@ Player::Player(): Entity(), moveTimer(3){
     munition = 0;
     state = NEUTRAL;
     moveTimer.reset();
+    direction = RIGHT;
 }
 
 
@@ -44,37 +45,86 @@ void Player::sauter(){
     }
 }
 
-void Player::update(){
-    position.x += velocity.x;
-    position.y += velocity.y;
+void Player::update(float deltaTime){
+    position.x += velocity.x * deltaTime;
+    position.y += velocity.y * deltaTime;
 
     box.setX(box.x + velocity.x);
     box.setY(box.y + velocity.y);
 }
 
-void Player::goLeft(){
-    velocity.x -= accel;
-    if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
+void Player::updateHorizontalMovement(float deltaTime){
+    box.setX(box.x + velocity.x);
 }
 
-void Player::goRight(){
-    velocity.x += accel;
-    if(velocity.x > maxSpeed) velocity.x = maxSpeed;
+void Player::updateVerticalMovement(float deltaTime){
+    box.setY(box.y + velocity.y);
 }
 
-void Player::sufferFriction(){
+void Player::checkHorizontalCollision(Entity& platform){
 
-    if(state == NEUTRAL){
-        if(velocity.x > 0){
-            velocity.x -= friction;
-            if(velocity.x < 0) velocity.x = 0;
+    float prevRight = this->box.rightMost - velocity.x;
+    float prevLeft = this->box.leftMost - velocity.x;
+
+    // Moving right into platform
+    if(this->box.overlaps(platform.box)){
+        if (velocity.x > 0 && prevRight <= platform.box.leftMost) {
+            this->box.setX(platform.box.leftMost - (this->box.w + .001));
+            velocity.x = 0;
+
+            std::cout << "Collided with left of platform : " << platform.box.toString() << std::endl;
+        } 
+        // Moving left into platform
+        else if (velocity.x < 0 && prevLeft >= platform.box.rightMost) {
+            this->box.setX(platform.box.rightMost + .001);
+            velocity.x = 0;
+
+            std::cout << "Collided with right of platform : " << platform.box.toString() << std::endl;
         }
-        if(velocity.x < 0){
-            velocity.x += friction;
-            if(velocity.x > 0) velocity.x = 0;
-        }
-            
     }
+    
+}
+
+bool Player::checkVerticalCollision(Entity& platform){
+    // No collision at all
+    if (!this->box.overlaps(platform.box)) {
+        return false;
+    }
+    
+    // Calculate how much player overlaps with each side of the platform
+    float overlapTop = this->box.bottom - platform.box.top;
+    float overlapBottom = platform.box.bottom - this->box.top;
+    float overlapLeft = this->box.rightMost - platform.box.leftMost;
+    float overlapRight = platform.box.rightMost - this->box.leftMost;
+    
+    // Previous frame positions
+    bool wasAbove = (this->box.bottom - velocity.y) <= platform.box.top;
+    bool wasBelow = (this->box.top - velocity.y) >= platform.box.bottom;
+    bool wasLeftOf = (this->box.rightMost - velocity.x) <= platform.box.leftMost;
+    bool wasRightOf = (this->box.leftMost - velocity.x) >= platform.box.rightMost;
+    
+    // IMPORTANT: First check if player was above before any other collision
+    if (wasAbove) {
+        this->box.setY(platform.box.top - this->box.h);
+        velocity.y = 0;
+        state = NEUTRAL;
+        return true; // Player is on ground
+    }
+    
+    // Only check other collisions if player was NOT above
+    if (wasBelow) {
+        this->box.setY(platform.box.bottom);
+        velocity.y = 0;
+    } else if (wasLeftOf) {
+        this->box.setX(platform.box.leftMost - this->box.w);
+        velocity.x = 0;
+    } else if (wasRightOf) {
+        this->box.setX(platform.box.rightMost);
+        velocity.x = 0;
+    }
+    
+    return false; // Not on ground for other collisions
+
 }
 
 
@@ -87,6 +137,7 @@ void Player::seDeplacer(std::string input){
             moveTimer.reset();
 
         }
+        direction = RIGHT;
     }
     if(contains(input, 'q')){
         if(moveTimer.canProceed() || moveTimer.last_input != 'q'){
@@ -94,35 +145,36 @@ void Player::seDeplacer(std::string input){
         if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
         moveTimer.reset();
         }
+        direction = LEFT;
     }
     if(contains(input, ' ')){
         sauter();
     }
     
     if(!(contains(input, 'd')  || contains(input, 'q'))){
-        if(state == NEUTRAL){
-            if(velocity.x > 0){
-                velocity.x -= friction;
-                if(velocity.x < 0) velocity.x = 0;
-            }
-            if(velocity.x < 0){
-                velocity.x += friction;
-                if(velocity.x > 0) velocity.x = 0;
-            }
-                
-        } else if(state == JUMP){
-            if(velocity.x > 0){
-                velocity.x -= frictionAir;
-                if(velocity.x < 0) velocity.x = 0;
-            }
-            if(velocity.x < 0){
-                velocity.x += frictionAir;
-                if(velocity.x > 0) velocity.x = 0;
-            }
-                
+        if(velocity.x > 0){
+            velocity.x -= friction;
+            if(velocity.x < 0) velocity.x = 0;
         }
+        if(velocity.x < 0){
+            velocity.x += friction;
+            if(velocity.x > 0) velocity.x = 0;
+        }
+    } 
+
+    /*else if(state == JUMP){
+        if(velocity.x > 0){
+            velocity.x -= frictionAir;
+            if(velocity.x < 0) velocity.x = 0;
+        }
+        if(velocity.x < 0){
+            velocity.x += frictionAir;
+            if(velocity.x > 0) velocity.x = 0;
+        }
+            
+    }*/
         
-    }
+    
         
     
 }
@@ -165,7 +217,7 @@ void Player::setJumpBoost(int j){
 }
 
 
-bool Player::checkCollisionPlatform(Entity& platform){
+bool Player::checkPlatformCollision(Entity& platform){
 
     bool onGround = false;
     

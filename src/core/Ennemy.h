@@ -31,8 +31,7 @@ public:
    void changeDirection();
 
     void moveAuto();
-
-    void update() override;
+    void update();
 
     void deplacement(bool hitwall);
     bool hitWall(Entity & platform);
