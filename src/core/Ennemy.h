@@ -3,6 +3,7 @@
 
 
 #include "Entity.h"
+#include "Timer.h"
 
 enum TypeEnnemy{
     SCORPION,
@@ -15,7 +16,8 @@ private:
     int type;
     float gravity;
     int state;
-    int direction;
+ 
+    Timer move ;
 
 
 public:
@@ -26,7 +28,7 @@ public:
 
     void changePosition(int x, int y);
 
-   
+   void changeDirection();
 
     void moveAuto();
 
@@ -34,6 +36,7 @@ public:
 
     void deplacement(bool hitwall);
     bool hitWall(Entity & platform);
+    bool vaTomber(std::vector<std::vector<int>> &gameMap) ;
     bool nextPosVide(Entity &platform);
 };
 

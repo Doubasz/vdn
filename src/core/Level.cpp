@@ -127,7 +127,7 @@ void Level::loadGameMap(){
 
 void Level::initEntities(){
 
-    int tileSize = 32;
+    
 
     for(int i = 0; i < gameMap[0].size(); i++){
         for(int j = 0; j < gameMap.size(); j++){
@@ -145,7 +145,39 @@ void Level::initEntities(){
         }
     }
 }
+void Level::actionAuto(){
+    bool playerOnGround = false;
+    for(Platform p : platforms){
+        if(player.checkCollisionPlatform(p)){
+            playerOnGround = true;
+        }  
+    }
+    if(!playerOnGround){
+        player.setState(JUMP);
+    }
+    
+    for(Ennemy& e : ennemies){
+        player.checkCollisionEnnemy(e);
+    }
 
+    
+    for(Ennemy & e : ennemies){
+        e.update();
+
+       if(e.vaTomber(gameMap))
+            e.changeDirection();
+
+        for( Platform& p : platforms){
+        
+            if(e.hitWall(p)){
+                e.changeDirection();
+                break;
+            }      
+               
+        }
+        
+    }
+}
 
 
 void Level::deroulementLevel(std::string input){
@@ -153,36 +185,17 @@ void Level::deroulementLevel(std::string input){
     player.seDeplacer(input);
     player.updateGravity();
     player.update();
-
+    actionAuto();
 
     //playerCheckMovement();
     
     
 
 
-    bool playerOnGround = false;
-    //actionAuto();
-    for(Platform p : platforms){
-        if(player.checkCollisionPlatform(p)){
-            playerOnGround = true;
-        }
-        
-    }
+    
 
-    if(!playerOnGround){
-        player.setState(JUMP);
-    }
-    float deltaTime = 0.016f;
-    for(Ennemy& e : ennemies){
-        player.checkCollisionEnnemy(e);
-    }
-    bool hitwall = false;
-    for(Ennemy & e : ennemies){
-        for(Platform p : platforms){
-           hitwall = e.hitWall(p);
-        }
-        e.update();
-    }
+    
+
     
     
     

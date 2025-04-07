@@ -6,7 +6,7 @@
 
 Platform::Platform() : Entity(){
     velocity = {0, 0};
-    dimension = {32, 32};
+    dimension = {1, 1};
     type = SAND;
     box = Rectangle(0, 0, 1, 1);
 }

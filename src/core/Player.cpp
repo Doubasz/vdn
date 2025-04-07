@@ -5,11 +5,11 @@
 
 
 
-Player::Player(): Entity(), moveTimer(10){
+Player::Player(): Entity(), moveTimer(3){
 
     accel = 1;
     friction = 1;
-    maxSpeed = 0.15;
+    maxSpeed = 1;
     maxFall = 0.3125;
     gravity = 0.1;
     frictionAir = 0.25;
@@ -20,6 +20,7 @@ Player::Player(): Entity(), moveTimer(10){
 
     munition = 0;
     state = NEUTRAL;
+    moveTimer.reset();
 }
 
 

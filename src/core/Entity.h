@@ -38,6 +38,7 @@ public:
     void setVel(int x, int y);
     
     bool checkCollision(const Entity& other) ;
+    bool checkCollisionWithTop(const Entity& other);
 
     Rectangle getBox() const {return this->box;}
         

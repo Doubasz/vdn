@@ -8,7 +8,7 @@
 
 Entity::Entity(){
     position = {0, 0};
-    dimension = {32, 32};
+    dimension = {1, 1};
     velocity = {0, 0};
 }
 
@@ -29,6 +29,15 @@ Entity::~Entity(){}
 
 bool Entity::checkCollision(const Entity& other){
     this->box.overlaps(other.box);
+}
+
+bool Entity::checkCollisionWithTop(const Entity& other){
+    if(box.overlaps(other.box)){
+        if(this->box.bottom - velocity.y <= other.box.top){
+            return true;
+        }
+    }
+    return false;
 }
 
 
