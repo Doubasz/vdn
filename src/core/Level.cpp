@@ -187,18 +187,6 @@ void Level::deroulementLevel(std::string input){
     player.update();
     actionAuto();
 
-    //playerCheckMovement();
-    
-    
-
-
-    
-
-    
-
-    
-    
-    
     //checkOutOfBonds();
 
 }
