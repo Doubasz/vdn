@@ -20,6 +20,7 @@ Player::Player(): Entity(), moveTimer(10){
 
     munition = 0;
     state = NEUTRAL;
+    direction = RIGHT;
 }
 
 
@@ -135,6 +136,7 @@ void Player::seDeplacer(std::string input){
             moveTimer.reset();
 
         }
+        direction = RIGHT;
     }
     if(contains(input, 'q')){
         if(moveTimer.canProceed() || moveTimer.last_input != 'q'){
@@ -142,6 +144,7 @@ void Player::seDeplacer(std::string input){
         if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
         moveTimer.reset();
         }
+        direction = LEFT;
     }
     if(contains(input, ' ')){
         sauter();

@@ -3,7 +3,7 @@
 #include "SDLJeu.h"
 #include <string>
 
-
+// TODO implement animation depending the state of the player
 
 SDLJeu::SDLJeu(){
 
@@ -18,7 +18,12 @@ SDLJeu::SDLJeu(){
 
     quit = false;
 
-    camera = Camera(1400, 900, 3400, 1900);
+    std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
+    
+    int width = gameMap[0].size() * tileSize;
+    int height = gameMap.size() * tileSize;
+
+    camera = Camera(1400, 900, width, height);
 
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -38,7 +43,6 @@ SDLJeu::SDLJeu(){
 
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 
-    std::vector<std::vector<int>>& gameMap = jeu.getCurrentLevel().getGameMap();
 
     loadTextures();
 
@@ -68,9 +72,11 @@ void SDLJeu::loadTextures(){
 
     char* path = "textures/assets/Tiles/Assets/Assets2x.png";
     char* pathBg = "textures/backgroundForest.jpg";
+    char* pathPlayer = "textures/assets/player/adventurer-Sheet.png";
 
     tileSet = loadTexture(renderer, path);
     background = loadTexture(renderer, pathBg);
+    playerTexture = loadTexture(renderer, pathPlayer);
 }
 
 /*void displayMap(const std::vector<std::vector<int>>& vec){
@@ -258,7 +264,21 @@ void SDLJeu::cameraUpdate(){
 
 void SDLJeu::drawPlayer(){
 
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
+    int direction = jeu.getCurrentLevel().getPlayer().getDirection();
+
+    if(direction == LEFT){
+        flip = SDL_FLIP_HORIZONTAL;
+    }
+
     Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
+    
+
+    int spriteWidth = 50;
+    int spriteHeight = 37;
+
+    int playerWidth = 100;
+    int playerHeight = 50;
 
     SDL_Rect rect = SDL_Rect{
         (int)(playerRect.x * tileSize - camera.x),
@@ -266,11 +286,16 @@ void SDLJeu::drawPlayer(){
          tileSize, tileSize};
 
     
+    SDL_Rect srcRect = { 0, 0, spriteWidth, spriteHeight}; // 0, 0 for now 
+    SDL_Rect dstRect = { ((playerRect.x * tileSize) - (playerWidth - tileSize) / 2) - camera.x,
+                         ((playerRect.y * tileSize) - (playerHeight - 3 - tileSize)) - camera.y,
+                    playerWidth, playerHeight};
 
     /*int playerState = jeu.getCurrentLevel().getPlayerState();
     drawTexture(renderer, playerTexture[playerState], playerRect);*/
 
-    drawRect(renderer, rect, SDL_Color{0, 255, 0});
+    //drawRect(renderer, rect, SDL_Color{0, 255, 0});
+    SDL_RenderCopyEx(renderer, playerTexture, &srcRect, &dstRect, 0.0, nullptr, flip);
 }
 
 void SDLJeu::drawEnnemy(){
@@ -356,8 +381,8 @@ void SDLJeu::drawBackground(){
 
     
 
-    int textureWidth, textureHeight;
-    SDL_QueryTexture(background, NULL, NULL, &textureWidth, &textureHeight);
+    //int textureWidth, textureHeight;
+    //SDL_QueryTexture(background, NULL, NULL, &textureWidth, &textureHeight);
     SDL_RenderCopy(renderer, background, NULL, &destRect);
 
 }
@@ -390,13 +415,13 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path){
 
 void SDLJeu::loadPlayerTextures(){
 
-    playerTexture.push_back(loadTexture(renderer, "textures/player.png"));
-    playerTexture.push_back(loadTexture(renderer, "textures/pebble.png"));
+    //playerTexture.push_back(loadTexture(renderer, "textures/player.png"));
+    //playerTexture.push_back(loadTexture(renderer, "textures/pebble.png"));
 }
 
 void SDLJeu::loadPlatformTextures(){
 
-    platformTexture.push_back(loadTexture(renderer, "textures/platform.png"));
+    //platformTexture.push_back(loadTexture(renderer, "textures/platform.png"));
 }
 
 void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color){

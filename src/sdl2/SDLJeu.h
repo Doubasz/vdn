@@ -33,7 +33,7 @@ class SDLJeu{
     SDL_Texture* background;
     SDL_Texture* tileSet;
 
-    std::vector<SDL_Texture*> playerTexture;
+    SDL_Texture* playerTexture;
     SDL_Rect playerRect;
 
     std::vector<SDL_Texture*> platformTexture;

@@ -37,6 +37,7 @@ private:
     float gravity;
     float jumpBoost;
     int munition;
+    int direction;
     int state;
 
     Timer moveTimer;
@@ -73,10 +74,12 @@ public:
     void goRight();
     void sufferFriction();
 
+    int getDirection() {return this->direction;}
+    
     void setState(int s){this->state = s;}
 
 };
 
 bool contains(std::string input, char target);
 
-#endif 
+#endif

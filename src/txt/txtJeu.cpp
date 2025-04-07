@@ -90,10 +90,7 @@ void txtBoucle(Jeu &jeu)
 
 		switch (c)
 		{
-		case 'e':
-			input = 'q';
-            break;
-		case 'q':
+		case ',':
 			ok = false;
 			break;
 		}
