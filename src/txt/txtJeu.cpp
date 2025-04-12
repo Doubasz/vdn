@@ -95,7 +95,7 @@ void txtBoucle(Jeu &jeu)
 			break;
 		}
 
-        jeu.getCurrentLevel().deroulementLevel(input, 1.0);
+        jeu.getCurrentLevel().deroulementLevel(input, .1);
 
 		Player &player = jeu.getCurrentLevel().getPlayer();
 		Rectangle playerRect = player.getBox();

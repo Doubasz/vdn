@@ -200,7 +200,9 @@ void Level::deroulementLevel(std::string input, float deltaTime){
     // 6. Update player state
     if(!playerOnGround) {
         player.setState(JUMP);
+        player.setOnGround(false);
     }
+    
     
     for(Ennemy& e : ennemies){
         player.checkCollisionEnnemy(e);

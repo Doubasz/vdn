@@ -23,6 +23,16 @@ const std::string PLAYER_TEXTURE[13] = {
     "textures/pebble.png",
 };
 
+
+struct Animation{
+    int startFrame;    
+    int numFrames;      
+    int currentFrame;   
+    float frameTime;    
+    float timer;     
+    bool loop;
+};
+
 class SDLJeu{
 
     Jeu jeu;
@@ -31,10 +41,15 @@ class SDLJeu{
     SDL_Renderer* renderer;
 
     SDL_Texture* background;
+    SDL_Texture* background1;
     SDL_Texture* tileSet;
 
-    SDL_Texture* playerTexture;
+    SDL_Texture* playerSheet;
     SDL_Rect playerRect;
+
+    std::vector<Animation> playerAnimation;
+
+    Animation currentAnimation;
 
     std::vector<SDL_Texture*> platformTexture;
     std::vector<SDL_Rect> plaformRect;
@@ -46,6 +61,8 @@ class SDLJeu{
     Camera camera;
 
     int tileSize;
+
+    int lastPlayerState;
 
     int state;
     bool quit;
@@ -72,6 +89,10 @@ public:
     void loadPlayerTextures();
     void loadPlatformTextures();
     void loadTextures();
+
+    void loadAnimations();
+    void updateAnimation(float deltaTime);
+    void setAnimation(int playerAnim);
 };
 
 

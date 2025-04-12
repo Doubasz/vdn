@@ -9,10 +9,16 @@ enum Etat{
     ZETLA,
 };
 
-enum PlayerState{
-    NEUTRAL,
+enum Directions{
     LEFT,
     RIGHT,
+    UP,
+    DOWN,
+};
+
+enum PlayerState{
+    IDLE,
+    RUNNING,
     JUMP,
 };
 
@@ -35,17 +41,26 @@ private:
     float maxSpeed;
     float maxFall;
     float gravity;
-    float jumpBoost;
+
+    bool onGround;
+    
     int munition;
     int direction;
     int state;
+
+    bool isJumpButtonHeld = false;
+    float jumpHoldTime;
+    float maxJumpHoldTime;
+    float minJumpBoost;
+    float maxJumpBoost;
 
     Timer moveTimer;
 
 public:
     Player();
 
-    void sauter();
+    void jump();
+    void releaseJump();
 
     void seDeplacer(std::string input);
 
@@ -77,6 +92,7 @@ public:
     int getDirection() {return this->direction;}
     
     void setState(int s){this->state = s;}
+    void setOnGround(int b) {this->onGround = b;}
 
 };
 

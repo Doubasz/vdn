@@ -34,7 +34,7 @@ void Ennemy::update() {
 
     if(move.canProceed()){
         position.x += velocity.x ;
-        std::cout << "vel : " << velocity.x << std::endl;
+        //std::cout << "vel : " << velocity.x << std::endl;
     position.y += velocity.y;
 
     box.setX(box.x + (velocity.x ));

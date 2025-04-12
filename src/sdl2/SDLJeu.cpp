@@ -14,7 +14,7 @@ SDLJeu::SDLJeu(){
     int windowFlags = 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED;
 
-    tileSize = 32;
+    tileSize = 48;
 
     quit = false;
 
@@ -45,6 +45,7 @@ SDLJeu::SDLJeu(){
 
 
     loadTextures();
+    loadAnimations();
 
     displayMap(gameMap);
 
@@ -71,12 +72,76 @@ SDLJeu::~SDLJeu(){
 void SDLJeu::loadTextures(){
 
     char* path = "textures/assets/Tiles/Assets/Assets2x.png";
-    char* pathBg = "textures/backgroundForest.jpg";
+    char* pathBg = "textures/assets/Tiles/Assets/background1.png";
+    char* pathBg2 = "textures/assets/Tiles/Assets/background2.png";
     char* pathPlayer = "textures/assets/player/adventurer-Sheet.png";
 
     tileSet = loadTexture(renderer, path);
     background = loadTexture(renderer, pathBg);
-    playerTexture = loadTexture(renderer, pathPlayer);
+    background1 = loadTexture(renderer, pathBg2);
+    playerSheet = loadTexture(renderer, pathPlayer);
+}
+
+
+void SDLJeu::loadAnimations(){
+
+    int spriteWidth = 50;
+    int spriteHeight = 37;
+    
+    int sheetWidth = 350;
+    int sheetHeight = 407;
+
+    Animation idleAnim = {0, 4, 0, 0.3f, 0.0, true};
+    Animation runAnim = {8, 6, 0, 0.1f, 0.0, true};
+    Animation jumpAnim = {14, 10, 0, 0.07f, 0.0, false};
+    
+    playerAnimation.push_back(idleAnim);
+    playerAnimation.push_back(runAnim);
+    playerAnimation.push_back(jumpAnim);
+
+    currentAnimation = playerAnimation[IDLE];
+
+}
+
+void SDLJeu::updateAnimation(float deltaTime){
+
+    currentAnimation.timer += deltaTime;
+
+    if(currentAnimation.timer >= currentAnimation.frameTime){
+        currentAnimation.timer = 0;
+        currentAnimation.currentFrame++;
+
+        if(currentAnimation.currentFrame >= currentAnimation.numFrames){
+            if(currentAnimation.loop){
+                currentAnimation.currentFrame = 0;
+            }
+            else{
+                currentAnimation.currentFrame = currentAnimation.numFrames - 1;
+            }
+        }
+    }
+
+    int stateAnim = jeu.getCurrentLevel().getPlayer().getState();
+
+    if(lastPlayerState != stateAnim){
+        currentAnimation = playerAnimation[stateAnim];
+    }
+
+    
+
+    //setAnimation(stateAnim);
+
+    
+    /*switch(state){
+        case IDLE:
+    }*/
+}
+
+
+void SDLJeu::setAnimation(int playerAnim){
+    /*nimation* newAnim = ;
+
+    if(&currentAnim)*/
 }
 
 /*void displayMap(const std::vector<std::vector<int>>& vec){
@@ -132,9 +197,10 @@ void SDLJeu::gameLoop(){
         float deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;
 
-        
+        lastPlayerState = jeu.getCurrentLevel().getPlayer().getState();
         input(deltaTime);
         update();
+        updateAnimation(deltaTime);
         draw();
         
 
@@ -188,15 +254,12 @@ void SDLJeu::input(float deltaTime){
 
     if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]){
         //Log::log("q pressed");
-        jeu.getCurrentLevel().getPlayer().seDeplacer("q");
         input += "q";
     }
     if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
-        jeu.getCurrentLevel().getPlayer().seDeplacer("d");
         input += "d";
     }
     if(keys[SDL_SCANCODE_SPACE]){
-        jeu.getCurrentLevel().getPlayer().sauter();
         input += " ";
     }
     jeu.handleInput(input, deltaTime);
@@ -207,34 +270,6 @@ void SDLJeu::input(float deltaTime){
 
 void SDLJeu::draw(){
 
-    /*std::vector<std::vector<int>> tileMap = jeu.getCurrentLevel().getTileMap();
-	Player &player = jeu.getCurrentLevel().getPlayer();
-	std::vector<Ennemy> &ennemies = jeu.getCurrentLevel().getEnnemies();
-
-    SDL_Texture* currentTexture;
-
-    for (int x = 0; x < tileMap[0].size(); ++x){
-        for (int y = 0; y < tileMap.size(); ++y){
-
-            char c;
-            int tile = tileMap[y][x];
-            switch(tileMap[y][x]){
-                case SANDBLOCK:
-                    currentTexture = platformTexture[SANDBLOCK];
-                    break;
-                case AIR:
-                    c = ' ';
-                    break;
-                default:
-                    c = '?';
-                    break;
-            }
-   
-        }
-    }*/
-
-    //SDL_RenderClear(renderer);
-
     drawBackground();
     drawTiles();
     drawPlayer();
@@ -243,6 +278,8 @@ void SDLJeu::draw(){
 
     SDL_RenderPresent(renderer);
 }
+
+
 
 void SDLJeu::cameraUpdate(){
     Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
@@ -272,21 +309,30 @@ void SDLJeu::drawPlayer(){
     }
 
     Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
+
+    SDL_Rect rect = {playerRect.x * tileSize - camera.x, playerRect.y * tileSize - camera.y, tileSize, tileSize};
     
 
     int spriteWidth = 50;
     int spriteHeight = 37;
 
-    int playerWidth = 100;
-    int playerHeight = 50;
+    int playerWidth = 200;
+    int playerHeight = 125;
 
-    SDL_Rect rect = SDL_Rect{
-        (int)(playerRect.x * tileSize - camera.x),
-        (int)(playerRect.y * tileSize - camera.y),
-         tileSize, tileSize};
+    int sheetWidth = 350;
+    int sheetHeight = 407;
+
+    int sprtPerCol = 407 / 37;
+    int sprtPerRow = 350 / 50; 
+
 
     
-    SDL_Rect srcRect = { 0, 0, spriteWidth, spriteHeight}; // 0, 0 for now 
+    SDL_Rect srcRect = { ((currentAnimation.startFrame + currentAnimation.currentFrame) % sprtPerRow) * spriteWidth,
+                         ((currentAnimation.startFrame + currentAnimation.currentFrame) / sprtPerRow) * spriteHeight,
+                        spriteWidth, spriteHeight};
+
+
+
     SDL_Rect dstRect = { ((playerRect.x * tileSize) - (playerWidth - tileSize) / 2) - camera.x,
                          ((playerRect.y * tileSize) - (playerHeight - 3 - tileSize)) - camera.y,
                     playerWidth, playerHeight};
@@ -294,8 +340,11 @@ void SDLJeu::drawPlayer(){
     /*int playerState = jeu.getCurrentLevel().getPlayerState();
     drawTexture(renderer, playerTexture[playerState], playerRect);*/
 
+    
+
+    SDL_RenderCopyEx(renderer, playerSheet, &srcRect, &dstRect, 0.0, nullptr, flip);
+
     //drawRect(renderer, rect, SDL_Color{0, 255, 0});
-    SDL_RenderCopyEx(renderer, playerTexture, &srcRect, &dstRect, 0.0, nullptr, flip);
 }
 
 void SDLJeu::drawEnnemy(){
@@ -324,7 +373,7 @@ void SDLJeu::drawTiles(){
     SDL_Rect rect = SDL_Rect{0, 0, tileSize, tileSize};
 
     int tilesetTextureWidth = 800;
-    int tilesetWidthInTiles = tilesetTextureWidth / tileSize;
+    int tilesetWidthInTiles = tilesetTextureWidth / 32;
 
     
 
@@ -336,8 +385,8 @@ void SDLJeu::drawTiles(){
             if(tileID == NONE || tileID == PLAYER) continue;
 
             int tileIndex = tileID;
-            int srcX = (tileIndex % tilesetWidthInTiles) * tileSize;
-            int srcY = (tileIndex / tilesetWidthInTiles) * tileSize;
+            int srcX = (tileIndex % tilesetWidthInTiles) * 32;
+            int srcY = (tileIndex / tilesetWidthInTiles) * 32;
 
             /*rect.x = (int)((i * tileSize) - camera.x);
             rect.y = (int)((j * tileSize) - camera.y);
@@ -355,7 +404,7 @@ void SDLJeu::drawTiles(){
 
             drawRect(renderer, rect, color);*/
 
-            SDL_Rect srcRect = { srcX, srcY, tileSize, tileSize };
+            SDL_Rect srcRect = { srcX, srcY, 32, 32 };
             SDL_Rect dstRect = { i * tileSize - camera.x, j * tileSize - camera.y, tileSize, tileSize };
 
             SDL_RenderCopy(renderer, tileSet, &srcRect, &dstRect);
@@ -372,18 +421,26 @@ void SDLJeu::drawBackground(){
 
     std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
 
+    Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
+
     
 
     int width = gameMap[0].size() * tileSize;
     int height = gameMap.size() * tileSize;
 
-    SDL_Rect destRect = { 0, 0, width, height};
+    float scrollSpeed = 0.2f;
+
+    SDL_Rect destRect = {-camera.x * 0.1, 0, width, height};
+    SDL_Rect rectBg = {-camera.x * scrollSpeed, 0, width, height};
 
     
 
     //int textureWidth, textureHeight;
     //SDL_QueryTexture(background, NULL, NULL, &textureWidth, &textureHeight);
-    SDL_RenderCopy(renderer, background, NULL, &destRect);
+    SDL_RenderCopy(renderer, background1, NULL, &destRect);
+    SDL_RenderCopy(renderer, background, NULL, &rectBg);
+
+    
 
 }
 

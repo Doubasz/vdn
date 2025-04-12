@@ -9,17 +9,24 @@ Player::Player(): Entity(), moveTimer(3){
 
     accel = 1;
     friction = 1;
-    maxSpeed = 1;
+    maxSpeed = .15;
     maxFall = 0.3125;
     gravity = 0.1;
     frictionAir = 0.25;
-    jumpBoost = -1;
+
+    jumpHoldTime = 0.0f;
+    maxJumpHoldTime = 0.4f;
+    minJumpBoost = -0.2f;
+    maxJumpBoost = -.25f;
+
+    onGround = true;
+
     dimension = {1, 1};
     velocity = {0, 0};
     box = Rectangle(0, 0, 1, 1);
 
     munition = 0;
-    state = NEUTRAL;
+    state = IDLE;
     moveTimer.reset();
     direction = RIGHT;
 }
@@ -38,22 +45,55 @@ void Player::changePosition(int x, int y){
     box.setY(y);
 }
 
-void Player::sauter(){
-    if(state != JUMP){
-        velocity.y = jumpBoost;
+void Player::jump(){
+    if(onGround){
+        velocity.y = minJumpBoost;
         state = JUMP;
+        onGround = false;
+        isJumpButtonHeld = true;
+        jumpHoldTime = 0;
     }
 }
 
+void Player::releaseJump(){
+    isJumpButtonHeld = false;
+}
+
+
 void Player::update(float deltaTime){
+
+    if(!onGround && isJumpButtonHeld){
+        jumpHoldTime += deltaTime;
+
+        if(jumpHoldTime >= maxJumpHoldTime){
+            isJumpButtonHeld = false;
+            jumpHoldTime = maxJumpHoldTime;
+        }
+
+        float jumpProgress = jumpHoldTime / maxJumpHoldTime;
+        float targetVelocity = minJumpBoost + (maxJumpBoost - minJumpBoost) * 1;//jumpProgress;
+
+        if(velocity.y > targetVelocity){
+            velocity.y = targetVelocity;
+        }
+ 
+        
+    }
+
+
     position.x += velocity.x * deltaTime;
     position.y += velocity.y * deltaTime;
 
     box.setX(box.x + velocity.x);
     box.setY(box.y + velocity.y);
+
+    if(velocity.x == 0 && velocity.y == 0){
+        state = IDLE;
+    }
+    
 }
 
-void Player::updateHorizontalMovement(float deltaTime){
+/*void Player::updateHorizontalMovement(float deltaTime){
     box.setX(box.x + velocity.x);
 }
 
@@ -83,9 +123,9 @@ void Player::checkHorizontalCollision(Entity& platform){
         }
     }
     
-}
+}*/
 
-bool Player::checkVerticalCollision(Entity& platform){
+/*bool Player::checkVerticalCollision(Entity& platform){
     // No collision at all
     if (!this->box.overlaps(platform.box)) {
         return false;
@@ -125,30 +165,43 @@ bool Player::checkVerticalCollision(Entity& platform){
     
     return false; // Not on ground for other collisions
 
-}
+}*/
 
 
 void Player::seDeplacer(std::string input){
+
+    static bool wasSpacePressed = false;
+    bool isSpacePressed = contains(input, ' ');
 
     if(contains(input, 'd')){
         if(moveTimer.canProceed() || moveTimer.last_input != 'd'){
             velocity.x += accel;
             if(velocity.x > maxSpeed) velocity.x = maxSpeed;
             moveTimer.reset();
+            state = RUNNING;
 
         }
         direction = RIGHT;
     }
     if(contains(input, 'q')){
         if(moveTimer.canProceed() || moveTimer.last_input != 'q'){
-        velocity.x -= accel;
-        if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
-        moveTimer.reset();
+            velocity.x -= accel;
+            if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
+            moveTimer.reset();
+            state = RUNNING;
         }
         direction = LEFT;
     }
-    if(contains(input, ' ')){
-        sauter();
+
+
+
+
+    if(isSpacePressed && !wasSpacePressed){
+        jump();
+    }
+
+    else if(!isSpacePressed && wasSpacePressed && !onGround){
+        releaseJump();
     }
     
     if(!(contains(input, 'd')  || contains(input, 'q'))){
@@ -162,20 +215,7 @@ void Player::seDeplacer(std::string input){
         }
     } 
 
-    /*else if(state == JUMP){
-        if(velocity.x > 0){
-            velocity.x -= frictionAir;
-            if(velocity.x < 0) velocity.x = 0;
-        }
-        if(velocity.x < 0){
-            velocity.x += frictionAir;
-            if(velocity.x > 0) velocity.x = 0;
-        }
-            
-    }*/
-        
-    
-        
+    wasSpacePressed = isSpacePressed;    
     
 }
 
@@ -194,7 +234,7 @@ bool contains(std::string s, char target){
 }
 
 void Player::updateGravity(){
-    if(state != NEUTRAL){
+    if(!onGround){
         velocity.y += gravity;
         if(velocity.y > maxFall) velocity.y = maxFall;
     }
@@ -204,7 +244,7 @@ void Player::updateGravity(){
 void Player::resetGravity(){
     velocity.y = 0;
     //rect.y = 700 - rect.h;
-    state = NEUTRAL; 
+    onGround = true; 
 }
 
 
@@ -213,21 +253,21 @@ int Player::getState(){
 }
 
 void Player::setJumpBoost(int j){
-    jumpBoost = j;
+    maxJumpBoost = j;
 }
 
 
 bool Player::checkPlatformCollision(Entity& platform){
 
-    bool onGround = false;
+    bool onGroundRet = false;
     
    
     if(this->box.overlaps(platform.box)){
         if(this->box.bottom - velocity.y <= platform.box.top){
             this->box.setY(platform.box.top - this->box.h);
             velocity.y = 0;
-            state = NEUTRAL;
             onGround = true;
+            onGroundRet = true;
             
             //std::cout << "Collided with top of platform : " << platform.box.toString() << std::endl;
             //std :: cout << "player pos : " << this->box.toString() << std::endl;
@@ -252,7 +292,7 @@ bool Player::checkPlatformCollision(Entity& platform){
         }
     }
 
-    return onGround;
+    return onGroundRet;
 }
 
 void Player::checkCollisionEnnemy(Entity& ennemy){
