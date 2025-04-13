@@ -31,7 +31,7 @@ void txtAff(WinTXT &win, Jeu &jeu)
                         c = '?';
                         break;
                 }*/
-				if(gameMap[y][x] != NONE){
+				if(gameMap[y][x] != NONE && gameMap[y][x] != ENNEMY){
 					c = '#';
 				}
 				else{
@@ -43,9 +43,10 @@ void txtAff(WinTXT &win, Jeu &jeu)
     }
 		
     Rectangle playerPos = player.getBox();
-
-	
 	win.print(playerPos.x, playerPos.y, 'P');
+
+	Rectangle atkBox = player.getAttackHitBox();
+	win.print(atkBox.x, atkBox.y, 'A');
 	
     for(const Ennemy& e : ennemies){
         win.print(e.getPos().x, e.getPos().y, 'E');
@@ -80,7 +81,7 @@ void txtBoucle(Jeu &jeu)
 #ifdef _WIN32
 		Sleep(100);
 #else
-		usleep(10000);
+		usleep(100000);
 #endif // WIN32
 
 		std::string input = "";
@@ -90,12 +91,12 @@ void txtBoucle(Jeu &jeu)
 
 		switch (c)
 		{
-		case ',':
+		case '=':
 			ok = false;
 			break;
 		}
 
-        jeu.getCurrentLevel().deroulementLevel(input, .1);
+        jeu.getCurrentLevel().deroulementLevel(input, 0.05);
 
 		Player &player = jeu.getCurrentLevel().getPlayer();
 		Rectangle playerRect = player.getBox();

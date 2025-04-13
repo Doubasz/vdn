@@ -9,13 +9,28 @@
 #include <algorithm>
 
 
+enum Directions{
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN,
+};
+
+
+
 class Entity{
 
 public:
     Rectangle box;
 
+    int hp;
+    bool isAlive;
+    float iFrames;
+    float iFramesTimer;
+    bool canGetHit;
+    bool isVisible;
+
 protected:
-    
 
     Vec2 position;
     Vec2 dimension;
@@ -36,14 +51,21 @@ public:
     void setPos(int x, int y);
     void setDim(int x, int y);
     void setVel(int x, int y);
+
+    void setHp(int h);
+    int getHp();
+    void decreaseHp();
+    void increaseHp();
     
     bool checkCollision(const Entity& other) ;
     bool checkCollisionWithTop(const Entity& other);
+    
+    void updateIFrames(float deltaTime);
 
     Rectangle getBox() const {return this->box;}
-        
+    bool getIsVisible() const {return this->isVisible;}
+    
 };
-
 
 
 #endif

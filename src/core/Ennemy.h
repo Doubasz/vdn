@@ -12,12 +12,13 @@ enum TypeEnnemy{
 
 class Ennemy : public Entity{
 
-private:    
+private:
+    int direction;    
     int type;
     float gravity;
     int state;
  
-    Timer move ;
+    Timer move;
 
 
 public:
@@ -31,12 +32,14 @@ public:
    void changeDirection();
 
     void moveAuto();
-    void update();
+    void update(float deltaTime);
 
     void deplacement(bool hitwall);
     bool hitWall(Entity & platform);
     bool vaTomber(std::vector<std::vector<int>> &gameMap) ;
     bool nextPosVide(Entity &platform);
+
+    int getDirection(){return direction;}
 };
 
 #endif

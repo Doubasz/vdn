@@ -9,6 +9,12 @@ Ennemy::Ennemy() : Entity(), move(0.5){
     velocity = {-1, 0};
     box = {0,0,1,1};
     gravity = 0;
+
+    direction = RIGHT;
+    isAlive = true;
+    iFrames = 0.4f;
+    iFramesTimer = 0;
+    hp = 2;
     
     move.reset();
 }
@@ -29,20 +35,16 @@ void Ennemy::changePosition(int x, int y) {
     box.setX(x);
     box.setY(y);
 }
-void Ennemy::update() {
+void Ennemy::update(float deltaTime) {
+
+    updateIFrames(deltaTime);
     velocity.y += gravity;
 
-    if(move.canProceed()){
-        position.x += velocity.x ;
-        //std::cout << "vel : " << velocity.x << std::endl;
-    position.y += velocity.y;
 
-    box.setX(box.x + (velocity.x ));
-    box.setY(box.y + (velocity.y ));
-
-    move.reset();
-    }
+    box.setX(box.x + (velocity.x * deltaTime ));
+    box.setY(box.y + (velocity.y * deltaTime ));
     
+    direction = (velocity.x < 0) ? LEFT : RIGHT;
 }
 
 void Ennemy::changeDirection(){

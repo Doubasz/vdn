@@ -164,6 +164,7 @@ void Level::initEntities(){
                     break;
                 case ENNEMY:
                     ennemies.push_back(Ennemy(i , j));
+                    gameMap[j][i] = NONE;
                     break;
             }
 
@@ -188,7 +189,8 @@ void Level::deroulementLevel(std::string input, float deltaTime){
     // 4. Apply gravity and vertical movement
     player.updateGravity();
     player.update(deltaTime);
-    
+
+
     // 5. Check vertical collisions
     bool playerOnGround = false;
     for(Platform& p : platforms) {
@@ -199,18 +201,17 @@ void Level::deroulementLevel(std::string input, float deltaTime){
     
     // 6. Update player state
     if(!playerOnGround) {
-        player.setState(JUMP);
         player.setOnGround(false);
     }
     
     
     for(Ennemy& e : ennemies){
-        player.checkCollisionEnnemy(e);
+        player.checkCollisionEnnemy(e, deltaTime);
     }
 
     
     for(Ennemy & e : ennemies){
-        e.update();
+        e.update(deltaTime);
 
        if(e.vaTomber(gameMap))
             e.changeDirection();

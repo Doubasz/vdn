@@ -54,13 +54,14 @@ class SDLJeu{
     std::vector<SDL_Texture*> platformTexture;
     std::vector<SDL_Rect> plaformRect;
 
-    std::vector<SDL_Texture*> ennemyTexture;
-    std::vector<SDL_Rect> ennemyRect;
+    SDL_Texture* ennemySheet;
+    Animation ennemyAnimation;
 
 
     Camera camera;
 
     int tileSize;
+    int blinkInterval;
 
     int lastPlayerState;
 
@@ -83,8 +84,7 @@ public:
     void drawTiles();
     void drawBackground();
 
-    void cameraUpdate();
-    void update();
+    void update(float deltaTime);
 
     void loadPlayerTextures();
     void loadPlatformTextures();
@@ -92,6 +92,7 @@ public:
 
     void loadAnimations();
     void updateAnimation(float deltaTime);
+    void updateEnnemyAnimation(float deltaTime);
     void setAnimation(int playerAnim);
 };
 

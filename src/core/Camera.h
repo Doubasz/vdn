@@ -15,6 +15,11 @@ public:
     bool smoothFollow;
     float followSpeed;
 
+    bool isShaking;
+    float shakeDuration;
+    float shakeTimer;
+    float shakeIntensity;
+
     int levelWidth, levelHeight;
 
 
@@ -27,7 +32,8 @@ public:
             levelWidth(mapWidth), levelHeight(mapHeight) {
         }
     
-    void update(float targetX, float targetY);
+    void update(float targetX, float targetY, float deltaTime);
+    void shake(float intensity, float duration);
 
     float getX() const {return x;}
     float getY() const {return y;}
