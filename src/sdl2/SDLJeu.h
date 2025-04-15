@@ -13,6 +13,7 @@
 #include "../core/Jeu.h"
 #include "../core/Log.h"
 #include "../core/Camera.h"
+#include "../core/Timer.h"  // Jai ajouté ca 
 
 
 #define SCREEN_WIDTH 1400
@@ -79,6 +80,8 @@ class SDLJeu{
 
     int state;
     bool quit;
+    Timer gameTimer{1.0};  
+    double gameTime;
 
 
 public:
@@ -96,6 +99,7 @@ public:
     void drawTiles();
     void drawBackground();
     void drawLives(); 
+    void drawTimer();
 
     void renderMainMenu();
 
