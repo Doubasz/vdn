@@ -323,7 +323,7 @@ void SDLJeu::input(float deltaTime){
 void SDLJeu::draw(){
 
     bool playerVulnerable = jeu.getCurrentLevel().getPlayer().getCanGetHit();
-    git config pull.rebase false
+
     drawBackground();
     drawTiles();
     drawPlayer();
@@ -551,7 +551,7 @@ void SDLJeu::loadPlayerTextures(){
 
     //playerTexture.push_back(loadTexture(renderer, "textures/player.png"));
     //playerTexture.push_back(loadTexture(renderer, "textures/pebble.png"));
-}
+}   
 
 void SDLJeu::loadPlatformTextures(){
 
@@ -561,7 +561,7 @@ void SDLJeu::loadPlatformTextures(){
 void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color){
 
     SDL_SetRenderDrawColor(renderer, color.b, color.g, color.r, 255);
-    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderFillRect(renderer,  &rect);
     
 }
 void SDLJeu::loadFont() {
