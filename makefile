@@ -1,7 +1,7 @@
 # Variables
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -g -I./src/core -I./src/sdl2 -I/usr/include/SDL2
-LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf
+LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 SRX_CORE = src/core
 SRX_TXT = src/txt
 SRX_SDL2 = src/sdl2

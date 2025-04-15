@@ -8,6 +8,8 @@ Ennemy::Ennemy() : Entity(), move(0.5){
     dimension = {1, 1};
     velocity = {-1, 0};
     box = {0,0,1,1};
+    
+    maxFall = 15.3125;
     gravity = 0;
 
     direction = RIGHT;

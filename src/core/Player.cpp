@@ -38,6 +38,9 @@ Player::Player(): Entity(), moveTimer(3){
     canGetHit = true;
 
 
+
+    gotHit = false;
+
     blinkInterval = iFrames;
 
     state = IDLE;
@@ -97,6 +100,7 @@ void Player::updateJump(float deltaTime){
 
 void Player::update(float deltaTime){
     
+    updateKnockBack(deltaTime);
     updateIFrames(deltaTime);
     updateAttack(deltaTime);
     updateJump(deltaTime);
@@ -515,7 +519,6 @@ bool Player::checkPlatformCollision(Entity& platform) {
 }
 
 
-
 void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
 
     if(this->attackHitBox.overlaps(ennemy.box)){
@@ -525,7 +528,7 @@ void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
             ennemy.decreaseHp();
             ennemy.canGetHit = false;
 
-            //knockback();
+            //ennemy.applyKnockBack(20, 0.3);
             switch(direction){
                 case RIGHT:
                     ennemy.box.setX(ennemy.box.x + 2);
@@ -548,7 +551,8 @@ void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
             canGetHit = false;
             gotHit = true;
 
-            switch(direction){
+            applyKnockBack(15, 0.3);
+            /*switch(direction){
                 case RIGHT:
                     box.setX(box.x - 2);
                     break;
@@ -556,7 +560,7 @@ void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
                     box.setX(box.x + 2);
                     break;
             }
-            box.setY(box.y - 2);
+            box.setY(box.y - 2);*/
         }
     }
 }

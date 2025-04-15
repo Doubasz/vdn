@@ -38,7 +38,6 @@ private:
     float maxFall;
     float gravity;
 
-    bool onGround;
     
     int direction;
     int state;
@@ -55,6 +54,7 @@ private:
     float attackWindow;
     float attackTimer;
     float attackCooldown;
+
 
     bool gotHit;
     float blinkInterval;
@@ -88,6 +88,7 @@ public:
 
     void update(float deltaTime);
     void updateState();
+
     void updateHorizontalMovement(float deltaTime);
     void updateVerticalMovement(float deltaTime);
 
@@ -106,7 +107,9 @@ public:
     
     void setState(int s){this->state = s;}
     void setGotHit(int b) {this->gotHit = b;}
-    void setOnGround(int b) {this->onGround = b;}
+    
+
+   
 
     Rectangle& getAttackHitBox() {return this->attackHitBox;}
 
