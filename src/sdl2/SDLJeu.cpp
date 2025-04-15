@@ -27,6 +27,11 @@ SDLJeu::SDLJeu(){
     camera = Camera(1400, 900, width, height);
 
 
+    font = nullptr;
+    textColor = {255, 255, 255, 255}; // Couleur blanche
+    loadFont();
+
+
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         Log::error("SDLJeu::SDLJeu() Couldn't init SDL");
         Log::error(std::string (SDL_GetError()));
@@ -317,9 +322,10 @@ void SDLJeu::draw(){
     drawTiles();
     drawPlayer();
     drawEnnemy();
-    
+    drawLives();
 
     SDL_RenderPresent(renderer);
+    
 }
 
 
@@ -552,3 +558,35 @@ void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color){
     SDL_RenderFillRect(renderer, &rect);
     
 }
+void SDLJeu::loadFont() {
+    font = TTF_OpenFont("textures/fonts/baby.ttf", 24); // Remplacez par le chemin de votre police
+    if (!font) {
+        Log::error("Failed to load font: " + std::string(TTF_GetError()));
+    }
+}
+void SDLJeu::drawLives() {
+    if (!font) return; // Si la police n'est pas chargée
+    
+    int lives = jeu.getCurrentLevel().getPlayer().getHp();
+    std::string livesText = "Lives: " + std::to_string(lives);
+    
+    SDL_Surface* surface = TTF_RenderText_Solid(font, livesText.c_str(), textColor);
+    if (!surface) {
+        Log::error("Unable to render text: " + std::string(TTF_GetError()));
+        return;
+    }
+    
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (!texture) {
+        Log::error("Unable to create texture from text: " + std::string(SDL_GetError()));
+        SDL_FreeSurface(surface);
+        return;
+    }
+    
+    SDL_Rect destRect = {20, 20, surface->w, surface->h};
+    SDL_RenderCopy(renderer, texture, NULL, &destRect);
+    
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
+}
+

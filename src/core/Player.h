@@ -61,6 +61,9 @@ private:
 
 
     Timer moveTimer;
+    
+    
+
 
 public:
     Player();
@@ -109,6 +112,8 @@ public:
     void setOnGround(int b) {this->onGround = b;}
 
     Rectangle& getAttackHitBox() {return this->attackHitBox;}
+
+
 
 };
 

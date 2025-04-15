@@ -516,6 +516,8 @@ bool Player::checkPlatformCollision(Entity& platform) {
 
 
 
+
+
 void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
 
     if(this->attackHitBox.overlaps(ennemy.box)){

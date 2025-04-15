@@ -55,6 +55,10 @@ class SDLJeu{
     std::vector<SDL_Rect> plaformRect;
 
     SDL_Texture* ennemySheet;
+
+    TTF_Font* font;
+    SDL_Color textColor;
+
     Animation ennemyAnimation;
 
 
@@ -83,12 +87,14 @@ public:
     void drawEnnemy();
     void drawTiles();
     void drawBackground();
+    void drawLives(); 
 
     void update(float deltaTime);
 
     void loadPlayerTextures();
     void loadPlatformTextures();
     void loadTextures();
+    void loadFont();
 
     void loadAnimations();
     void updateAnimation(float deltaTime);
@@ -100,5 +106,6 @@ public:
 SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path);
 void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect);
 void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color);
+
 
 #endif
