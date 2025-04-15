@@ -34,6 +34,10 @@ struct Animation{
     bool loop;
 };
 
+enum GameState{
+    MAIN_MENU, OPTION, LEVEL, PAUSE, GAME_OVER, 
+};
+
 class SDLJeu{
 
     Jeu jeu;
@@ -63,6 +67,9 @@ class SDLJeu{
     Animation ennemyAnimation;
 
 
+    //std::vector<Button> buttons;
+
+
     Camera camera;
 
     int tileSize;
@@ -89,6 +96,8 @@ public:
     void drawTiles();
     void drawBackground();
     void drawLives(); 
+
+    void renderMainMenu();
 
     void update(float deltaTime);
 

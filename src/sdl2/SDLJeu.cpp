@@ -29,8 +29,7 @@ SDLJeu::SDLJeu(){
 
     font = nullptr;
     textColor = {255, 255, 255, 255}; // Couleur blanche
-    loadFont();
-
+    
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         Log::error("SDLJeu::SDLJeu() Couldn't init SDL");
@@ -48,6 +47,8 @@ SDLJeu::SDLJeu(){
         std::cout << "SDL_mixer Error: " << Mix_GetError() << std::endl;
         exit(1);
     }
+
+    loadFont();
     
 
     window = SDL_CreateWindow("Vent du Nord", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
@@ -195,30 +196,6 @@ void SDLJeu::setAnimation(int playerAnim){
     }
 }*/
 
-
-void SDLJeu::scale(){
-
-
-    Player &player = jeu.getCurrentLevel().getPlayer();
-
-    player.getBox().setX(player.getBox().x * 32);
-    player.getBox().setY(player.getBox().y * 32);
-    player.setDim(player.getDim().x * 32, player.getDim().y * 32);
-
-
-    std::vector<Platform>& platforms = jeu.getCurrentLevel().getPlatforms();
-
-    for (Platform& p : platforms){
-
-        p.getBox().setX(p.getBox().x * 32);
-        p.getBox().setY(p.getBox().y * 32);
-    
-        p.setDim(p.getDim().x * 32, p.getDim().y * 32);
-    }
-
-
-}
-
 void SDLJeu::gameLoop(){
 
     const int FPS = 60;
@@ -269,6 +246,22 @@ void SDLJeu::update(float deltaTime){
     float playerCenterY = (playerRect.y + (playerRect.h / 2)) * tileSize;
 
     camera.update(playerCenterX, playerCenterY, deltaTime);
+}
+
+
+
+void SDLJeu::renderMainMenu(){
+
+    //drawBackground();
+
+    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+    SDL_RenderClear(renderer);
+
+
+    //SDL_RenderButtons();
+
+
+    SDL_RenderPresent(renderer);
 }
 
 
@@ -565,9 +558,11 @@ void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color){
     
 }
 void SDLJeu::loadFont() {
-    font = TTF_OpenFont("textures/fonts/baby.ttf", 24); // Remplacez par le chemin de votre police
+
+    font = TTF_OpenFont("textures/fonts/yakuza.ttf", 24); // Remplacez par le chemin de votre police
     if (!font) {
         Log::error("Failed to load font: " + std::string(TTF_GetError()));
+        exit(-1);
     }
 }
 void SDLJeu::drawLives() {
