@@ -1,6 +1,27 @@
 {
     "files.associations": {
         "iostream": "cpp",
+<<<<<<< HEAD
+        "array": "cpp",
+        "atomic": "cpp",
+        "bit": "cpp",
+        "cctype": "cpp",
+        "chrono": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+=======
         "string": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
@@ -24,6 +45,7 @@
         "cstdint": "cpp",
         "deque": "cpp",
         "list": "cpp",
+>>>>>>> 3ce7b8d1a1d5fef8688535487996838f39fc2d45
         "unordered_map": "cpp",
         "vector": "cpp",
         "exception": "cpp",
@@ -33,7 +55,10 @@
         "memory": "cpp",
         "memory_resource": "cpp",
         "numeric": "cpp",
+<<<<<<< HEAD
+=======
         "optional": "cpp",
+>>>>>>> 3ce7b8d1a1d5fef8688535487996838f39fc2d45
         "random": "cpp",
         "ratio": "cpp",
         "string_view": "cpp",
@@ -41,16 +66,28 @@
         "tuple": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
+<<<<<<< HEAD
+        "fstream": "cpp",
+        "initializer_list": "cpp",
+=======
         "format": "cpp",
         "fstream": "cpp",
         "initializer_list": "cpp",
         "iomanip": "cpp",
+>>>>>>> 3ce7b8d1a1d5fef8688535487996838f39fc2d45
         "iosfwd": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
         "numbers": "cpp",
         "ostream": "cpp",
+<<<<<<< HEAD
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "cinttypes": "cpp",
+        "typeinfo": "cpp"
+=======
         "span": "cpp",
         "sstream": "cpp",
         "stdexcept": "cpp",
@@ -58,6 +95,7 @@
         "text_encoding": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
+<<<<<<< HEAD
         "variant": "cpp",
         "condition_variable": "cpp",
         "map": "cpp",
@@ -65,6 +103,10 @@
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp"
+=======
+        "variant": "cpp"
+>>>>>>> 3ce7b8d1a1d5fef8688535487996838f39fc2d45
+>>>>>>> c51b70eb23c4f8787d49d418240241964352527f
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

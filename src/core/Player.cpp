@@ -49,7 +49,9 @@ Player::Player(): Entity(), moveTimer(3){
 }
 
 
-
+bool Player::getOnGround() const {
+    return onGround;
+}
 void Player::changePosition(Vec2 pos){
     position = pos;
     box.setX(pos.x);

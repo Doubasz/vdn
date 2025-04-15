@@ -3,9 +3,10 @@
 #include "SDLJeu.h"
 #include <string>
 
+
 // TODO implement animation depending the state of the player
 
-SDLJeu::SDLJeu(){
+SDLJeu::SDLJeu() : moveTimer(0.3){
 
     jeu = Jeu();
 
@@ -14,7 +15,7 @@ SDLJeu::SDLJeu(){
     int windowFlags = 0;
     int rendererFlags = SDL_RENDERER_ACCELERATED;
 
-    tileSize = 32;
+    tileSize = 48;
     blinkInterval = 1;
 
     quit = false;
@@ -30,7 +31,6 @@ SDLJeu::SDLJeu(){
     font = nullptr;
     textColor = {255, 255, 255, 255}; // Couleur blanche
     
-
 
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
         Log::error("SDLJeu::SDLJeu() Couldn't init SDL");
@@ -57,9 +57,11 @@ SDLJeu::SDLJeu(){
 
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 
-
     loadTextures();
     loadAnimations();
+    assert(loadSounds(0) == 0) ;
+    //playBackgroundMusic(0,0);
+    //later do the niv and the state in parametres to choose which music is playing
 
     displayMap(gameMap);
 
@@ -125,7 +127,97 @@ void SDLJeu::loadAnimations(){
     ennemyAnimation = ennemyRunning;
 
 }
+int SDLJeu::loadSounds(int niveau) {
 
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cerr << "Erreur Mix_OpenAudio: " << Mix_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
+    }
+
+    music = Mix_LoadMUS("sounds_musics/Steam Gardens - Super Mario Odyssey OST(1).mp3");
+
+    if (!music) {
+        std::cerr << "Erreur Mix_LoadMUS: " << Mix_GetError() << std::endl;
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+
+    walk = Mix_LoadWAV("sounds_musics/walkgrass.mp3");
+
+    if (!walk) {
+        std::cerr << "Erreur Mix_LoadWAV: " << Mix_GetError() << std::endl;
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+
+    sauter = Mix_LoadWAV("sounds_musics/jump.mp3");
+
+    if (!sauter) {
+        std::cerr << "Erreur Mix_LoadWAV: " << Mix_GetError() << std::endl;
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+    return 0;
+}
+
+int SDLJeu::playBackgroundMusic(int niveau, int state) {
+
+    if (Mix_PlayMusic(music, -1) == -1) { // -1 means loop infinitely
+        std::cerr << "Erreur Mix_PlayMusic: " << Mix_GetError() << std::endl;
+        Mix_FreeMusic(music);
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+
+    double loopStartTime = 9.0;
+    if (Mix_SetMusicPosition(loopStartTime) != 0) {
+        std::cerr << "Erreur Mix_SetMusicPosition: " << Mix_GetError() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+
+bool contain(std::string s, char target){
+
+    if(s[s.length()-1] == target)
+        return true;
+    return false;
+}
+bool jumping = false;
+void SDLJeu::playSound(std::string input){
+    bool playerOnGround = jeu.getCurrentLevel().getPlayer().getOnGround();
+    
+    
+    if(contain(input,'q') || contain(input,'d')){
+
+        if(moveTimer.canProceed()){
+            if(playerOnGround)
+                Mix_PlayChannel(-1,walk,0);
+
+            moveTimer.reset();
+
+        }
+
+    }else if (contain(input,' ')){
+        if(!jumping){
+
+            jumping = true;
+            Mix_VolumeChunk(sauter, 20);
+            Mix_PlayChannel(-1,sauter,0);
+        }
+       
+
+
+    } 
+    if(playerOnGround)
+            jumping = false;
+}
 void SDLJeu::updateAnimation(float deltaTime){
 
     currentAnimation.timer += deltaTime;
@@ -196,30 +288,6 @@ void SDLJeu::setAnimation(int playerAnim){
         std::cout << std::endl;
     }
 }*/
-
-
-void SDLJeu::scale(){
-
-
-    Player &player = jeu.getCurrentLevel().getPlayer();
-
-    player.getBox().setX(player.getBox().x * 32);
-    player.getBox().setY(player.getBox().y * 32);
-    player.setDim(player.getDim().x * 32, player.getDim().y * 32);
-
-
-    std::vector<Platform>& platforms = jeu.getCurrentLevel().getPlatforms();
-
-    for (Platform& p : platforms){
-
-        p.getBox().setX(p.getBox().x * 32);
-        p.getBox().setY(p.getBox().y * 32);
-    
-        p.setDim(p.getDim().x * 32, p.getDim().y * 32);
-    }
-
-
-}
 
 void SDLJeu::gameLoop(){
 
@@ -307,16 +375,21 @@ void SDLJeu::input(float deltaTime){
     if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]){
         //Log::log("q pressed");
         input += "q";
+        
     }
     if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
         input += "d";
+        
     }
     if (keys[SDL_SCANCODE_M]){
         input += "m";
     }
     if(keys[SDL_SCANCODE_SPACE]){
         input += " ";
+      
+       
     }
+    playSound(input);
     jeu.handleInput(input, deltaTime);
 }
 
