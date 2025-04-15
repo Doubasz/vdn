@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 #include <iostream>
 #include <fstream>
 #include <SDL2/SDL_mixer.h>
@@ -35,6 +36,10 @@ struct Animation{
     bool loop;
 };
 
+enum GameState{
+    MAIN_MENU, OPTION, LEVEL, PAUSE, GAME_OVER, 
+};
+
 class SDLJeu{
 
     Jeu jeu;
@@ -57,7 +62,14 @@ class SDLJeu{
     std::vector<SDL_Rect> plaformRect;
 
     SDL_Texture* ennemySheet;
+
+    TTF_Font* font;
+    SDL_Color textColor;
+
     Animation ennemyAnimation;
+
+
+    //std::vector<Button> buttons;
 
 
     Camera camera;
@@ -91,6 +103,9 @@ public:
     void drawEnnemy();
     void drawTiles();
     void drawBackground();
+    void drawLives(); 
+
+    void renderMainMenu();
 
     void update(float deltaTime);
 
@@ -102,6 +117,7 @@ public:
     int playBackgroundMusic(int niveau, int state);
 
     void playFromSpecificTime(Mix_Music *music, double startTime);
+    void loadFont();
 
     void loadAnimations();
     void playSound(std::string input);
@@ -114,5 +130,6 @@ public:
 SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path);
 void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect);
 void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color);
+
 
 #endif
