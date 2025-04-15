@@ -74,6 +74,8 @@ public:
     void attack();
     void updateAttack(float deltaTime);
 
+    bool getOnGround() const;
+
     void changePosition(Vec2 pos);
     void changePosition(int x, int y);
 

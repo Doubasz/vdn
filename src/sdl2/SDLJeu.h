@@ -7,8 +7,10 @@
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <fstream>
-
+#include <SDL2/SDL_mixer.h>
 #include <vector>
+#include <cassert>
+#include <thread>
 #include "../core/Jeu.h"
 #include "../core/Log.h"
 #include "../core/Camera.h"
@@ -68,12 +70,18 @@ class SDLJeu{
     int state;
     bool quit;
 
+    Mix_Chunk* sauter;
+    Mix_Chunk* gotHit;
+    Mix_Chunk* walk;
+    Mix_Chunk* attack;
+
+    Mix_Music* music;
+    Timer moveTimer;
 
 public:
     SDLJeu();
     ~SDLJeu();
 
-    void scale();
 
     void gameLoop();
     void input(float deltaTime);
@@ -89,8 +97,14 @@ public:
     void loadPlayerTextures();
     void loadPlatformTextures();
     void loadTextures();
+    int loadSounds(int niveau);
+
+    int playBackgroundMusic(int niveau, int state);
+
+    void playFromSpecificTime(Mix_Music *music, double startTime);
 
     void loadAnimations();
+    void playSound(std::string input);
     void updateAnimation(float deltaTime);
     void updateEnnemyAnimation(float deltaTime);
     void setAnimation(int playerAnim);
