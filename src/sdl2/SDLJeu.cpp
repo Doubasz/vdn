@@ -44,6 +44,12 @@ SDLJeu::SDLJeu(){
         exit(1);
     }
 
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cout << "SDL_mixer Error: " << Mix_GetError() << std::endl;
+        exit(1);
+    }
+    
+
     window = SDL_CreateWindow("Vent du Nord", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
     renderer = SDL_CreateRenderer(window, -1, rendererFlags);
 
@@ -317,7 +323,7 @@ void SDLJeu::input(float deltaTime){
 void SDLJeu::draw(){
 
     bool playerVulnerable = jeu.getCurrentLevel().getPlayer().getCanGetHit();
-
+    git config pull.rebase false
     drawBackground();
     drawTiles();
     drawPlayer();

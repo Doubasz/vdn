@@ -36,6 +36,14 @@ protected:
     Vec2 dimension;
     Vec2f velocity;
 
+    bool onGround;
+
+    float knockBackTimer;
+    float knockBackDuration;
+    float knockBackForce;
+    float knockBackFriction;
+    bool onKnockBack;
+
 public:
     Entity();
     Entity(int x, int y, int w, int h, float vx, float vy);
@@ -61,10 +69,14 @@ public:
     bool checkCollisionWithTop(const Entity& other);
     
     void updateIFrames(float deltaTime);
+    void updateKnockBack(float deltaTime);
+
+    void applyKnockBack(float force, float duration);
 
     Rectangle getBox() const {return this->box;}
     bool getIsVisible() const {return this->isVisible;}
-    
+
+    void setOnGround(int b) {this->onGround = b;}
 };
 
 

@@ -104,7 +104,7 @@ void txtBoucle(Jeu &jeu)
 		float playerCenterX = (playerRect.x + (playerRect.w / 2));
 		float playerCenterY = (playerRect.y + (playerRect.h / 2));
 
-		win.camera.update(playerCenterX, playerCenterY);
+		win.camera.update(playerCenterX, playerCenterY, 1);
 
 	} while (ok);
 }

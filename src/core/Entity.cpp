@@ -11,6 +11,12 @@ Entity::Entity(){
     dimension = {1, 1};
     velocity = {0, 0};
 
+    knockBackTimer = 0;
+    knockBackDuration = 0;
+    knockBackForce = 0;
+    knockBackFriction = 10;
+    onKnockBack = false;
+
     isVisible = true;
 }
 
@@ -56,6 +62,38 @@ void Entity::updateIFrames(float deltaTime){
         }
     }
 }
+
+void Entity::applyKnockBack(float force, float duration){
+    knockBackForce = force;
+    knockBackDuration = duration;
+
+    velocity = {0, 0};
+}
+
+
+void Entity::updateKnockBack(float deltaTime){
+
+    if(knockBackTimer < knockBackDuration){
+        knockBackTimer += deltaTime;
+
+        if(knockBackTimer >= knockBackDuration){
+            knockBackTimer = 0;
+            onKnockBack = false;
+        }
+        else{
+            velocity.x += knockBackForce;
+            velocity.y -= knockBackForce / 2;
+        }
+    }
+
+    if(knockBackForce > 0){
+        knockBackForce -= knockBackFriction;
+
+        if(knockBackForce < 0) knockBackForce = 0;
+    }
+}
+
+
 
 void Entity::setPos(int x, int y){
     position = {x, y};

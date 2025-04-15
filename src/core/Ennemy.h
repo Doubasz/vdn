@@ -16,6 +16,7 @@ private:
     int direction;    
     int type;
     float gravity;
+    float maxFall;
     int state;
  
     Timer move;
