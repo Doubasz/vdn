@@ -79,6 +79,8 @@ public:
 
     bool getOnGround() const;
 
+    bool getGotHit() const;
+
     void changePosition(Vec2 pos);
     void changePosition(int x, int y);
 

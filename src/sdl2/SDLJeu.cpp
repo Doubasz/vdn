@@ -6,7 +6,7 @@
 
 // TODO implement animation depending the state of the player
 
-SDLJeu::SDLJeu() : moveTimer(0.3){
+SDLJeu::SDLJeu() : moveTimer(0.3), attacksound(0.5){
 
     jeu = Jeu();
 
@@ -55,7 +55,7 @@ SDLJeu::SDLJeu() : moveTimer(0.3){
     loadTextures();
     loadAnimations();
     assert(loadSounds(0) == 0) ;
-    //playBackgroundMusic(0,0);
+    playBackgroundMusic(0,0);
     //later do the niv and the state in parametres to choose which music is playing
 
     displayMap(gameMap);
@@ -156,11 +156,37 @@ int SDLJeu::loadSounds(int niveau) {
         SDL_Quit();
         return 1;
     }
+
+    land = Mix_LoadWAV("sounds_musics/land.wav");
+    if (!land) {
+        std::cerr << "Erreur Mix_LoadWAV: " << Mix_GetError() << std::endl;
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+
+
+    attack = Mix_LoadWAV("sounds_musics/attack.mp3");
+    if (!attack) {
+        std::cerr << "Erreur Mix_LoadWAV: " << Mix_GetError() << std::endl;
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+    gotHit = Mix_LoadWAV("sounds_musics/gotHit.wav");
+    if (!gotHit) {
+        std::cerr << "Erreur Mix_LoadWAV: " << Mix_GetError() << std::endl;
+        Mix_CloseAudio();
+        SDL_Quit();
+        return 1;
+    }
+
     return 0;
 }
 
 int SDLJeu::playBackgroundMusic(int niveau, int state) {
 
+    Mix_VolumeMusic(20);
     if (Mix_PlayMusic(music, -1) == -1) { // -1 means loop infinitely
         std::cerr << "Erreur Mix_PlayMusic: " << Mix_GetError() << std::endl;
         Mix_FreeMusic(music);
@@ -169,11 +195,6 @@ int SDLJeu::playBackgroundMusic(int niveau, int state) {
         return 1;
     }
 
-    double loopStartTime = 9.0;
-    if (Mix_SetMusicPosition(loopStartTime) != 0) {
-        std::cerr << "Erreur Mix_SetMusicPosition: " << Mix_GetError() << std::endl;
-        return 1;
-    }
 
     return 0;
 }
@@ -184,34 +205,65 @@ bool contain(std::string s, char target){
         return true;
     return false;
 }
+
+
 bool jumping = false;
+
+
+
 void SDLJeu::playSound(std::string input){
+    bool falling;
+    bool fell ;
     bool playerOnGround = jeu.getCurrentLevel().getPlayer().getOnGround();
     
     
     if(contain(input,'q') || contain(input,'d')){
 
-        if(moveTimer.canProceed()){
-            if(playerOnGround)
+        if(moveTimer.canProceed()){ 
+            if(playerOnGround){
+
+                Mix_VolumeChunk(walk,30);
                 Mix_PlayChannel(-1,walk,0);
+            }
 
             moveTimer.reset();
 
         }
 
     }else if (contain(input,' ')){
-        if(!jumping){
-
+        if(!jumping && jeu.getCurrentLevel().getPlayer().getState() == JUMP){
+            
             jumping = true;
+
             Mix_VolumeChunk(sauter, 20);
             Mix_PlayChannel(-1,sauter,0);
         }
-       
 
+    }else if (contain(input,'m')){
+        if(attacksound.canProceed()){
+            Mix_VolumeChunk(attack, 90);
+            Mix_PlayChannel(-1,attack,0);
+            attacksound.reset();
 
-    } 
+        }
+    }
     if(playerOnGround)
-            jumping = false;
+        jumping = false;
+    if(jeu.getCurrentLevel().getPlayer().getState() == FALLING )  {
+        falling = true;
+    }
+    if(falling && playerOnGround){
+        Mix_VolumeChunk(land, 20);
+        Mix_PlayChannel(-1,land,0);
+    }
+
+    if(jeu.getCurrentLevel().getPlayer().getGotHit()){
+    
+        Mix_VolumeChunk(gotHit, 128);
+        Mix_PlayChannel(-1,gotHit,0);
+    }
+
+    
 }
 void SDLJeu::updateAnimation(float deltaTime){
 
@@ -402,8 +454,9 @@ void SDLJeu::input(float deltaTime){
       
        
     }
-    playSound(input);
+    
     jeu.handleInput(input, deltaTime);
+    playSound(input);
 }
 
 

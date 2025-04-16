@@ -86,9 +86,12 @@ class SDLJeu{
     Mix_Chunk* gotHit;
     Mix_Chunk* walk;
     Mix_Chunk* attack;
-
+    Mix_Chunk* land;
     Mix_Music* music;
+
+    
     Timer moveTimer;
+    Timer attacksound;
 
 public:
     SDLJeu();

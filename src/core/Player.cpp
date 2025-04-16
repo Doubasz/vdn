@@ -52,6 +52,9 @@ Player::Player(): Entity(), moveTimer(3){
 bool Player::getOnGround() const {
     return onGround;
 }
+bool Player::getGotHit()const {
+    return gotHit;
+}
 void Player::changePosition(Vec2 pos){
     position = pos;
     box.setX(pos.x);
@@ -66,9 +69,9 @@ void Player::changePosition(int x, int y){
 
 void Player::jump(){
     if(onGround){
+        onGround = false;
         velocity.y = minJumpBoost;
         state = JUMP;
-        onGround = false;
         isJumpButtonHeld = true;
         jumpHoldTime = 0;
     }
@@ -111,6 +114,7 @@ void Player::update(float deltaTime){
     box.setY(box.y + velocity.y * deltaTime);
 
     updateState();
+
     
 }
 
@@ -198,7 +202,6 @@ void Player::seDeplacer(std::string input){
 
         velocity.x -= accel;
         if(velocity.x < -maxSpeed) velocity.x = -maxSpeed;
-        moveTimer.reset();
         state = RUNNING;
         
         direction = LEFT;
@@ -304,9 +307,9 @@ void Player::updateGravity(){
 }
 
 void Player::resetGravity(){
+    onGround = true; 
     velocity.y = 0;
     //rect.y = 700 - rect.h;
-    onGround = true; 
 }
 
 
