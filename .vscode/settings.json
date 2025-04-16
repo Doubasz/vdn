@@ -95,8 +95,18 @@
         "text_encoding": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
+<<<<<<< HEAD
+        "variant": "cpp",
+        "condition_variable": "cpp",
+        "map": "cpp",
+        "mutex": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
+=======
         "variant": "cpp"
 >>>>>>> 3ce7b8d1a1d5fef8688535487996838f39fc2d45
+>>>>>>> c51b70eb23c4f8787d49d418240241964352527f
     },
     "C_Cpp.errorSquiggles": "enabled"
 }
