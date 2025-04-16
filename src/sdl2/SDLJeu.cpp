@@ -9,6 +9,8 @@
 SDLJeu::SDLJeu() : moveTimer(0.3), attacksound(0.5){
 
     jeu = Jeu();
+    gameState = MAIN_MENU;
+
 
     Player& player = jeu.getCurrentLevel().getPlayer();
 
@@ -204,12 +206,6 @@ int SDLJeu::playBackgroundMusic(int niveau, int state) {
     return 0;
 }
 
-bool contain(std::string s, char target){
-
-    if(s[s.length()-1] == target)
-        return true;
-    return false;
-}
 
 
 bool jumping = false;
@@ -222,7 +218,7 @@ void SDLJeu::playSound(std::string input){
     bool playerOnGround = jeu.getCurrentLevel().getPlayer().getOnGround();
     
     
-    if(contain(input,'q') || contain(input,'d')){
+    if(contains(input,'q') || contains(input,'d')){
 
         if(moveTimer.canProceed()){ 
             if(playerOnGround){
@@ -235,7 +231,7 @@ void SDLJeu::playSound(std::string input){
 
         }
 
-    }else if (contain(input,' ')){
+    }else if (contains(input,' ')){
         if(!jumping && jeu.getCurrentLevel().getPlayer().getState() == JUMP){
             
             jumping = true;
@@ -244,7 +240,7 @@ void SDLJeu::playSound(std::string input){
             Mix_PlayChannel(-1,sauter,0);
         }
 
-    }else if (contain(input,'m')){
+    }else if (contains(input,'m')){
         if(attacksound.canProceed()){
             Mix_VolumeChunk(attack, 90);
             Mix_PlayChannel(-1,attack,0);
@@ -270,6 +266,10 @@ void SDLJeu::playSound(std::string input){
 
     
 }
+
+
+
+
 void SDLJeu::updateAnimation(float deltaTime){
 
     currentAnimation.timer += deltaTime;
@@ -756,6 +756,58 @@ void SDLJeu::drawTimer() {
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
 }
+
+void SDLJeu::renderMainMenu() {
+    SDL_Event event;
+    bool inMenu = true;
+
+    SDL_Color white = {255, 255, 255, 255};
+
+    while (inMenu) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                inMenu = false;
+                quit = true;
+                return;
+            } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                int x = event.button.x;
+                int y = event.button.y;
+
+                // Bouton "Start"
+                if (x >= 600 && x <= 800 && y >= 400 && y <= 470) {
+                    inMenu = false;
+                    gameState = LEVEL;  // On passe à l'état de jeu
+                }
+            }
+        }
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // fond noir
+        SDL_RenderClear(renderer);
+
+        // Titre
+        SDL_Surface* titleSurface = TTF_RenderText_Solid(font, "Vent du Nord", white);
+        SDL_Texture* titleTexture = SDL_CreateTextureFromSurface(renderer, titleSurface);
+        SDL_Rect titleRect = {SCREEN_WIDTH / 2 - titleSurface->w / 2, 200, titleSurface->w, titleSurface->h};
+        SDL_RenderCopy(renderer, titleTexture, NULL, &titleRect);
+        SDL_FreeSurface(titleSurface);
+        SDL_DestroyTexture(titleTexture);
+
+        // Bouton "Start"
+        SDL_Rect startButton = {600, 400, 200, 70};
+        SDL_SetRenderDrawColor(renderer, 100, 100, 255, 255); // bleu clair
+        SDL_RenderFillRect(renderer, &startButton);
+
+        SDL_Surface* startText = TTF_RenderText_Solid(font, "Start", white);
+        SDL_Texture* startTexture = SDL_CreateTextureFromSurface(renderer, startText);
+        SDL_Rect startTextRect = {startButton.x + 50, startButton.y + 20, startText->w, startText->h};
+        SDL_RenderCopy(renderer, startTexture, NULL, &startTextRect);
+        SDL_FreeSurface(startText);
+        SDL_DestroyTexture(startTexture);
+
+        SDL_RenderPresent(renderer);
+    }
+}
+
 
 
 

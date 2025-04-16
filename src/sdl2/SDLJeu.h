@@ -95,8 +95,11 @@ class SDLJeu{
     
     Timer moveTimer;
     Timer attacksound;
+    GameState gameState = MAIN_MENU; // Valeur par défaut : le menu
+
 
 public:
+
     SDLJeu();
     ~SDLJeu();
 
@@ -131,6 +134,8 @@ public:
     void updateAnimation(float deltaTime);
     void updateEnnemyAnimation(float deltaTime);
     void setAnimation(int playerAnim);
+    bool isQuit() const { return quit; }
+
 };
 
 
