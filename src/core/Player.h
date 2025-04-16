@@ -84,6 +84,8 @@ public:
     void changePosition(Vec2 pos);
     void changePosition(int x, int y);
 
+    bool getIsAlive() const;
+
     void changeVelocity(int x, int y);
 
     bool checkPlatformCollision(Entity& platform);

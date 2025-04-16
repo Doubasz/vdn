@@ -32,8 +32,6 @@ public:
 
 protected:
 
-    Vec2 position;
-    Vec2 dimension;
     Vec2f velocity;
 
     bool onGround;
@@ -52,8 +50,6 @@ public:
     virtual ~Entity();
 
 
-    Vec2 getPos() const {return position;}
-    Vec2 getDim() const {return dimension;}
     Vec2f getVel() const {return velocity;}
 
     void setPos(int x, int y);

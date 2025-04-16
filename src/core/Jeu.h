@@ -12,6 +12,7 @@ enum State{
     CHOIX_NIVEAU,
     NIVEAU,
     MENU_NIVEAU,
+    PAUSE
 };
 
 
@@ -25,7 +26,10 @@ class Jeu{
 
         Jeu();
         void gameLoop();
-        void scale(int x);
+
+        int getState() const;
+
+        void setState(int newState);
 
         Level& getCurrentLevel();
         void handleInput(std::string input, float deltaTime);

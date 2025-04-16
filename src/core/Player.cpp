@@ -24,7 +24,6 @@ Player::Player(): Entity(), moveTimer(3){
 
     onGround = true;
 
-    dimension = {1, 1};
     velocity = {0, 0};
     box = Rectangle(0, 0, 1, 1);
 
@@ -55,18 +54,15 @@ bool Player::getOnGround() const {
 bool Player::getGotHit()const {
     return gotHit;
 }
-void Player::changePosition(Vec2 pos){
-    position = pos;
-    box.setX(pos.x);
-    box.setY(pos.y);
-}
+
 
 void Player::changePosition(int x, int y){
-    position = {x, y};
     box.setX(x);
     box.setY(y);
 }
-
+bool Player::getIsAlive() const {
+    return isAlive;
+}
 void Player::jump(){
     if(onGround){
         onGround = false;
@@ -112,57 +108,14 @@ void Player::update(float deltaTime){
 
     box.setX(box.x + velocity.x * deltaTime);
     box.setY(box.y + velocity.y * deltaTime);
-
+    std::cout << " x : " << box.x << std::endl;
+    std::cout << " velx : " << velocity.x << std::endl;
     updateState();
 
     
 }
 
 
-/*void Player::updateHorizontalMovement(float deltaTime){
-    box.setX(box.x + velocity.x * deltaTime);
-}
-
-void Player::updateVerticalMovement(float deltaTime){
-    box.setY(box.y + velocity.y * deltaTime);
-}
-
-void Player::checkHorizontalCollision(Entity& platform){
-    if (this->box.overlaps(platform.box)) {
-        float overlapTop = this->box.bottom - platform.box.top;
-        bool standingOnTop = overlapTop >= 0 && overlapTop < 0.1f && velocity.y >= 0;
-
-        if (!standingOnTop) {
-            if (velocity.x > 0) {
-                // Moving right, hit left side
-                this->box.setX(platform.box.leftMost - (this->box.w + 0.01));
-            } else if (velocity.x < 0) {
-                // Moving left, hit right side
-                this->box.setX(platform.box.rightMost + 0.01);
-            }
-            velocity.x = 0;
-        }
-    }
-}
-
-bool Player::checkVerticalCollision(Entity& platform){
-    bool onGroundRet = false;
-
-    if (this->box.overlaps(platform.box)) {
-        if (velocity.y > 0) {
-            // Falling, landed on platform
-            this->box.setY(platform.box.top - this->box.h);
-            onGround = true;
-            onGroundRet = true;
-        } else if (velocity.y < 0) {
-            // Jumping, hit underside
-            this->box.setY(platform.box.bottom);
-        }
-        velocity.y = 0;
-    }
-
-    return onGroundRet;
-}*/
 
 
 void Player::updateState(){
@@ -221,7 +174,7 @@ void Player::seDeplacer(std::string input){
         releaseJump();
     }
     
-    if(!(contains(input, 'd')  || contains(input, 'q'))){
+    if(!(contains(input, 'd')  || contains(input, 'q'))){    
         if(velocity.x > 0){
             velocity.x -= friction;
             if(velocity.x < 0) velocity.x = 0;
@@ -230,8 +183,8 @@ void Player::seDeplacer(std::string input){
             velocity.x += friction;
             if(velocity.x > 0) velocity.x = 0;
         }
-    } 
-
+    
+    }
     wasSpacePressed = isSpacePressed;    
     
 }
@@ -533,7 +486,6 @@ void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
             ennemy.decreaseHp();
             ennemy.canGetHit = false;
 
-            //ennemy.applyKnockBack(20, 0.3);
             switch(direction){
                 case RIGHT:
                     ennemy.box.setX(ennemy.box.x + 2);
@@ -543,7 +495,6 @@ void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
                     ennemy.box.setX(ennemy.box.x - 2);
                     break;
             }
-            //ennemy.box.setY(ennemy.box.y - 2);
             
         }
         
@@ -557,15 +508,6 @@ void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
             gotHit = true;
 
             applyKnockBack(15, 0.3);
-            /*switch(direction){
-                case RIGHT:
-                    box.setX(box.x - 2);
-                    break;
-                case LEFT:
-                    box.setX(box.x + 2);
-                    break;
-            }
-            box.setY(box.y - 2);*/
         }
     }
 }

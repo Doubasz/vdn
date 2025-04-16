@@ -49,7 +49,7 @@ void txtAff(WinTXT &win, Jeu &jeu)
 	win.print(atkBox.x, atkBox.y, 'A');
 	
     for(const Ennemy& e : ennemies){
-        win.print(e.getPos().x, e.getPos().y, 'E');
+        win.print(e.getBox().x, e.getBox().y, 'E');
     }
 	
 
@@ -96,7 +96,7 @@ void txtBoucle(Jeu &jeu)
 			break;
 		}
 
-        jeu.getCurrentLevel().deroulementLevel(input, 0.05);
+        jeu.getCurrentLevel().deroulementLevel(input, 1);
 
 		Player &player = jeu.getCurrentLevel().getPlayer();
 		Rectangle playerRect = player.getBox();
