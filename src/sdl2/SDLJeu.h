@@ -38,7 +38,7 @@ struct Animation{
 };
 
 enum GameState{
-    MAIN_MENU, OPTION, LEVEL, PAUSE, GAME_OVER, 
+    MAIN_MENU, OPTION, LEVEL, GAME_OVER, 
 };
 
 class SDLJeu{
@@ -126,7 +126,6 @@ public:
 
     int playBackgroundMusic(int niveau, int state);
 
-    void playFromSpecificTime(Mix_Music *music, double startTime);
     void loadFont();
 
     void loadAnimations();

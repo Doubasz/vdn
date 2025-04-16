@@ -99,7 +99,7 @@ void Level::loadGameMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/pasfini.txt";
+            path = "scripts/mapGeneration/level1.txt";
     }
 
     std::ifstream file(path);
@@ -159,7 +159,7 @@ void Level::initEntities(){
             //std::cout<< "i : " << i << " j : " << j << std::endl;
             switch(gameMap[j][i]){
                 case PLAYER:
-                    player.changePosition({i , j});
+                    player.changePosition(i , j);
                     gameMap[j][i] = NONE;
                     break;
                 case ENNEMY:
@@ -232,20 +232,6 @@ void Level::deroulementLevel(std::string input, float deltaTime){
 
 
 
-void Level::checkOutOfBonds() {
-    Vec2 playerPos = player.getPos();
-    Vec2 playerDim = player.getDim();
-
-    // Bord gauche
-    if (playerPos.x < 0) {
-        player.changePosition(0, playerPos.y);
-    }
-    // Bord droit
-    else if (playerPos.x + playerDim.x >= gameMap[0].size()) {
-        player.changePosition(gameMap[0].size() - playerDim.x - 1, playerPos.y); // -1 pour éviter le dépassement
-    }
-
-}
 
 
 
@@ -260,10 +246,4 @@ int Level::getLevel(){
 
 bool Level::isLevelFinished(){
     return isLevelCompleted;
-}
-
-
-void Level::scale(int x){
-
-    player.setPos(player.getPos().x * x, player.getPos().y * x);
 }

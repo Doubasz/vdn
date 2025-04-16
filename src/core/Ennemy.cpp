@@ -5,7 +5,6 @@
 
 
 Ennemy::Ennemy() : Entity(), move(0.5){
-    dimension = {1, 1};
     velocity = {-1, 0};
     box = {0,0,1,1};
     
@@ -22,18 +21,11 @@ Ennemy::Ennemy() : Entity(), move(0.5){
 }
 
 Ennemy::Ennemy(int x, int y) : Ennemy(){
-    position = {x, y};
     box.setX(x);
     box.setY(y);
 }
 
-void Ennemy::changePosition(Vec2 pos) {
-    position = pos;
-    box.setX(pos.x);
-    box.setY(pos.y);
-}
 void Ennemy::changePosition(int x, int y) {
-    position = {x, y};
     box.setX(x);
     box.setY(y);
 }
@@ -65,32 +57,19 @@ bool Ennemy::hitWall(Entity & platform){
             this->box.setY(platform.box.top - (this->box.h));
             velocity.y = 0;
             onGround = true;
-            
-            //std::cout << "Collided with top of platform : " << platform.box.toString() << std::endl;
-            //std :: cout << "player pos : " << this->box.toString() << std::endl;
+
         }
         else if(this->box.rightMost - velocity.x  <= platform.box.leftMost){
             this->box.setX(platform.box.leftMost - (this->box.h));
             
-            
-
-            //std::cout << "Collided with left of platform : " << platform.box.toString() << std::endl;
-           // std :: cout << "player pos : " << this->box.toString() << std::endl;
             return true;
         }
         else if(this->box.leftMost - velocity.x  >= platform.box.rightMost){
             this->box.setX(platform.box.rightMost );
            
-            
-            //std::cout << "Collided with right of platform : " << platform.box.toString() << std::endl;
             return true;
         }
-        /*else if(this->box.top - velocity.y >= platform.box.bottom ){
-            this->box.setY(platform.box.bottom);
-            velocity.y = 0;
-
-            std::cout << "Collided with bottom of platform : " << platform.box.toString() << std::endl;
-        }*/
+    
     }
 
     return false;
@@ -105,9 +84,3 @@ bool Ennemy::vaTomber(std::vector<std::vector<int>> &gameMap) {
 
 }
 
-
-bool Ennemy::nextPosVide(Entity& platform){
-    if(this->box.x + velocity.x != platform.box.x)
-        return true;
-    return false;
-}

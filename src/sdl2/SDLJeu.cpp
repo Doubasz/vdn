@@ -22,6 +22,7 @@ SDLJeu::SDLJeu() : moveTimer(0.3), attacksound(0.5){
 
     quit = false;
 
+    gameTime = 300; //300 seconds to finish the level or 5 min if u want
     std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
     
     int width = gameMap[0].size() * tileSize;
@@ -214,7 +215,6 @@ bool jumping = false;
 
 void SDLJeu::playSound(std::string input){
     bool falling;
-    bool fell ;
     bool playerOnGround = jeu.getCurrentLevel().getPlayer().getOnGround();
     
     
@@ -361,11 +361,21 @@ void SDLJeu::gameLoop(){
         lastTime = currentTime;
 
         lastPlayerState = jeu.getCurrentLevel().getPlayer().getState();
-        input(deltaTime);
-        update(deltaTime);
-        updateEnnemyAnimation(deltaTime);
-        updateAnimation(deltaTime);
-        draw();
+        bool alive =  jeu.getCurrentLevel().getPlayer().getIsAlive();
+        if(!alive){
+            //we can call here the functio that makes the game stop and draw you died like in elden ring
+            jeu.setState(PAUSE);
+
+        } 
+        if(jeu.getState()== LEVEL){
+
+            input(deltaTime);
+            update(deltaTime);
+            updateEnnemyAnimation(deltaTime);
+            updateAnimation(deltaTime);
+            
+        }
+            draw();
         
 
             // Cap FPS
@@ -391,7 +401,7 @@ void SDLJeu::update(float deltaTime){
     float playerCenterY = (playerRect.y + (playerRect.h / 2)) * tileSize;
 
     camera.update(playerCenterX, playerCenterY, deltaTime);
-    gameTime += deltaTime;
+    gameTime -= deltaTime;
 }
 
 
@@ -734,7 +744,7 @@ void SDLJeu::drawTimer() {
     int minutes = static_cast<int>(gameTime) / 60;
     int seconds = static_cast<int>(gameTime) % 60;
     
-    std::string timerText = "3 secondes";
+    std::string timerText = std::to_string(minutes) + ":" + std::to_string(seconds);
     
     SDL_Surface* surface = TTF_RenderText_Solid(font, timerText.c_str(), textColor);
     if (!surface) {
