@@ -99,7 +99,7 @@ void Level::loadGameMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/pasfini.txt";
+            path = "scripts/mapGeneration/mapfinale2.txt";
     }
 
     std::ifstream file(path);

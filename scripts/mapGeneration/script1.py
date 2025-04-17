@@ -55,5 +55,5 @@ def add_zero_to_digits(file_path):
     print("All one-digit numbers have been updated with a '0' behind them.")
 
 # Example usage
-file_path = 'pasfiniencore.txt'
+file_path = 'pasfini.txt'
 add_zero_to_digits(file_path)

@@ -140,6 +140,8 @@ public:
     void updateEnnemyAnimation(float deltaTime);
     void setAnimation(int playerAnim);
     bool isQuit() const { return quit; }
+    void resetGame();
+
 
 };
 

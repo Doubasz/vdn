@@ -88,6 +88,11 @@ SDLJeu::~SDLJeu(){
     SDL_DestroyTexture(tileSet);
 }
 
+void SDLJeu::resetGame() {
+    jeu = Jeu();  
+    gameTime = 300;
+}
+
 void SDLJeu::loadTextures(){
 
     char* path = "textures/assets/Tiles/Assets/Assets2x.png";
@@ -441,6 +446,7 @@ void SDLJeu::input(float deltaTime){
         
             if (x >= quitButtonRect.x && x <= quitButtonRect.x + quitButtonRect.w &&
                 y >= quitButtonRect.y && y <= quitButtonRect.y + quitButtonRect.h) {
+                resetGame();
                 gameState = MAIN_MENU;
                 renderMainMenu();
             }
@@ -890,6 +896,8 @@ void SDLJeu::renderMainMenu() {
         SDL_RenderPresent(renderer);
     }
 }
+
+
 
 
 
