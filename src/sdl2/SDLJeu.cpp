@@ -367,12 +367,18 @@ void SDLJeu::gameLoop(){
             jeu.setState(PAUSE);
 
         } 
-        if(jeu.getState()== LEVEL){
+        if(gameState== LEVEL){
 
             input(deltaTime);
             update(deltaTime);
             updateEnnemyAnimation(deltaTime);
             updateAnimation(deltaTime);
+            
+    
+        }
+
+        else if (gameState== GAME_PAUSED){
+            input(deltaTime);  
             
         }
             draw();
@@ -424,7 +430,6 @@ void SDLJeu::input(float deltaTime){
                 break;
 
             case SDL_KEYDOWN:
-                
                 break;
             
             default:
@@ -434,27 +439,38 @@ void SDLJeu::input(float deltaTime){
 
     const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-    if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]){
-        //Log::log("q pressed");
-        input += "q";
-        
-    }
-    if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
-        input += "d";
-        
-    }
-    if (keys[SDL_SCANCODE_M]){
-        input += "m";
-    }
-    if(keys[SDL_SCANCODE_SPACE]){
-        input += " ";
-      
-       
-    }
     
-    jeu.handleInput(input, deltaTime);
-    playSound(input);
+    bool pKeyIsPressed = keys[SDL_SCANCODE_P];
+
+    if (pKeyIsPressed && !pKeyWasPressed) {
+        if (gameState == LEVEL) {
+            gameState = GAME_PAUSED;
+        } else if (gameState == GAME_PAUSED) {
+            gameState = LEVEL;
+        }
+    }
+    pKeyWasPressed = pKeyIsPressed;
+
+    
+    if (gameState == LEVEL) {
+        if (keys[SDL_SCANCODE_LEFT] || keys[SDL_SCANCODE_A]){
+            input += "q";
+        }
+        if (keys[SDL_SCANCODE_RIGHT] || keys[SDL_SCANCODE_D]){
+            input += "d";
+        }
+        if (keys[SDL_SCANCODE_M]){
+            input += "m";
+        }
+        if (keys[SDL_SCANCODE_SPACE]){
+            input += " ";
+        }
+
+        jeu.handleInput(input, deltaTime);
+        playSound(input);
+    }
 }
+
 
 
 
@@ -469,6 +485,35 @@ void SDLJeu::draw(){
     drawEnnemy();
     drawLives();
     drawTimer();
+
+    if (gameState == GAME_PAUSED && font) {
+        
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);  
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);              
+        SDL_Rect darkOverlay = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+        SDL_RenderFillRect(renderer, &darkOverlay);
+    
+        
+        SDL_Color black = {0, 0, 0, 255};
+        SDL_Surface* pauseSurface = TTF_RenderText_Solid(font, "PAUSE", black);
+        SDL_Texture* pauseTexture = SDL_CreateTextureFromSurface(renderer, pauseSurface);
+        SDL_Rect pauseRect = {
+            SCREEN_WIDTH / 2 - pauseSurface->w / 2,
+            20,
+            pauseSurface->w,
+            pauseSurface->h
+        };
+        SDL_RenderCopy(renderer, pauseTexture, NULL, &pauseRect);
+    
+        SDL_FreeSurface(pauseSurface);
+        SDL_DestroyTexture(pauseTexture);
+    
+        
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
+    }
+    
+    
+    
 
     SDL_RenderPresent(renderer);
     

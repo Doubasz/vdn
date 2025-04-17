@@ -35,10 +35,12 @@ struct Animation{
     float frameTime;    
     float timer;     
     bool loop;
+    
+
 };
 
 enum GameState{
-    MAIN_MENU, OPTION, LEVEL, GAME_OVER, 
+    MAIN_MENU, OPTION, LEVEL, GAME_OVER,GAME_PAUSED
 };
 
 class SDLJeu{
@@ -95,7 +97,8 @@ class SDLJeu{
     
     Timer moveTimer;
     Timer attacksound;
-    GameState gameState = MAIN_MENU; // Valeur par défaut : le menu
+    GameState gameState = MAIN_MENU;
+    bool pKeyWasPressed = false; 
 
 
 public:
