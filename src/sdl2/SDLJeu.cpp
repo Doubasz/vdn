@@ -435,6 +435,17 @@ void SDLJeu::input(float deltaTime){
             default:
                 break;
         }
+        if (gameState == GAME_PAUSED && event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT) {
+            int x = event.button.x;
+            int y = event.button.y;
+        
+            if (x >= quitButtonRect.x && x <= quitButtonRect.x + quitButtonRect.w &&
+                y >= quitButtonRect.y && y <= quitButtonRect.y + quitButtonRect.h) {
+                gameState = MAIN_MENU;
+                renderMainMenu();
+            }
+        }
+        
     }
 
     const Uint8* keys = SDL_GetKeyboardState(NULL);
@@ -507,6 +518,23 @@ void SDLJeu::draw(){
     
         SDL_FreeSurface(pauseSurface);
         SDL_DestroyTexture(pauseTexture);
+
+
+
+        SDL_SetRenderDrawColor(renderer, 200, 30, 30, 255);  // rouge vif
+        SDL_RenderFillRect(renderer, &quitButtonRect);
+
+        SDL_Surface* quitSurface = TTF_RenderText_Solid(font, "Quitter", textColor);
+        SDL_Texture* quitTexture = SDL_CreateTextureFromSurface(renderer, quitSurface);
+        SDL_Rect quitTextRect = {
+        quitButtonRect.x + (quitButtonRect.w - quitSurface->w) / 2,
+        quitButtonRect.y + (quitButtonRect.h - quitSurface->h) / 2,
+        quitSurface->w,
+        quitSurface->h
+};
+        SDL_RenderCopy(renderer, quitTexture, NULL, &quitTextRect);
+        SDL_FreeSurface(quitSurface);
+        SDL_DestroyTexture(quitTexture);
     
         
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);

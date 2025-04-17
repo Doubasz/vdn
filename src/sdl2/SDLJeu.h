@@ -100,6 +100,9 @@ class SDLJeu{
     GameState gameState = MAIN_MENU;
     bool pKeyWasPressed = false; 
 
+    SDL_Rect quitButtonRect = {SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50, 200, 60};
+
+
 
 public:
 
