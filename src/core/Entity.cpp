@@ -29,9 +29,11 @@ Entity::Entity(Vec2 pos, Vec2 dim, Vec2f vel){
 Entity::~Entity(){}
 
 
-bool Entity::checkCollision(const Entity& other){
-    this->box.overlaps(other.box);
+// Dans Entity.cpp
+bool Entity::checkCollision(const Entity& other) const {
+    return box.overlaps(other.box);
 }
+
 
 bool Entity::checkCollisionWithTop(const Entity& other){
     if(box.overlaps(other.box)){

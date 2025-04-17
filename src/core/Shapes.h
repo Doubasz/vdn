@@ -61,6 +61,9 @@ struct Rectangle{
 
     Rectangle(Rectangle* other);
 
+
+	bool overlaps(const Rectangle& other) const;
+
 	/// @brief Initialize by default all attributes with `0`
 	Rectangle();
 

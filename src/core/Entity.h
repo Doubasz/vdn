@@ -61,7 +61,7 @@ public:
     void decreaseHp();
     void increaseHp();
     
-    bool checkCollision(const Entity& other) ;
+    bool checkCollision(const Entity& other) const ;
     bool checkCollisionWithTop(const Entity& other);
     
     void updateIFrames(float deltaTime);

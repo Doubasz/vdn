@@ -99,26 +99,41 @@ void Rectangle::update(){
 	this->rightCenter  = Point(rightMost, center.y);
 }
 
-bool Rectangle::overlaps(Rectangle other){
-	return this->overlaps(&other);
+bool Rectangle::overlaps(const Rectangle& other) const {
+    return (
+        x <= other.rightMost &&
+        other.x <= rightMost &&
+        y <= other.bottom &&
+        other.y <= bottom
+    );
 }
-
 bool Rectangle::overlaps(Rectangle* other)
 {
-	if ((       x <= other->rightMost) &&
-	    (other->x <= rightMost)        &&
-	    (       y <= other->bottom)    &&
-	    (other->y <= bottom))
-		return true;
+    if (other == nullptr) return false;
 
-	return false;
+    if ((x <= other->rightMost) &&
+        (other->x <= rightMost) &&
+        (y <= other->bottom) &&
+        (other->y <= bottom))
+        return true;
+
+    return false;
 }
+
+
 
 void Rectangle::placeOnTop(Rectangle other){
 	this->y = (other.y - this->h);
 
 	this->update();
 }
+// Dans Shapes.cpp
+
+
+bool Rectangle::overlaps(Rectangle other) {
+    return this->overlaps(&other);
+}
+
 
 
 Circle::Circle(float x, float y, int r): x(x), y(y), r(r) {
