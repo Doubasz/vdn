@@ -7,7 +7,8 @@
 
 enum TypeEnnemy{
     SCORPION,
-    KALB,
+    BATARD,
+
 };
 
 class Ennemy : public Entity{
@@ -24,7 +25,7 @@ private:
 
 public:
     Ennemy();
-    Ennemy(int x, int y);
+    Ennemy(int x, int y,int type);
 
     void changePosition(Vec2 pos);
 

@@ -3,7 +3,9 @@
 
 
 #include "GameState.h"
+#include <SDL2/SDL_mixer.h>
 #include <vector>
+#include <cassert>
 
 class MenuState : public GameState {
 private:
@@ -13,6 +15,8 @@ private:
 
     SDL_Texture* background;
     std::vector<Button> buttons;
+
+    Mix_Music* music;
 
     GameState::StateCode whatToDoNow;
     int state;
@@ -31,7 +35,9 @@ public:
     void render(SDL_Renderer* renderer) override;
 
     void renderBackground(SDL_Renderer* renderer);
-    void renderButtons(SDL_Renderer* renderer);
+    void load_music();
+    int playBackgroundMusic();
+    void renderButtons(SDL_Renderer *renderer);
 
     GameState::StateCode startGame();
 

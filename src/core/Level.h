@@ -22,7 +22,9 @@ enum Entities{
     NONE = -1,
     PLATFORM,
     PLAYER = -2,
-    ENNEMY = -3,
+    ENNEMY_TYPE1 = -3,
+    ENNEMY_TYPE2 = -4,
+    ENNEMY_TYPE3 = -5,
 };
 
 enum Tiles{

@@ -1,6 +1,7 @@
 #ifndef IN_GAME_STATE_H
 #define IN_GAME_STATE_H
 
+#include <SDL2/SDL_mixer.h>
 #include "GameState.h"
 #include "../core/Jeu.h"
 #include "../core/Camera.h"
@@ -54,6 +55,17 @@ private:
 
     Camera camera;
 
+    Mix_Chunk* sauter;
+    Mix_Chunk* gotHit;
+    Mix_Chunk* walk;
+    Mix_Chunk* attack;
+    Mix_Chunk* land;
+    Mix_Music* music;
+
+    Timer moveTimer;
+    Timer attacksound;
+
+    
     int tileSize;
     int state;
 
@@ -88,6 +100,10 @@ public:
     void updateAnimation(float deltaTime);
     void updateEnnemyAnimation(float deltaTime);
     void updateCamera(float deltaTime);
+
+    int playBackgroundMusic(int niveau) ;
+    void playSound(std::string input);
+    int loadSounds(int niveau);
 
     
 

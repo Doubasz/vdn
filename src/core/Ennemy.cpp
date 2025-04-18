@@ -20,9 +20,10 @@ Ennemy::Ennemy() : Entity(), move(0.5){
     move.reset();
 }
 
-Ennemy::Ennemy(int x, int y) : Ennemy(){
+Ennemy::Ennemy(int x, int y,int type) : Ennemy(){
     box.setX(x);
     box.setY(y);
+    type = type;
 }
 
 void Ennemy::changePosition(int x, int y) {

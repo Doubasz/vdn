@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
+
 #include <iostream>
 #include <fstream>
 #include <SDL2/SDL_mixer.h>
@@ -61,16 +61,10 @@ class SDLJeu{
     Timer gameTimer{1.0};  
     double gameTime;
 
-    Mix_Chunk* sauter;
-    Mix_Chunk* gotHit;
-    Mix_Chunk* walk;
-    Mix_Chunk* attack;
-    Mix_Chunk* land;
-    Mix_Music* music;
+   
 
     
-    Timer moveTimer;
-    Timer attacksound;
+    
 
     bool pKeyWasPressed = false; 
 

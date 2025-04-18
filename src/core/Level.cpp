@@ -192,13 +192,17 @@ void Level::initEntities(){
                     player.changePosition(i , j);
                     gameMap[j][i] = NONE;
                     break;
-                case ENNEMY:
-                    ennemies.push_back(Ennemy(i , j));
+                case ENNEMY_TYPE1:
+                    ennemies.push_back(Ennemy(i , j,SCORPION));
                     gameMap[j][i] = NONE;
                     break;
+                case ENNEMY_TYPE2:
+                    ennemies.push_back(Ennemy(i , j,BATARD));
+                    gameMap[j][i] = NONE;
+
             }
 
-            if(gameMap[j][i] != NONE && gameMap[j][i] != PLAYER && gameMap[j][i] != ENNEMY){
+            if(gameMap[j][i] != NONE && gameMap[j][i] != PLAYER && gameMap[j][i] != ENNEMY_TYPE1 && gameMap[j][i] != ENNEMY_TYPE2 ){
                 if(neighborIsNone(gameMap, j, i)){
                     platforms.push_back(Platform(i, j));
                 }

@@ -36,6 +36,8 @@ void MenuState::load(){
     whatToDoNow = GameState::MAIN_MENU;
     
     buttons.push_back(b1);
+
+    load_music();
 }
 
 
@@ -49,11 +51,13 @@ MenuState::~MenuState(){
 
 
 int MenuState::unload(){
-
+    if(Mix_PlayingMusic)
+        Mix_HaltMusic();
 }
 
 
 GameState::StateCode MenuState::update(float dt){
+    playBackgroundMusic();
     return whatToDoNow;
 }
 
@@ -85,4 +89,26 @@ void MenuState::renderBackground(SDL_Renderer* renderer){
 
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderClear(renderer);
+}
+
+
+void MenuState::load_music(){
+    music = Mix_LoadMUS("sounds_musics/Main Menu - The Legend of Zelda Collectors Edition.mp3");
+    assert(music);
+}
+int MenuState::playBackgroundMusic() {
+    if(!Mix_PlayingMusic()){
+        Mix_VolumeMusic(20);
+        if (Mix_PlayMusic(music, -1) == -1) { // -1 means loop infinitely
+            std::cerr << "Erreur Mix_PlayMusic: " << Mix_GetError() << std::endl;
+            Mix_FreeMusic(music);
+            Mix_CloseAudio();
+            SDL_Quit();
+            return 1;
+        }
+        
+    }
+
+
+    return 0;
 }
