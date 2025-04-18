@@ -1,16 +1,11 @@
 #include "SDLJeu.h"
+#include "StateManager.h"
 
 int main(void) {
     SDLJeu jeu;
 
     // Affiche le menu principal
-    jeu.renderMainMenu();
-
-    // Si le joueur n’a pas quitté depuis le menu, on lance le jeu
-    if (!jeu.isQuit()) {
-        jeu.gameLoop();
-    }
+    jeu.run();
     
-
     return 0;
 }

@@ -13,7 +13,7 @@ Level::Level(){
     player = Player();
     level = DESERT;
 
-    loadGameMap();
+    loadGameMap(DESERT);
     loadTileMap();
 
     //displayMap(gameMap);
@@ -24,6 +24,29 @@ Level::Level(){
 Level::Level(int lvl) : Level(){
     level = lvl;
 }
+
+
+void Level::loadLevel(int lvl){
+
+    unloadLevel();
+
+    level = lvl;
+
+    loadGameMap(lvl);
+    initEntities();
+}
+
+void Level::unloadLevel(){
+
+    score = 0;
+    nbLife = 5;
+    isLevelCompleted = false;
+
+    tileMap.clear();
+    gameMap.clear();
+
+}
+
 
 void displayMap(const std::vector<std::vector<int>>& vec){
 
@@ -93,19 +116,26 @@ void Level::loadTileMap(){
     }
 }
 
-void Level::loadGameMap(){
+void Level::loadGameMap(int lvl){
 
     std::string path = "";
 
-    switch(level){
+    switch(lvl){
         case DESERT:
-            path = "scripts/mapGeneration/mapfinale2.txt";
+            path = "scripts/mapGeneration/level1.txt";
+            break;
+        case FOREST:
+            path = "scripts/mapGeneration/level2.txt";
+            break;
+        case CITY:
+            path = "scripts/mapGeneration/level3.txt";
+            break;
     }
 
     std::ifstream file(path);
 
     if (!file.is_open()) {
-        std::cerr << "Error: Unable to open file " << path << std::endl;
+        std::cerr << "Level::loadGameMap : Error: Unable to open file " << path << std::endl;
         exit(-1);
     }
 

@@ -12,10 +12,10 @@
 #include <algorithm>
 
 
-enum Niveauu{
+enum LevelCode{
     DESERT,
-    FORET,
-    VILLE
+    FOREST,
+    CITY,
 };
 
 enum Entities{
@@ -52,7 +52,10 @@ public:
     Level(int lvl);
 
     void loadTileMap();
-    void loadGameMap();
+    void loadGameMap(int lvl);
+
+    void loadLevel(int lvl);
+    void unloadLevel();
 
     void initEntities();
 

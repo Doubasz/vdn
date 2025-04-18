@@ -16,6 +16,11 @@
 #include "../core/Log.h"
 #include "../core/Camera.h"
 #include "../core/Timer.h"  // Jai ajouté ca 
+#include "Button.h"
+
+#include "GameState.h"
+#include "MenuState.h"
+#include "InGameState.h"
 
 
 #define SCREEN_WIDTH 1400
@@ -28,20 +33,8 @@ const std::string PLAYER_TEXTURE[13] = {
 };
 
 
-struct Animation{
-    int startFrame;    
-    int numFrames;      
-    int currentFrame;   
-    float frameTime;    
-    float timer;     
-    bool loop;
-    
 
-};
 
-enum GameState{
-    MAIN_MENU, OPTION, LEVEL, GAME_OVER,GAME_PAUSED
-};
 
 class SDLJeu{
 
@@ -50,37 +43,18 @@ class SDLJeu{
     SDL_Window* window;
     SDL_Renderer* renderer;
 
-    SDL_Texture* background;
-    SDL_Texture* background1;
-    SDL_Texture* tileSet;
-
-    SDL_Texture* playerSheet;
-    SDL_Rect playerRect;
-
-    std::vector<Animation> playerAnimation;
-
-    Animation currentAnimation;
-
-    std::vector<SDL_Texture*> platformTexture;
-    std::vector<SDL_Rect> plaformRect;
-
-    SDL_Texture* ennemySheet;
 
     TTF_Font* font;
     SDL_Color textColor;
 
-    Animation ennemyAnimation;
 
 
-    //std::vector<Button> buttons;
+    std::vector<Button> buttons;
 
+    std::unique_ptr<GameState> currentState;
+    GameState::StateCode lastState;
+    GameState::StateCode currentStateCode;
 
-    Camera camera;
-
-    int tileSize;
-    int blinkInterval;
-
-    int lastPlayerState;
 
     int state;
     bool quit;
@@ -97,7 +71,7 @@ class SDLJeu{
     
     Timer moveTimer;
     Timer attacksound;
-    GameState gameState = MAIN_MENU;
+
     bool pKeyWasPressed = false; 
 
     SDL_Rect quitButtonRect = {SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50, 200, 60};
@@ -110,43 +84,29 @@ public:
     ~SDLJeu();
 
 
-    void gameLoop();
-    void input(float deltaTime);
-
-    void draw();
-    void drawPlayer();
-    void drawEnnemy();
-    void drawTiles();
-    void drawBackground();
     void drawLives(); 
     void drawTimer();
 
     void renderMainMenu();
 
-    void update(float deltaTime);
-
-    void loadPlayerTextures();
-    void loadPlatformTextures();
-    void loadTextures();
     int loadSounds(int niveau);
 
     int playBackgroundMusic(int niveau, int state);
 
     void loadFont();
 
-    void loadAnimations();
     void playSound(std::string input);
-    void updateAnimation(float deltaTime);
-    void updateEnnemyAnimation(float deltaTime);
-    void setAnimation(int playerAnim);
     bool isQuit() const { return quit; }
     void resetGame();
 
 
+    void run();
+
+    GameState* loadState(GameState::StateCode state);
 };
 
 
-SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path);
+
 void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect);
 void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color);
 

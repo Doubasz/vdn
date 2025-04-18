@@ -11,6 +11,11 @@ Jeu::Jeu(){
 }
 
 
+void Jeu::loadLevel(int level){
+    currentLevel.loadLevel(level);
+}
+
+
 
 
 void Jeu::gameLoop(){
@@ -29,7 +34,7 @@ Level& Jeu::getCurrentLevel(){
     return currentLevel;
 }
 
-void Jeu::handleInput(std::string input, float deltaTime){
+void Jeu::update(std::string input, float deltaTime){
     currentLevel.deroulementLevel(input, deltaTime);
 }
 
