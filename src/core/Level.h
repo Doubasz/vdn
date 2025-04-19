@@ -65,6 +65,8 @@ public:
 
     void checkCollision();
     void checkOutOfBonds();
+
+    void ennemyMovAuto(float deltaTime);
     void deroulementLevel(std::string input, float deltaTime);
 
     Player& getPlayer();

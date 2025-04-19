@@ -25,7 +25,7 @@ private:
 
 public:
     Ennemy();
-    Ennemy(int x, int y,int type);
+    Ennemy(int x, int y,int typeEnnemy);
 
     void changePosition(Vec2 pos);
 
@@ -37,7 +37,10 @@ public:
     void update(float deltaTime);
 
     void deplacement(bool hitwall);
-    bool hitWall(Entity & platform);
+    int getType() const;
+    bool PlayerOutofRange(Entity &player)const;
+    void followPlayer(Entity &player);
+    bool hitWall(Entity &platform);
     bool vaTomber(std::vector<std::vector<int>> &gameMap) ;
     bool nextPosVide(Entity &platform);
 

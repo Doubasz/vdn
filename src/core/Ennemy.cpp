@@ -5,7 +5,7 @@
 
 
 Ennemy::Ennemy() : Entity(), move(0.5){
-    velocity = {-1, 0};
+    velocity = {1, 0};
     box = {0,0,1,1};
     
     maxFall = 15.3125;
@@ -20,10 +20,10 @@ Ennemy::Ennemy() : Entity(), move(0.5){
     move.reset();
 }
 
-Ennemy::Ennemy(int x, int y,int type) : Ennemy(){
+Ennemy::Ennemy(int x, int y,int typeEnnemie) : Ennemy(){
     box.setX(x);
     box.setY(y);
-    type = type;
+    type = typeEnnemie;
 }
 
 void Ennemy::changePosition(int x, int y) {
@@ -47,6 +47,45 @@ void Ennemy::changeDirection(){
 }
 
 
+int Ennemy::getType() const {
+    return type;
+}
+bool Ennemy::PlayerOutofRange(Entity& player) const {
+    float playerPosX = player.getBox().x;
+    float enemyPosX = this->box.x;
+    float distanceX = playerPosX - enemyPosX;
+    
+    
+    const float followRange = 5 ; // Example range
+
+   
+    return (!(abs(distanceX) <= followRange));
+}
+void Ennemy::followPlayer(Entity& player) {
+    float playerPosX = player.getBox().x;
+    float enemyPosX = this->box.x;
+
+    float distanceX = playerPosX - enemyPosX;
+    
+    
+   
+    if (!PlayerOutofRange(player)) {
+       
+        // Determine direction and change its direction if necessary
+        // Player is to the right, move right
+        if (distanceX > 0) {
+
+            if(velocity.x < 0)
+                changeDirection();
+
+        //player is to the left move left
+        } else if (distanceX < 0) {
+
+            if(velocity.x > 0)
+                changeDirection();
+        }
+    }
+}
 
 bool Ennemy::hitWall(Entity & platform){
 
@@ -77,8 +116,8 @@ bool Ennemy::hitWall(Entity & platform){
     
 }
 bool Ennemy::vaTomber(std::vector<std::vector<int>> &gameMap) {
-    Rectangle nextpos = {this->box.x + velocity.x,this->box.y + 1,1,1};
-    if(gameMap[nextpos.y][nextpos.x] == -1)
+    Rectangle nextpos = {this->box.x + velocity.x ,this->box.y + 1,1,1};
+    if(gameMap[nextpos.y][nextpos.x] == -1)//NONE
         return true;
     return false;
 

@@ -213,6 +213,60 @@ void Level::initEntities(){
 }
 
 
+void Level::ennemyMovAuto(float deltaTime) {
+    for (Ennemy& e : ennemies) {
+        bool isGoingToFall = e.vaTomber(gameMap);
+        bool hasHitWall   = false;
+        for (Platform& p : platforms) {
+            if (e.hitWall(p)) {
+                hasHitWall = true;
+                break;
+            }
+        }
+
+        if (e.getType() == BATARD) {
+            if (!e.PlayerOutofRange(player)) {
+
+                if (isGoingToFall || hasHitWall) {
+                    
+                    continue;
+                }
+    
+                e.followPlayer(player);
+                e.update(deltaTime);
+            }
+            else {
+                // Hors de portée → agit comme un SCORPION
+                if (isGoingToFall) {
+                    e.changeDirection();
+                }
+                for (Platform& p : platforms) {
+                    if (e.hitWall(p)) {
+                        e.changeDirection();
+                        break;
+                    }
+                }
+                e.update(deltaTime);
+            }
+        }
+        else if (e.getType() == SCORPION) {
+            if (isGoingToFall) {
+                e.changeDirection();
+            }
+            for (Platform& p : platforms) {
+                if (e.hitWall(p)) {
+                    e.changeDirection();
+                    break;
+                }
+            }
+            e.update(deltaTime);
+        }
+    }
+}
+
+
+
+
 
 void Level::deroulementLevel(std::string input, float deltaTime){
 
@@ -242,24 +296,9 @@ void Level::deroulementLevel(std::string input, float deltaTime){
     for(Ennemy& e : ennemies){
         player.checkCollisionEnnemy(e, deltaTime);
     }
-
     
-    for(Ennemy & e : ennemies){
-        e.update(deltaTime);
-
-       if(e.vaTomber(gameMap))
-            e.changeDirection();
-
-        for( Platform& p : platforms){
-        
-            if(e.hitWall(p)){
-                e.changeDirection();
-                break;
-            }      
-               
-        }
-        
-    }
+    
+    ennemyMovAuto(deltaTime);
 }
 
 
