@@ -274,126 +274,6 @@ void Player::setJumpBoost(int j){
 }
 
 
-/*bool Player::checkPlatformCollision(Entity& platform){
-
-    bool onGroundRet = false;
-    
-   
-    if(this->box.overlaps(platform.box)){
-        if(this->box.bottom - velocity.y <= platform.box.top){
-            this->box.setY(platform.box.top - this->box.h);
-            velocity.y = 0;
-            onGround = true;
-            onGroundRet = true;
-            
-            //std::cout << "Collided with top of platform : " << platform.box.toString() << std::endl;
-            //std :: cout << "player pos : " << this->box.toString() << std::endl;
-        }
-        else if(this->box.rightMost - velocity.x <= platform.box.leftMost){
-           this->box.setX(platform.box.leftMost - (this->box.h));
-            velocity.x = 0;
-
-            std::cout << "Collided with left of platform : " << platform.box.toString() << std::endl;
-            std :: cout << "player pos : " << this->box.toString() << std::endl;
-        }
-        else if(this->box.leftMost - velocity.x >= platform.box.rightMost){
-            this->box.setX(platform.box.rightMost - .01);
-            velocity.x = 0;
-            //std::cout << "Collided with right of platform : " << platform.box.toString() << std::endl;
-        }
-        else if(this->box.top - velocity.y >= platform.box.bottom ){
-            this->box.setY(platform.box.bottom);
-            velocity.y = 0;
-
-            std::cout << "Collided with bottom of platform : " << platform.box.toString() << std::endl;
-        }
-    }
-
-    return onGroundRet;
-}*/
-
-
-
-/*bool Player::checkPlatformCollision(Entity& platform) {
-    bool onGroundRet = false;
-    bool debugOutput = false;
-    
-    // First check if there's an overlap
-    if (this->box.overlaps(platform.box)) {
-        // Calculate previous position based on velocity
-        float prevX = this->box.leftMost - velocity.x;
-        float prevY = this->box.top - velocity.y;
-        
-        // Calculate overlap amounts in each direction
-        float overlapLeft = this->box.rightMost - platform.box.leftMost;
-        float overlapRight = platform.box.rightMost - this->box.leftMost;
-        float overlapTop = this->box.bottom - platform.box.top;
-        float overlapBottom = platform.box.bottom - this->box.top;
-        
-        // Determine minimum overlap
-        float minOverlapX = std::min(overlapLeft, overlapRight);
-        float minOverlapY = std::min(overlapTop, overlapBottom);
-        
-        // Determine if collision is more horizontal or vertical based on
-        // both overlap and velocity direction
-        bool resolveHorizontal = false;
-        
-        // Check if we were approaching more from horizontal or vertical direction
-        if (minOverlapX < minOverlapY) {
-            resolveHorizontal = true;
-        } else if (minOverlapX > minOverlapY) {
-            resolveHorizontal = false;
-        } else {
-            // If overlaps are equal, use velocity to determine direction
-            resolveHorizontal = std::abs(velocity.x) > std::abs(velocity.y);
-        }
-        
-        if (resolveHorizontal) {
-            // Horizontal collision resolution
-            if (overlapLeft < overlapRight) {
-                // Collision from left side
-                this->box.setX(platform.box.leftMost - this->box.w);
-                velocity.x = 0;
-                if (debugOutput) {
-                    std::cout << "Collided with left of platform: " << platform.box.toString() << std::endl;
-                    std::cout << "Player pos: " << this->box.toString() << std::endl;
-                }
-            } else {
-                // Collision from right side
-                this->box.setX(platform.box.rightMost);
-                velocity.x = 0;
-                if (debugOutput) {
-                    std::cout << "Collided with right of platform: " << platform.box.toString() << std::endl;
-                    std::cout << "Player pos: " << this->box.toString() << std::endl;
-                }
-            }
-        } else {
-            // Vertical collision resolution
-            if (overlapTop < overlapBottom) {
-                // Collision from top (player is on ground)
-                this->box.setY(platform.box.top - this->box.h);
-                velocity.y = 0;
-                onGround = true;
-                onGroundRet = true;
-                if (debugOutput) {
-                    std::cout << "Collided with top of platform: " << platform.box.toString() << std::endl;
-                    std::cout << "Player pos: " << this->box.toString() << std::endl;
-                }
-            } else {
-                // Collision from bottom (player hit ceiling)
-                this->box.setY(platform.box.bottom);
-                velocity.y = 0;
-                if (debugOutput) {
-                    std::cout << "Collided with bottom of platform: " << platform.box.toString() << std::endl;
-                    std::cout << "Player pos: " << this->box.toString() << std::endl;
-                }
-            }
-        }
-    }
-    
-    return onGroundRet;
-}*/
-
 
 bool Player::checkPlatformCollision(Entity& platform) {
     bool onGroundRet = false;
@@ -476,6 +356,7 @@ bool Player::checkPlatformCollision(Entity& platform) {
 }
 
 
+
 void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
 
     if(this->attackHitBox.overlaps(ennemy.box)){
@@ -493,10 +374,8 @@ void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
                 case LEFT:
                     ennemy.box.setX(ennemy.box.x - 2);
                     break;
-            }
-            
+            }   
         }
-        
     }
 
     if(this->checkCollision(ennemy)){

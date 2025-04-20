@@ -30,6 +30,58 @@ Button::~Button() {
     }
 }
 
+
+
+
+Button::Button(Button&& other) noexcept {
+    text = std::move(other.text);
+    state = other.state;
+    renderer = other.renderer;
+    font = other.font;
+    textTexture = other.textTexture;
+    textWidth = other.textWidth;
+    textHeight = other.textHeight;
+    onClick = std::move(other.onClick);
+    normalColor = other.normalColor;
+    hoverColor = other.hoverColor;
+    pressedColor = other.pressedColor;
+    textColor = other.textColor;
+    box = other.box;
+
+    other.textTexture = nullptr; // Prevent double free
+}
+
+
+Button& Button::operator=(Button&& other) noexcept {
+    if (this != &other) {
+        if (textTexture) SDL_DestroyTexture(textTexture);
+
+        text = std::move(other.text);
+        state = other.state;
+        renderer = other.renderer;
+        font = other.font;
+        textTexture = other.textTexture;
+        textWidth = other.textWidth;
+        textHeight = other.textHeight;
+        onClick = std::move(other.onClick);
+        normalColor = other.normalColor;
+        hoverColor = other.hoverColor;
+        pressedColor = other.pressedColor;
+        textColor = other.textColor;
+        box = other.box;
+
+        other.textTexture = nullptr;
+    }
+    return *this;
+}
+
+
+
+
+
+
+
+
 void Button::render() {
     Rectangle temp = getRect();
     SDL_Rect buttonRect = {temp.x, temp.y, temp.w, temp.h};
@@ -53,7 +105,7 @@ void Button::render() {
         currentColor = normalColor;
         break;
     }
-
+    
     // Draw button background
     SDL_SetRenderDrawColor(renderer, currentColor.r, currentColor.g, currentColor.b, currentColor.a);
     SDL_RenderFillRect(renderer, &buttonRect);
@@ -64,6 +116,7 @@ void Button::render() {
 
     // Draw text if available
     if (textTexture != nullptr) {
+        
         SDL_Rect textRect = {
             buttonRect.x + (buttonRect.w - textWidth) / 2,
             buttonRect.y + (buttonRect.h - textHeight) / 2,
@@ -71,6 +124,7 @@ void Button::render() {
             textHeight
         };
         SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
+        
     }
 }
 
@@ -121,13 +175,13 @@ void Button::handleEvent(const SDL_Event& e) {
 }
 
 void Button::setPosition(int x, int y) {
-    x = x;
-    y = y;
+    box.setX(x);
+    box.setY(y);
 }
 
 void Button::setSize(int width, int height) {
-    width = width;
-    height = height;
+    box.w = width;
+    box.h = height;
 }
 
 void Button::setText(const std::string& textT) {
@@ -138,9 +192,9 @@ void Button::setText(const std::string& textT) {
 }
 
 void Button::setColors(SDL_Color normalColor, SDL_Color hoverColor, SDL_Color pressedColor) {
-    normalColor = normalColor;
-    hoverColor = hoverColor;
-    pressedColor = pressedColor;
+    this->normalColor = normalColor;
+    this->hoverColor = hoverColor;
+    this->pressedColor = pressedColor;
 }
 
 void Button::setTextColor(SDL_Color textColorT) {
@@ -168,11 +222,30 @@ void Button::updateTextTexture() {
 
     // Create new texture if we have text and a font
     if (!text.empty() && font != nullptr) {
+                
         SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), textColor);
         if (textSurface != nullptr) {
+
             textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-            textWidth = textSurface->w;
-            textHeight = textSurface->h;
+
+            int originalW = textSurface->w;
+            int originalH = textSurface->h;
+
+            int padding = 25;
+            int maxW = box.w - 2 * padding;
+            int maxH = box.h - 2 * padding;
+
+            float scaleW = (float)maxW / originalW;
+            float scaleH = (float)maxH / originalH;
+            float scale = std::min(scaleW, scaleH);  // maintain aspect ratio
+
+
+            textWidth = (int)(originalW * scale);
+            textHeight = (int)(originalH * scale);
+
+            SDL_SetTextureBlendMode(textTexture, SDL_BLENDMODE_BLEND);
+            SDL_SetTextureAlphaMod(textTexture, 255);
+
             SDL_FreeSurface(textSurface);
         }
     }
@@ -181,3 +254,4 @@ void Button::updateTextTexture() {
 Rectangle Button::getRect() const {
     return box;
 }
+

@@ -28,30 +28,64 @@ void MenuState::load(){
         exit(-1);
     }
 
-    Button b1 = {300, 300, 200, 50, "start game", SDL_Color{0, 0, 0}, SDL_Color{0, 0, 0}, SDL_Color{0, 0, 0}, SDL_Color{0xFF, 0xFF, 0xFF}, font, renderer};
-
-    // [this]() { runPerft(); };
-    b1.setOnClick([this]() {startGame();});
+    loadTextures();
+    initButtons();
 
     whatToDoNow = GameState::MAIN_MENU;
-    
-    buttons.push_back(b1);
 
     load_music();
+
 }
 
 
-GameState::StateCode MenuState::startGame(){
+void MenuState::initButtons(){
+
+    int screenWidth = 1400;
+    int screenHeight = 900;
+
+    int buttonWidth = 400;
+    int buttonHeight = 100;
+
+    Button b1 = {(screenWidth / 2) - (buttonWidth / 2), 350, buttonWidth, buttonHeight, "Start game", SDL_Color{0, 0, 0, 255}, SDL_Color{200, 100, 20, 255}, SDL_Color{50, 100, 50, 255}, SDL_Color{0xFF, 0xFF, 0, 255}, font, renderer};
+    // [this]() { runPerft(); };
+    b1.setOnClick([this]() {startGame();});
+
+    Button b2 = {(screenWidth / 2) - (buttonWidth / 2), 500, buttonWidth, buttonHeight, "Options", SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{0xFF, 0xFF, 0xFF, 255}, font, renderer};
+    
+    buttons.push_back(std::move(b1));
+    buttons.push_back(std::move(b2));
+
+}
+
+
+void MenuState::loadTextures(){
+
+    std::string pathBg = "textures/backgroundMenu.png";
+
+    background = loadTexture(renderer, pathBg.c_str());
+}
+
+
+
+
+
+void MenuState::startGame(){
     whatToDoNow = GameState::LEVEL;
 }
 
 MenuState::~MenuState(){
-    delete background;
+    //delete background;
+    if (background != nullptr) {
+        SDL_DestroyTexture(background);  
+        background = nullptr;
+    }
 }
 
 
 int MenuState::unload(){
-    if(Mix_PlayingMusic)
+    buttons.clear();
+
+    if(Mix_PlayingMusic())
         Mix_HaltMusic();
 }
 
@@ -89,6 +123,10 @@ void MenuState::renderBackground(SDL_Renderer* renderer){
 
     SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
     SDL_RenderClear(renderer);
+
+    SDL_Rect rect = {0, 0, 1400, 900};
+
+    SDL_RenderCopy(renderer, background, NULL, &rect);
 }
 
 
@@ -111,4 +149,70 @@ int MenuState::playBackgroundMusic() {
 
 
     return 0;
+}
+
+
+/*void renderMainMenu() {
+    SDL_Event event;
+    bool inMenu = true;
+
+    SDL_Color white = {255, 255, 255, 255};
+
+    while (inMenu) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                inMenu = false;
+                quit = true;
+                return;
+            } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                int x = event.button.x;
+                int y = event.button.y;
+
+                // Bouton "Start"
+                if (x >= 600 && x <= 800 && y >= 400 && y <= 470) {
+                    inMenu = false;
+                    //gameState = LEVEL;  // On passe à l'état de jeu
+                }
+            }
+        }
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // fond noir
+        SDL_RenderClear(renderer);
+
+        // Titre
+        SDL_Surface* titleSurface = TTF_RenderText_Solid(font, "Vent du Nord", white);
+        SDL_Texture* titleTexture = SDL_CreateTextureFromSurface(renderer, titleSurface);
+        SDL_Rect titleRect = {SCREEN_WIDTH / 2 - titleSurface->w / 2, 200, titleSurface->w, titleSurface->h};
+        SDL_RenderCopy(renderer, titleTexture, NULL, &titleRect);
+        SDL_FreeSurface(titleSurface);
+        SDL_DestroyTexture(titleTexture);
+
+        
+        
+        SDL_Surface* startText = TTF_RenderText_Solid(font, "Start", white);
+        SDL_Texture* startTexture = SDL_CreateTextureFromSurface(renderer, startText);
+        SDL_Rect startTextRect = {startButton.x + 50, startButton.y + 20, startText->w, startText->h};
+        SDL_RenderCopy(renderer, startTexture, NULL, &startTextRect);
+        SDL_FreeSurface(startText);
+        SDL_DestroyTexture(startTexture);
+
+        SDL_RenderPresent(renderer);
+    }
+}*/
+
+
+SDL_Texture* loadTexture(SDL_Renderer* renderer, const char* path){
+    SDL_Texture* texture;
+
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);
+
+    texture = IMG_LoadTexture(renderer, path);
+
+    if (!texture) {
+        std::cerr << "Failed to load texture: " << path << "\n";
+        std::cerr << "Error: " << IMG_GetError() << "\n"; 
+        exit(1);
+    }
+
+    return texture;
 }

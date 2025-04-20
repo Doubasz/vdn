@@ -34,14 +34,18 @@ public:
     StateCode update(float dt) override;
     void render(SDL_Renderer* renderer) override;
 
+    void initButtons();
     void renderBackground(SDL_Renderer* renderer);
     void load_music();
     int playBackgroundMusic();
     void renderButtons(SDL_Renderer *renderer);
 
-    GameState::StateCode startGame();
+    void loadTextures();
+
+    void startGame();
 
 };
 
+SDL_Texture* loadTexture(SDL_Renderer* renderer, const char* path);
 
 #endif
