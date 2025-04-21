@@ -122,7 +122,7 @@ void Level::loadGameMap(int lvl){
 
     switch(lvl){
         case DESERT:
-            path = "scripts/mapGeneration/level1.txt";
+            path = "scripts/mapGeneration/desert.txt";
             break;
         case FOREST:
             path = "scripts/mapGeneration/level2.txt";
