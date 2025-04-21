@@ -1,0 +1,87 @@
+\doxysection{Button.\+h}
+\hypertarget{Button_8h_source}{}\label{Button_8h_source}\index{src/sdl2/Button.h@{src/sdl2/Button.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ BUTTON\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ BUTTON\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SDL2/SDL.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <SDL2/SDL\_ttf.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}../core/Shapes.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classButton}{Button}}\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6}{State}}\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a1e23852820b9154316c7c06e2b7ba051}{NORMAL}},\ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6ada95feece334f0612031adf21d057ab9}{HOVER}},\ \ \ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a5381dc876ab002103a027265bc14ae52}{PRESSED}},\ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a055c1a591abb0e8cd86dc969727bcc0b}{DISABLED}}\ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classButton_a3b36df1ae23c58aedb9e15a713159459}{Button}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classButton_a3b36df1ae23c58aedb9e15a713159459}{Button}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ std::string\&\ text,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ SDL\_Color\ normalColor,\ SDL\_Color\ hoverColor,\ SDL\_Color\ pressedColor,\ SDL\_Color\ textColor,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ TTF\_Font*\ font,\ SDL\_Renderer*\ renderer);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classButton_a2a001eb9c3cc8ae54768a850dd345002}{\string~Button}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classButton_a3b36df1ae23c58aedb9e15a713159459}{Button}}(\mbox{\hyperlink{classButton}{Button}}\&\&\ other)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classButton}{Button}}\&\ \mbox{\hyperlink{classButton_adfde09b03b651f52d9588d5f1b9c31d2}{operator=}}(\mbox{\hyperlink{classButton}{Button}}\&\&\ other)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00059\ \ \ \ \ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_ada7376aa20dcde271fc1af17c0b4997f}{updateTextTexture}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_add4daea65a908027aa5a1593305b9656}{render}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_ab716c9fc0544eb952bb92ea8861779bb}{handleEvent}}(\textcolor{keyword}{const}\ SDL\_Event\&\ e);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_ab6b733217aabf3efa8df58145949fd7c}{setPosition}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_a99bc50c21b6a335fc36a068908872d08}{setSize}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00084\ \ \ \ \ std::string\ \mbox{\hyperlink{classButton_ab535ce6d90b62f744ca4c05262ad8190}{getText}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00089\ \ \ \ \ State\ \mbox{\hyperlink{classButton_af7e1f77b38dc2d1840e51b4e16cea625}{getState}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00094\ \ \ \ \ SDL\_Color\ \mbox{\hyperlink{classButton_a80426b1f951c518cff5676bb35d46585}{getNormalColor}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_ac6a233c876164a52d54ef7f1b3fb78d1}{setText}}(\textcolor{keyword}{const}\ std::string\ \&text);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_ab97e44bcefb8a97e58fc48bc357904cb}{setColors}}(SDL\_Color\ normalColor,\ SDL\_Color\ hoverColor,\ SDL\_Color\ pressedColor);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_a3844e0e8f7957a1c339e838c1d113a64}{setTextColor}}(SDL\_Color\ textColor);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_a5e8773a222851c9994d5492345156988}{setEnabled}}(\textcolor{keywordtype}{bool}\ enabled);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classButton_a8ac346be3bfe39717685fae07cc5038d}{setOnClick}}(std::function<\textcolor{keywordtype}{void}()>\ callback);}
+\DoxyCodeLine{00120\ \ \ \ \ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classButton_afa828cbd443acec9737e2dc323cddc65}{isEnabled}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ state\ !=\ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a055c1a591abb0e8cd86dc969727bcc0b}{State::DISABLED}};\ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classButton_a6ed2a4b4e00facf5c42a11ecd1f4e1c7}{isPressed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ state\ ==\ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a5381dc876ab002103a027265bc14ae52}{State::PRESSED}};\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{structRectangle}{Rectangle}}\ \mbox{\hyperlink{classButton_adbde8b0273fec448dbafda97fc2b02e4}{getRect}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{structRectangle}{Rectangle}}\ box;\ }
+\DoxyCodeLine{00138\ \ \ \ \ std::string\ text;\ }
+\DoxyCodeLine{00139\ \ \ \ \ }
+\DoxyCodeLine{00140\ \ \ \ \ SDL\_Color\ normalColor;\ }
+\DoxyCodeLine{00141\ \ \ \ \ SDL\_Color\ hoverColor;\ }
+\DoxyCodeLine{00142\ \ \ \ \ SDL\_Color\ pressedColor;\ }
+\DoxyCodeLine{00143\ \ \ \ \ SDL\_Color\ textColor;\ }
+\DoxyCodeLine{00144\ \ \ \ \ }
+\DoxyCodeLine{00145\ \ \ \ \ State\ state;\ }
+\DoxyCodeLine{00146\ \ \ \ \ SDL\_Renderer*\ renderer;\ }
+\DoxyCodeLine{00147\ \ \ \ \ TTF\_Font*\ font;\ }
+\DoxyCodeLine{00148\ \ \ \ \ SDL\_Texture*\ textTexture;\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{int}\ textWidth,\ textHeight;\ }
+\DoxyCodeLine{00150\ \ \ \ \ }
+\DoxyCodeLine{00151\ \ \ \ \ std::function<void()>\ onClick;\ }
+\DoxyCodeLine{00152\ \};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ SDL\_BUTTON\_H}}
+
+\end{DoxyCode}

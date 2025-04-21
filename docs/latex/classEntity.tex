@@ -1,0 +1,142 @@
+\doxysection{Entity Class Reference}
+\hypertarget{classEntity}{}\label{classEntity}\index{Entity@{Entity}}
+
+
+{\ttfamily \#include $<$Entity.\+h$>$}
+
+
+
+Inheritance diagram for Entity\+:
+% FIG 0
+
+
+Collaboration diagram for Entity\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classEntity_a980f368aa07ce358583982821533a54a}\label{classEntity_a980f368aa07ce358583982821533a54a} 
+{\bfseries Entity} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_adf6d3f7cb1b2ba029b6b048a395cc8ae}\label{classEntity_adf6d3f7cb1b2ba029b6b048a395cc8ae} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Entity} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor to allow polymorphic deletion. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a440b119e28067a6403f5d86809a7a7be}\label{classEntity_a440b119e28067a6403f5d86809a7a7be} 
+\mbox{\hyperlink{structVec2f}{Vec2f}} {\bfseries get\+Vel} () const
+\begin{DoxyCompactList}\small\item\em Get the current velocity. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_aa7d79b64929d9599982c106237f101a2}\label{classEntity_aa7d79b64929d9599982c106237f101a2} 
+void {\bfseries set\+Pos} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set entity position. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a147eed52bbac45596ce22dda1e0f0b85}\label{classEntity_a147eed52bbac45596ce22dda1e0f0b85} 
+void {\bfseries set\+Dim} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set entity dimensions (width and height). \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_adfbc520f30ff0ac85ab3aa8d724ee698}\label{classEntity_adfbc520f30ff0ac85ab3aa8d724ee698} 
+void {\bfseries set\+Vel} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set velocity. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a0b3daca45abae91bf6d8cb491568ad57}\label{classEntity_a0b3daca45abae91bf6d8cb491568ad57} 
+void {\bfseries set\+Hp} (int h)
+\begin{DoxyCompactList}\small\item\em Set health points. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a3581642dc6f9cb80fe4d9fdc98f7c80d}\label{classEntity_a3581642dc6f9cb80fe4d9fdc98f7c80d} 
+int {\bfseries get\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Get current health. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a1ab398b3ccac5b684b3923a5b6a6afa4}\label{classEntity_a1ab398b3ccac5b684b3923a5b6a6afa4} 
+void {\bfseries decrease\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Decrease health by 1. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a673a1bf66c3b638fdedd0851786d8eda}\label{classEntity_a673a1bf66c3b638fdedd0851786d8eda} 
+void {\bfseries increase\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Increase health by 1. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a33880292f98fe636659784848830f6f0}\label{classEntity_a33880292f98fe636659784848830f6f0} 
+bool {\bfseries check\+Collision} (const \mbox{\hyperlink{classEntity}{Entity}} \&other) const
+\begin{DoxyCompactList}\small\item\em General AABB collision check with another entity. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_aeee1ffe357ebd2fc8a5e516124bc2b12}\label{classEntity_aeee1ffe357ebd2fc8a5e516124bc2b12} 
+bool {\bfseries check\+Collision\+With\+Top} (const \mbox{\hyperlink{classEntity}{Entity}} \&other)
+\begin{DoxyCompactList}\small\item\em Check for collision specifically on the top side. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a248303f3eebe15c37b107bf4bdc677bf}\label{classEntity_a248303f3eebe15c37b107bf4bdc677bf} 
+void {\bfseries update\+IFrames} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Update invincibility frame logic. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a7285e0883bb767a1441b66c326570b0e}\label{classEntity_a7285e0883bb767a1441b66c326570b0e} 
+void {\bfseries update\+Knock\+Back} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Update knockback logic and position changes. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a8c0c36041310e164148537f2acb19949}\label{classEntity_a8c0c36041310e164148537f2acb19949} 
+void {\bfseries apply\+Knock\+Back} (float force, float duration)
+\begin{DoxyCompactList}\small\item\em Apply knockback to the entity with force and duration. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a89341d276f1d807c3e44425d092ec888}\label{classEntity_a89341d276f1d807c3e44425d092ec888} 
+\mbox{\hyperlink{structRectangle}{Rectangle}} {\bfseries get\+Box} () const
+\begin{DoxyCompactList}\small\item\em Get the bounding box. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a0ca2c350e893cff95a1c517bd8523207}\label{classEntity_a0ca2c350e893cff95a1c517bd8523207} 
+bool {\bfseries get\+Is\+Visible} () const
+\begin{DoxyCompactList}\small\item\em Get whether the entity is visible. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a36b1021364a6888ba7f6cfd910b5e10d}\label{classEntity_a36b1021364a6888ba7f6cfd910b5e10d} 
+void {\bfseries set\+On\+Ground} (int b)
+\begin{DoxyCompactList}\small\item\em Set whether the entity is grounded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classEntity_a63dbfcfa89feab3fca30ff8811b0dc5b}\label{classEntity_a63dbfcfa89feab3fca30ff8811b0dc5b} 
+\mbox{\hyperlink{structRectangle}{Rectangle}} {\bfseries box}
+\begin{DoxyCompactList}\small\item\em Bounding box for position and dimension. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_ab2047c7cc0414f54fb2492deac18d11c}\label{classEntity_ab2047c7cc0414f54fb2492deac18d11c} 
+int {\bfseries hp}
+\begin{DoxyCompactList}\small\item\em Health points of the entity. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_aaec4e8bc2d18e138454553a8df94ac20}\label{classEntity_aaec4e8bc2d18e138454553a8df94ac20} 
+bool {\bfseries is\+Alive}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently active. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_abe91d12bc564627918038e862001861f}\label{classEntity_abe91d12bc564627918038e862001861f} 
+float {\bfseries i\+Frames}
+\begin{DoxyCompactList}\small\item\em Duration of invincibility frames after hit. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a6fe656fea28ce9aa8aff8565b39219d2}\label{classEntity_a6fe656fea28ce9aa8aff8565b39219d2} 
+float {\bfseries i\+Frames\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} to track i\+Frames. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a9cd316ce3c2c4593748e91d5f89d5272}\label{classEntity_a9cd316ce3c2c4593748e91d5f89d5272} 
+bool {\bfseries can\+Get\+Hit}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently vulnerable. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a8af20e61f5de761c97e7f596525ecb1b}\label{classEntity_a8af20e61f5de761c97e7f596525ecb1b} 
+bool {\bfseries is\+Visible}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently visible on screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classEntity_a65f9279b7e823d68d955dd93398c0386}\label{classEntity_a65f9279b7e823d68d955dd93398c0386} 
+\mbox{\hyperlink{structVec2f}{Vec2f}} {\bfseries velocity}
+\begin{DoxyCompactList}\small\item\em 2D velocity (floating point precision). \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_aaea9f07bff66b8596dc389c0a5355bfe}\label{classEntity_aaea9f07bff66b8596dc389c0a5355bfe} 
+bool {\bfseries on\+Ground}
+\begin{DoxyCompactList}\small\item\em Whether the entity is on the ground. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a50341d5c0fff2b223f93dc695d5e167e}\label{classEntity_a50341d5c0fff2b223f93dc695d5e167e} 
+float {\bfseries knock\+Back\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} for knockback duration. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a41a0d045550809ca041ea3264d812538}\label{classEntity_a41a0d045550809ca041ea3264d812538} 
+float {\bfseries knock\+Back\+Duration}
+\begin{DoxyCompactList}\small\item\em Total time for knockback. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a08bd8795a51796ac88df9bd67cf1b8b9}\label{classEntity_a08bd8795a51796ac88df9bd67cf1b8b9} 
+float {\bfseries knock\+Back\+Force}
+\begin{DoxyCompactList}\small\item\em Intensity of knockback. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_ae63cf339646abfc1f104a67c9582a8ac}\label{classEntity_ae63cf339646abfc1f104a67c9582a8ac} 
+float {\bfseries knock\+Back\+Friction}
+\begin{DoxyCompactList}\small\item\em Resistance during knockback. \end{DoxyCompactList}\item 
+\Hypertarget{classEntity_a04063acdc590bfd4f3895fa916ea3ea5}\label{classEntity_a04063acdc590bfd4f3895fa916ea3ea5} 
+bool {\bfseries on\+Knock\+Back}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently knocked back. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class representing any game object with a position, size, health, and physics.
+
+This class defines a rectangular-\/shaped entity with position, velocity, and collision logic. Entities can also take damage, experience knockback, and be toggled as visible or invisible.\hypertarget{classEntity_autotoc_md0}{}\doxysubsubsection{\texorpdfstring{How to use}{How to use}}\label{classEntity_autotoc_md0}
+\begin{DoxyVerb}// Inherit from Entity
+class Player : public Entity { ... };
+
+// Set position, size, and velocity
+entity.setPos(100, 200);
+entity.setDim(50, 50);
+entity.setVel(1, 0);
+
+// Check collision
+if (entity.checkCollision(enemy)) { ... }
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Entity.\+h\item 
+src/core/Entity.\+cpp\end{DoxyCompactItemize}

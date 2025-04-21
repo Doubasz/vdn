@@ -1,0 +1,59 @@
+\doxysection{Ennemy.\+h}
+\hypertarget{Ennemy_8h_source}{}\label{Ennemy_8h_source}\index{src/core/Ennemy.h@{src/core/Ennemy.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ ENNEMY\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ ENNEMY\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Entity.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Timer.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{enum}\ TypeEnnemy\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ SCORPION,\ \ \ }
+\DoxyCodeLine{00011\ \ \ \ \ BATARD,\ \ \ \ \ }
+\DoxyCodeLine{00012\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classEnnemy}{Ennemy}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classEntity}{Entity}}\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{int}\ direction;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ type;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{float}\ gravity;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{float}\ maxFall;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ state;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classTimer}{Timer}}\ move;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classEnnemy_a19dd525f067c790d073c89bb3234c593}{Ennemy}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classEnnemy_a19dd525f067c790d073c89bb3234c593}{Ennemy}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ type);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEnnemy_aa0036ea581e78ff54a5e3bd4cf7c25e9}{changePosition}}(\mbox{\hyperlink{structVec2}{Vec2}}\ pos);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEnnemy_aa0036ea581e78ff54a5e3bd4cf7c25e9}{changePosition}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEnnemy_a74678ffba9826e0df345306bfe4a323a}{changeDirection}}();}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEnnemy_a6ad6aa7e60a0ab44923d9642baec7057}{moveAuto}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEnnemy_a2c699868b201f113cad2103ac2291ead}{update}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classEnnemy_a62c1c543e3c9f821348ebf357b761568}{deplacement}}(\textcolor{keywordtype}{bool}\ hitwall);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{int}\ getType()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ PlayerOutofRange(\mbox{\hyperlink{classEntity}{Entity}}\ \&player)\textcolor{keyword}{const};}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ followPlayer(\mbox{\hyperlink{classEntity}{Entity}}\ \&player);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classEnnemy_a976ea2d237544b48788993435a135b97}{hitWall}}(\mbox{\hyperlink{classEntity}{Entity}}\&\ platform);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classEnnemy_a1afa92d786fdb54bea04eca7972c41e3}{vaTomber}}(std::vector<std::vector<int>>\&\ gameMap);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classEnnemy_a9a5de4fcab0f4f8ecb843befc6ad3c14}{nextPosVide}}(\mbox{\hyperlink{classEntity}{Entity}}\&\ platform);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classEnnemy_ab5e0bab6e9d1e79b4068c5ed82114ce0}{getDirection}}()\ \{\ \textcolor{keywordflow}{return}\ direction;\ \}}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ENNEMY\_H}}
+
+\end{DoxyCode}

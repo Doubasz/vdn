@@ -1,0 +1,121 @@
+\doxysection{Player.\+h}
+\hypertarget{Player_8h_source}{}\label{Player_8h_source}\index{src/core/Player.h@{src/core/Player.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Entity.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Timer.h"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{enum}\ Etat\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ QAHWA,\ \ }
+\DoxyCodeLine{00010\ \ \ \ \ ZETLA,\ \ }
+\DoxyCodeLine{00011\ \};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{enum}\ PlayerState\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ IDLE,}
+\DoxyCodeLine{00016\ \ \ \ \ RUNNING,}
+\DoxyCodeLine{00017\ \ \ \ \ JUMP,}
+\DoxyCodeLine{00018\ \ \ \ \ FALLING,}
+\DoxyCodeLine{00019\ \ \ \ \ ATTACK,}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#define\ ACCEL\ 0.5f\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ FRICTION\ 0.3f\ \ \ \ }}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ GRAVITY\ 0.8f\ \ \ \ \ }}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ MAX\_SPEED\ 5.0f\ \ \ }}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPlayer}{Player}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classEntity}{Entity}}\ \{}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ accel;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ friction;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ frictionAir;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ maxSpeed;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ maxFall;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ gravity;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{int}\ direction;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Jumping\ mechanics}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ isJumpButtonHeld\ =\ \textcolor{keyword}{false};\ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ jumpHoldTime;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{float}\ maxJumpHoldTime;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{float}\ minJumpBoost;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{float}\ maxJumpBoost;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ Attacking}}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{structRectangle}{Rectangle}}\ attackHitBox;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ isAttacking;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ onCoolDown;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{float}\ attackWindow;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{float}\ attackTimer;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{float}\ attackCooldown;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ Damage\ and\ invincibility}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ gotHit;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{float}\ blinkInterval;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classTimer}{Timer}}\ moveTimer;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classPlayer_affe0cc3cb714f6deb4e62f0c0d3f1fd8}{Player}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a70e21ca98281b7d72f105f2693113d7e}{jump}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_aa29148ec6774536d35921d3589b7cc2e}{releaseJump}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a8e75ae7cd3261c7f45a98c0cefe9be86}{updateJump}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a81c2723e4070a135d6bd71a7063794c6}{seDeplacer}}(std::string\ input);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_aeea45f839f224a5320dfadfd2ff3ebe9}{attack}}();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_ae06c49b9097aa4668a411f24a9d706d4}{updateAttack}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlayer_a39c9d4831f4c711b98085221944cbbd4}{getOnGround}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlayer_aeffef27872152377db1d40f1249e4519}{getGotHit}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_abdab1e443401970fb03f8f78cc009392}{changePosition}}(\mbox{\hyperlink{structVec2}{Vec2}}\ pos);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_abdab1e443401970fb03f8f78cc009392}{changePosition}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlayer_a180f2bcd9d370dd3dd8839f06fb1bb77}{getIsAlive}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlayer_a5982c8936b15d6bde3c8e75914d24f3e}{checkPlatformCollision}}(\mbox{\hyperlink{classEntity}{Entity}}\&\ platform);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a6e70729915507e36afcfa2127926a7f5}{checkCollisionEnnemy}}(\mbox{\hyperlink{classEntity}{Entity}}\&\ ennemy);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a557480981677366ecab2a6a8ef15c944}{updateGravity}}();}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_aaa9baad45188ec0f683edbe00486f5ae}{resetGravity}}();}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a584e779f6483c59a680766e3b11f060a}{update}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_ae169d871725b3c890f19ca64ead2e0fd}{updateState}}();}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classPlayer_a4e989861150820ee7ea142665fd07973}{getState}}();}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a3e876c883811a042a94f613a01024869}{setJumpBoost}}(\textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{00123\ \ \ \ \ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classPlayer_ae40dba674aeb688409e3964bf82dc8f5}{getDirection}}()\ \{\ \textcolor{keywordflow}{return}\ this-\/>direction;\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlayer_aa98511a6a039561d177b7f1f1dee0188}{getGotHit}}()\ \{\ \textcolor{keywordflow}{return}\ this-\/>gotHit;\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPlayer_a2911c2d89b382718a3f5eb0534049ef0}{getCanGetHit}}()\ \{\ \textcolor{keywordflow}{return}\ this-\/>\mbox{\hyperlink{classEntity_a9cd316ce3c2c4593748e91d5f89d5272}{canGetHit}};\ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a9aca3045e6a18cb7468737c468248c8c}{setState}}(\textcolor{keywordtype}{int}\ s)\ \{\ this-\/>state\ =\ s;\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPlayer_a94381b22b7f3bb3782326a80a7a5af6d}{setGotHit}}(\textcolor{keywordtype}{int}\ b)\ \{\ this-\/>gotHit\ =\ b;\ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{structRectangle}{Rectangle}}\&\ \mbox{\hyperlink{classPlayer_a65345a0a8f01498ccf893c2f265bffaf}{getAttackHitBox}}()\ \{\ \textcolor{keywordflow}{return}\ this-\/>attackHitBox;\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00148\ \textcolor{keywordtype}{bool}\ contains(std::string\ input,\ \textcolor{keywordtype}{char}\ target);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

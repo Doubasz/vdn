@@ -1,0 +1,43 @@
+\doxysection{Jeu.\+h}
+\hypertarget{Jeu_8h_source}{}\label{Jeu_8h_source}\index{src/core/Jeu.h@{src/core/Jeu.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ JEU\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ JEU\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Level.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{enum}\ State\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ MENU\_PRINCIPAL,\ \ }
+\DoxyCodeLine{00011\ \ \ \ \ CHOIX\_NIVEAU,\ \ \ \ }
+\DoxyCodeLine{00012\ \ \ \ \ NIVEAU,\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00013\ \ \ \ \ MENU\_NIVEAU\ \ \ \ \ \ }
+\DoxyCodeLine{00014\ \};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classJeu}{Jeu}}\ \{}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classLevel}{Level}}\ currentLevel;\ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ state;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classJeu_acc5795ee00edf75516d3dfe65be3e6d6}{Jeu}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classJeu_af351c88f258d3c1d9607902a9fba4972}{gameLoop}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classJeu_a1afaa5a0d26e4e33822a4d0621eae52e}{getState}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classJeu_a9d204717cb9083312ed1da5897ad6c29}{setState}}(\textcolor{keywordtype}{int}\ newState);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classJeu_a6c8af092d9c7a7cbd64ad8b4c19aa28b}{loadLevel}}(\textcolor{keywordtype}{int}\ level);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classLevel}{Level}}\&\ \mbox{\hyperlink{classJeu_a309b3aa7adddbb242d39024fddb5fd7e}{getCurrentLevel}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classJeu_a1010722aa149a5284b7a46046c1301ea}{update}}(std::string\ input,\ \textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ JEU\_H}}
+
+\end{DoxyCode}

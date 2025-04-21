@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['overlaps_0',['overlaps',['../structRectangle.html#ab6fe5378371c9f1300013b5befb5ea94',1,'Rectangle::overlaps(Rectangle other)'],['../structRectangle.html#a7ba388f26e02ad4223be80adb30fd8de',1,'Rectangle::overlaps(Rectangle *other)']]]
+  ['jeu_0',['jeu',['../classJeu.html',1,'Jeu'],['../classJeu.html#acc5795ee00edf75516d3dfe65be3e6d6',1,'Jeu::Jeu()']]],
+  ['jump_1',['jump',['../classPlayer.html#a70e21ca98281b7d72f105f2693113d7e',1,'Player']]]
 ];

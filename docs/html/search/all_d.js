@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['timer_0',['Timer',['../classTimer.html',1,'']]],
-  ['to_20use_1',['How to use',['../classLog.html#autotoc_md0',1,'']]],
-  ['top_2',['top',['../structRectangle.html#a87a5fabfb34ee12b61f58f9fcd8a32d3',1,'Rectangle']]],
-  ['tostring_3',['toString',['../structRectangle.html#accca16de7a07c1c4ef522c13d88e0516',1,'Rectangle']]]
+  ['nextposvide_0',['nextPosVide',['../classEnnemy.html#a9a5de4fcab0f4f8ecb843befc6ad3c14',1,'Ennemy']]],
+  ['normal_1',['NORMAL',['../classButton.html#ae15938c6b06f6bbf909314f987938fd6a1e23852820b9154316c7c06e2b7ba051',1,'Button']]],
+  ['numframes_2',['numFrames',['../structAnimation.html#a2b42beb2f7e3a8caf3d1f763168c2b40',1,'Animation']]]
 ];

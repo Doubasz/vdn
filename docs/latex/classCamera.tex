@@ -1,0 +1,221 @@
+\doxysection{Camera Class Reference}
+\hypertarget{classCamera}{}\label{classCamera}\index{Camera@{Camera}}
+
+
+Handles camera positioning and effects (like shake) in a 2D game.  
+
+
+
+
+{\ttfamily \#include $<$Camera.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classCamera_a01f94c3543f56ede7af49dc778f19331}\label{classCamera_a01f94c3543f56ede7af49dc778f19331} 
+{\bfseries Camera} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. Initializes all values to zero or defaults. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCamera_a66018ab4fe4c679f4b583b28c2e34d85}{Camera}} (int w, int \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}}, int map\+Width, int map\+Height)
+\begin{DoxyCompactList}\small\item\em Constructs a camera with given viewport and level dimensions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a47259c3e479888cf93190335cf15e68d}{update}} (float targetX, float \mbox{\hyperlink{classCamera_a2fc6eed51c6e0614cfecb9def729a4af}{targetY}}, float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the camera position based on a target. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a09c71b6e6d5f4752c28ef45a0c1cf47c}{shake}} (float intensity, float duration)
+\begin{DoxyCompactList}\small\item\em Starts a camera shake effect. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classCamera_a4a2a9b57d3d68efede27d3b2b3bb280c}{getX}} () const
+\item 
+float \mbox{\hyperlink{classCamera_a10543fa801d67c3558246a9464604a59}{getY}} () const
+\item 
+void \mbox{\hyperlink{classCamera_a442a8a43aeed967c626fa9ee6997504e}{set\+Smooth\+Follow}} (bool smooth)
+\begin{DoxyCompactList}\small\item\em Enables or disables smooth camera following. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_a0ed9218501762a4f68942faa02620398}{set\+Follow\+Speed}} (float s)
+\begin{DoxyCompactList}\small\item\em Sets the smoothing speed for smooth follow. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classCamera_aa1a57bf7dac75f2f191aa2c79575f6b3}{set\+Level\+Boundaries}} (int w, int \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}})
+\begin{DoxyCompactList}\small\item\em Defines the level\textquotesingle{}s boundaries for camera constraint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classCamera_ae270fbd3b09b36f240a2d55b3b5b9cec}\label{classCamera_ae270fbd3b09b36f240a2d55b3b5b9cec} 
+float {\bfseries x}
+\item 
+\Hypertarget{classCamera_ab0522c72fc25c7fa9ad6d0b91e0a3270}\label{classCamera_ab0522c72fc25c7fa9ad6d0b91e0a3270} 
+float {\bfseries y}
+\begin{DoxyCompactList}\small\item\em Current camera position (top-\/left corner). \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_ae92d4d04b7f0cbc7ae9769b6dbbc20d9}\label{classCamera_ae92d4d04b7f0cbc7ae9769b6dbbc20d9} 
+int {\bfseries w}
+\item 
+\Hypertarget{classCamera_a693b45b5fbfe6982649d1567549d7a7a}\label{classCamera_a693b45b5fbfe6982649d1567549d7a7a} 
+int {\bfseries h}
+\begin{DoxyCompactList}\small\item\em Viewport dimensions. \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_aee320749635e54c9a19d070ae4c78241}\label{classCamera_aee320749635e54c9a19d070ae4c78241} 
+float {\bfseries targetX}
+\item 
+\Hypertarget{classCamera_a2fc6eed51c6e0614cfecb9def729a4af}\label{classCamera_a2fc6eed51c6e0614cfecb9def729a4af} 
+float {\bfseries targetY}
+\begin{DoxyCompactList}\small\item\em Target position for the camera to follow. \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_a52d94744e729ddf5514288982900adaf}\label{classCamera_a52d94744e729ddf5514288982900adaf} 
+bool {\bfseries smooth\+Follow}
+\begin{DoxyCompactList}\small\item\em Enables smooth camera movement. \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_aec23ecf9322c84909af930e5c7597ec9}\label{classCamera_aec23ecf9322c84909af930e5c7597ec9} 
+float {\bfseries follow\+Speed}
+\begin{DoxyCompactList}\small\item\em Speed of smoothing (only if smooth\+Follow is true). \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_a858ba08abbe0f9fbae74f88e9bf1384b}\label{classCamera_a858ba08abbe0f9fbae74f88e9bf1384b} 
+bool {\bfseries is\+Shaking}
+\begin{DoxyCompactList}\small\item\em Indicates whether the camera is currently shaking. \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_aabb8e3d07afdf1ff3d4bf81f4ce66e0b}\label{classCamera_aabb8e3d07afdf1ff3d4bf81f4ce66e0b} 
+float {\bfseries shake\+Duration}
+\begin{DoxyCompactList}\small\item\em Total duration of the shake effect. \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_a1a713b7ab0107604c70ca22a10979fd9}\label{classCamera_a1a713b7ab0107604c70ca22a10979fd9} 
+float {\bfseries shake\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} tracking elapsed shake time. \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_a0c8f4ac3cba858100ffd3c3a1dd3bfe2}\label{classCamera_a0c8f4ac3cba858100ffd3c3a1dd3bfe2} 
+float {\bfseries shake\+Intensity}
+\begin{DoxyCompactList}\small\item\em Intensity (amplitude) of the shake. \end{DoxyCompactList}\item 
+\Hypertarget{classCamera_a215e6b087cc0e1612cc89f9fe0ea026f}\label{classCamera_a215e6b087cc0e1612cc89f9fe0ea026f} 
+int {\bfseries level\+Width}
+\item 
+\Hypertarget{classCamera_a579b90e970385e1ab6811929b2c9c4b7}\label{classCamera_a579b90e970385e1ab6811929b2c9c4b7} 
+int {\bfseries level\+Height}
+\begin{DoxyCompactList}\small\item\em Total dimensions of the level (to constrain camera). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles camera positioning and effects (like shake) in a 2D game. 
+
+The camera follows a target entity (typically the player) within the level boundaries. It takes the center of the player and follows it
+
+Supports smooth following and screen shake effects for immersive gameplay.
+
+TODO Might add a dead zone to see if it looks better 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCamera_a66018ab4fe4c679f4b583b28c2e34d85}\label{classCamera_a66018ab4fe4c679f4b583b28c2e34d85} 
+\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}}
+{\footnotesize\ttfamily Camera\+::\+Camera (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h,  }\item[{int}]{map\+Width,  }\item[{int}]{map\+Height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a camera with given viewport and level dimensions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & Width of the viewport. \\
+\hline
+{\em h} & Height of the viewport. \\
+\hline
+{\em map\+Width} & Total width of the level. \\
+\hline
+{\em map\+Height} & Total height of the level. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCamera_a4a2a9b57d3d68efede27d3b2b3bb280c}\label{classCamera_a4a2a9b57d3d68efede27d3b2b3bb280c} 
+\index{Camera@{Camera}!getX@{getX}}
+\index{getX@{getX}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily float Camera\+::getX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Current X position of the camera. 
+\end{DoxyReturn}
+\Hypertarget{classCamera_a10543fa801d67c3558246a9464604a59}\label{classCamera_a10543fa801d67c3558246a9464604a59} 
+\index{Camera@{Camera}!getY@{getY}}
+\index{getY@{getY}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily float Camera\+::getY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Current Y position of the camera. 
+\end{DoxyReturn}
+\Hypertarget{classCamera_a0ed9218501762a4f68942faa02620398}\label{classCamera_a0ed9218501762a4f68942faa02620398} 
+\index{Camera@{Camera}!setFollowSpeed@{setFollowSpeed}}
+\index{setFollowSpeed@{setFollowSpeed}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setFollowSpeed()}{setFollowSpeed()}}
+{\footnotesize\ttfamily void Camera\+::set\+Follow\+Speed (\begin{DoxyParamCaption}\item[{float}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the smoothing speed for smooth follow. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & New follow speed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCamera_aa1a57bf7dac75f2f191aa2c79575f6b3}\label{classCamera_aa1a57bf7dac75f2f191aa2c79575f6b3} 
+\index{Camera@{Camera}!setLevelBoundaries@{setLevelBoundaries}}
+\index{setLevelBoundaries@{setLevelBoundaries}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setLevelBoundaries()}{setLevelBoundaries()}}
+{\footnotesize\ttfamily void Camera\+::set\+Level\+Boundaries (\begin{DoxyParamCaption}\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Defines the level\textquotesingle{}s boundaries for camera constraint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & Width of the level. \\
+\hline
+{\em h} & Height of the level. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCamera_a442a8a43aeed967c626fa9ee6997504e}\label{classCamera_a442a8a43aeed967c626fa9ee6997504e} 
+\index{Camera@{Camera}!setSmoothFollow@{setSmoothFollow}}
+\index{setSmoothFollow@{setSmoothFollow}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{setSmoothFollow()}{setSmoothFollow()}}
+{\footnotesize\ttfamily void Camera\+::set\+Smooth\+Follow (\begin{DoxyParamCaption}\item[{bool}]{smooth }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Enables or disables smooth camera following. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em smooth} & If true, camera will ease toward target position. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCamera_a09c71b6e6d5f4752c28ef45a0c1cf47c}\label{classCamera_a09c71b6e6d5f4752c28ef45a0c1cf47c} 
+\index{Camera@{Camera}!shake@{shake}}
+\index{shake@{shake}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{shake()}{shake()}}
+{\footnotesize\ttfamily void Camera\+::shake (\begin{DoxyParamCaption}\item[{float}]{intensity,  }\item[{float}]{duration }\end{DoxyParamCaption})}
+
+
+
+Starts a camera shake effect. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em intensity} & How much the screen should shake. \\
+\hline
+{\em duration} & How long the shake should last. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classCamera_a47259c3e479888cf93190335cf15e68d}\label{classCamera_a47259c3e479888cf93190335cf15e68d} 
+\index{Camera@{Camera}!update@{update}}
+\index{update@{update}!Camera@{Camera}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Camera\+::update (\begin{DoxyParamCaption}\item[{float}]{targetX,  }\item[{float}]{targetY,  }\item[{float}]{delta\+Time }\end{DoxyParamCaption})}
+
+
+
+Updates the camera position based on a target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em targetX} & X-\/coordinate of the target to follow. \\
+\hline
+{\em targetY} & Y-\/coordinate of the target to follow. \\
+\hline
+{\em delta\+Time} & Time elapsed since the last update (for smooth movement). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Camera.\+h\item 
+src/core/Camera.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,117 @@
+\doxysection{Jeu Class Reference}
+\hypertarget{classJeu}{}\label{classJeu}\index{Jeu@{Jeu}}
+
+
+Handles the main game logic and state transitions.  
+
+
+
+
+{\ttfamily \#include $<$Jeu.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classJeu_acc5795ee00edf75516d3dfe65be3e6d6}\label{classJeu_acc5795ee00edf75516d3dfe65be3e6d6} 
+{\bfseries Jeu} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classJeu_af351c88f258d3c1d9607902a9fba4972}\label{classJeu_af351c88f258d3c1d9607902a9fba4972} 
+void {\bfseries game\+Loop} ()
+\begin{DoxyCompactList}\small\item\em Starts the main game loop. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classJeu_a1afaa5a0d26e4e33822a4d0621eae52e}{get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current state of the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classJeu_a9d204717cb9083312ed1da5897ad6c29}{set\+State}} (int new\+State)
+\begin{DoxyCompactList}\small\item\em Sets the current state of the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classJeu_a6c8af092d9c7a7cbd64ad8b4c19aa28b}{load\+Level}} (int level)
+\begin{DoxyCompactList}\small\item\em Loads the specified level. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLevel}{Level}} \& \mbox{\hyperlink{classJeu_a309b3aa7adddbb242d39024fddb5fd7e}{get\+Current\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current level object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classJeu_a1010722aa149a5284b7a46046c1301ea}{update}} (std\+::string input, float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the current level based on player input and elapsed time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the main game logic and state transitions. 
+
+This class contains the current level and manages the overall game state. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classJeu_a309b3aa7adddbb242d39024fddb5fd7e}\label{classJeu_a309b3aa7adddbb242d39024fddb5fd7e} 
+\index{Jeu@{Jeu}!getCurrentLevel@{getCurrentLevel}}
+\index{getCurrentLevel@{getCurrentLevel}!Jeu@{Jeu}}
+\doxysubsubsection{\texorpdfstring{getCurrentLevel()}{getCurrentLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLevel}{Level}} \& Jeu\+::get\+Current\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets the current level object. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classLevel}{Level}. 
+\end{DoxyReturn}
+\Hypertarget{classJeu_a1afaa5a0d26e4e33822a4d0621eae52e}\label{classJeu_a1afaa5a0d26e4e33822a4d0621eae52e} 
+\index{Jeu@{Jeu}!getState@{getState}}
+\index{getState@{getState}!Jeu@{Jeu}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily int Jeu\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the current state of the game. 
+
+\begin{DoxyReturn}{Returns}
+Current game state. 
+\end{DoxyReturn}
+\Hypertarget{classJeu_a6c8af092d9c7a7cbd64ad8b4c19aa28b}\label{classJeu_a6c8af092d9c7a7cbd64ad8b4c19aa28b} 
+\index{Jeu@{Jeu}!loadLevel@{loadLevel}}
+\index{loadLevel@{loadLevel}!Jeu@{Jeu}}
+\doxysubsubsection{\texorpdfstring{loadLevel()}{loadLevel()}}
+{\footnotesize\ttfamily void Jeu\+::load\+Level (\begin{DoxyParamCaption}\item[{int}]{level }\end{DoxyParamCaption})}
+
+
+
+Loads the specified level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & The level number to load. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classJeu_a9d204717cb9083312ed1da5897ad6c29}\label{classJeu_a9d204717cb9083312ed1da5897ad6c29} 
+\index{Jeu@{Jeu}!setState@{setState}}
+\index{setState@{setState}!Jeu@{Jeu}}
+\doxysubsubsection{\texorpdfstring{setState()}{setState()}}
+{\footnotesize\ttfamily void Jeu\+::set\+State (\begin{DoxyParamCaption}\item[{int}]{new\+State }\end{DoxyParamCaption})}
+
+
+
+Sets the current state of the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+State} & The new state to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classJeu_a1010722aa149a5284b7a46046c1301ea}\label{classJeu_a1010722aa149a5284b7a46046c1301ea} 
+\index{Jeu@{Jeu}!update@{update}}
+\index{update@{update}!Jeu@{Jeu}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Jeu\+::update (\begin{DoxyParamCaption}\item[{std\+::string}]{input,  }\item[{float}]{delta\+Time }\end{DoxyParamCaption})}
+
+
+
+Updates the current level based on player input and elapsed time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The current input string. \\
+\hline
+{\em delta\+Time} & Time elapsed since last frame (in seconds). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Jeu.\+h\item 
+src/core/Jeu.\+cpp\end{DoxyCompactItemize}

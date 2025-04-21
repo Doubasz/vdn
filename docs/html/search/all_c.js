@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['setx_0',['setX',['../structRectangle.html#a3fa0036ff576f4b63ab3350bd229915f',1,'Rectangle']]],
-  ['sety_1',['setY',['../structRectangle.html#a608196906d5031c48c28554f36d7c1eb',1,'Rectangle']]],
-  ['stretch_2',['stretch',['../structRectangle.html#a16e25b4fde1009692524ca6e03c6834b',1,'Rectangle']]]
+  ['menustate_0',['menustate',['../classMenuState.html',1,'MenuState'],['../classMenuState.html#aa8c0b7495397c6c46d137f6c5b3167d3',1,'MenuState::MenuState()'],['../classMenuState.html#a5dfca7cdac8756c8903ae07e648da53b',1,'MenuState::MenuState(SDL_Renderer *renderer, TTF_Font *font)']]],
+  ['moveauto_1',['moveAuto',['../classEnnemy.html#a6ad6aa7e60a0ab44923d9642baec7057',1,'Ennemy']]]
 ];

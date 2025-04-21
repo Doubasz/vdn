@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['placeontop_0',['placeOnTop',['../structRectangle.html#a0519cd9e69d4428893b40eee6585386e',1,'Rectangle']]],
-  ['platform_1',['Platform',['../classPlatform.html',1,'']]],
-  ['player_2',['Player',['../classPlayer.html',1,'']]],
-  ['point_3',['Point',['../classPoint.html',1,'']]]
+  ['knockbackduration_0',['knockBackDuration',['../classEntity.html#a41a0d045550809ca041ea3264d812538',1,'Entity']]],
+  ['knockbackforce_1',['knockBackForce',['../classEntity.html#a08bd8795a51796ac88df9bd67cf1b8b9',1,'Entity']]],
+  ['knockbackfriction_2',['knockBackFriction',['../classEntity.html#ae63cf339646abfc1f104a67c9582a8ac',1,'Entity']]],
+  ['knockbacktimer_3',['knockBackTimer',['../classEntity.html#a50341d5c0fff2b223f93dc695d5e167e',1,'Entity']]]
 ];

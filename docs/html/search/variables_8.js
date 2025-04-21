@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['y_0',['y',['../structRectangle.html#a86f71f891bada4e5e920a4a9b7c505a3',1,'Rectangle']]]
+  ['onground_0',['onGround',['../classEntity.html#aaea9f07bff66b8596dc389c0a5355bfe',1,'Entity']]],
+  ['onknockback_1',['onKnockBack',['../classEntity.html#a04063acdc590bfd4f3895fa916ea3ea5',1,'Entity']]]
 ];

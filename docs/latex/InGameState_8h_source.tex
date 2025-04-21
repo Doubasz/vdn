@@ -1,0 +1,158 @@
+\doxysection{In\+Game\+State.\+h}
+\hypertarget{InGameState_8h_source}{}\label{InGameState_8h_source}\index{src/sdl2/InGameState.h@{src/sdl2/InGameState.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ IN\_GAME\_STATE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ IN\_GAME\_STATE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <SDL2/SDL\_mixer.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}GameState.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../core/Jeu.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}../core/Camera.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Button.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ SCREEN\_WIDTH\ 1400\ \ }}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ SCREEN\_HEIGHT\ 900\ }}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{enum}\ WindowState\{}
+\DoxyCodeLine{00020\ \ \ \ \ CONTINUE,\ }
+\DoxyCodeLine{00021\ \ \ \ \ PAUSE,\ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ QUIT,\ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ DEAD,\ \ \ \ \ }
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structAnimation}{Animation}}\{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structAnimation_aeef5ace5df27c18ed65d4762e57274d8}{startFrame}};\ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structAnimation_a2b42beb2f7e3a8caf3d1f763168c2b40}{numFrames}};\ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structAnimation_adc7df29e613689f29ddac3316b2a509d}{currentFrame}};\ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structAnimation_aa1aa4ae25b5ab7a931c2fd67637adff6}{frameTime}};\ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structAnimation_a32a1a83a874a210d29eadeeb3b14c22f}{timer}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structAnimation_a951ff207e048c16b7c5dde293eb5419b}{loop}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classInGameState}{InGameState}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classGameState}{GameState}}\{}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00049\ \ \ \ \ SDL\_Renderer*\ renderer;\ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{int}\ level;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classJeu}{Jeu}}\ jeu;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ SDL\_Texture*\ background;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ SDL\_Texture*\ background1;\ \ \ \ \ \ }
+\DoxyCodeLine{00055\ \ \ \ \ SDL\_Texture*\ tileSet;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ SDL\_Texture*\ deathBackground;\ \ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ SDL\_Texture*\ playerSheet;\ \ \ \ \ \ }
+\DoxyCodeLine{00060\ \ \ \ \ SDL\_Rect\ playerRect;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ std::vector<Animation>\ playerAnimation;\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{structAnimation}{Animation}}\ currentAnimation;\ \ \ \ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ std::vector<SDL\_Texture*>\ platformTexture;\ }
+\DoxyCodeLine{00066\ \ \ \ \ std::vector<Button>\ buttons;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ SDL\_Texture*\ ennemySheet;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00069\ \ \ \ \ TTF\_Font*\ font;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00070\ \ \ \ \ SDL\_Color\ textColor;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{structAnimation}{Animation}}\ ennemyAnimation;\ \ \ \ \ \ }
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classCamera}{Camera}}\ camera;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ Sound\ effects\ and\ music}}
+\DoxyCodeLine{00077\ \ \ \ \ Mix\_Chunk*\ sauter;\ \ \ \ \ \ }
+\DoxyCodeLine{00078\ \ \ \ \ Mix\_Chunk*\ gotHit;\ \ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ Mix\_Chunk*\ walk;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00080\ \ \ \ \ Mix\_Chunk*\ attack;\ \ \ \ \ \ }
+\DoxyCodeLine{00081\ \ \ \ \ Mix\_Chunk*\ land;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00082\ \ \ \ \ Mix\_Music*\ music;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classTimer}{Timer}}\ moveTimer;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classTimer}{Timer}}\ attacksound;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{int}\ tileSize;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{int}\ state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{int}\ blinkInterval;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{int}\ lastPlayerState;\ \ \ \ \ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{bool}\ quit;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{float}\ deathDuration;\ \ \ \ \ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{float}\ deathTimer;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{int}\ gameTime;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{comment}{//\ Constructors\ and\ destructors}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{classInGameState_a752664ae116529322a8717d1bdb7326a}{InGameState}}();}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{classInGameState_a752664ae116529322a8717d1bdb7326a}{InGameState}}(SDL\_Renderer*\ renderer,\ TTF\_Font*\ font,\ \textcolor{keywordtype}{int}\ lvl);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_acda8b9deabacdbb4996c114fffb81284}{load}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00117\ \ \ \ \ SDL\_Texture\ *\mbox{\hyperlink{classInGameState_afee9071fe5cec87d331156889e5e4307}{getTileSet}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classInGameState_a46473d66044165240612c6c9d8073a9e}{unload}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a2024dda89d0d24e6b8ea5958f5ab2956}{handleEvents}}(SDL\_Event\&\ events)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00133\ \ \ \ \ StateCode\ \mbox{\hyperlink{classInGameState_a946b985b3a7aea0cbad97f9c8529e00c}{update}}(\textcolor{keywordtype}{float}\ dt)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a34e91319ff18700ab6ed947fb5d4c224}{render}}(SDL\_Renderer*\ renderer)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//\ Helper\ rendering\ functions\ for\ different\ game\ elements}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a0eb3d5e1d0ccf7eb0c1cbbb227fb47e5}{renderPlayer}}(SDL\_Renderer*\ renderer);\ \ \ \ \ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a5368b94a4019398b0edffd1e869ac8e6}{renderEnnemy}}(SDL\_Renderer*\ renderer);\ \ \ \ \ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_af8ee93ce13daa5d2842f92393ebfe98c}{renderTiles}}(SDL\_Renderer*\ renderer);\ \ \ \ \ \ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a6cfa93f2a826f951be6a3f375d18de48}{renderBackground}}(SDL\_Renderer*\ renderer);}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_aae43288cf99bd68d1a721de08adbe8e4}{renderLives}}(SDL\_Renderer*\ renderer);\ \ \ \ \ \ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a46f6786e882752a7ad7018fbd7af0cc9}{renderTimer}}(SDL\_Renderer*\ renderer);\ \ \ \ \ \ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a0a772e6adc21bca646cb2bd8e0db70bb}{renderDeathScreen}}(SDL\_Renderer*\ renderer);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a1eb0a408c747ca4c17f9060f738e0812}{loadTextures}}(SDL\_Renderer*\ renderer);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00154\ \ \ \ \ SDL\_Texture\ *\mbox{\hyperlink{classInGameState_a380ed00001db6a02f1122ead837a959f}{getBackground}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00157\ \ \ \ \ SDL\_Texture\ *\mbox{\hyperlink{classInGameState_a7f3c4bfcdec6001b1409e0c33c7a04a2}{getPlayerSheet}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00160\ \ \ \ \ SDL\_Texture\ *\mbox{\hyperlink{classInGameState_a304158b900bc7fd88e1055b8eae8d300}{getEnnemySheet}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00163\ \ \ \ \ SDL\_Texture\ *\mbox{\hyperlink{classInGameState_a54e80350b0a342f061a005d08f6c327f}{getBackground1}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<Animation>\ \&\mbox{\hyperlink{classInGameState_ad0b9df4b544a19f739fdec03bbc7f1d6}{getPlayerAnimation}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a5f50f9250790bab80eb242e7b41240b9}{loadAnimations}}();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a39f991e0a604b6f68efb5625fd379770}{updateGame}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a33718f7dc17270be9e915d1d2323d4a7}{updateAnimation}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_acf209df281256a456477ecc751fd72e7}{updateEnnemyAnimation}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_aaf51fbecb8de66ad0dce42778bcedb90}{updateCamera}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a1707522839047c7f727022b7e84c83e8}{updateDeath}}(\textcolor{keywordtype}{float}\ delatTime);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classInGameState_a6b4a88e88a492d017500350a1fd98379}{playBackgroundMusic}}();}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a877de887fe702574d4f5882c319d74f6}{playSound}}(std::string\ input);}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classInGameState_a28d2ac4c39984c0a9429d818c9cd278a}{loadSounds}}(\textcolor{keywordtype}{int}\ niveau);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a9ebb13943d45c9137b92ca02b88d6d99}{initButtons}}();}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_aa96b121080fdbfa3398a2c971e5f93f6}{resumeGame}}();}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a13f6ce4ce5675f64916eb5e267f6f8f6}{quitGame}}();}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classInGameState_a77316448de260114499bfbee8372e49b}{renderButtons}}();}
+\DoxyCodeLine{00208\ \};}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{comment}{//\ Loads\ a\ texture\ from\ a\ file\ path}}
+\DoxyCodeLine{00211\ SDL\_Texture*\ loadTexture(SDL\_Renderer*\ renderer,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path);}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ IN\_GAME\_STATE\_H}}
+
+\end{DoxyCode}

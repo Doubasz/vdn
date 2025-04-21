@@ -1,0 +1,221 @@
+\doxysection{Menu\+State Class Reference}
+\hypertarget{classMenuState}{}\label{classMenuState}\index{MenuState@{MenuState}}
+
+
+{\ttfamily \#include $<$Menu\+State.\+h$>$}
+
+
+
+Inheritance diagram for Menu\+State\+:
+% FIG 0
+
+
+Collaboration diagram for Menu\+State\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classMenuState_aa8c0b7495397c6c46d137f6c5b3167d3}\label{classMenuState_aa8c0b7495397c6c46d137f6c5b3167d3} 
+{\bfseries Menu\+State} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMenuState_a5dfca7cdac8756c8903ae07e648da53b}{Menu\+State}} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer, TTF\+\_\+\+Font \texorpdfstring{$\ast$}{*}font)
+\item 
+\Hypertarget{classMenuState_a58aea91a44436c5bba575c5de755a5bc}\label{classMenuState_a58aea91a44436c5bba575c5de755a5bc} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Menu\+State} ()
+\begin{DoxyCompactList}\small\item\em Destructor to free allocated resources. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenuState_a24621aace605f7e7e26c8cb68393436b}{load}} () override
+\begin{DoxyCompactList}\small\item\em Loads the resources for the menu (e.\+g., textures, sounds) \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classMenuState_ac7d60fb4a5c184e6bc0f901ecdb6f392}{unload}} () override
+\item 
+void \mbox{\hyperlink{classMenuState_a0458298fe819ab9dcf8b099538d15edf}{handle\+Events}} (SDL\+\_\+\+Event \&events) override
+\item 
+State\+Code \mbox{\hyperlink{classMenuState_a1ebd35f6d031f91d8446b8136116c457}{update}} (float dt) override
+\item 
+void \mbox{\hyperlink{classMenuState_ad4f9da6a41b2536a260d21b706cf0252}{render}} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer) override
+\item 
+\Hypertarget{classMenuState_a6b5ed7d00e34a0ea474e1b2d8576a291}\label{classMenuState_a6b5ed7d00e34a0ea474e1b2d8576a291} 
+void {\bfseries init\+Buttons} ()
+\begin{DoxyCompactList}\small\item\em Initializes the menu buttons (Start, Options, etc.) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMenuState_a7fd9fde3baf2242ef9751b28f772f7b1}{render\+Background}} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\item 
+\Hypertarget{classMenuState_a45aedff5cb7044516a05e18cf0b67d96}\label{classMenuState_a45aedff5cb7044516a05e18cf0b67d96} 
+void {\bfseries load\+\_\+music} ()
+\begin{DoxyCompactList}\small\item\em Loads the background music for the menu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classMenuState_aff3978f363fe0156a8b3dde34d5c5833}{play\+Background\+Music}} ()
+\item 
+\Hypertarget{classMenuState_a4d1999f990aa137c50bcf9fdaf6e59ec}\label{classMenuState_a4d1999f990aa137c50bcf9fdaf6e59ec} 
+void {\bfseries render\+Buttons} ()
+\begin{DoxyCompactList}\small\item\em Renders the general buttons in the menu (e.\+g., Start, Options) \end{DoxyCompactList}\item 
+\Hypertarget{classMenuState_a38ccfdff4f77e1872b87bf57676c9b60}\label{classMenuState_a38ccfdff4f77e1872b87bf57676c9b60} 
+void {\bfseries render\+Level\+Buttons} ()
+\begin{DoxyCompactList}\small\item\em Renders the buttons for level selection. \end{DoxyCompactList}\item 
+\Hypertarget{classMenuState_aa83a2465d87f4324052cc90aabc48369}\label{classMenuState_aa83a2465d87f4324052cc90aabc48369} 
+void {\bfseries load\+Textures} ()
+\begin{DoxyCompactList}\small\item\em Loads textures used in the menu (e.\+g., buttons, background) \end{DoxyCompactList}\item 
+\Hypertarget{classMenuState_a10f9c21b6c6343875ac18a9810973902}\label{classMenuState_a10f9c21b6c6343875ac18a9810973902} 
+void {\bfseries start\+Game} ()
+\begin{DoxyCompactList}\small\item\em Starts the game (switch to the game state) \end{DoxyCompactList}\item 
+\Hypertarget{classMenuState_a1d7d94302458cd43558701ead080375d}\label{classMenuState_a1d7d94302458cd43558701ead080375d} 
+void {\bfseries choose\+Level} ()
+\begin{DoxyCompactList}\small\item\em Switches to the level selection screen. \end{DoxyCompactList}\item 
+\Hypertarget{classMenuState_a526bb4998cc1476358b918ccc1026c60}\label{classMenuState_a526bb4998cc1476358b918ccc1026c60} 
+void {\bfseries options} ()
+\begin{DoxyCompactList}\small\item\em Switches to the options screen. \end{DoxyCompactList}\item 
+\Hypertarget{classMenuState_ad060bb6d7a1077f5285dc4c06f2a5a66}\label{classMenuState_ad060bb6d7a1077f5285dc4c06f2a5a66} 
+void {\bfseries start\+Level1} ()
+\begin{DoxyCompactList}\small\item\em Starts the first level of the game. \end{DoxyCompactList}\item 
+\Hypertarget{classMenuState_aec3132e80e8755625bd380ab8199a8f2}\label{classMenuState_aec3132e80e8755625bd380ab8199a8f2} 
+void {\bfseries start\+Level2} ()
+\begin{DoxyCompactList}\small\item\em Starts the second level of the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classGameState}{Game\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classGameState_aba5cd94cc1b5f4c47a08a9f5c7b461ab}\label{classGameState_aba5cd94cc1b5f4c47a08a9f5c7b461ab} 
+enum {\bfseries State\+Code} \{ \newline
+{\bfseries MAIN\+\_\+\+MENU}
+, {\bfseries OPTION}
+, {\bfseries LEVEL1}
+, {\bfseries LEVEL2}
+, \newline
+{\bfseries PAUSE}
+, {\bfseries GAME\+\_\+\+OVER}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classMenuState}{Menu\+State} is the class that represents the main menu of the game. It manages the display of the menu, buttons, background, music, and user interactions. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classMenuState_a5dfca7cdac8756c8903ae07e648da53b}\label{classMenuState_a5dfca7cdac8756c8903ae07e648da53b} 
+\index{MenuState@{MenuState}!MenuState@{MenuState}}
+\index{MenuState@{MenuState}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{MenuState()}{MenuState()}}
+{\footnotesize\ttfamily Menu\+State\+::\+Menu\+State (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}}]{renderer,  }\item[{TTF\+\_\+\+Font \texorpdfstring{$\ast$}{*}}]{font }\end{DoxyParamCaption})}
+
+Constructor with parameters to initialize the renderer and font
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & The SDL renderer used for drawing \\
+\hline
+{\em font} & The font used for rendering text in the menu \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classMenuState_a0458298fe819ab9dcf8b099538d15edf}\label{classMenuState_a0458298fe819ab9dcf8b099538d15edf} 
+\index{MenuState@{MenuState}!handleEvents@{handleEvents}}
+\index{handleEvents@{handleEvents}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{handleEvents()}{handleEvents()}}
+{\footnotesize\ttfamily void Menu\+State\+::handle\+Events (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Event \&}]{events }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Handles user input and events like button clicks or key presses
+
+
+\begin{DoxyParams}{Parameters}
+{\em events} & The SDL event to be handled (user input) \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classMenuState_a24621aace605f7e7e26c8cb68393436b}\label{classMenuState_a24621aace605f7e7e26c8cb68393436b} 
+\index{MenuState@{MenuState}!load@{load}}
+\index{load@{load}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void Menu\+State\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Loads the resources for the menu (e.\+g., textures, sounds) 
+
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classMenuState_aff3978f363fe0156a8b3dde34d5c5833}\label{classMenuState_aff3978f363fe0156a8b3dde34d5c5833} 
+\index{MenuState@{MenuState}!playBackgroundMusic@{playBackgroundMusic}}
+\index{playBackgroundMusic@{playBackgroundMusic}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{playBackgroundMusic()}{playBackgroundMusic()}}
+{\footnotesize\ttfamily int Menu\+State\+::play\+Background\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Plays the background music
+
+\begin{DoxyReturn}{Returns}
+An integer indicating the music playback status 
+\end{DoxyReturn}
+\Hypertarget{classMenuState_ad4f9da6a41b2536a260d21b706cf0252}\label{classMenuState_ad4f9da6a41b2536a260d21b706cf0252} 
+\index{MenuState@{MenuState}!render@{render}}
+\index{render@{render}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Menu\+State\+::render (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Renders the menu to the screen
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & The SDL renderer used to draw the menu \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classMenuState_a7fd9fde3baf2242ef9751b28f772f7b1}\label{classMenuState_a7fd9fde3baf2242ef9751b28f772f7b1} 
+\index{MenuState@{MenuState}!renderBackground@{renderBackground}}
+\index{renderBackground@{renderBackground}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{renderBackground()}{renderBackground()}}
+{\footnotesize\ttfamily void Menu\+State\+::render\+Background (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}}]{renderer }\end{DoxyParamCaption})}
+
+Renders the background image of the menu
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & The SDL renderer used to render the background \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classMenuState_ac7d60fb4a5c184e6bc0f901ecdb6f392}\label{classMenuState_ac7d60fb4a5c184e6bc0f901ecdb6f392} 
+\index{MenuState@{MenuState}!unload@{unload}}
+\index{unload@{unload}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{unload()}{unload()}}
+{\footnotesize\ttfamily int Menu\+State\+::unload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Unloads resources when exiting the menu
+
+\begin{DoxyReturn}{Returns}
+An integer indicating the unloading status 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classMenuState_a1ebd35f6d031f91d8446b8136116c457}\label{classMenuState_a1ebd35f6d031f91d8446b8136116c457} 
+\index{MenuState@{MenuState}!update@{update}}
+\index{update@{update}!MenuState@{MenuState}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily Game\+State\+::\+State\+Code Menu\+State\+::update (\begin{DoxyParamCaption}\item[{float}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Updates the menu state based on elapsed time and interactions
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & The delta time (time elapsed since the last update) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next state code (e.\+g., Game, Options) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/sdl2/Menu\+State.\+h\item 
+src/sdl2/Menu\+State.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,176 @@
+\doxysection{Rectangle Struct Reference}
+\hypertarget{structRectangle}{}\label{structRectangle}\index{Rectangle@{Rectangle}}
+
+
+{\ttfamily \#include $<$Shapes.\+h$>$}
+
+
+
+Collaboration diagram for Rectangle\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structRectangle_abfd67f4d0f241595325f7229abf9e5b6}\label{structRectangle_abfd67f4d0f241595325f7229abf9e5b6} 
+{\bfseries Rectangle} (float \mbox{\hyperlink{structRectangle_a40917b61b33bf046d189be401c13cc7f}{x}}, float \mbox{\hyperlink{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}{y}}, int \mbox{\hyperlink{structRectangle_abfa421daace50b66f37ab89d6c826384}{w}}, int \mbox{\hyperlink{structRectangle_afc7a7cebf422495e41277247eb131692}{h}})
+\begin{DoxyCompactList}\small\item\em Creates a rectangle with {\ttfamily x} and {\ttfamily y} coordinates and {\ttfamily w} and {\ttfamily y} dimensions. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a66cb69c0fe73a06c743771d2798e9147}\label{structRectangle_a66cb69c0fe73a06c743771d2798e9147} 
+{\bfseries Rectangle} (\mbox{\hyperlink{structRectangle}{Rectangle}} \texorpdfstring{$\ast$}{*}other)
+\item 
+\Hypertarget{structRectangle_aefbb58f855a5a19959e972924bf2285e}\label{structRectangle_aefbb58f855a5a19959e972924bf2285e} 
+bool {\bfseries overlaps} (const \mbox{\hyperlink{structRectangle}{Rectangle}} \&other) const
+\item 
+\Hypertarget{structRectangle_a8a933e0ebd9e80ce91e61ffe87fd577e}\label{structRectangle_a8a933e0ebd9e80ce91e61ffe87fd577e} 
+{\bfseries Rectangle} ()
+\begin{DoxyCompactList}\small\item\em Initialize by default all attributes with {\ttfamily 0} \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a04942ab5ec7b2a27c723c09eaedac1b6}\label{structRectangle_a04942ab5ec7b2a27c723c09eaedac1b6} 
+void {\bfseries copy} (\mbox{\hyperlink{structRectangle}{Rectangle}} \texorpdfstring{$\ast$}{*}other)
+\begin{DoxyCompactList}\small\item\em Copies {\itshape other}\textquotesingle{}s internal values to this. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structRectangle_a8cce58b11d4b7ccbedf1fa1bc0096c61}{addX}} (float \mbox{\hyperlink{structRectangle_a40917b61b33bf046d189be401c13cc7f}{x}})
+\item 
+void \mbox{\hyperlink{structRectangle_a399e44cf899369f8566b960ff96104b9}{addY}} (float \mbox{\hyperlink{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}{y}})
+\item 
+\Hypertarget{structRectangle_a3fa0036ff576f4b63ab3350bd229915f}\label{structRectangle_a3fa0036ff576f4b63ab3350bd229915f} 
+void {\bfseries setX} (float \mbox{\hyperlink{structRectangle_a40917b61b33bf046d189be401c13cc7f}{x}})
+\begin{DoxyCompactList}\small\item\em Sets the current x, making necessary internal calculations. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a608196906d5031c48c28554f36d7c1eb}\label{structRectangle_a608196906d5031c48c28554f36d7c1eb} 
+void {\bfseries setY} (float \mbox{\hyperlink{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}{y}})
+\begin{DoxyCompactList}\small\item\em Sets the current y, making necessary internal calculations. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structRectangle_a16e25b4fde1009692524ca6e03c6834b}{stretch}} (float scale)
+\item 
+void \mbox{\hyperlink{structRectangle_ab92d1def505d300873233d525638ea19}{update}} ()
+\item 
+\Hypertarget{structRectangle_ab6fe5378371c9f1300013b5befb5ea94}\label{structRectangle_ab6fe5378371c9f1300013b5befb5ea94} 
+bool {\bfseries overlaps} (\mbox{\hyperlink{structRectangle}{Rectangle}} other)
+\begin{DoxyCompactList}\small\item\em Tells if this rectangle overlaps the other in any way. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a7ba388f26e02ad4223be80adb30fd8de}\label{structRectangle_a7ba388f26e02ad4223be80adb30fd8de} 
+bool {\bfseries overlaps} (\mbox{\hyperlink{structRectangle}{Rectangle}} \texorpdfstring{$\ast$}{*}other)
+\begin{DoxyCompactList}\small\item\em Tells if this rectangle overlaps the other in any way. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structRectangle_a0519cd9e69d4428893b40eee6585386e}{place\+On\+Top}} (\mbox{\hyperlink{structRectangle}{Rectangle}} other)
+\item 
+\Hypertarget{structRectangle_accca16de7a07c1c4ef522c13d88e0516}\label{structRectangle_accca16de7a07c1c4ef522c13d88e0516} 
+std\+::string {\bfseries to\+String} ()
+\begin{DoxyCompactList}\small\item\em Return a string to write it in the std output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structRectangle_a40917b61b33bf046d189be401c13cc7f}\label{structRectangle_a40917b61b33bf046d189be401c13cc7f} 
+float {\bfseries x}
+\begin{DoxyCompactList}\small\item\em X of the top left point. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}\label{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3} 
+float {\bfseries y}
+\begin{DoxyCompactList}\small\item\em Y of the top left point. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_abfa421daace50b66f37ab89d6c826384}\label{structRectangle_abfa421daace50b66f37ab89d6c826384} 
+int {\bfseries w}
+\begin{DoxyCompactList}\small\item\em width of the rect \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_afc7a7cebf422495e41277247eb131692}\label{structRectangle_afc7a7cebf422495e41277247eb131692} 
+int {\bfseries h}
+\begin{DoxyCompactList}\small\item\em height of the rect \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a87a5fabfb34ee12b61f58f9fcd8a32d3}\label{structRectangle_a87a5fabfb34ee12b61f58f9fcd8a32d3} 
+float {\bfseries top}
+\begin{DoxyCompactList}\small\item\em An alias for y. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a9b18ca2e2e8d9b333309d55c6e804b20}\label{structRectangle_a9b18ca2e2e8d9b333309d55c6e804b20} 
+float {\bfseries bottom}
+\begin{DoxyCompactList}\small\item\em An alias for y + h. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a5bcbd1d80eb6e86a04488f1a13a5c28e}\label{structRectangle_a5bcbd1d80eb6e86a04488f1a13a5c28e} 
+float {\bfseries left\+Most}
+\begin{DoxyCompactList}\small\item\em An alias for x. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_a4a59f15fb349d0d8e9f002b4497d0ea1}\label{structRectangle_a4a59f15fb349d0d8e9f002b4497d0ea1} 
+float {\bfseries right\+Most}
+\begin{DoxyCompactList}\small\item\em An alias for x + w. \end{DoxyCompactList}\item 
+\Hypertarget{structRectangle_adc79434458b8c2ccc209379ae14ac2fe}\label{structRectangle_adc79434458b8c2ccc209379ae14ac2fe} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries center}
+\item 
+\Hypertarget{structRectangle_aa71bbb19345c6bb6716f3ad4827d3c0f}\label{structRectangle_aa71bbb19345c6bb6716f3ad4827d3c0f} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries left\+Center}
+\item 
+\Hypertarget{structRectangle_aab4d6eac8763a26bec36d2b5fb5074c1}\label{structRectangle_aab4d6eac8763a26bec36d2b5fb5074c1} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries right\+Center}
+\item 
+\Hypertarget{structRectangle_a62933ce30985afe593c8da5d86a7d03f}\label{structRectangle_a62933ce30985afe593c8da5d86a7d03f} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries top\+Left}
+\item 
+\Hypertarget{structRectangle_ad44c0a7d2a001b9c0f90a2b09c8bbd7f}\label{structRectangle_ad44c0a7d2a001b9c0f90a2b09c8bbd7f} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries top\+Right}
+\item 
+\Hypertarget{structRectangle_a475cb7ff1b11f6b8d55edfa2f26a7870}\label{structRectangle_a475cb7ff1b11f6b8d55edfa2f26a7870} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries top\+Center}
+\item 
+\Hypertarget{structRectangle_aae9e1cf5334c5dfe51927e6f0a4e5388}\label{structRectangle_aae9e1cf5334c5dfe51927e6f0a4e5388} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries bottom\+Left}
+\item 
+\Hypertarget{structRectangle_a7ae66ec3320469a6fb043c9e20a0a208}\label{structRectangle_a7ae66ec3320469a6fb043c9e20a0a208} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries bottom\+Right}
+\item 
+\Hypertarget{structRectangle_abd21316c3b2d69923fcc6d697b97e58a}\label{structRectangle_abd21316c3b2d69923fcc6d697b97e58a} 
+\mbox{\hyperlink{classPoint}{Point}} {\bfseries bottom\+Center}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A rectangle with special properties.
+
+It automatically stores all important points of a rectangle (top\+Left, top\+Right, center...), making everything easier.
+
+\begin{DoxyNote}{Note}
+Since everything\textquotesingle{}s public, take care to not modify the attributes directly. Use the predefined functions to alter things!
+\end{DoxyNote}
+Zendef\+: \begin{DoxyNote}{Note}
+NEVER NEVER try to modify {\ttfamily x/y/w/h} directly! Always do it through the {\ttfamily add()}/{\ttfamily set()} methods! That\textquotesingle{}s because this class needs to refresh internal points and stuff. 
+\end{DoxyNote}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structRectangle_a8cce58b11d4b7ccbedf1fa1bc0096c61}\label{structRectangle_a8cce58b11d4b7ccbedf1fa1bc0096c61} 
+\index{Rectangle@{Rectangle}!addX@{addX}}
+\index{addX@{addX}!Rectangle@{Rectangle}}
+\doxysubsubsection{\texorpdfstring{addX()}{addX()}}
+{\footnotesize\ttfamily void Rectangle\+::addX (\begin{DoxyParamCaption}\item[{float}]{x }\end{DoxyParamCaption})}
+
+Adds to the current x, making necessary internal calculations.
+
+if you want to subtract, send a negative parameter. \Hypertarget{structRectangle_a399e44cf899369f8566b960ff96104b9}\label{structRectangle_a399e44cf899369f8566b960ff96104b9} 
+\index{Rectangle@{Rectangle}!addY@{addY}}
+\index{addY@{addY}!Rectangle@{Rectangle}}
+\doxysubsubsection{\texorpdfstring{addY()}{addY()}}
+{\footnotesize\ttfamily void Rectangle\+::addY (\begin{DoxyParamCaption}\item[{float}]{y }\end{DoxyParamCaption})}
+
+Adds to the current y, making necessary internal calculations.
+
+Of course, if you want to subtract, send a negative parameter. \Hypertarget{structRectangle_a0519cd9e69d4428893b40eee6585386e}\label{structRectangle_a0519cd9e69d4428893b40eee6585386e} 
+\index{Rectangle@{Rectangle}!placeOnTop@{placeOnTop}}
+\index{placeOnTop@{placeOnTop}!Rectangle@{Rectangle}}
+\doxysubsubsection{\texorpdfstring{placeOnTop()}{placeOnTop()}}
+{\footnotesize\ttfamily void Rectangle\+::place\+On\+Top (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structRectangle}{Rectangle}}}]{other }\end{DoxyParamCaption})}
+
+Places this rectangle immediately above {\ttfamily other}.
+
+\begin{DoxyNote}{Note}
+It only considers the y axis, x is left unchanged.
+\end{DoxyNote}
+\hypertarget{structRectangle_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{For developers}{For developers}}\label{structRectangle_autotoc_md1}
+The only purpose of this method is to make possible for the player to stay above a platform. Say if it\textquotesingle{}s collision \doxylink{structRectangle}{Rectangle} passes through the platform, we place it above it with this method. \Hypertarget{structRectangle_a16e25b4fde1009692524ca6e03c6834b}\label{structRectangle_a16e25b4fde1009692524ca6e03c6834b} 
+\index{Rectangle@{Rectangle}!stretch@{stretch}}
+\index{stretch@{stretch}!Rectangle@{Rectangle}}
+\doxysubsubsection{\texorpdfstring{stretch()}{stretch()}}
+{\footnotesize\ttfamily void Rectangle\+::stretch (\begin{DoxyParamCaption}\item[{float}]{scale }\end{DoxyParamCaption})}
+
+Stretches the rectangle by {\ttfamily step}.
+
+If you want to increase it\textquotesingle{}s size by two, send 2. If you want to shrink it by two, send 0.\+2. \Hypertarget{structRectangle_ab92d1def505d300873233d525638ea19}\label{structRectangle_ab92d1def505d300873233d525638ea19} 
+\index{Rectangle@{Rectangle}!update@{update}}
+\index{update@{update}!Rectangle@{Rectangle}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Rectangle\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Refreshes all internal values.
+
+\begin{DoxyNote}{Note}
+This gets called all the time internally 
+\end{DoxyNote}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Shapes.\+h\item 
+src/core/Shapes.\+cpp\end{DoxyCompactItemize}

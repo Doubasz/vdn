@@ -1,0 +1,54 @@
+\doxysection{Camera.\+h}
+\hypertarget{Camera_8h_source}{}\label{Camera_8h_source}\index{src/core/Camera.h@{src/core/Camera.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ CAMERA\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ CAMERA\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCamera}{Camera}}\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{float}\ x,\ \mbox{\hyperlink{classCamera_ab0522c72fc25c7fa9ad6d0b91e0a3270}{y}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ w,\ \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{float}\ targetX,\ \mbox{\hyperlink{classCamera_a2fc6eed51c6e0614cfecb9def729a4af}{targetY}};\ \ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCamera_a52d94744e729ddf5514288982900adaf}{smoothFollow}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCamera_aec23ecf9322c84909af930e5c7597ec9}{followSpeed}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classCamera_a858ba08abbe0f9fbae74f88e9bf1384b}{isShaking}};\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCamera_aabb8e3d07afdf1ff3d4bf81f4ce66e0b}{shakeDuration}};\ \ \ \ \ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCamera_a1a713b7ab0107604c70ca22a10979fd9}{shakeTimer}};\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCamera_a0c8f4ac3cba858100ffd3c3a1dd3bfe2}{shakeIntensity}};\ \ \ \ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{int}\ levelWidth,\ \mbox{\hyperlink{classCamera_a579b90e970385e1ab6811929b2c9c4b7}{levelHeight}};\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classCamera_a01f94c3543f56ede7af49dc778f19331}{Camera}}()\ :\ x(0),\ \mbox{\hyperlink{classCamera_ab0522c72fc25c7fa9ad6d0b91e0a3270}{y}}(0),\ w(0),\ \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}}(0)\ \{\}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classCamera_a66018ab4fe4c679f4b583b28c2e34d85}{Camera}}(\textcolor{keywordtype}{int}\ w,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}},\ \textcolor{keywordtype}{int}\ mapWidth,\ \textcolor{keywordtype}{int}\ mapHeight)}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ :\ x(0),\ \mbox{\hyperlink{classCamera_ab0522c72fc25c7fa9ad6d0b91e0a3270}{y}}(0),\ w(w),\ \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}}(\mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}}),}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ targetX(0),\ \mbox{\hyperlink{classCamera_a2fc6eed51c6e0614cfecb9def729a4af}{targetY}}(0),}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCamera_a52d94744e729ddf5514288982900adaf}{smoothFollow}}(false),\ \mbox{\hyperlink{classCamera_aec23ecf9322c84909af930e5c7597ec9}{followSpeed}}(5.0f),}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ levelWidth(mapWidth),\ \mbox{\hyperlink{classCamera_a579b90e970385e1ab6811929b2c9c4b7}{levelHeight}}(mapHeight)\ \{\}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ update(\textcolor{keywordtype}{float}\ targetX,\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCamera_a2fc6eed51c6e0614cfecb9def729a4af}{targetY}},\ \textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCamera_a09c71b6e6d5f4752c28ef45a0c1cf47c}{shake}}(\textcolor{keywordtype}{float}\ intensity,\ \textcolor{keywordtype}{float}\ duration);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCamera_a4a2a9b57d3d68efede27d3b2b3bb280c}{getX}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ x;\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classCamera_a10543fa801d67c3558246a9464604a59}{getY}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classCamera_ab0522c72fc25c7fa9ad6d0b91e0a3270}{y}};\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCamera_a442a8a43aeed967c626fa9ee6997504e}{setSmoothFollow}}(\textcolor{keywordtype}{bool}\ smooth)\ \{\ \mbox{\hyperlink{classCamera_a52d94744e729ddf5514288982900adaf}{smoothFollow}}\ =\ smooth;\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCamera_a0ed9218501762a4f68942faa02620398}{setFollowSpeed}}(\textcolor{keywordtype}{float}\ s)\ \{\ \mbox{\hyperlink{classCamera_aec23ecf9322c84909af930e5c7597ec9}{followSpeed}}\ =\ s;\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classCamera_aa1a57bf7dac75f2f191aa2c79575f6b3}{setLevelBoundaries}}(\textcolor{keywordtype}{int}\ w,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}})\ \{\ levelWidth\ =\ w;\ \mbox{\hyperlink{classCamera_a579b90e970385e1ab6811929b2c9c4b7}{levelHeight}}\ =\ \mbox{\hyperlink{classCamera_a693b45b5fbfe6982649d1567549d7a7a}{h}};\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ CAMERA\_H}}
+
+\end{DoxyCode}

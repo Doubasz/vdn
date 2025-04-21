@@ -1,0 +1,85 @@
+\doxysection{Menu\+State.\+h}
+\hypertarget{MenuState_8h_source}{}\label{MenuState_8h_source}\index{src/sdl2/MenuState.h@{src/sdl2/MenuState.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MENU\_STATE\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MENU\_STATE\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}GameState.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <SDL2/SDL\_mixer.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classMenuState}{MenuState}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classGameState}{GameState}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{enum}\ WindowStat\{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ NORMAL,\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ LEVELS,\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ OPTION\ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ SDL\_Renderer*\ renderer;\ \ }
+\DoxyCodeLine{00026\ \ \ \ \ TTF\_Font*\ font;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ SDL\_Texture*\ background;\ }
+\DoxyCodeLine{00029\ \ \ \ \ std::vector<Button>\ buttons;\ }
+\DoxyCodeLine{00030\ \ \ \ \ std::vector<Button>\ lvlButtons;\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ Mix\_Music*\ music;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ GameState::StateCode\ whatToDoNow;\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{int}\ state;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classMenuState_aa8c0b7495397c6c46d137f6c5b3167d3}{MenuState}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{classMenuState_aa8c0b7495397c6c46d137f6c5b3167d3}{MenuState}}(SDL\_Renderer*\ renderer,\ TTF\_Font*\ font);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classMenuState_a58aea91a44436c5bba575c5de755a5bc}{\string~MenuState}}();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a24621aace605f7e7e26c8cb68393436b}{load}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classMenuState_ac7d60fb4a5c184e6bc0f901ecdb6f392}{unload}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a0458298fe819ab9dcf8b099538d15edf}{handleEvents}}(SDL\_Event\&\ events)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ StateCode\ \mbox{\hyperlink{classMenuState_a1ebd35f6d031f91d8446b8136116c457}{update}}(\textcolor{keywordtype}{float}\ dt)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_ad4f9da6a41b2536a260d21b706cf0252}{render}}(SDL\_Renderer*\ renderer)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Helper\ functions\ to\ handle\ menu\ items}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a6b5ed7d00e34a0ea474e1b2d8576a291}{initButtons}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a7fd9fde3baf2242ef9751b28f772f7b1}{renderBackground}}(SDL\_Renderer*\ renderer);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a45aedff5cb7044516a05e18cf0b67d96}{load\_music}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classMenuState_aff3978f363fe0156a8b3dde34d5c5833}{playBackgroundMusic}}();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a4d1999f990aa137c50bcf9fdaf6e59ec}{renderButtons}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a38ccfdff4f77e1872b87bf57676c9b60}{renderLevelButtons}}();}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_aa83a2465d87f4324052cc90aabc48369}{loadTextures}}();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ Button\ actions\ (menu\ navigation)}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a10f9c21b6c6343875ac18a9810973902}{startGame}}();}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a1d7d94302458cd43558701ead080375d}{chooseLevel}}();}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_a526bb4998cc1476358b918ccc1026c60}{options}}();}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_ad060bb6d7a1077f5285dc4c06f2a5a66}{startLevel1}}();}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classMenuState_aec3132e80e8755625bd380ab8199a8f2}{startLevel2}}();}
+\DoxyCodeLine{00117\ \};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{comment}{//\ Loads\ a\ texture\ from\ a\ file\ path\ for\ the\ menu}}
+\DoxyCodeLine{00120\ SDL\_Texture*\ loadTextureM(SDL\_Renderer*\ renderer,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ path);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MENU\_STATE\_H}}
+
+\end{DoxyCode}

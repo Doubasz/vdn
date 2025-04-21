@@ -1,0 +1,297 @@
+\doxysection{Ennemy Class Reference}
+\hypertarget{classEnnemy}{}\label{classEnnemy}\index{Ennemy@{Ennemy}}
+
+
+Represents an enemy in the game.  
+
+
+
+
+{\ttfamily \#include $<$Ennemy.\+h$>$}
+
+
+
+Inheritance diagram for Ennemy\+:
+% FIG 0
+
+
+Collaboration diagram for Ennemy\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classEnnemy_a19dd525f067c790d073c89bb3234c593}\label{classEnnemy_a19dd525f067c790d073c89bb3234c593} 
+{\bfseries Ennemy} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classEnnemy_a5c7139c8ee8843d613f67359e61bfed6}{Ennemy}} (int x, int y, int type)
+\begin{DoxyCompactList}\small\item\em Constructs an enemy at the specified position and type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEnnemy_aa0036ea581e78ff54a5e3bd4cf7c25e9}{change\+Position}} (\mbox{\hyperlink{structVec2}{Vec2}} pos)
+\begin{DoxyCompactList}\small\item\em Changes the position using a \doxylink{structVec2}{Vec2} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEnnemy_af615811be16016780d171da51d6fed2a}{change\+Position}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Changes the position using X and Y values. \end{DoxyCompactList}\item 
+\Hypertarget{classEnnemy_a74678ffba9826e0df345306bfe4a323a}\label{classEnnemy_a74678ffba9826e0df345306bfe4a323a} 
+void {\bfseries change\+Direction} ()
+\begin{DoxyCompactList}\small\item\em Changes the movement direction. \end{DoxyCompactList}\item 
+\Hypertarget{classEnnemy_a6ad6aa7e60a0ab44923d9642baec7057}\label{classEnnemy_a6ad6aa7e60a0ab44923d9642baec7057} 
+void {\bfseries move\+Auto} ()
+\begin{DoxyCompactList}\small\item\em Automatically moves the enemy based on its type and direction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEnnemy_a2c699868b201f113cad2103ac2291ead}{update}} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates enemy state, movement, and physics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEnnemy_a62c1c543e3c9f821348ebf357b761568}{deplacement}} (bool hitwall)
+\begin{DoxyCompactList}\small\item\em Manages movement based on wall collisions. \end{DoxyCompactList}\item 
+\Hypertarget{classEnnemy_a23b22e3118c4fcf9d32ae77424c9f6f4}\label{classEnnemy_a23b22e3118c4fcf9d32ae77424c9f6f4} 
+int {\bfseries get\+Type} () const
+\item 
+\Hypertarget{classEnnemy_a72e62c62e72ba088cbd0fcd17c2ea2cd}\label{classEnnemy_a72e62c62e72ba088cbd0fcd17c2ea2cd} 
+bool {\bfseries Player\+Outof\+Range} (\mbox{\hyperlink{classEntity}{Entity}} \&player) const
+\item 
+\Hypertarget{classEnnemy_a604aadf2ac2c9813b38dd84ab61cb4f3}\label{classEnnemy_a604aadf2ac2c9813b38dd84ab61cb4f3} 
+void {\bfseries follow\+Player} (\mbox{\hyperlink{classEntity}{Entity}} \&player)
+\item 
+bool \mbox{\hyperlink{classEnnemy_a976ea2d237544b48788993435a135b97}{hit\+Wall}} (\mbox{\hyperlink{classEntity}{Entity}} \&platform)
+\begin{DoxyCompactList}\small\item\em Checks if the enemy is colliding with a wall. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classEnnemy_a1afa92d786fdb54bea04eca7972c41e3}{va\+Tomber}} (std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&game\+Map)
+\begin{DoxyCompactList}\small\item\em Checks if the enemy is about to fall off the platform. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classEnnemy_a9a5de4fcab0f4f8ecb843befc6ad3c14}{next\+Pos\+Vide}} (\mbox{\hyperlink{classEntity}{Entity}} \&platform)
+\begin{DoxyCompactList}\small\item\em Checks if the next position is empty. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classEnnemy_ab5e0bab6e9d1e79b4068c5ed82114ce0}{get\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Gets the enemy\textquotesingle{}s current direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEntity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Entity} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Entity} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor to allow polymorphic deletion. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structVec2f}{Vec2f}} {\bfseries get\+Vel} () const
+\begin{DoxyCompactList}\small\item\em Get the current velocity. \end{DoxyCompactList}\item 
+void {\bfseries set\+Pos} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set entity position. \end{DoxyCompactList}\item 
+void {\bfseries set\+Dim} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set entity dimensions (width and height). \end{DoxyCompactList}\item 
+void {\bfseries set\+Vel} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set velocity. \end{DoxyCompactList}\item 
+void {\bfseries set\+Hp} (int h)
+\begin{DoxyCompactList}\small\item\em Set health points. \end{DoxyCompactList}\item 
+int {\bfseries get\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Get current health. \end{DoxyCompactList}\item 
+void {\bfseries decrease\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Decrease health by 1. \end{DoxyCompactList}\item 
+void {\bfseries increase\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Increase health by 1. \end{DoxyCompactList}\item 
+bool {\bfseries check\+Collision} (const \mbox{\hyperlink{classEntity}{Entity}} \&other) const
+\begin{DoxyCompactList}\small\item\em General AABB collision check with another entity. \end{DoxyCompactList}\item 
+bool {\bfseries check\+Collision\+With\+Top} (const \mbox{\hyperlink{classEntity}{Entity}} \&other)
+\begin{DoxyCompactList}\small\item\em Check for collision specifically on the top side. \end{DoxyCompactList}\item 
+void {\bfseries update\+IFrames} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Update invincibility frame logic. \end{DoxyCompactList}\item 
+void {\bfseries update\+Knock\+Back} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Update knockback logic and position changes. \end{DoxyCompactList}\item 
+void {\bfseries apply\+Knock\+Back} (float force, float duration)
+\begin{DoxyCompactList}\small\item\em Apply knockback to the entity with force and duration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structRectangle}{Rectangle}} {\bfseries get\+Box} () const
+\begin{DoxyCompactList}\small\item\em Get the bounding box. \end{DoxyCompactList}\item 
+bool {\bfseries get\+Is\+Visible} () const
+\begin{DoxyCompactList}\small\item\em Get whether the entity is visible. \end{DoxyCompactList}\item 
+void {\bfseries set\+On\+Ground} (int b)
+\begin{DoxyCompactList}\small\item\em Set whether the entity is grounded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classEntity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structRectangle}{Rectangle}} {\bfseries box}
+\begin{DoxyCompactList}\small\item\em Bounding box for position and dimension. \end{DoxyCompactList}\item 
+int {\bfseries hp}
+\begin{DoxyCompactList}\small\item\em Health points of the entity. \end{DoxyCompactList}\item 
+bool {\bfseries is\+Alive}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently active. \end{DoxyCompactList}\item 
+float {\bfseries i\+Frames}
+\begin{DoxyCompactList}\small\item\em Duration of invincibility frames after hit. \end{DoxyCompactList}\item 
+float {\bfseries i\+Frames\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} to track i\+Frames. \end{DoxyCompactList}\item 
+bool {\bfseries can\+Get\+Hit}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently vulnerable. \end{DoxyCompactList}\item 
+bool {\bfseries is\+Visible}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently visible on screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classEntity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structVec2f}{Vec2f}} {\bfseries velocity}
+\begin{DoxyCompactList}\small\item\em 2D velocity (floating point precision). \end{DoxyCompactList}\item 
+bool {\bfseries on\+Ground}
+\begin{DoxyCompactList}\small\item\em Whether the entity is on the ground. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} for knockback duration. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Duration}
+\begin{DoxyCompactList}\small\item\em Total time for knockback. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Force}
+\begin{DoxyCompactList}\small\item\em Intensity of knockback. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Friction}
+\begin{DoxyCompactList}\small\item\em Resistance during knockback. \end{DoxyCompactList}\item 
+bool {\bfseries on\+Knock\+Back}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently knocked back. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an enemy in the game. 
+
+Inherits from \doxylink{classEntity}{Entity} and adds enemy-\/specific behavior such as automatic movement and simple AI. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classEnnemy_a5c7139c8ee8843d613f67359e61bfed6}\label{classEnnemy_a5c7139c8ee8843d613f67359e61bfed6} 
+\index{Ennemy@{Ennemy}!Ennemy@{Ennemy}}
+\index{Ennemy@{Ennemy}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{Ennemy()}{Ennemy()}}
+{\footnotesize\ttfamily Ennemy\+::\+Ennemy (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{type }\end{DoxyParamCaption})}
+
+
+
+Constructs an enemy at the specified position and type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/coordinate \\
+\hline
+{\em y} & Y-\/coordinate \\
+\hline
+{\em type} & Type of the enemy (see Type\+Ennemy) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classEnnemy_af615811be16016780d171da51d6fed2a}\label{classEnnemy_af615811be16016780d171da51d6fed2a} 
+\index{Ennemy@{Ennemy}!changePosition@{changePosition}}
+\index{changePosition@{changePosition}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{changePosition()}{changePosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Ennemy\+::change\+Position (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Changes the position using X and Y values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & New X position. \\
+\hline
+{\em y} & New Y position. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classEnnemy_aa0036ea581e78ff54a5e3bd4cf7c25e9}\label{classEnnemy_aa0036ea581e78ff54a5e3bd4cf7c25e9} 
+\index{Ennemy@{Ennemy}!changePosition@{changePosition}}
+\index{changePosition@{changePosition}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{changePosition()}{changePosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Ennemy\+::change\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structVec2}{Vec2}}}]{pos }\end{DoxyParamCaption})}
+
+
+
+Changes the position using a \doxylink{structVec2}{Vec2} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & New position. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classEnnemy_a62c1c543e3c9f821348ebf357b761568}\label{classEnnemy_a62c1c543e3c9f821348ebf357b761568} 
+\index{Ennemy@{Ennemy}!deplacement@{deplacement}}
+\index{deplacement@{deplacement}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{deplacement()}{deplacement()}}
+{\footnotesize\ttfamily void Ennemy\+::deplacement (\begin{DoxyParamCaption}\item[{bool}]{hitwall }\end{DoxyParamCaption})}
+
+
+
+Manages movement based on wall collisions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hitwall} & Whether the enemy has hit a wall. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classEnnemy_ab5e0bab6e9d1e79b4068c5ed82114ce0}\label{classEnnemy_ab5e0bab6e9d1e79b4068c5ed82114ce0} 
+\index{Ennemy@{Ennemy}!getDirection@{getDirection}}
+\index{getDirection@{getDirection}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{getDirection()}{getDirection()}}
+{\footnotesize\ttfamily int Ennemy\+::get\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the enemy\textquotesingle{}s current direction. 
+
+\begin{DoxyReturn}{Returns}
+Direction (LEFT or RIGHT). 
+\end{DoxyReturn}
+\Hypertarget{classEnnemy_a976ea2d237544b48788993435a135b97}\label{classEnnemy_a976ea2d237544b48788993435a135b97} 
+\index{Ennemy@{Ennemy}!hitWall@{hitWall}}
+\index{hitWall@{hitWall}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{hitWall()}{hitWall()}}
+{\footnotesize\ttfamily bool Ennemy\+::hit\+Wall (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEntity}{Entity}} \&}]{platform }\end{DoxyParamCaption})}
+
+
+
+Checks if the enemy is colliding with a wall. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em platform} & The platform to check against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if hitting a wall, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classEnnemy_a9a5de4fcab0f4f8ecb843befc6ad3c14}\label{classEnnemy_a9a5de4fcab0f4f8ecb843befc6ad3c14} 
+\index{Ennemy@{Ennemy}!nextPosVide@{nextPosVide}}
+\index{nextPosVide@{nextPosVide}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{nextPosVide()}{nextPosVide()}}
+{\footnotesize\ttfamily bool Ennemy\+::next\+Pos\+Vide (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classEntity}{Entity}} \&}]{platform }\end{DoxyParamCaption})}
+
+
+
+Checks if the next position is empty. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em platform} & \doxylink{classPlatform}{Platform} to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the next position is empty. 
+\end{DoxyReturn}
+\Hypertarget{classEnnemy_a2c699868b201f113cad2103ac2291ead}\label{classEnnemy_a2c699868b201f113cad2103ac2291ead} 
+\index{Ennemy@{Ennemy}!update@{update}}
+\index{update@{update}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Ennemy\+::update (\begin{DoxyParamCaption}\item[{float}]{delta\+Time }\end{DoxyParamCaption})}
+
+
+
+Updates enemy state, movement, and physics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delta\+Time} & Time elapsed since last frame. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classEnnemy_a1afa92d786fdb54bea04eca7972c41e3}\label{classEnnemy_a1afa92d786fdb54bea04eca7972c41e3} 
+\index{Ennemy@{Ennemy}!vaTomber@{vaTomber}}
+\index{vaTomber@{vaTomber}!Ennemy@{Ennemy}}
+\doxysubsubsection{\texorpdfstring{vaTomber()}{vaTomber()}}
+{\footnotesize\ttfamily bool Ennemy\+::va\+Tomber (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&}]{game\+Map }\end{DoxyParamCaption})}
+
+
+
+Checks if the enemy is about to fall off the platform. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Map} & The map grid to analyze. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the next step is empty (falling), false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Ennemy.\+h\item 
+src/core/Ennemy.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,79 @@
+\doxysection{Circle Struct Reference}
+\hypertarget{structCircle}{}\label{structCircle}\index{Circle@{Circle}}
+
+
+{\ttfamily \#include $<$Shapes.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structCircle_ab39367ce94245abbeffdfba76d71f149}{Circle}} (float x, float y, int r)
+\item 
+\Hypertarget{structCircle_a0f36ef8ff3a822828329d0ab18557dd3}\label{structCircle_a0f36ef8ff3a822828329d0ab18557dd3} 
+void {\bfseries update\+Text\+Texture} ()
+\item 
+void \mbox{\hyperlink{structCircle_ab5e143de1a9f0f73e57fc0a5b9db660f}{addX}} (float x)
+\item 
+void \mbox{\hyperlink{structCircle_aec26cc2f75e2eec7dec720715033563b}{addY}} (float y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structCircle_a017e2f5ddc49b63f9b3a3793ec362eb7}\label{structCircle_a017e2f5ddc49b63f9b3a3793ec362eb7} 
+float {\bfseries x}
+\item 
+\Hypertarget{structCircle_af86ea96e8ba78e996368316476033cff}\label{structCircle_af86ea96e8ba78e996368316476033cff} 
+float {\bfseries y}
+\item 
+\Hypertarget{structCircle_a067c0b8ccbda5ca1f518dd89a1d55989}\label{structCircle_a067c0b8ccbda5ca1f518dd89a1d55989} 
+int {\bfseries r}
+\item 
+\Hypertarget{structCircle_a3b80430fa03002a8a1caacc3daa98867}\label{structCircle_a3b80430fa03002a8a1caacc3daa98867} 
+float {\bfseries centerX}
+\begin{DoxyCompactList}\small\item\em Radius. \end{DoxyCompactList}\item 
+\Hypertarget{structCircle_a4ac1ca8d81ecb3dc7e850a49c5bf1cb1}\label{structCircle_a4ac1ca8d81ecb3dc7e850a49c5bf1cb1} 
+float {\bfseries centerY}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A circle, duh. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structCircle_ab39367ce94245abbeffdfba76d71f149}\label{structCircle_ab39367ce94245abbeffdfba76d71f149} 
+\index{Circle@{Circle}!Circle@{Circle}}
+\index{Circle@{Circle}!Circle@{Circle}}
+\doxysubsubsection{\texorpdfstring{Circle()}{Circle()}}
+{\footnotesize\ttfamily Circle\+::\+Circle (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{int}]{r }\end{DoxyParamCaption})}
+
+Creates a nice circle with {\ttfamily x} and {\ttfamily y} coordinates and {\ttfamily r} radius. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structCircle_ab5e143de1a9f0f73e57fc0a5b9db660f}\label{structCircle_ab5e143de1a9f0f73e57fc0a5b9db660f} 
+\index{Circle@{Circle}!addX@{addX}}
+\index{addX@{addX}!Circle@{Circle}}
+\doxysubsubsection{\texorpdfstring{addX()}{addX()}}
+{\footnotesize\ttfamily void Circle\+::addX (\begin{DoxyParamCaption}\item[{float}]{x }\end{DoxyParamCaption})}
+
+Adds to the current x.
+
+\begin{DoxyNote}{Note}
+Although this seems useless, you must call this instead of directly modifying x because it refreshes internal points. 
+\end{DoxyNote}
+\Hypertarget{structCircle_aec26cc2f75e2eec7dec720715033563b}\label{structCircle_aec26cc2f75e2eec7dec720715033563b} 
+\index{Circle@{Circle}!addY@{addY}}
+\index{addY@{addY}!Circle@{Circle}}
+\doxysubsubsection{\texorpdfstring{addY()}{addY()}}
+{\footnotesize\ttfamily void Circle\+::addY (\begin{DoxyParamCaption}\item[{float}]{y }\end{DoxyParamCaption})}
+
+Adds to the current y.
+
+\begin{DoxyNote}{Note}
+Although this seems useless, you must call this instead of directly modifying y because it refreshes internal points. 
+\end{DoxyNote}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Shapes.\+h\item 
+src/core/Shapes.\+cpp\end{DoxyCompactItemize}

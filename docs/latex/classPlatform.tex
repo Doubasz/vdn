@@ -1,0 +1,132 @@
+\doxysection{Platform Class Reference}
+\hypertarget{classPlatform}{}\label{classPlatform}\index{Platform@{Platform}}
+
+
+A class representing a static platform that the player or enemies can stand on. Inherits from {\ttfamily \doxylink{classEntity}{Entity}} for collision, position, and physics data.  
+
+
+
+
+{\ttfamily \#include $<$Platform.\+h$>$}
+
+
+
+Inheritance diagram for Platform\+:
+% FIG 0
+
+
+Collaboration diagram for Platform\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classPlatform_a52028ea2984cbfdf8e9f42ee87f66cfe}\label{classPlatform_a52028ea2984cbfdf8e9f42ee87f66cfe} 
+{\bfseries Platform} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPlatform_ab0eda312968332a64df184dd3f6573da}{Platform}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Creates a platform at a given position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classEntity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Entity} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Entity} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor to allow polymorphic deletion. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structVec2f}{Vec2f}} {\bfseries get\+Vel} () const
+\begin{DoxyCompactList}\small\item\em Get the current velocity. \end{DoxyCompactList}\item 
+void {\bfseries set\+Pos} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set entity position. \end{DoxyCompactList}\item 
+void {\bfseries set\+Dim} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set entity dimensions (width and height). \end{DoxyCompactList}\item 
+void {\bfseries set\+Vel} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Set velocity. \end{DoxyCompactList}\item 
+void {\bfseries set\+Hp} (int h)
+\begin{DoxyCompactList}\small\item\em Set health points. \end{DoxyCompactList}\item 
+int {\bfseries get\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Get current health. \end{DoxyCompactList}\item 
+void {\bfseries decrease\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Decrease health by 1. \end{DoxyCompactList}\item 
+void {\bfseries increase\+Hp} ()
+\begin{DoxyCompactList}\small\item\em Increase health by 1. \end{DoxyCompactList}\item 
+bool {\bfseries check\+Collision} (const \mbox{\hyperlink{classEntity}{Entity}} \&other) const
+\begin{DoxyCompactList}\small\item\em General AABB collision check with another entity. \end{DoxyCompactList}\item 
+bool {\bfseries check\+Collision\+With\+Top} (const \mbox{\hyperlink{classEntity}{Entity}} \&other)
+\begin{DoxyCompactList}\small\item\em Check for collision specifically on the top side. \end{DoxyCompactList}\item 
+void {\bfseries update\+IFrames} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Update invincibility frame logic. \end{DoxyCompactList}\item 
+void {\bfseries update\+Knock\+Back} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Update knockback logic and position changes. \end{DoxyCompactList}\item 
+void {\bfseries apply\+Knock\+Back} (float force, float duration)
+\begin{DoxyCompactList}\small\item\em Apply knockback to the entity with force and duration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structRectangle}{Rectangle}} {\bfseries get\+Box} () const
+\begin{DoxyCompactList}\small\item\em Get the bounding box. \end{DoxyCompactList}\item 
+bool {\bfseries get\+Is\+Visible} () const
+\begin{DoxyCompactList}\small\item\em Get whether the entity is visible. \end{DoxyCompactList}\item 
+void {\bfseries set\+On\+Ground} (int b)
+\begin{DoxyCompactList}\small\item\em Set whether the entity is grounded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classEntity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structRectangle}{Rectangle}} {\bfseries box}
+\begin{DoxyCompactList}\small\item\em Bounding box for position and dimension. \end{DoxyCompactList}\item 
+int {\bfseries hp}
+\begin{DoxyCompactList}\small\item\em Health points of the entity. \end{DoxyCompactList}\item 
+bool {\bfseries is\+Alive}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently active. \end{DoxyCompactList}\item 
+float {\bfseries i\+Frames}
+\begin{DoxyCompactList}\small\item\em Duration of invincibility frames after hit. \end{DoxyCompactList}\item 
+float {\bfseries i\+Frames\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} to track i\+Frames. \end{DoxyCompactList}\item 
+bool {\bfseries can\+Get\+Hit}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently vulnerable. \end{DoxyCompactList}\item 
+bool {\bfseries is\+Visible}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently visible on screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classEntity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structVec2f}{Vec2f}} {\bfseries velocity}
+\begin{DoxyCompactList}\small\item\em 2D velocity (floating point precision). \end{DoxyCompactList}\item 
+bool {\bfseries on\+Ground}
+\begin{DoxyCompactList}\small\item\em Whether the entity is on the ground. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} for knockback duration. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Duration}
+\begin{DoxyCompactList}\small\item\em Total time for knockback. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Force}
+\begin{DoxyCompactList}\small\item\em Intensity of knockback. \end{DoxyCompactList}\item 
+float {\bfseries knock\+Back\+Friction}
+\begin{DoxyCompactList}\small\item\em Resistance during knockback. \end{DoxyCompactList}\item 
+bool {\bfseries on\+Knock\+Back}
+\begin{DoxyCompactList}\small\item\em Whether the entity is currently knocked back. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing a static platform that the player or enemies can stand on. Inherits from {\ttfamily \doxylink{classEntity}{Entity}} for collision, position, and physics data. 
+
+Might add moving and falling platforms ? 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classPlatform_ab0eda312968332a64df184dd3f6573da}\label{classPlatform_ab0eda312968332a64df184dd3f6573da} 
+\index{Platform@{Platform}!Platform@{Platform}}
+\index{Platform@{Platform}!Platform@{Platform}}
+\doxysubsubsection{\texorpdfstring{Platform()}{Platform()}}
+{\footnotesize\ttfamily Platform\+::\+Platform (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+
+
+Creates a platform at a given position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/coordinate of the platform. \\
+\hline
+{\em y} & Y-\/coordinate of the platform. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Platform.\+h\item 
+src/core/Platform.\+cpp\end{DoxyCompactItemize}

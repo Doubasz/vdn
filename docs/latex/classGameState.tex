@@ -1,0 +1,91 @@
+\doxysection{Game\+State Class Reference}
+\hypertarget{classGameState}{}\label{classGameState}\index{GameState@{GameState}}
+
+
+Inheritance diagram for Game\+State\+:
+% FIG 0
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classGameState_aba5cd94cc1b5f4c47a08a9f5c7b461ab}\label{classGameState_aba5cd94cc1b5f4c47a08a9f5c7b461ab} 
+enum {\bfseries State\+Code} \{ \newline
+{\bfseries MAIN\+\_\+\+MENU}
+, {\bfseries OPTION}
+, {\bfseries LEVEL1}
+, {\bfseries LEVEL2}
+, \newline
+{\bfseries PAUSE}
+, {\bfseries GAME\+\_\+\+OVER}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classGameState_a26536d0218fcad9fbc876670cb3b3a0e}{load}} ()=0
+\item 
+virtual int \mbox{\hyperlink{classGameState_ac1d5979e35e84b6c6df247ccb31b49b1}{unload}} ()=0
+\item 
+virtual void \mbox{\hyperlink{classGameState_a2777ffdd0b1c53176d98610c43d029ed}{handle\+Events}} (SDL\+\_\+\+Event \&events)=0
+\item 
+virtual State\+Code \mbox{\hyperlink{classGameState_a0d2ea039433bd3e1c5de49955d4fc790}{update}} (float dt)=0
+\item 
+virtual void \mbox{\hyperlink{classGameState_adc76bb013e84b2bbe2765d33818fad6b}{render}} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGameState_a2777ffdd0b1c53176d98610c43d029ed}\label{classGameState_a2777ffdd0b1c53176d98610c43d029ed} 
+\index{GameState@{GameState}!handleEvents@{handleEvents}}
+\index{handleEvents@{handleEvents}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{handleEvents()}{handleEvents()}}
+{\footnotesize\ttfamily virtual void Game\+State\+::handle\+Events (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Event \&}]{events }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classInGameState_a2024dda89d0d24e6b8ea5958f5ab2956}{In\+Game\+State}}, and \mbox{\hyperlink{classMenuState_a0458298fe819ab9dcf8b099538d15edf}{Menu\+State}}.
+
+\Hypertarget{classGameState_a26536d0218fcad9fbc876670cb3b3a0e}\label{classGameState_a26536d0218fcad9fbc876670cb3b3a0e} 
+\index{GameState@{GameState}!load@{load}}
+\index{load@{load}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily virtual void Game\+State\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classInGameState_acda8b9deabacdbb4996c114fffb81284}{In\+Game\+State}}, and \mbox{\hyperlink{classMenuState_a24621aace605f7e7e26c8cb68393436b}{Menu\+State}}.
+
+\Hypertarget{classGameState_adc76bb013e84b2bbe2765d33818fad6b}\label{classGameState_adc76bb013e84b2bbe2765d33818fad6b} 
+\index{GameState@{GameState}!render@{render}}
+\index{render@{render}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily virtual void Game\+State\+::render (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classInGameState_a34e91319ff18700ab6ed947fb5d4c224}{In\+Game\+State}}, and \mbox{\hyperlink{classMenuState_ad4f9da6a41b2536a260d21b706cf0252}{Menu\+State}}.
+
+\Hypertarget{classGameState_ac1d5979e35e84b6c6df247ccb31b49b1}\label{classGameState_ac1d5979e35e84b6c6df247ccb31b49b1} 
+\index{GameState@{GameState}!unload@{unload}}
+\index{unload@{unload}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{unload()}{unload()}}
+{\footnotesize\ttfamily virtual int Game\+State\+::unload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classInGameState_a46473d66044165240612c6c9d8073a9e}{In\+Game\+State}}, and \mbox{\hyperlink{classMenuState_ac7d60fb4a5c184e6bc0f901ecdb6f392}{Menu\+State}}.
+
+\Hypertarget{classGameState_a0d2ea039433bd3e1c5de49955d4fc790}\label{classGameState_a0d2ea039433bd3e1c5de49955d4fc790} 
+\index{GameState@{GameState}!update@{update}}
+\index{update@{update}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual State\+Code Game\+State\+::update (\begin{DoxyParamCaption}\item[{float}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classInGameState_a946b985b3a7aea0cbad97f9c8529e00c}{In\+Game\+State}}, and \mbox{\hyperlink{classMenuState_a1ebd35f6d031f91d8446b8136116c457}{Menu\+State}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/sdl2/Game\+State.\+h\end{DoxyCompactItemize}

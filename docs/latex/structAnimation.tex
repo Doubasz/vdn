@@ -1,0 +1,45 @@
+\doxysection{Animation Struct Reference}
+\hypertarget{structAnimation}{}\label{structAnimation}\index{Animation@{Animation}}
+
+
+{\ttfamily \#include $<$In\+Game\+State.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structAnimation_aeef5ace5df27c18ed65d4762e57274d8}\label{structAnimation_aeef5ace5df27c18ed65d4762e57274d8} 
+int {\bfseries start\+Frame}
+\begin{DoxyCompactList}\small\item\em The first frame of the animation. \end{DoxyCompactList}\item 
+\Hypertarget{structAnimation_a2b42beb2f7e3a8caf3d1f763168c2b40}\label{structAnimation_a2b42beb2f7e3a8caf3d1f763168c2b40} 
+int {\bfseries num\+Frames}
+\begin{DoxyCompactList}\small\item\em The total number of frames in the animation. \end{DoxyCompactList}\item 
+\Hypertarget{structAnimation_adc7df29e613689f29ddac3316b2a509d}\label{structAnimation_adc7df29e613689f29ddac3316b2a509d} 
+int {\bfseries current\+Frame}
+\begin{DoxyCompactList}\small\item\em The index of the current frame. \end{DoxyCompactList}\item 
+\Hypertarget{structAnimation_aa1aa4ae25b5ab7a931c2fd67637adff6}\label{structAnimation_aa1aa4ae25b5ab7a931c2fd67637adff6} 
+float {\bfseries frame\+Time}
+\begin{DoxyCompactList}\small\item\em The time each frame should be displayed for. \end{DoxyCompactList}\item 
+\Hypertarget{structAnimation_a32a1a83a874a210d29eadeeb3b14c22f}\label{structAnimation_a32a1a83a874a210d29eadeeb3b14c22f} 
+float {\bfseries timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{classTimer}{Timer} for controlling the animation frame switch. \end{DoxyCompactList}\item 
+\Hypertarget{structAnimation_a951ff207e048c16b7c5dde293eb5419b}\label{structAnimation_a951ff207e048c16b7c5dde293eb5419b} 
+bool {\bfseries loop}
+\begin{DoxyCompactList}\small\item\em Whether the animation should loop after completion. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A structure to represent an animation for an object (like the player or enemies)
+
+
+\begin{DoxyItemize}
+\item start\+Frame\+: The index of the first frame of the animation
+\item num\+Frames\+: The total number of frames in the animation
+\item current\+Frame\+: The index of the current frame
+\item frame\+Time\+: The time duration for each frame in seconds
+\item timer\+: A timer to track the elapsed time for frame switching
+\item loop\+: If true, the animation loops back to the first frame after finishing 
+\end{DoxyItemize}
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/sdl2/In\+Game\+State.\+h\end{DoxyCompactItemize}

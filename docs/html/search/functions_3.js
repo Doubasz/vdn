@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['error_0',['error',['../classLog.html#a85d299a50e7bf83e101533555ebbb246',1,'Log']]]
+  ['decreasehp_0',['decreaseHp',['../classEntity.html#a1ab398b3ccac5b684b3923a5b6a6afa4',1,'Entity']]],
+  ['deplacement_1',['deplacement',['../classEnnemy.html#a62c1c543e3c9f821348ebf357b761568',1,'Ennemy']]]
 ];

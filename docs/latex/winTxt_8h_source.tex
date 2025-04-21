@@ -1,0 +1,34 @@
+\doxysection{win\+Txt.\+h}
+\hypertarget{winTxt_8h_source}{}\label{winTxt_8h_source}\index{src/txt/winTxt.h@{src/txt/winTxt.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ WINTXT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WINTXT\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../core/Camera.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classWinTXT}{WinTXT}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ dimx;\ \ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{int}\ dimy;\ \ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{char}\ *win;\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classCamera}{Camera}}\ camera;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classWinTXT}{WinTXT}}(\textcolor{keywordtype}{int}\ dx,\ \textcolor{keywordtype}{int}\ dy);}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{classWinTXT}{\string~WinTXT}}()\ \{\ \textcolor{keywordflow}{if}\ (win!=\textcolor{keyword}{nullptr})\ \textcolor{keyword}{delete}\ []win;\ \}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ clear(\textcolor{keywordtype}{char}\ c\ =\ \textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ print(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ print(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{char}\ *c);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ draw(\textcolor{keywordtype}{int}\ x\ =\ 0,\ \textcolor{keywordtype}{int}\ y\ =\ 0);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ pause();}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{char}\ getCh();}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ termClear();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

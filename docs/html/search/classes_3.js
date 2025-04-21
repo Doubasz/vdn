@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['level_0',['Level',['../classLevel.html',1,'']]],
-  ['log_1',['Log',['../classLog.html',1,'']]]
+  ['ennemy_0',['Ennemy',['../classEnnemy.html',1,'']]],
+  ['entity_1',['Entity',['../classEntity.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rectangle_0',['Rectangle',['../structRectangle.html',1,'']]]
+  ['ingamestate_0',['InGameState',['../classInGameState.html',1,'']]]
 ];

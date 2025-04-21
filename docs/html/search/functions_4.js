@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['log_0',['log',['../classLog.html#adafc4c83565cf9c7a8d062a445fd945d',1,'Log']]],
-  ['log_5fraw_1',['log_raw',['../classLog.html#ab9205b7504fb215494ea3ac315c7b179',1,'Log']]]
+  ['ennemy_0',['ennemy',['../classEnnemy.html#a19dd525f067c790d073c89bb3234c593',1,'Ennemy::Ennemy()'],['../classEnnemy.html#a5c7139c8ee8843d613f67359e61bfed6',1,'Ennemy::Ennemy(int x, int y, int type)']]],
+  ['entity_1',['Entity',['../classEntity.html#a980f368aa07ce358583982821533a54a',1,'Entity']]]
 ];

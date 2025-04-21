@@ -1,0 +1,101 @@
+\doxysection{Level Class Reference}
+\hypertarget{classLevel}{}\label{classLevel}\index{Level@{Level}}
+
+
+Represents a game level including the player, platforms, enemies, and maps.  
+
+
+
+
+{\ttfamily \#include $<$Level.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classLevel_a7a696c928ca5d5354db6e50e46d0f67d}\label{classLevel_a7a696c928ca5d5354db6e50e46d0f67d} 
+{\bfseries Level} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a2646f8148d0a12d2e8f7eab310821fff}\label{classLevel_a2646f8148d0a12d2e8f7eab310821fff} 
+{\bfseries Level} (int lvl)
+\begin{DoxyCompactList}\small\item\em Constructs a level with a given number. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a2855813baaa600df46a21274b6a99dc8}\label{classLevel_a2855813baaa600df46a21274b6a99dc8} 
+void {\bfseries load\+Tile\+Map} ()
+\begin{DoxyCompactList}\small\item\em Loads the tile map from file. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a70f809a12ed73d416a5270e25fdc79ef}\label{classLevel_a70f809a12ed73d416a5270e25fdc79ef} 
+void {\bfseries load\+Game\+Map} (int lvl)
+\begin{DoxyCompactList}\small\item\em Loads the game entity map from file for a given level. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a0f90e051927c26032da3ef1fc4f0f5d7}\label{classLevel_a0f90e051927c26032da3ef1fc4f0f5d7} 
+void {\bfseries load\+Level} (int lvl)
+\begin{DoxyCompactList}\small\item\em Loads all level data. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a808cc2ffa0faec517a7d3bf63a47ad50}\label{classLevel_a808cc2ffa0faec517a7d3bf63a47ad50} 
+void {\bfseries unload\+Level} ()
+\begin{DoxyCompactList}\small\item\em Clears level data. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_aed56853997a26daba1502637fa7a06da}\label{classLevel_aed56853997a26daba1502637fa7a06da} 
+void {\bfseries init\+Entities} ()
+\begin{DoxyCompactList}\small\item\em Initializes all entities (player, enemies, platforms). \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a5744273d036bcbe0ab784b132b9f0558}\label{classLevel_a5744273d036bcbe0ab784b132b9f0558} 
+void {\bfseries action\+Auto} ()
+\begin{DoxyCompactList}\small\item\em Updates all autonomous actions (e.\+g. enemy AI). \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_aec6786f4ca417695f27858a34b03c9c0}\label{classLevel_aec6786f4ca417695f27858a34b03c9c0} 
+void {\bfseries check\+Collision} ()
+\begin{DoxyCompactList}\small\item\em Checks collisions between all entities. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a8456936b501dffab7410955d2287d0f9}\label{classLevel_a8456936b501dffab7410955d2287d0f9} 
+void {\bfseries check\+Out\+Of\+Bonds} ()
+\begin{DoxyCompactList}\small\item\em Checks if any entities went out of bounds. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a1f18d24e4a1de4154838007b3ee4c960}\label{classLevel_a1f18d24e4a1de4154838007b3ee4c960} 
+void {\bfseries ennemy\+Mov\+Auto} (float delta\+Time)
+\item 
+\Hypertarget{classLevel_a0a038dfb699606595d2b5a5bd4eed06c}\label{classLevel_a0a038dfb699606595d2b5a5bd4eed06c} 
+bool {\bfseries fin\+Jeu} ()
+\item 
+\Hypertarget{classLevel_a3c5c676857af780322a5f458cd4fb670}\label{classLevel_a3c5c676857af780322a5f458cd4fb670} 
+void {\bfseries deroulement\+Level} (std\+::string input, float delta\+Time)
+\item 
+\Hypertarget{classLevel_aea174116fe469e45123ec13484645796}\label{classLevel_aea174116fe469e45123ec13484645796} 
+\mbox{\hyperlink{classPlayer}{Player}} \& {\bfseries get\+Player} ()
+\begin{DoxyCompactList}\small\item\em Gets the player. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a0aeadc05f2d179880d6188a2001e1d80}\label{classLevel_a0aeadc05f2d179880d6188a2001e1d80} 
+std\+::vector$<$ \mbox{\hyperlink{classEnnemy}{Ennemy}} $>$ \& {\bfseries get\+Ennemies} ()
+\begin{DoxyCompactList}\small\item\em Gets the enemies. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a807a58ec13795f4c5cb70a9b77c2e6a7}\label{classLevel_a807a58ec13795f4c5cb70a9b77c2e6a7} 
+std\+::vector$<$ \mbox{\hyperlink{classPlatform}{Platform}} $>$ \& {\bfseries get\+Platforms} ()
+\begin{DoxyCompactList}\small\item\em Gets the platforms. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a14edeb2471e69f1cd7719c623ebbc4bb}\label{classLevel_a14edeb2471e69f1cd7719c623ebbc4bb} 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \& {\bfseries get\+Tile\+Map} ()
+\begin{DoxyCompactList}\small\item\em Gets the tile map. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a295a75b3fa8d53e1867b8e883f46f107}\label{classLevel_a295a75b3fa8d53e1867b8e883f46f107} 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \& {\bfseries get\+Game\+Map} ()
+\begin{DoxyCompactList}\small\item\em Gets the entity map. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_ae8a54a924eb3bc0069d9ca64d9141ed9}\label{classLevel_ae8a54a924eb3bc0069d9ca64d9141ed9} 
+bool {\bfseries player\+On\+Platform} ()
+\begin{DoxyCompactList}\small\item\em Checks if the player is currently on a platform. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_ae6e07fbd93f486567bbb84983102ab22}\label{classLevel_ae6e07fbd93f486567bbb84983102ab22} 
+void {\bfseries check\+Collision\+Player\+Platform} ()
+\begin{DoxyCompactList}\small\item\em Handles collision detection between the player and platforms. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a9392816c5ee1f1036e34df4911b55fb7}\label{classLevel_a9392816c5ee1f1036e34df4911b55fb7} 
+void {\bfseries player\+Check\+Movement} ()
+\begin{DoxyCompactList}\small\item\em Handles player\textquotesingle{}s movement logic. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_aa87a6da4d66b953871a320975b1b671c}\label{classLevel_aa87a6da4d66b953871a320975b1b671c} 
+int {\bfseries get\+Player\+State} ()
+\begin{DoxyCompactList}\small\item\em Returns the current state of the player. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a063afc0ec0a3d3e153c8ef8031f180df}\label{classLevel_a063afc0ec0a3d3e153c8ef8031f180df} 
+int {\bfseries get\+Level} ()
+\begin{DoxyCompactList}\small\item\em Returns the current level number. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_ac57985a3104f5a0307fd7d66eea5200b}\label{classLevel_ac57985a3104f5a0307fd7d66eea5200b} 
+bool {\bfseries fin\+Level} (\mbox{\hyperlink{classPlayer}{Player}} \&player)
+\item 
+\Hypertarget{classLevel_ad4162cd5c7fb6cfb9be52c3d420cfc04}\label{classLevel_ad4162cd5c7fb6cfb9be52c3d420cfc04} 
+bool {\bfseries is\+Level\+Finished} ()
+\begin{DoxyCompactList}\small\item\em Returns whether the level is completed. \end{DoxyCompactList}\item 
+\Hypertarget{classLevel_a4b1fd6745249081950dee67f97054cad}\label{classLevel_a4b1fd6745249081950dee67f97054cad} 
+void {\bfseries scale} (int x)
+\begin{DoxyCompactList}\small\item\em Scales the level (useful for resizing, zooming, etc). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a game level including the player, platforms, enemies, and maps. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/core/Level.\+h\item 
+src/core/Level.\+cpp\end{DoxyCompactItemize}

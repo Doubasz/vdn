@@ -1,0 +1,98 @@
+\doxysection{Shapes.\+h}
+\hypertarget{Shapes_8h_source}{}\label{Shapes_8h_source}\index{src/core/Shapes.h@{src/core/Shapes.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SHAPES\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SHAPES\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPoint}{Point}}\{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{float}\ x;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{float}\ y;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}();}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00016\ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structRectangle}{Rectangle}}\{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a40917b61b33bf046d189be401c13cc7f}{x}};\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}{y}};\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structRectangle_abfa421daace50b66f37ab89d6c826384}{w}};\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structRectangle_afc7a7cebf422495e41277247eb131692}{h}};\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a87a5fabfb34ee12b61f58f9fcd8a32d3}{top}};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a9b18ca2e2e8d9b333309d55c6e804b20}{bottom}};\ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a5bcbd1d80eb6e86a04488f1a13a5c28e}{leftMost}};\ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a4a59f15fb349d0d8e9f002b4497d0ea1}{rightMost}};\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{//\ Special\ points}}
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ center;}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ leftCenter;}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ rightCenter;}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ topLeft;}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ topRight;}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ topCenter;}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ bottomLeft;}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ bottomRight;}
+\DoxyCodeLine{00055\ \ \ \ \ \mbox{\hyperlink{classPoint}{Point}}\ bottomCenter;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{structRectangle_a8a933e0ebd9e80ce91e61ffe87fd577e}{Rectangle}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a40917b61b33bf046d189be401c13cc7f}{x}},\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}{y}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structRectangle_abfa421daace50b66f37ab89d6c826384}{w}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structRectangle_afc7a7cebf422495e41277247eb131692}{h}});}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{structRectangle_a8a933e0ebd9e80ce91e61ffe87fd577e}{Rectangle}}(\mbox{\hyperlink{structRectangle}{Rectangle}}*\ other);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ overlaps(\textcolor{keyword}{const}\ \mbox{\hyperlink{structRectangle}{Rectangle}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{structRectangle_a8a933e0ebd9e80ce91e61ffe87fd577e}{Rectangle}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_a04942ab5ec7b2a27c723c09eaedac1b6}{copy}}(\mbox{\hyperlink{structRectangle}{Rectangle}}*\ other);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_a8cce58b11d4b7ccbedf1fa1bc0096c61}{addX}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a40917b61b33bf046d189be401c13cc7f}{x}});}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_a399e44cf899369f8566b960ff96104b9}{addY}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}{y}});}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_a3fa0036ff576f4b63ab3350bd229915f}{setX}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a40917b61b33bf046d189be401c13cc7f}{x}});}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_a608196906d5031c48c28554f36d7c1eb}{setY}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{structRectangle_a86f71f891bada4e5e920a4a9b7c505a3}{y}});}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_a16e25b4fde1009692524ca6e03c6834b}{stretch}}(\textcolor{keywordtype}{float}\ scale);}
+\DoxyCodeLine{00099\ \ \ \ \ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_ab92d1def505d300873233d525638ea19}{update}}();}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ overlaps(\mbox{\hyperlink{structRectangle}{Rectangle}}\ other);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{bool}\ overlaps(\mbox{\hyperlink{structRectangle}{Rectangle}}*\ other);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structRectangle_a0519cd9e69d4428893b40eee6585386e}{placeOnTop}}(\mbox{\hyperlink{structRectangle}{Rectangle}}\ other);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00126\ \ \ \ \ std::string\ \mbox{\hyperlink{structRectangle_accca16de7a07c1c4ef522c13d88e0516}{toString}}();}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structCircle}{Circle}}}
+\DoxyCodeLine{00133\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{float}\ x;}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{float}\ y;}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{int}\ r;\ }
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structCircle_a3b80430fa03002a8a1caacc3daa98867}{centerX}};}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{float}\ centerY;}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{structCircle}{Circle}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{int}\ r);}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ updateTextTexture();}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structCircle_ab5e143de1a9f0f73e57fc0a5b9db660f}{addX}}(\textcolor{keywordtype}{float}\ x);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structCircle_aec26cc2f75e2eec7dec720715033563b}{addY}}(\textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//SHAPES\_H}}
+
+\end{DoxyCode}

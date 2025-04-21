@@ -1,0 +1,103 @@
+\doxysection{Level.\+h}
+\hypertarget{Level_8h_source}{}\label{Level_8h_source}\index{src/core/Level.h@{src/core/Level.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LEVEL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LEVEL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Player.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Ennemy.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Platform.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum}\ LevelCode\{}
+\DoxyCodeLine{00017\ \ \ \ \ DESERT,}
+\DoxyCodeLine{00018\ \ \ \ \ FOREST,}
+\DoxyCodeLine{00019\ \ \ \ \ CITY,}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{enum}\ Entities\{}
+\DoxyCodeLine{00024\ \ \ \ \ NONE\ =\ -\/1,}
+\DoxyCodeLine{00025\ \ \ \ \ PLATFORM,}
+\DoxyCodeLine{00026\ \ \ \ \ PLAYER\ =\ -\/2,}
+\DoxyCodeLine{00027\ \ \ \ \ ENNEMY\_TYPE1\ =\ -\/3,}
+\DoxyCodeLine{00028\ \ \ \ \ ENNEMY\_TYPE2\ =\ -\/4,}
+\DoxyCodeLine{00029\ \ \ \ \ ENNEMY\_TYPE3\ =\ -\/5,}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{enum}\ Tiles\{}
+\DoxyCodeLine{00034\ \ \ \ \ SANDBLOCK,}
+\DoxyCodeLine{00035\ \ \ \ \ AIR,}
+\DoxyCodeLine{00036\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classLevel}{Level}}\{}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ level;\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{int}\ score;\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{int}\ nbLife;\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ isLevelCompleted;\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{structVec2}{Vec2}}\ dimension;\ }
+\DoxyCodeLine{00048\ \ \ \ \ std::vector<std::vector<int>>\ tileMap;\ }
+\DoxyCodeLine{00049\ \ \ \ \ std::vector<std::vector<int>>\ gameMap;\ }
+\DoxyCodeLine{00050\ \ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classPlayer}{Player}}\ player;\ }
+\DoxyCodeLine{00052\ \ \ \ \ std::vector<Ennemy>\ ennemies;\ }
+\DoxyCodeLine{00053\ \ \ \ \ std::vector<Platform>\ platforms;\ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classLevel_a7a696c928ca5d5354db6e50e46d0f67d}{Level}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classLevel_a7a696c928ca5d5354db6e50e46d0f67d}{Level}}(\textcolor{keywordtype}{int}\ lvl);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a2855813baaa600df46a21274b6a99dc8}{loadTileMap}}();}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a70f809a12ed73d416a5270e25fdc79ef}{loadGameMap}}(\textcolor{keywordtype}{int}\ lvl);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a0f90e051927c26032da3ef1fc4f0f5d7}{loadLevel}}(\textcolor{keywordtype}{int}\ lvl);}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a808cc2ffa0faec517a7d3bf63a47ad50}{unloadLevel}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_aed56853997a26daba1502637fa7a06da}{initEntities}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a5744273d036bcbe0ab784b132b9f0558}{actionAuto}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_aec6786f4ca417695f27858a34b03c9c0}{checkCollision}}();}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a8456936b501dffab7410955d2287d0f9}{checkOutOfBonds}}();}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ ennemyMovAuto(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{bool}\ finJeu();}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ deroulementLevel(std::string\ input,\ \textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classPlayer}{Player}}\&\ \mbox{\hyperlink{classLevel_aea174116fe469e45123ec13484645796}{getPlayer}}();}
+\DoxyCodeLine{00090\ \ \ \ \ std::vector<Ennemy>\&\ \mbox{\hyperlink{classLevel_a0aeadc05f2d179880d6188a2001e1d80}{getEnnemies}}();}
+\DoxyCodeLine{00092\ \ \ \ \ std::vector<Platform>\&\ \mbox{\hyperlink{classLevel_a807a58ec13795f4c5cb70a9b77c2e6a7}{getPlatforms}}();}
+\DoxyCodeLine{00094\ \ \ \ \ std::vector<std::vector<int>>\&\ \mbox{\hyperlink{classLevel_a14edeb2471e69f1cd7719c623ebbc4bb}{getTileMap}}();\ }
+\DoxyCodeLine{00096\ \ \ \ \ std::vector<std::vector<int>>\&\ \mbox{\hyperlink{classLevel_a295a75b3fa8d53e1867b8e883f46f107}{getGameMap}}();\ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classLevel_ae8a54a924eb3bc0069d9ca64d9141ed9}{playerOnPlatform}}();}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_ae6e07fbd93f486567bbb84983102ab22}{checkCollisionPlayerPlatform}}();}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a9392816c5ee1f1036e34df4911b55fb7}{playerCheckMovement}}();}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classLevel_aa87a6da4d66b953871a320975b1b671c}{getPlayerState}}();}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classLevel_a063afc0ec0a3d3e153c8ef8031f180df}{getLevel}}();}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{bool}\ finLevel(\mbox{\hyperlink{classPlayer}{Player}}\ \&player);}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classLevel_ad4162cd5c7fb6cfb9be52c3d420cfc04}{isLevelFinished}}();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLevel_a4b1fd6745249081950dee67f97054cad}{scale}}(\textcolor{keywordtype}{int}\ x);}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{void}\ displayMap(\textcolor{keyword}{const}\ std::vector<std::vector<int>>\&\ vec);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00126\ \textcolor{keywordtype}{bool}\ inBounds(\textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j,\ \textcolor{keyword}{const}\ std::vector<std::vector<int>>\&\ map);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00133\ \textcolor{keywordtype}{bool}\ neighborIsNone(\textcolor{keyword}{const}\ std::vector<std::vector<int>>\&\ map,\ \textcolor{keywordtype}{int}\ i,\ \textcolor{keywordtype}{int}\ j);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,30 @@
+\doxysection{Vec2f.\+h}
+\hypertarget{Vec2f_8h_source}{}\label{Vec2f_8h_source}\index{src/core/Vec2f.h@{src/core/Vec2f.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VEC2F\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VEC2F\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structVec2f}{Vec2f}}\{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{float}\ x,\ y;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \mbox{\hyperlink{structVec2f}{Vec2f}}(\textcolor{keywordtype}{float}\ a,\ \textcolor{keywordtype}{float}\ b);}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{structVec2f}{Vec2f}}();}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ operator==\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{structVec2f}{Vec2f}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ }
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ Overload\ the\ <<\ operator}}
+\DoxyCodeLine{00020\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structVec2f}{Vec2f}}\&\ p);}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{void}\ displayTab(std::vector<Vec2f>\ tab);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

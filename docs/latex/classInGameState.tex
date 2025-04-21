@@ -1,0 +1,265 @@
+\doxysection{In\+Game\+State Class Reference}
+\hypertarget{classInGameState}{}\label{classInGameState}\index{InGameState@{InGameState}}
+
+
+{\ttfamily \#include $<$In\+Game\+State.\+h$>$}
+
+
+
+Inheritance diagram for In\+Game\+State\+:
+% FIG 0
+
+
+Collaboration diagram for In\+Game\+State\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classInGameState_a752664ae116529322a8717d1bdb7326a}\label{classInGameState_a752664ae116529322a8717d1bdb7326a} 
+{\bfseries In\+Game\+State} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for the in-\/game state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classInGameState_a329df12d02349ea9764b719e81ff7dfb}{In\+Game\+State}} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer, TTF\+\_\+\+Font \texorpdfstring{$\ast$}{*}font, int lvl)
+\item 
+void \mbox{\hyperlink{classInGameState_acda8b9deabacdbb4996c114fffb81284}{load}} () override
+\begin{DoxyCompactList}\small\item\em Loads the game resources like textures and sounds. \end{DoxyCompactList}\item 
+SDL\+\_\+\+Texture \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classInGameState_afee9071fe5cec87d331156889e5e4307}{get\+Tile\+Set}} () const
+\item 
+int \mbox{\hyperlink{classInGameState_a46473d66044165240612c6c9d8073a9e}{unload}} () override
+\item 
+void \mbox{\hyperlink{classInGameState_a2024dda89d0d24e6b8ea5958f5ab2956}{handle\+Events}} (SDL\+\_\+\+Event \&events) override
+\item 
+State\+Code \mbox{\hyperlink{classInGameState_a946b985b3a7aea0cbad97f9c8529e00c}{update}} (float dt) override
+\item 
+void \mbox{\hyperlink{classInGameState_a34e91319ff18700ab6ed947fb5d4c224}{render}} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer) override
+\item 
+\Hypertarget{classInGameState_a0eb3d5e1d0ccf7eb0c1cbbb227fb47e5}\label{classInGameState_a0eb3d5e1d0ccf7eb0c1cbbb227fb47e5} 
+void {\bfseries render\+Player} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Renders the player on the screen. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a5368b94a4019398b0edffd1e869ac8e6}\label{classInGameState_a5368b94a4019398b0edffd1e869ac8e6} 
+void {\bfseries render\+Ennemy} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Renders the enemy on the screen. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_af8ee93ce13daa5d2842f92393ebfe98c}\label{classInGameState_af8ee93ce13daa5d2842f92393ebfe98c} 
+void {\bfseries render\+Tiles} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Renders the game tiles on the screen. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a6cfa93f2a826f951be6a3f375d18de48}\label{classInGameState_a6cfa93f2a826f951be6a3f375d18de48} 
+void {\bfseries render\+Background} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Renders the background of the game. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_aae43288cf99bd68d1a721de08adbe8e4}\label{classInGameState_aae43288cf99bd68d1a721de08adbe8e4} 
+void {\bfseries render\+Lives} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Renders the player\textquotesingle{}s remaining lives. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a46f6786e882752a7ad7018fbd7af0cc9}\label{classInGameState_a46f6786e882752a7ad7018fbd7af0cc9} 
+void {\bfseries render\+Timer} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Renders the game timer. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a0a772e6adc21bca646cb2bd8e0db70bb}\label{classInGameState_a0a772e6adc21bca646cb2bd8e0db70bb} 
+void {\bfseries render\+Death\+Screen} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Renders the death screen when the player dies. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a1eb0a408c747ca4c17f9060f738e0812}\label{classInGameState_a1eb0a408c747ca4c17f9060f738e0812} 
+void {\bfseries load\+Textures} (SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\begin{DoxyCompactList}\small\item\em Loads the game textures (player, enemies, backgrounds, etc.) \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a380ed00001db6a02f1122ead837a959f}\label{classInGameState_a380ed00001db6a02f1122ead837a959f} 
+SDL\+\_\+\+Texture \texorpdfstring{$\ast$}{*} {\bfseries get\+Background} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the background texture for the game. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a7f3c4bfcdec6001b1409e0c33c7a04a2}\label{classInGameState_a7f3c4bfcdec6001b1409e0c33c7a04a2} 
+SDL\+\_\+\+Texture \texorpdfstring{$\ast$}{*} {\bfseries get\+Player\+Sheet} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the player sprite sheet texture. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a304158b900bc7fd88e1055b8eae8d300}\label{classInGameState_a304158b900bc7fd88e1055b8eae8d300} 
+SDL\+\_\+\+Texture \texorpdfstring{$\ast$}{*} {\bfseries get\+Ennemy\+Sheet} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the enemy sprite sheet texture. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a54e80350b0a342f061a005d08f6c327f}\label{classInGameState_a54e80350b0a342f061a005d08f6c327f} 
+SDL\+\_\+\+Texture \texorpdfstring{$\ast$}{*} {\bfseries get\+Background1} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the secondary background texture. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_ad0b9df4b544a19f739fdec03bbc7f1d6}\label{classInGameState_ad0b9df4b544a19f739fdec03bbc7f1d6} 
+const std\+::vector$<$ \mbox{\hyperlink{structAnimation}{Animation}} $>$ \& {\bfseries get\+Player\+Animation} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the list of player animations. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a5f50f9250790bab80eb242e7b41240b9}\label{classInGameState_a5f50f9250790bab80eb242e7b41240b9} 
+void {\bfseries load\+Animations} ()
+\begin{DoxyCompactList}\small\item\em Loads animations for the player and enemies. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a39f991e0a604b6f68efb5625fd379770}\label{classInGameState_a39f991e0a604b6f68efb5625fd379770} 
+void {\bfseries update\+Game} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the game logic such as player movement, collisions, etc. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a33718f7dc17270be9e915d1d2323d4a7}\label{classInGameState_a33718f7dc17270be9e915d1d2323d4a7} 
+void {\bfseries update\+Animation} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the player\textquotesingle{}s animation based on elapsed time. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_acf209df281256a456477ecc751fd72e7}\label{classInGameState_acf209df281256a456477ecc751fd72e7} 
+void {\bfseries update\+Ennemy\+Animation} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the enemy\textquotesingle{}s animation based on elapsed time. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_aaf51fbecb8de66ad0dce42778bcedb90}\label{classInGameState_aaf51fbecb8de66ad0dce42778bcedb90} 
+void {\bfseries update\+Camera} (float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the camera\textquotesingle{}s position and view. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a1707522839047c7f727022b7e84c83e8}\label{classInGameState_a1707522839047c7f727022b7e84c83e8} 
+void {\bfseries update\+Death} (float delat\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the death screen logic, if the player is dead. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a6b4a88e88a492d017500350a1fd98379}\label{classInGameState_a6b4a88e88a492d017500350a1fd98379} 
+int {\bfseries play\+Background\+Music} ()
+\begin{DoxyCompactList}\small\item\em Plays the background music for the game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classInGameState_a877de887fe702574d4f5882c319d74f6}{play\+Sound}} (std\+::string input)
+\item 
+\Hypertarget{classInGameState_a28d2ac4c39984c0a9429d818c9cd278a}\label{classInGameState_a28d2ac4c39984c0a9429d818c9cd278a} 
+int {\bfseries load\+Sounds} (int niveau)
+\begin{DoxyCompactList}\small\item\em Loads all the sound resources based on the current level. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a9ebb13943d45c9137b92ca02b88d6d99}\label{classInGameState_a9ebb13943d45c9137b92ca02b88d6d99} 
+void {\bfseries init\+Buttons} ()
+\begin{DoxyCompactList}\small\item\em Initializes the game buttons (pause, resume, etc.) \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_aa96b121080fdbfa3398a2c971e5f93f6}\label{classInGameState_aa96b121080fdbfa3398a2c971e5f93f6} 
+void {\bfseries resume\+Game} ()
+\begin{DoxyCompactList}\small\item\em Resumes the game from a paused state. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a13f6ce4ce5675f64916eb5e267f6f8f6}\label{classInGameState_a13f6ce4ce5675f64916eb5e267f6f8f6} 
+void {\bfseries quit\+Game} ()
+\begin{DoxyCompactList}\small\item\em Quits the game, triggering the end of the game loop. \end{DoxyCompactList}\item 
+\Hypertarget{classInGameState_a77316448de260114499bfbee8372e49b}\label{classInGameState_a77316448de260114499bfbee8372e49b} 
+void {\bfseries render\+Buttons} ()
+\begin{DoxyCompactList}\small\item\em Renders the buttons on the screen (e.\+g., pause, resume) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classGameState}{Game\+State}}}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classGameState_aba5cd94cc1b5f4c47a08a9f5c7b461ab}\label{classGameState_aba5cd94cc1b5f4c47a08a9f5c7b461ab} 
+enum {\bfseries State\+Code} \{ \newline
+{\bfseries MAIN\+\_\+\+MENU}
+, {\bfseries OPTION}
+, {\bfseries LEVEL1}
+, {\bfseries LEVEL2}
+, \newline
+{\bfseries PAUSE}
+, {\bfseries GAME\+\_\+\+OVER}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class representing the in-\/game state, including all game logic, rendering, and interactions It manages the game state during gameplay, including level rendering, player and enemy animations, sounds, and the user interface like buttons and health status. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classInGameState_a329df12d02349ea9764b719e81ff7dfb}\label{classInGameState_a329df12d02349ea9764b719e81ff7dfb} 
+\index{InGameState@{InGameState}!InGameState@{InGameState}}
+\index{InGameState@{InGameState}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{InGameState()}{InGameState()}}
+{\footnotesize\ttfamily In\+Game\+State\+::\+In\+Game\+State (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}}]{renderer,  }\item[{TTF\+\_\+\+Font \texorpdfstring{$\ast$}{*}}]{font,  }\item[{int}]{lvl }\end{DoxyParamCaption})}
+
+Parameterized constructor to initialize the in-\/game state with custom values
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & The SDL renderer to be used for rendering \\
+\hline
+{\em font} & The font for rendering text (e.\+g., score, timer) \\
+\hline
+{\em lvl} & The level of the game to start at \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classInGameState_afee9071fe5cec87d331156889e5e4307}\label{classInGameState_afee9071fe5cec87d331156889e5e4307} 
+\index{InGameState@{InGameState}!getTileSet@{getTileSet}}
+\index{getTileSet@{getTileSet}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{getTileSet()}{getTileSet()}}
+{\footnotesize\ttfamily SDL\+\_\+\+Texture \texorpdfstring{$\ast$}{*} In\+Game\+State\+::get\+Tile\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Gets the tileset texture used for drawing the game\textquotesingle{}s world
+
+\begin{DoxyReturn}{Returns}
+The tileset texture 
+\end{DoxyReturn}
+\Hypertarget{classInGameState_a2024dda89d0d24e6b8ea5958f5ab2956}\label{classInGameState_a2024dda89d0d24e6b8ea5958f5ab2956} 
+\index{InGameState@{InGameState}!handleEvents@{handleEvents}}
+\index{handleEvents@{handleEvents}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{handleEvents()}{handleEvents()}}
+{\footnotesize\ttfamily void In\+Game\+State\+::handle\+Events (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Event \&}]{events }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Handles events like player input or system events
+
+
+\begin{DoxyParams}{Parameters}
+{\em events} & The SDL event to be handled \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classInGameState_acda8b9deabacdbb4996c114fffb81284}\label{classInGameState_acda8b9deabacdbb4996c114fffb81284} 
+\index{InGameState@{InGameState}!load@{load}}
+\index{load@{load}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void In\+Game\+State\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Loads the game resources like textures and sounds. 
+
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classInGameState_a877de887fe702574d4f5882c319d74f6}\label{classInGameState_a877de887fe702574d4f5882c319d74f6} 
+\index{InGameState@{InGameState}!playSound@{playSound}}
+\index{playSound@{playSound}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{playSound()}{playSound()}}
+{\footnotesize\ttfamily void In\+Game\+State\+::play\+Sound (\begin{DoxyParamCaption}\item[{std\+::string}]{input }\end{DoxyParamCaption})}
+
+Plays a specific sound effect based on the input string
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The name of the sound to be played \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classInGameState_a34e91319ff18700ab6ed947fb5d4c224}\label{classInGameState_a34e91319ff18700ab6ed947fb5d4c224} 
+\index{InGameState@{InGameState}!render@{render}}
+\index{render@{render}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void In\+Game\+State\+::render (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Renders the game to the screen
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & The SDL renderer to render the game \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classInGameState_a46473d66044165240612c6c9d8073a9e}\label{classInGameState_a46473d66044165240612c6c9d8073a9e} 
+\index{InGameState@{InGameState}!unload@{unload}}
+\index{unload@{unload}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{unload()}{unload()}}
+{\footnotesize\ttfamily int In\+Game\+State\+::unload (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Unloads all resources and prepares the game for a new state
+
+\begin{DoxyReturn}{Returns}
+An integer indicating the status of the unloading 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+\Hypertarget{classInGameState_a946b985b3a7aea0cbad97f9c8529e00c}\label{classInGameState_a946b985b3a7aea0cbad97f9c8529e00c} 
+\index{InGameState@{InGameState}!update@{update}}
+\index{update@{update}!InGameState@{InGameState}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily Game\+State\+::\+State\+Code In\+Game\+State\+::update (\begin{DoxyParamCaption}\item[{float}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Updates the game state based on elapsed time
+
+
+\begin{DoxyParams}{Parameters}
+{\em dt} & The delta time (time elapsed since the last frame) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next game state code (e.\+g., CONTINUE, PAUSE, etc.) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classGameState}{Game\+State}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/sdl2/In\+Game\+State.\+h\item 
+src/sdl2/In\+Game\+State.\+cpp\end{DoxyCompactItemize}

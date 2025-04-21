@@ -1,0 +1,318 @@
+\doxysection{Button Class Reference}
+\hypertarget{classButton}{}\label{classButton}\index{Button@{Button}}
+
+
+{\ttfamily \#include $<$Button.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6}{State}} \{ \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a1e23852820b9154316c7c06e2b7ba051}{NORMAL}}
+, \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6ada95feece334f0612031adf21d057ab9}{HOVER}}
+, \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a5381dc876ab002103a027265bc14ae52}{PRESSED}}
+, \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6a055c1a591abb0e8cd86dc969727bcc0b}{DISABLED}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classButton_a3b36df1ae23c58aedb9e15a713159459}\label{classButton_a3b36df1ae23c58aedb9e15a713159459} 
+{\bfseries Button} ()
+\begin{DoxyCompactList}\small\item\em Default constructor to create an empty button. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classButton_a3b66ed7360ca73705ebfc242b2e74d27}{Button}} (int x, int y, int width, int height, const std\+::string \&text, SDL\+\_\+\+Color normal\+Color, SDL\+\_\+\+Color hover\+Color, SDL\+\_\+\+Color pressed\+Color, SDL\+\_\+\+Color text\+Color, TTF\+\_\+\+Font \texorpdfstring{$\ast$}{*}font, SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}renderer)
+\item 
+\Hypertarget{classButton_a2a001eb9c3cc8ae54768a850dd345002}\label{classButton_a2a001eb9c3cc8ae54768a850dd345002} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Button} ()
+\begin{DoxyCompactList}\small\item\em Destructor to clean up resources (like textures) \end{DoxyCompactList}\item 
+\Hypertarget{classButton_a30f306f8b9e9c6a051b7ab1765faafd6}\label{classButton_a30f306f8b9e9c6a051b7ab1765faafd6} 
+{\bfseries Button} (\mbox{\hyperlink{classButton}{Button}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move constructor for transferring ownership of the button resources. \end{DoxyCompactList}\item 
+\Hypertarget{classButton_adfde09b03b651f52d9588d5f1b9c31d2}\label{classButton_adfde09b03b651f52d9588d5f1b9c31d2} 
+\mbox{\hyperlink{classButton}{Button}} \& {\bfseries operator=} (\mbox{\hyperlink{classButton}{Button}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move assignment operator for transferring ownership of the button resources. \end{DoxyCompactList}\item 
+\Hypertarget{classButton_ada7376aa20dcde271fc1af17c0b4997f}\label{classButton_ada7376aa20dcde271fc1af17c0b4997f} 
+void {\bfseries update\+Text\+Texture} ()
+\begin{DoxyCompactList}\small\item\em Updates the button\textquotesingle{}s text texture, re-\/rendering if needed. \end{DoxyCompactList}\item 
+\Hypertarget{classButton_add4daea65a908027aa5a1593305b9656}\label{classButton_add4daea65a908027aa5a1593305b9656} 
+void {\bfseries render} ()
+\begin{DoxyCompactList}\small\item\em Renders the button (background and text) to the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classButton_ab716c9fc0544eb952bb92ea8861779bb}{handle\+Event}} (const SDL\+\_\+\+Event \&e)
+\item 
+void \mbox{\hyperlink{classButton_ab6b733217aabf3efa8df58145949fd7c}{set\+Position}} (int x, int y)
+\item 
+void \mbox{\hyperlink{classButton_a99bc50c21b6a335fc36a068908872d08}{set\+Size}} (int width, int height)
+\item 
+std\+::string \mbox{\hyperlink{classButton_ab535ce6d90b62f744ca4c05262ad8190}{get\+Text}} () const
+\item 
+\mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6}{State}} \mbox{\hyperlink{classButton_af7e1f77b38dc2d1840e51b4e16cea625}{get\+State}} () const
+\item 
+SDL\+\_\+\+Color \mbox{\hyperlink{classButton_a80426b1f951c518cff5676bb35d46585}{get\+Normal\+Color}} () const
+\item 
+void \mbox{\hyperlink{classButton_ac6a233c876164a52d54ef7f1b3fb78d1}{set\+Text}} (const std\+::string \&text)
+\item 
+void \mbox{\hyperlink{classButton_ab97e44bcefb8a97e58fc48bc357904cb}{set\+Colors}} (SDL\+\_\+\+Color normal\+Color, SDL\+\_\+\+Color hover\+Color, SDL\+\_\+\+Color pressed\+Color)
+\item 
+void \mbox{\hyperlink{classButton_a3844e0e8f7957a1c339e838c1d113a64}{set\+Text\+Color}} (SDL\+\_\+\+Color text\+Color)
+\item 
+void \mbox{\hyperlink{classButton_a5e8773a222851c9994d5492345156988}{set\+Enabled}} (bool enabled)
+\item 
+void \mbox{\hyperlink{classButton_a8ac346be3bfe39717685fae07cc5038d}{set\+On\+Click}} (std\+::function$<$ void()$>$ callback)
+\item 
+bool \mbox{\hyperlink{classButton_afa828cbd443acec9737e2dc323cddc65}{is\+Enabled}} () const
+\item 
+bool \mbox{\hyperlink{classButton_a6ed2a4b4e00facf5c42a11ecd1f4e1c7}{is\+Pressed}} () const
+\item 
+\mbox{\hyperlink{structRectangle}{Rectangle}} \mbox{\hyperlink{classButton_adbde8b0273fec448dbafda97fc2b02e4}{get\+Rect}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A button class to represent an interactive button with SDL2
+
+This class provides functionality for creating, rendering, and interacting with a button in a graphical user interface. It supports multiple states (normal, hover, pressed, disabled), customizable colors, and can handle click events through a callback.
+
+\begin{DoxyNote}{Note}
+The button uses a rectangle ({\ttfamily \doxylink{structRectangle}{Rectangle}}) for its positioning and a text ({\ttfamily std\+::string}) for its label, with support for font rendering using SDL\+\_\+ttf. 
+\end{DoxyNote}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classButton_ae15938c6b06f6bbf909314f987938fd6}\label{classButton_ae15938c6b06f6bbf909314f987938fd6} 
+\index{Button@{Button}!State@{State}}
+\index{State@{State}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6}{Button\+::\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+Enum representing the possible states of the button
+
+
+\begin{DoxyItemize}
+\item NORMAL\+: The button in its default state.
+\item HOVER\+: The button when the mouse hovers over it.
+\item PRESSED\+: The button when it is clicked.
+\item DISABLED\+: The button is disabled and unclickable. 
+\end{DoxyItemize}\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NORMAL@{NORMAL}!Button@{Button}}\index{Button@{Button}!NORMAL@{NORMAL}}}\Hypertarget{classButton_ae15938c6b06f6bbf909314f987938fd6a1e23852820b9154316c7c06e2b7ba051}\label{classButton_ae15938c6b06f6bbf909314f987938fd6a1e23852820b9154316c7c06e2b7ba051} 
+NORMAL&Default state. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HOVER@{HOVER}!Button@{Button}}\index{Button@{Button}!HOVER@{HOVER}}}\Hypertarget{classButton_ae15938c6b06f6bbf909314f987938fd6ada95feece334f0612031adf21d057ab9}\label{classButton_ae15938c6b06f6bbf909314f987938fd6ada95feece334f0612031adf21d057ab9} 
+HOVER&Hovered state. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PRESSED@{PRESSED}!Button@{Button}}\index{Button@{Button}!PRESSED@{PRESSED}}}\Hypertarget{classButton_ae15938c6b06f6bbf909314f987938fd6a5381dc876ab002103a027265bc14ae52}\label{classButton_ae15938c6b06f6bbf909314f987938fd6a5381dc876ab002103a027265bc14ae52} 
+PRESSED&Clicked state. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DISABLED@{DISABLED}!Button@{Button}}\index{Button@{Button}!DISABLED@{DISABLED}}}\Hypertarget{classButton_ae15938c6b06f6bbf909314f987938fd6a055c1a591abb0e8cd86dc969727bcc0b}\label{classButton_ae15938c6b06f6bbf909314f987938fd6a055c1a591abb0e8cd86dc969727bcc0b} 
+DISABLED&Disabled state (unclickable) \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classButton_a3b66ed7360ca73705ebfc242b2e74d27}\label{classButton_a3b66ed7360ca73705ebfc242b2e74d27} 
+\index{Button@{Button}!Button@{Button}}
+\index{Button@{Button}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{Button()}{Button()}}
+{\footnotesize\ttfamily Button\+::\+Button (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{const std\+::string \&}]{text,  }\item[{SDL\+\_\+\+Color}]{normal\+Color,  }\item[{SDL\+\_\+\+Color}]{hover\+Color,  }\item[{SDL\+\_\+\+Color}]{pressed\+Color,  }\item[{SDL\+\_\+\+Color}]{text\+Color,  }\item[{TTF\+\_\+\+Font \texorpdfstring{$\ast$}{*}}]{font,  }\item[{SDL\+\_\+\+Renderer \texorpdfstring{$\ast$}{*}}]{renderer }\end{DoxyParamCaption})}
+
+Parameterized constructor to create a button with custom attributes
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,y} & The position of the button (top-\/left corner) \\
+\hline
+{\em width,height} & The dimensions of the button \\
+\hline
+{\em text} & The label text displayed on the button \\
+\hline
+{\em normal\+Color,hover\+Color,pressed\+Color} & The button\textquotesingle{}s colors in different states \\
+\hline
+{\em text\+Color} & The color of the text displayed on the button \\
+\hline
+{\em font} & The font used for rendering the text \\
+\hline
+{\em renderer} & The SDL\+\_\+\+Renderer for rendering the button and text \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classButton_a80426b1f951c518cff5676bb35d46585}\label{classButton_a80426b1f951c518cff5676bb35d46585} 
+\index{Button@{Button}!getNormalColor@{getNormalColor}}
+\index{getNormalColor@{getNormalColor}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{getNormalColor()}{getNormalColor()}}
+{\footnotesize\ttfamily SDL\+\_\+\+Color Button\+::get\+Normal\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Gets the normal color of the button (used in the default state)
+
+\begin{DoxyReturn}{Returns}
+The normal color of the button 
+\end{DoxyReturn}
+\Hypertarget{classButton_adbde8b0273fec448dbafda97fc2b02e4}\label{classButton_adbde8b0273fec448dbafda97fc2b02e4} 
+\index{Button@{Button}!getRect@{getRect}}
+\index{getRect@{getRect}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{getRect()}{getRect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structRectangle}{Rectangle}} Button\+::get\+Rect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Gets the button\textquotesingle{}s rectangle (used for positioning and collision detection)
+
+\begin{DoxyReturn}{Returns}
+A {\ttfamily \doxylink{structRectangle}{Rectangle}} representing the button\textquotesingle{}s area 
+\end{DoxyReturn}
+\Hypertarget{classButton_af7e1f77b38dc2d1840e51b4e16cea625}\label{classButton_af7e1f77b38dc2d1840e51b4e16cea625} 
+\index{Button@{Button}!getState@{getState}}
+\index{getState@{getState}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{getState()}{getState()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classButton_ae15938c6b06f6bbf909314f987938fd6}{Button\+::\+State}} Button\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Gets the current state of the button
+
+\begin{DoxyReturn}{Returns}
+The current button state (NORMAL, HOVER, PRESSED, DISABLED) 
+\end{DoxyReturn}
+\Hypertarget{classButton_ab535ce6d90b62f744ca4c05262ad8190}\label{classButton_ab535ce6d90b62f744ca4c05262ad8190} 
+\index{Button@{Button}!getText@{getText}}
+\index{getText@{getText}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{getText()}{getText()}}
+{\footnotesize\ttfamily std\+::string Button\+::get\+Text (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Gets the current text of the button
+
+\begin{DoxyReturn}{Returns}
+The current text label of the button 
+\end{DoxyReturn}
+\Hypertarget{classButton_ab716c9fc0544eb952bb92ea8861779bb}\label{classButton_ab716c9fc0544eb952bb92ea8861779bb} 
+\index{Button@{Button}!handleEvent@{handleEvent}}
+\index{handleEvent@{handleEvent}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{handleEvent()}{handleEvent()}}
+{\footnotesize\ttfamily void Button\+::handle\+Event (\begin{DoxyParamCaption}\item[{const SDL\+\_\+\+Event \&}]{e }\end{DoxyParamCaption})}
+
+Handles input events such as mouse hover and clicks
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & The SDL\+\_\+\+Event to process \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classButton_afa828cbd443acec9737e2dc323cddc65}\label{classButton_afa828cbd443acec9737e2dc323cddc65} 
+\index{Button@{Button}!isEnabled@{isEnabled}}
+\index{isEnabled@{isEnabled}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{isEnabled()}{isEnabled()}}
+{\footnotesize\ttfamily bool Button\+::is\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if the button is enabled
+
+\begin{DoxyReturn}{Returns}
+true if the button is enabled, false if it\textquotesingle{}s disabled 
+\end{DoxyReturn}
+\Hypertarget{classButton_a6ed2a4b4e00facf5c42a11ecd1f4e1c7}\label{classButton_a6ed2a4b4e00facf5c42a11ecd1f4e1c7} 
+\index{Button@{Button}!isPressed@{isPressed}}
+\index{isPressed@{isPressed}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{isPressed()}{isPressed()}}
+{\footnotesize\ttfamily bool Button\+::is\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if the button is pressed
+
+\begin{DoxyReturn}{Returns}
+true if the button is in the PRESSED state 
+\end{DoxyReturn}
+\Hypertarget{classButton_ab97e44bcefb8a97e58fc48bc357904cb}\label{classButton_ab97e44bcefb8a97e58fc48bc357904cb} 
+\index{Button@{Button}!setColors@{setColors}}
+\index{setColors@{setColors}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setColors()}{setColors()}}
+{\footnotesize\ttfamily void Button\+::set\+Colors (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Color}]{normal\+Color,  }\item[{SDL\+\_\+\+Color}]{hover\+Color,  }\item[{SDL\+\_\+\+Color}]{pressed\+Color }\end{DoxyParamCaption})}
+
+Sets the colors of the button in different states
+
+
+\begin{DoxyParams}{Parameters}
+{\em normal\+Color,hover\+Color,pressed\+Color} & The colors for each state \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classButton_a5e8773a222851c9994d5492345156988}\label{classButton_a5e8773a222851c9994d5492345156988} 
+\index{Button@{Button}!setEnabled@{setEnabled}}
+\index{setEnabled@{setEnabled}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setEnabled()}{setEnabled()}}
+{\footnotesize\ttfamily void Button\+::set\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{enabled }\end{DoxyParamCaption})}
+
+Enables or disables the button
+
+
+\begin{DoxyParams}{Parameters}
+{\em enabled} & If true, the button is enabled; otherwise, it\textquotesingle{}s disabled \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classButton_a8ac346be3bfe39717685fae07cc5038d}\label{classButton_a8ac346be3bfe39717685fae07cc5038d} 
+\index{Button@{Button}!setOnClick@{setOnClick}}
+\index{setOnClick@{setOnClick}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setOnClick()}{setOnClick()}}
+{\footnotesize\ttfamily void Button\+::set\+On\+Click (\begin{DoxyParamCaption}\item[{std\+::function$<$ void()$>$}]{callback }\end{DoxyParamCaption})}
+
+Sets the callback function to be called when the button is clicked
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The function to be called when the button is clicked \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classButton_ab6b733217aabf3efa8df58145949fd7c}\label{classButton_ab6b733217aabf3efa8df58145949fd7c} 
+\index{Button@{Button}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}}
+{\footnotesize\ttfamily void Button\+::set\+Position (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Sets the position of the button
+
+
+\begin{DoxyParams}{Parameters}
+{\em x,y} & The new position (top-\/left corner) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classButton_a99bc50c21b6a335fc36a068908872d08}\label{classButton_a99bc50c21b6a335fc36a068908872d08} 
+\index{Button@{Button}!setSize@{setSize}}
+\index{setSize@{setSize}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setSize()}{setSize()}}
+{\footnotesize\ttfamily void Button\+::set\+Size (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+Sets the size of the button
+
+
+\begin{DoxyParams}{Parameters}
+{\em width,height} & The new dimensions of the button \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classButton_ac6a233c876164a52d54ef7f1b3fb78d1}\label{classButton_ac6a233c876164a52d54ef7f1b3fb78d1} 
+\index{Button@{Button}!setText@{setText}}
+\index{setText@{setText}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setText()}{setText()}}
+{\footnotesize\ttfamily void Button\+::set\+Text (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{text }\end{DoxyParamCaption})}
+
+Sets the text of the button
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & The new text to display on the button \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classButton_a3844e0e8f7957a1c339e838c1d113a64}\label{classButton_a3844e0e8f7957a1c339e838c1d113a64} 
+\index{Button@{Button}!setTextColor@{setTextColor}}
+\index{setTextColor@{setTextColor}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{setTextColor()}{setTextColor()}}
+{\footnotesize\ttfamily void Button\+::set\+Text\+Color (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Color}]{text\+Color }\end{DoxyParamCaption})}
+
+Sets the color of the text on the button
+
+
+\begin{DoxyParams}{Parameters}
+{\em text\+Color} & The color of the button\textquotesingle{}s text \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/sdl2/Button.\+h\item 
+src/sdl2/Button.\+cpp\end{DoxyCompactItemize}
