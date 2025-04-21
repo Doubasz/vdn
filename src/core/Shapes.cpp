@@ -58,25 +58,9 @@ void Rectangle::setY(float y){
 	this->update();
 }
 
-void Rectangle::stretch(float scale){
-	this->stretch(scale, scale);
-}
 
-void Rectangle::stretch(float scaleX, float scaleY){
-	if ((scaleX <= 0) || (scaleY <= 0)) return;
 
-	float oldW = this->w;
-	float oldH = this->h;
 
-	this->w *= scaleX;
-	this->h *= scaleY;
-
-	// Centralizing one rectangle on the other
-	this->x += abs(oldW - this->w)/2;
-	this->y += abs(oldH - this->h)/2;
-
-	this->update();
-}
 
 void Rectangle::update(){
 	this->top    = y;

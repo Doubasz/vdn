@@ -81,6 +81,7 @@ public:
     InGameState(SDL_Renderer* renderer, int lvl);
 
     void load() override;
+    SDL_Texture *getTileSet() const;
     int unload() override;
     void handleEvents(SDL_Event& events, float deltaTime) override;
     StateCode update(float dt) override;
@@ -94,6 +95,11 @@ public:
     void renderTimer(SDL_Renderer* renderer);  
 
     void loadTextures(SDL_Renderer* renderer);
+    SDL_Texture *getBackground() const;
+    SDL_Texture *getPlayerSheet() const;
+    SDL_Texture *getEnnemySheet() const;
+    SDL_Texture *getBackground1() const;
+    const std::vector<Animation> &getPlayerAnimation() const;
     void loadAnimations();
 
     void updateGame(float deltaTime);

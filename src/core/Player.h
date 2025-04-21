@@ -106,9 +106,7 @@ public:
 
     int getState();
     void setJumpBoost(int j);
-    void goLeft();
-    void goRight();
-    void sufferFriction();
+    
 
     int getDirection() {return this->direction;}
     bool getGotHit() {return this->gotHit;}

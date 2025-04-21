@@ -96,7 +96,7 @@ struct Rectangle{
 	/// If you want to increase it's size by two, send 2.
 	/// If you want to shrink it by two, send 0.2.
 	void stretch(float scale);
-	void stretch(float scaleX, float scaleY);
+	
 
     /// Refreshes all internal values.
 	///

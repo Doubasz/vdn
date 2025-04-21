@@ -86,39 +86,45 @@ void Button::handleEvent(const SDL_Event& e) {
 
     // Handle different event types
     if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP) {
-    // Get mouse position
-    int mouseX, mouseY;
-    SDL_GetMouseState(&mouseX, &mouseY);
+        // Get mouse position
+        int mouseX, mouseY;
+        SDL_GetMouseState(&mouseX, &mouseY);
 
-    // Check if mouse is inside button
-    bool inside = (mouseX >= buttonRect.x && mouseX <= buttonRect.x + buttonRect.w &&
-                mouseY >= buttonRect.y && mouseY <= buttonRect.y + buttonRect.h);
+        // Check if mouse is inside button
+        bool inside = (mouseX >= buttonRect.x && mouseX <= buttonRect.x + buttonRect.w &&
+                    mouseY >= buttonRect.y && mouseY <= buttonRect.y + buttonRect.h);
 
-    if (!inside) {
-        state = State::NORMAL;
-    } 
-    else{
-        switch (e.type) {
-            case SDL_MOUSEMOTION:
-                state = State::HOVER;
-                break;
-            case SDL_MOUSEBUTTONDOWN:
-                if (e.button.button == SDL_BUTTON_LEFT) {
-                    state = State::PRESSED;
-                }
-                break;
-            case SDL_MOUSEBUTTONUP:
-                if (e.button.button == SDL_BUTTON_LEFT) {
+        if (!inside) {
+            // If mouse is outside the button, set state to NORMAL
+            state = State::NORMAL;
+        } 
+        else {
+            switch (e.type) {
+                case SDL_MOUSEMOTION:
+                    // Set state to HOVER when mouse moves inside the button
                     state = State::HOVER;
-                    if (onClick) {
-                        onClick();
+                    break;
+                case SDL_MOUSEBUTTONDOWN:
+                    if (e.button.button == SDL_BUTTON_LEFT) {
+                        // Set state to PRESSED when mouse button is pressed
+                        state = State::PRESSED;
                     }
-                }
-                break;
+                    break;
+                case SDL_MOUSEBUTTONUP:
+                    if (e.button.button == SDL_BUTTON_LEFT) {
+                        // Set state back to HOVER after mouse button release
+                        state = State::HOVER;
+                        if (onClick) {
+                            onClick();  // Trigger the onClick callback if set
+                        }
+                    }
+                    break;
             }
         }
     }
 }
+
+
 
 void Button::setPosition(int x, int y) {
     x = x;
@@ -129,6 +135,15 @@ void Button::setSize(int width, int height) {
     width = width;
     height = height;
 }
+std::string Button::getText() const {
+    return text;
+}
+Button::State Button::getState() const {
+    return state;
+}
+SDL_Color Button::getNormalColor() const {
+    return normalColor;
+}
 
 void Button::setText(const std::string& textT) {
     if (text != textT) {
@@ -138,10 +153,11 @@ void Button::setText(const std::string& textT) {
 }
 
 void Button::setColors(SDL_Color normalColor, SDL_Color hoverColor, SDL_Color pressedColor) {
-    normalColor = normalColor;
-    hoverColor = hoverColor;
-    pressedColor = pressedColor;
+    this->normalColor = normalColor;
+    this->hoverColor = hoverColor;
+    this->pressedColor = pressedColor;
 }
+
 
 void Button::setTextColor(SDL_Color textColorT) {
     if (textColor.r != textColorT.r || textColor.g != textColorT.g || 

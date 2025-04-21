@@ -87,7 +87,7 @@ void Level::loadTileMap(){
 
     switch(level){
         case DESERT:
-            path = "scripts/mapGeneration/map3.txt";
+            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/map3.txt";
     }
 
     if(!path.empty()){
@@ -122,13 +122,13 @@ void Level::loadGameMap(int lvl){
 
     switch(lvl){
         case DESERT:
-            path = "scripts/mapGeneration/level1.txt";
+            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/level1.txt";
             break;
         case FOREST:
-            path = "scripts/mapGeneration/level2.txt";
+            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/level1.txt";
             break;
         case CITY:
-            path = "scripts/mapGeneration/level3.txt";
+            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/level1.txt";
             break;
     }
 

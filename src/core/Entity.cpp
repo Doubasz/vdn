@@ -28,7 +28,15 @@ Entity::Entity(Vec2 pos, Vec2 dim, Vec2f vel){
 
 Entity::~Entity(){}
 
+void Entity::setPos(int x, int y) {
+    box.x = x;
+    box.y = y;
+}
 
+void Entity::setDim(int w, int h) {
+    box.w = w;
+    box.h = h;
+}
 // Dans Entity.cpp
 bool Entity::checkCollision(const Entity& other) const {
     return box.overlaps(other.box);

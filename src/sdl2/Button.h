@@ -27,7 +27,10 @@ public:
     void handleEvent(const SDL_Event& e);
     void setPosition(int x, int y);
     void setSize(int width, int height);
-    void setText(const std::string& text);
+    std::string getText() const;
+    State getState() const;
+    SDL_Color getNormalColor() const;
+    void setText(const std::string &text);
     void setColors(SDL_Color normalColor, SDL_Color hoverColor, SDL_Color pressedColor);
     void setTextColor(SDL_Color textColor);
     void setEnabled(bool enabled);
@@ -35,10 +38,10 @@ public:
     
     bool isEnabled() const { return state != State::DISABLED; }
     bool isPressed() const { return state == State::PRESSED; }
-    
+    Rectangle getRect() const;
 private:
     void updateTextTexture();
-    Rectangle getRect() const;
+    
     
     Rectangle box;
     std::string text;

@@ -44,7 +44,27 @@ void InGameState::load(){
 }
 
 
+SDL_Texture* InGameState::getTileSet() const {
+    return tileSet;
+}
 
+SDL_Texture* InGameState::getBackground() const {
+    return background;
+}
+SDL_Texture* InGameState::getPlayerSheet() const {
+    return playerSheet;
+}
+
+SDL_Texture* InGameState::getEnnemySheet() const {
+    return ennemySheet;
+}
+
+SDL_Texture* InGameState::getBackground1() const {
+    return background1;
+}
+const std::vector<Animation>& InGameState::getPlayerAnimation() const {
+    return playerAnimation;
+}
 void InGameState::loadAnimations(){
 
     int spriteWidth = 50;
