@@ -112,6 +112,8 @@ public:
 
     /// @brief Scales the level (useful for resizing, zooming, etc).
     void scale(int x);
+
+    bool playerOutOfBonds();
 };
 
 /// @brief Displays a 2D map in the console.

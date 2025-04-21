@@ -277,6 +277,10 @@ void Level::deroulementLevel(std::string input, float deltaTime){
             break;
         }
     }
+
+    if(!playerOutOfBonds()){
+        player.isAlive = false;
+    }
     
     
     
@@ -285,7 +289,14 @@ void Level::deroulementLevel(std::string input, float deltaTime){
 
 
 
+bool Level::playerOutOfBonds(){
+    int i = player.box.x;
+    int j = player.box.y;
 
+    return i >= 0 && j >= 0 &&
+           static_cast<size_t>(i) < gameMap[0].size() &&
+           static_cast<size_t>(j) < gameMap.size();
+}
 
 
 
@@ -301,12 +312,12 @@ int Level::getLevel(){
 
 bool Level::finLevel (Player& player){
     if(level == DESERT ){
-        if(player.getBox(). x > 199.8){
+        if(player.getBox(). x > 198){
             return true;
         }
         return false;
     }else if(level == FOREST){
-        if(player.getBox().x > 59.8){
+        if(player.getBox().x > 58){
             return true;
         }
         return false;
