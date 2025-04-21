@@ -87,7 +87,7 @@ void Level::loadTileMap(){
 
     switch(level){
         case DESERT:
-            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/map3.txt";
+            path = "scripts/mapGeneration/map3.txt";
     }
 
     if(!path.empty()){
@@ -157,7 +157,9 @@ void Level::loadGameMap(int lvl){
 
 // Check if a coordinate is inside the map bounds
 bool inBounds(int i, int j, const std::vector<std::vector<int>>& map) {
-    return i >= 0 && j >= 0 && i < map.size() && j < map[0].size();
+    return i >= 0 && j >= 0 &&
+           static_cast<size_t>(i) < map.size() &&
+           static_cast<size_t>(j) < map[0].size();
 }
 
 // Check if any of the 4 neighbors of (i, j) are NONE
@@ -183,8 +185,8 @@ void Level::initEntities(){
 
     
 
-    for(int i = 0; i < gameMap[0].size(); i++){
-        for(int j = 0; j < gameMap.size(); j++){
+    for(size_t i = 0; i < gameMap[0].size(); i++){
+        for(size_t j = 0; j < gameMap.size(); j++){
             //std:: cout << "x : " << gameMap.size() << " y : " << gameMap[0].size() << std::endl;
             //std::cout<< "i : " << i << " j : " << j << std::endl;
             switch(gameMap[j][i]){
@@ -294,7 +296,7 @@ void Level::deroulementLevel(std::string input, float deltaTime){
     
     
     for(Ennemy& e : ennemies){
-        player.checkCollisionEnnemy(e, deltaTime);
+        player.checkCollisionEnnemy(e);
     }
     
     

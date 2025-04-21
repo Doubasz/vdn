@@ -60,11 +60,7 @@ public:
     /// Default constructor.
     Entity();
 
-    /// Construct an entity with position, size, and velocity.
-    Entity(int x, int y, int w, int h, float vx, float vy);
 
-    /// Construct an entity from vector-based parameters.
-    Entity(Vec2 pos, Vec2 dim, Vec2f vel);
 
     /// Virtual destructor to allow polymorphic deletion.
     virtual ~Entity();

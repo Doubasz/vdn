@@ -1,5 +1,4 @@
 #include "SDLJeu.h"
-#include "StateManager.h"
 
 int main(void) {
     SDLJeu jeu;
