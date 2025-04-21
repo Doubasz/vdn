@@ -12,9 +12,10 @@ InGameState::InGameState(): moveTimer(0.3), attacksound(0.5){
 }
 
 
-InGameState::InGameState(SDL_Renderer* renderer, int lvl) : InGameState(){
+InGameState::InGameState(SDL_Renderer* renderer, TTF_Font* font, int lvl) : InGameState(){
     this->renderer = renderer;
     this->level = lvl;
+    this->font = font;
 }
 
 
@@ -24,6 +25,11 @@ void InGameState::load(){
         std::cout << "InGameState::load : render is nullptr" << std::endl;
         exit(-1);
     }
+    if(!font){
+        std::cout << "InGameState::load : font is nullptr" << std::endl;
+        exit(-1);
+    }
+
 
     tileSize = 48;
     blinkInterval = 1;
@@ -33,6 +39,7 @@ void InGameState::load(){
     loadTextures(renderer);
     loadAnimations();
     loadSounds(0);
+    initButtons();
 
     std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
     
@@ -108,11 +115,45 @@ void InGameState::loadTextures(SDL_Renderer* renderer){
     ennemySheet = loadTexture(renderer, pathEnnemy);
 }
 
+
+void InGameState::initButtons(){
+
+    int screenWidth = 1400;
+    int screenHeight = 900;
+
+    int buttonWidth = 400;
+    int buttonHeight = 100;
+
+    Button b1 = {(screenWidth / 2) - (buttonWidth / 2), 350, buttonWidth, buttonHeight, "Resume", SDL_Color{0, 0, 0, 255}, SDL_Color{200, 100, 20, 255}, SDL_Color{50, 100, 50, 255}, SDL_Color{0xFF, 0xFF, 0, 255}, font, renderer};
+    b1.setOnClick([this]() {resumeGame();});
+
+    Button b2 = {(screenWidth / 2) - (buttonWidth / 2), 500, buttonWidth, buttonHeight, "Quit", SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{0xFF, 0xFF, 0xFF, 255}, font, renderer};
+    b2.setOnClick([this]() {quitGame();});
+
+    buttons.push_back(std::move(b1));
+    buttons.push_back(std::move(b2));
+
+}
+
+
+void InGameState::resumeGame(){
+    this->state = CONTINUE;
+}
+
+void InGameState::quitGame(){
+    this->state = QUIT;
+}
+
+
 int InGameState::unload(){
+
+    platformTexture.clear();
+    playerAnimation.clear();
+    buttons.clear();
     
-        if(Mix_PlayingMusic()){
-            Mix_HaltMusic();
-        }
+    if(Mix_PlayingMusic()){
+        Mix_HaltMusic();
+    }
 }
 
 void InGameState::handleEvents(SDL_Event& events, float deltaTime){
@@ -120,23 +161,25 @@ void InGameState::handleEvents(SDL_Event& events, float deltaTime){
     switch(events.type){
         case SDL_KEYDOWN:
             if (events.key.keysym.sym == SDLK_ESCAPE){
-                state = QUIT;
+                state = (state == PAUSE) ? CONTINUE : PAUSE; 
             }
     }
 
-    
-    
+    for(Button& b : buttons){
+        b.handleEvent(events);
+    }
 }
 
 GameState::StateCode InGameState::update(float dt){
 
     lastPlayerState = jeu.getCurrentLevel().getPlayer().getState();
     playBackgroundMusic(0);
-    updateGame(dt);
-    updateCamera(dt);
-    updateEnnemyAnimation(dt);
-    updateAnimation(dt);
-    
+    if(state != PAUSE){
+        updateGame(dt);
+        updateCamera(dt);
+        updateEnnemyAnimation(dt);
+        updateAnimation(dt);
+    }
 
 
     if(state == QUIT){
@@ -200,12 +243,23 @@ void InGameState::render(SDL_Renderer* renderer){
     renderTimer(renderer);
 
     if(state == PAUSE){
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 125);
-        SDL_RenderClear(renderer);
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);              
+        SDL_Rect darkOverlay = {0, 0, 1400, 900};
+        SDL_RenderFillRect(renderer, &darkOverlay);
+
+        renderButtons();
     }
 
     SDL_RenderPresent(renderer);
     
+}
+
+
+void InGameState::renderButtons(){
+    for(Button& b : buttons){
+        b.render();
+    }
 }
 
 void InGameState::renderPlayer(SDL_Renderer* renderer){
@@ -358,8 +412,6 @@ void InGameState::renderTiles(SDL_Renderer* renderer){
 
 
 void InGameState::renderBackground(SDL_Renderer* renderer){
-    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
-    SDL_RenderClear(renderer);
 
     std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
 
@@ -381,9 +433,10 @@ void InGameState::renderBackground(SDL_Renderer* renderer){
     //SDL_QueryTexture(background, NULL, NULL, &textureWidth, &textureHeight);
     SDL_RenderCopy(renderer, background1, NULL, &destRect);
     SDL_RenderCopy(renderer, background, NULL, &rectBg);
-
-    
 }
+
+
+
 void InGameState::renderLives(SDL_Renderer* renderer){
 
 }   
@@ -398,13 +451,12 @@ SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path){
     SDL_Texture* texture;
 
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);
-    //Log::log("Loading " + std::string(path));
 
     texture = IMG_LoadTexture(renderer, path);
 
     if (!texture) {
         std::cerr << "Failed to load texture: " << path << "\n";
-        std::cerr << "Error: " << IMG_GetError() << "\n"; // More accurate than SDL_GetError() for images
+        std::cerr << "Error: " << IMG_GetError() << "\n"; 
         exit(1);
     }
 
@@ -474,6 +526,8 @@ int InGameState::loadSounds(int niveau) {
     }
 
     music = Mix_LoadMUS("sounds_musics/Steam Gardens - Super Mario Odyssey OST(1).mp3");
+    //music = Mix_LoadMUS("sounds_musics/peak1.mp3");
+
 
     if (!music) {
         std::cerr << "Erreur Mix_LoadMUS: " << Mix_GetError() << std::endl;
@@ -510,6 +564,8 @@ int InGameState::loadSounds(int niveau) {
 
 
     attack = Mix_LoadWAV("sounds_musics/attack.mp3");
+    //attack = Mix_LoadWAV("sounds_musics/oraora.mp3");
+
     if (!attack) {
         std::cerr << "Erreur Mix_LoadWAV: " << Mix_GetError() << std::endl;
         Mix_CloseAudio();
@@ -528,8 +584,15 @@ int InGameState::loadSounds(int niveau) {
 }
 
 int InGameState::playBackgroundMusic(int niveau) {
-    if(!Mix_PlayingMusic()){
+
+    if(state == PAUSE){
+        Mix_VolumeMusic(8);
+    }else{
         Mix_VolumeMusic(20);
+    }
+
+    if(!Mix_PlayingMusic()){
+        
         if (Mix_PlayMusic(music, -1) == -1) { // -1 means loop infinitely
             std::cerr << "Erreur Mix_PlayMusic: " << Mix_GetError() << std::endl;
             Mix_FreeMusic(music);
@@ -601,6 +664,4 @@ void InGameState::playSound(std::string input){
         Mix_VolumeChunk(gotHit, 128);
         Mix_PlayChannel(-1,gotHit,0);
     }
-
-    
 }

@@ -1,41 +1,55 @@
 #ifndef JEU_H
 #define JEU_H
 
-
 #include <vector>
 #include <iostream>
-
 #include "Level.h"
 
-enum State{
-    MENU_PRINCIPAL,
-    CHOIX_NIVEAU,
-    NIVEAU,
-    MENU_NIVEAU,
+/// Enum representing the different states the game can be in.
+enum State {
+    MENU_PRINCIPAL,  ///< Main menu
+    CHOIX_NIVEAU,    ///< Level selection screen
+    NIVEAU,          ///< Gameplay in a level
+    MENU_NIVEAU      ///< In-level pause menu
 };
 
+/// @class Jeu
+/// @brief Handles the main game logic and state transitions.
+///
+/// This class contains the current level and manages the overall game state.
+class Jeu {
 
-class Jeu{
+    Level currentLevel;  ///< The currently loaded level
+    int state;            ///< Current game state (see State enum)
 
+public:
 
-    Level currentLevel;
-    int state;
+    /// @brief Constructor
+    Jeu();
 
-    public:
+    /// @brief Starts the main game loop.
+    void gameLoop();
 
-        Jeu();
-        void gameLoop();
+    /// @brief Gets the current state of the game.
+    /// @return Current game state.
+    int getState() const;
 
-        int getState() const;
+    /// @brief Sets the current state of the game.
+    /// @param newState The new state to set.
+    void setState(int newState);
 
-        void setState(int newState);
+    /// @brief Loads the specified level.
+    /// @param level The level number to load.
+    void loadLevel(int level);
 
-        void loadLevel(int level);
+    /// @brief Gets the current level object.
+    /// @return Reference to the current Level.
+    Level& getCurrentLevel();
 
-        Level& getCurrentLevel();
-        void update(std::string input, float deltaTime);
-
+    /// @brief Updates the current level based on player input and elapsed time.
+    /// @param input The current input string.
+    /// @param deltaTime Time elapsed since last frame (in seconds).
+    void update(std::string input, float deltaTime);
 };
 
-
-#endif
+#endif // JEU_H

@@ -22,7 +22,11 @@ public:
            SDL_Color normalColor, SDL_Color hoverColor, SDL_Color pressedColor, SDL_Color textColor,
            TTF_Font* font, SDL_Renderer* renderer);
     ~Button();
+
+    Button(Button&& other) noexcept;
+    Button& operator=(Button&& other) noexcept;
     
+    void updateTextTexture();
     void render();
     void handleEvent(const SDL_Event& e);
     void setPosition(int x, int y);
@@ -40,7 +44,9 @@ public:
     bool isPressed() const { return state == State::PRESSED; }
     Rectangle getRect() const;
 private:
-    void updateTextTexture();
+ 
+    
+   
     
     
     Rectangle box;

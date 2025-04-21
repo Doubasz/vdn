@@ -122,13 +122,13 @@ void Level::loadGameMap(int lvl){
 
     switch(lvl){
         case DESERT:
-            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/level1.txt";
+            path = "scripts/mapGeneration/desert.txt";
             break;
         case FOREST:
-            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/level1.txt";
+            path = "scripts/mapGeneration/level1.txt";
             break;
         case CITY:
-            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/level1.txt";
+            path = "scripts/mapGeneration/level1.txt";
             break;
     }
 

@@ -7,21 +7,21 @@
 
 void Camera::update(float targetX, float targetY, float deltaTime) {
 
-    
-    
-    this->targetX = targetX - (w / 2);  // Center on target
+    // Center on target
+    this->targetX = targetX - (w / 2);  
     this->targetY = targetY - (h / 2);
     
     if (smoothFollow) {
-        
         x += (this->targetX - x) * followSpeed;
         y += (this->targetY - y) * followSpeed;
-    } else {
+    } 
+    else {
         // Immediate follow
         x = this->targetX;
         y = this->targetY;
     }
     
+    // if out of bonds
     if (x < 0) x = 0;
     if (y < 0) y = 0;
 
@@ -29,9 +29,8 @@ void Camera::update(float targetX, float targetY, float deltaTime) {
     if(y > levelHeight - h) y = levelHeight - h;
     
 
-    //x = std::clamp(x, 0.0f, static_cast<float>(levelWidth - w));
-    //y = std::clamp(y, 0.0f, static_cast<float>(levelHeight - h));
 
+    // apply shaking if active
     if(isShaking){
         shakeTimer += deltaTime;
 
@@ -45,6 +44,7 @@ void Camera::update(float targetX, float targetY, float deltaTime) {
             x += offSetX;
             y += offSetY;
 
+            //  also checks here if out of bonds just in case
             if (x < 0) x = 0;
             if (y < 0) y = 0;
 
@@ -52,7 +52,7 @@ void Camera::update(float targetX, float targetY, float deltaTime) {
             if(y > levelHeight - h) y = levelHeight - h;
         }
         else{
-            isShaking = 0;
+            isShaking = false;
         }
     }
 }

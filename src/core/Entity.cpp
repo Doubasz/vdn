@@ -7,8 +7,8 @@
 
 
 Entity::Entity(){
+    
     velocity = {0, 0};
-
     knockBackTimer = 0;
     knockBackDuration = 0;
     knockBackForce = 0;
@@ -53,6 +53,7 @@ bool Entity::checkCollisionWithTop(const Entity& other){
 }
 
 void Entity::updateIFrames(float deltaTime){
+    //  Only update when being on IFrames (idk if im already checking it in Level)
     if(!canGetHit){
         if(iFramesTimer < iFrames){
             iFramesTimer += deltaTime;
@@ -68,15 +69,16 @@ void Entity::updateIFrames(float deltaTime){
 }
 
 void Entity::applyKnockBack(float force, float duration){
+
     knockBackForce = force;
     knockBackDuration = duration;
-
     velocity = {0, 0};
 }
 
 
 void Entity::updateKnockBack(float deltaTime){
 
+    //  onKnockback
     if(knockBackTimer < knockBackDuration){
         knockBackTimer += deltaTime;
 
@@ -84,6 +86,7 @@ void Entity::updateKnockBack(float deltaTime){
             knockBackTimer = 0;
             onKnockBack = false;
         }
+        // the y force is less to give a somewhat parabolic effect
         else{
             velocity.x += knockBackForce;
             velocity.y -= knockBackForce / 2;

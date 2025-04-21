@@ -5,6 +5,7 @@
 #include "GameState.h"
 #include "../core/Jeu.h"
 #include "../core/Camera.h"
+#include "Button.h"
 
 
 enum WindowState{
@@ -44,7 +45,8 @@ private:
     Animation currentAnimation;
 
     std::vector<SDL_Texture*> platformTexture;
-    std::vector<SDL_Rect> plaformRect;
+
+    std::vector<Button> buttons;
 
     SDL_Texture* ennemySheet;
 
@@ -78,7 +80,7 @@ private:
 public:
 
     InGameState();
-    InGameState(SDL_Renderer* renderer, int lvl);
+    InGameState(SDL_Renderer* renderer, TTF_Font* font, int lvl);
 
     void load() override;
     SDL_Texture *getTileSet() const;
@@ -111,6 +113,12 @@ public:
     void playSound(std::string input);
     int loadSounds(int niveau);
 
+    void initButtons();
+
+    void resumeGame();
+    void quitGame();
+
+    void renderButtons();
     
 
 };

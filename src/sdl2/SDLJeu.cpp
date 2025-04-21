@@ -59,12 +59,8 @@ SDLJeu::SDLJeu() {
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_NONE);
 
     
-
-
     //playBackgroundMusic(0,0);
     //later do the niv and the state in parametres to choose which music is playing
-
-    displayMap(gameMap);
 
     currentState = std::make_unique<MenuState>(renderer, font);
     static_cast<MenuState*>(currentState.get())->load();
@@ -73,7 +69,7 @@ SDLJeu::SDLJeu() {
     GameState::StateCode lastState = GameState::MAIN_MENU;
     GameState::StateCode currentStateCode = GameState::MAIN_MENU;
 
-
+    std::cout << "font " << font << std::endl;
 
     /*loadPlayerTextures();
     loadPlatformTextures();
@@ -175,7 +171,7 @@ void SDLJeu::run(){
 
 GameState* SDLJeu::loadState(GameState::StateCode state){
     currentState->unload();
-    
+
     switch (state) {
         case GameState::StateCode::MAIN_MENU:
             
@@ -183,7 +179,7 @@ GameState* SDLJeu::loadState(GameState::StateCode state){
             static_cast<MenuState*>(currentState.get())->load();
             break;
         case GameState::StateCode::LEVEL:
-            currentState = std::make_unique<InGameState>(renderer, DESERT);
+            currentState = std::make_unique<InGameState>(renderer, font ,DESERT);
             static_cast<InGameState*>(currentState.get())->load();
             break;
     }
@@ -263,10 +259,11 @@ void SDLJeu::loadFont() {
     font = TTF_OpenFont("textures/fonts/yakuza.ttf", 24); 
     if (!font) {
         Log::error("Failed to load font: " + std::string(TTF_GetError()));
+        exit(-1);
     }
 }
 
-void SDLJeu::drawLives() {
+/*void SDLJeu::drawLives() {
     if (!font) return; 
     
     int lives = jeu.getCurrentLevel().getPlayer().getHp();
@@ -322,57 +319,7 @@ void SDLJeu::drawTimer() {
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
 }
-
-void SDLJeu::renderMainMenu() {
-    SDL_Event event;
-    bool inMenu = true;
-
-    SDL_Color white = {255, 255, 255, 255};
-
-    while (inMenu) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                inMenu = false;
-                quit = true;
-                return;
-            } else if (event.type == SDL_MOUSEBUTTONDOWN) {
-                int x = event.button.x;
-                int y = event.button.y;
-
-                // Bouton "Start"
-                if (x >= 600 && x <= 800 && y >= 400 && y <= 470) {
-                    inMenu = false;
-                    //gameState = LEVEL;  // On passe à l'état de jeu
-                }
-            }
-        }
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // fond noir
-        SDL_RenderClear(renderer);
-
-        // Titre
-        SDL_Surface* titleSurface = TTF_RenderText_Solid(font, "Vent du Nord", white);
-        SDL_Texture* titleTexture = SDL_CreateTextureFromSurface(renderer, titleSurface);
-        SDL_Rect titleRect = {SCREEN_WIDTH / 2 - titleSurface->w / 2, 200, titleSurface->w, titleSurface->h};
-        SDL_RenderCopy(renderer, titleTexture, NULL, &titleRect);
-        SDL_FreeSurface(titleSurface);
-        SDL_DestroyTexture(titleTexture);
-
-        // Bouton "Start"
-        SDL_Rect startButton = {600, 400, 200, 70};
-        SDL_SetRenderDrawColor(renderer, 100, 100, 255, 255); // bleu clair
-        SDL_RenderFillRect(renderer, &startButton);
-
-        SDL_Surface* startText = TTF_RenderText_Solid(font, "Start", white);
-        SDL_Texture* startTexture = SDL_CreateTextureFromSurface(renderer, startText);
-        SDL_Rect startTextRect = {startButton.x + 50, startButton.y + 20, startText->w, startText->h};
-        SDL_RenderCopy(renderer, startTexture, NULL, &startTextRect);
-        SDL_FreeSurface(startText);
-        SDL_DestroyTexture(startTexture);
-
-        SDL_RenderPresent(renderer);
-    }
-}
+*/
 
 
 

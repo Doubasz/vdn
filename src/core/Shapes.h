@@ -141,7 +141,7 @@ struct Circle
 	/// Creates a nice circle with `x` and `y` coordinates and `r`
 	/// radius.
 	Circle(float x, float y, int r);
-
+	void updateTextTexture();
 	/// Adds to the current x.
 	///
 	/// @note Although this seems useless, you must call this
