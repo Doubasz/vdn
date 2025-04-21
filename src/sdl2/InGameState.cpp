@@ -36,12 +36,13 @@ void InGameState::load(){
 
     tileSize = 48;
     blinkInterval = 1;
-
+    gameTime = 150;
     jeu.loadLevel(level);
 
     loadTextures(renderer);
     loadAnimations();
-    loadSounds(0);
+    int lvl = jeu.getCurrentLevel().getLevel();
+    loadSounds(lvl);
     initButtons();
 
     std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
@@ -175,6 +176,35 @@ void InGameState::handleEvents(SDL_Event& events){
         b.handleEvent(events);
     }
 }
+void InGameState::renderGameOverScreen(SDL_Renderer* renderer) {
+    // Charger une image de fin de jeu
+    SDL_Surface* gameOverSurface = IMG_Load("textures/menu/game over.jpeg"); // Assurez-vous que l'image existe
+    if (!gameOverSurface) {
+        std::cerr << "Failed to load game over image: " << SDL_GetError() << std::endl;
+        return;
+    }
+
+    SDL_Texture* gameOverTexture = SDL_CreateTextureFromSurface(renderer, gameOverSurface);
+    SDL_FreeSurface(gameOverSurface); // Libérez la surface après avoir créé la texture
+
+    if (!gameOverTexture) {
+        std::cerr << "Failed to create texture: " << SDL_GetError() << std::endl;
+        return;
+    }
+
+    // Obtenez la taille de la fenêtre
+    int windowWidth, windowHeight;
+    SDL_GetRendererOutputSize(renderer, &windowWidth, &windowHeight);
+
+    // Définissez le rectangle de destination pour couvrir toute la fenêtre
+    SDL_Rect destRect = { 0, 0, windowWidth, windowHeight };
+
+    // Rendu de la texture
+    SDL_RenderCopy(renderer, gameOverTexture, nullptr, &destRect);
+
+    // Détruire la texture après usage
+    SDL_DestroyTexture(gameOverTexture);
+}
 
 GameState::StateCode InGameState::update(float dt){
 
@@ -196,11 +226,17 @@ GameState::StateCode InGameState::update(float dt){
 
     lastPlayerState = jeu.getCurrentLevel().getPlayer().getState();
     playBackgroundMusic();
-    if(state == WindowState::CONTINUE){
-        updateGame(dt);
-        updateCamera(dt);
-        updateEnnemyAnimation(dt);
-        updateAnimation(dt);
+    
+    if(state != WindowState::PAUSE){
+        if(jeu.getCurrentLevel().finJeu()){
+            state = WindowState::END;
+        }else{
+
+            updateGame(dt);
+            updateCamera(dt);
+            updateEnnemyAnimation(dt);
+            updateAnimation(dt);
+        }
     }
 
     bool isAlive = jeu.getCurrentLevel().getPlayer().getIsAlive();
@@ -275,21 +311,25 @@ void InGameState::updateCamera(float dt){
 
 
 void InGameState::render(SDL_Renderer* renderer){
+    if(state == WindowState::END){
+        renderGameOverScreen(renderer);
+    }else{
 
-    renderBackground(renderer);
-    renderTiles(renderer);
-    renderPlayer(renderer);
-    renderEnnemy(renderer);
-    renderLives(renderer);
-    renderTimer(renderer);
-
-    if(state == WindowState::PAUSE){
-        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);              
-        SDL_Rect darkOverlay = {0, 0, 1400, 900};
-        SDL_RenderFillRect(renderer, &darkOverlay);
-
-        renderButtons();
+        renderBackground(renderer);
+        renderTiles(renderer);
+        renderPlayer(renderer);
+        renderEnnemy(renderer);
+        renderLives(renderer);
+        renderTimer(renderer);
+    
+        if(state == WindowState::PAUSE){
+            SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);              
+            SDL_Rect darkOverlay = {0, 0, 1400, 900};
+            SDL_RenderFillRect(renderer, &darkOverlay);
+    
+            renderButtons();
+        }
     }
 
     if(state == WindowState::DEAD){
@@ -558,8 +598,16 @@ int InGameState::loadSounds(int niveau) {
         SDL_Quit();
         return 1;
     }
+    switch(niveau) {
+        case DESERT : 
+            music = Mix_LoadMUS("sounds_musics/Super Mario 64 Music- Lethal Lava LandDesert.mp3");
+            break;
+        case FOREST : 
+            music = Mix_LoadMUS("sounds_musics/Steam Gardens - Super Mario Odyssey OST(1).mp3");
+            break;
+    } 
 
-    music = Mix_LoadMUS("sounds_musics/Steam Gardens - Super Mario Odyssey OST(1).mp3");
+    
     //music = Mix_LoadMUS("sounds_musics/peak1.mp3");
 
 

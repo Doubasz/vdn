@@ -13,8 +13,8 @@ Level::Level(){
     player = Player();
     level = DESERT;
 
-    loadGameMap(DESERT);
-    loadTileMap();
+    loadGameMap(level);
+    
 
     //displayMap(gameMap);
 
@@ -51,16 +51,7 @@ void Level::unloadLevel(){
 }
 
 
-void displayMap(const std::vector<std::vector<int>>& vec){
 
-    std::cout << "GameMap" << std::endl;
-    for (const auto& row : vec) {
-        for (int tile : row) {
-            std::cout << tile << " ";
-        }
-        std::cout << std::endl;
-    }
-}
 
 
 
@@ -76,48 +67,12 @@ std::vector<Platform>& Level::getPlatforms(){
     return platforms;
 }
 
-std::vector<std::vector<int>>& Level::getTileMap(){
-    return tileMap;
-}
+
 
 std::vector<std::vector<int>>& Level::getGameMap(){
     return gameMap;
 }
 
-void Level::loadTileMap(){
-
-    std::string path = "";
-
-    switch(level){
-        case DESERT:
-            path = "scripts/mapGeneration/map3.txt";
-    }
-
-    if(!path.empty()){
-
-        std::ifstream file(path);
-
-        if (!file.is_open()) {
-            std::cerr << "Error: Unable to open file " << path << std::endl;
-            exit(-1);
-        }
-
-        std::string line;
-        while (std::getline(file, line)) {
-            std::vector<int> row;
-            std::stringstream ss(line);
-            int value;
-
-            while (ss >> value) {
-                row.push_back(value);
-            }
-
-            tileMap.push_back(row);
-        }
-
-        file.close();
-    }
-}
 
 void Level::loadGameMap(int lvl){
 
@@ -125,7 +80,11 @@ void Level::loadGameMap(int lvl){
 
     switch(lvl){
         case DESERT:
+<<<<<<< HEAD
+            path = "scripts/mapGeneration/leveldesert.txt";
+=======
             path = "scripts/mapGeneration/desert.txt";
+>>>>>>> 4dec583d2a1c5f999b36ccb8403aeb666e9baf4f
             break;
         case FOREST:
             path = "scripts/mapGeneration/level1.txt";
@@ -234,11 +193,12 @@ void Level::ennemyMovAuto(float deltaTime) {
                     
                     continue;
                 }
-    
+                e.setVel(1.5,0);
                 e.followPlayer(player);
                 e.update(deltaTime);
             }
             else {
+                e.setVel(1,0);
                 // Hors de portée → agit comme un SCORPION
                 if (isGoingToFall) {
                     e.changeDirection();
@@ -281,6 +241,12 @@ bool Level::finJeu(){
 void Level::deroulementLevel(std::string input, float deltaTime){
 
     isLevelCompleted = finLevel(player);
+    if( isLevelCompleted){
+        if(level == DESERT)
+            level = FOREST;
+    }
+
+    
     player.seDeplacer(input);
 
     

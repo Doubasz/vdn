@@ -107,7 +107,6 @@ void Player::update(float deltaTime){
 
     box.setX(box.x + velocity.x * deltaTime);
     box.setY(box.y + velocity.y * deltaTime);
-    std::cout << "x : " << box.x << " y : " << box.y << std::endl;
     
     updateState();
 

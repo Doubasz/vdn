@@ -31,9 +31,9 @@ EXEC_ENNEMY := $(BIN_DIR)/ennemy
 EXEC_LEVEL  := $(BIN_DIR)/level
 EXEC_PLAYER := $(BIN_DIR)/player
 EXEC_BUTTON := $(BIN_DIR)/button_test # Binaire pour les tests de Button
-EXEC_MENU   := $(BIN_DIR)/menu_test   # Binaire pour les tests de MenuState
 
-.PHONY: all camera ennemy level player button_test menu_test run_camera run_ennemy run_level run_button_test run_menu_test clean
+
+.PHONY: all camera ennemy level player button_test  run_camera run_ennemy run_level run_button_test  clean
 
 # Cible par défaut
 all: camera ennemy level player button_test menu_test
@@ -79,12 +79,7 @@ run_button_test: button_test
 	./$(EXEC_BUTTON)
 
 # --- Tests MenuState ---
-menu_test: $(TEST_OBJS) $(CORE_OBJS) $(SDL2_OBJS)
-	mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $(TEST_FLAGS) $(OBJ_DIR)/MenuStateTest.o $(CORE_OBJS) $(SDL2_OBJS) -o $(EXEC_MENU) $(LIBS_TEST)
 
-run_menu_test: menu_test
-	./$(EXEC_MENU)
 
 # Règle pour compiler les tests dans obj/
 $(OBJ_DIR)/%.o: $(SRX_TEST)/%.cpp

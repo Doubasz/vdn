@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL_mixer.h>
 #include "GameState.h"
+#include <SDL2/SDL_image.h>
 #include "../core/Jeu.h"
 #include "../core/Camera.h"
 #include "Button.h"
@@ -17,10 +18,7 @@
 /// - QUIT: The game is quitting
 /// - DEAD: The player is dead
 enum WindowState{
-    CONTINUE, ///< Normal game state
-    PAUSE,    ///< Paused game state
-    QUIT,     ///< Quit game state
-    DEAD,     ///< Player death state
+    CONTINUE, PAUSE, QUIT, END,DEAD
 };
 
 /// A structure to represent an animation for an object (like the player or enemies)
@@ -125,11 +123,8 @@ public:
     ///
     /// @param events The SDL event to be handled
     void handleEvents(SDL_Event& events) override;
-
-    /// Updates the game state based on elapsed time
-    ///
-    /// @param dt The delta time (time elapsed since the last frame)
-    /// @return The next game state code (e.g., CONTINUE, PAUSE, etc.)
+    void renderGameOverScreen(SDL_Renderer *renderer);
+   
     StateCode update(float dt) override;
 
     /// Renders the game to the screen

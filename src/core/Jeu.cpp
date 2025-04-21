@@ -20,9 +20,7 @@ void Jeu::loadLevel(int level){
 
 void Jeu::gameLoop(){
 
-    if(currentLevel.isLevelFinished()){
-        currentLevel = Level(currentLevel.getLevel() + 1);
-    }
+    
 }
 int Jeu::getState() const {
     return state;
