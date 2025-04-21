@@ -10,7 +10,6 @@ SDLJeu::SDLJeu() {
     int rendererFlags = SDL_RENDERER_ACCELERATED;
 
     quit = false;
-    
     font = nullptr;
     
     if(SDL_Init(SDL_INIT_VIDEO) < 0){
@@ -90,8 +89,6 @@ void SDLJeu::run(){
         currentStateCode = this->currentState->update(deltaTime);
         this->currentState->render(renderer);
 
-        
-    
         if(currentStateCode != lastState){
             loadState(currentStateCode);
         }

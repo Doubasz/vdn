@@ -17,30 +17,19 @@ void txtAff(WinTXT &win, Jeu &jeu)
 	win.clear();
 
 	// Affichage des murs et des pastilles
-	for (int x = 0; x < gameMap[0].size(); ++x){
-        for (int y = 0; y < gameMap.size(); ++y){
-                char c;
-                /*switch(gameMap[y][x]){
-                    case SANDBLOCK:
-                        c = '#';
-                        break;
-                    case AIR:
-                        c = ' ';
-                        break;
-                    default:
-                        c = '?';
-                        break;
-                }*/
-				if(gameMap[y][x] != NONE && gameMap[y][x] != ENNEMY){
+	for (int x = 0; x < (int)gameMap[0].size(); ++x){
+		for (int y = 0; y < (int)gameMap.size(); ++y){
+				char c;
+				if (gameMap[y][x] != NONE && (gameMap[y][x] != ENNEMY_TYPE1 && gameMap[y][x] != ENNEMY_TYPE2 && gameMap[y][x] != ENNEMY_TYPE3)){
 					c = '#';
 				}
 				else{
 					c = ' ';
 				}
 
-               win.print(x, y, c);      
-        }
-    }
+			win.print(x, y, c);      
+		}
+	}
 		
     Rectangle playerPos = player.getBox();
 	win.print(playerPos.x, playerPos.y, 'P');
