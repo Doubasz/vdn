@@ -109,8 +109,9 @@ void Entity::increaseHp(){hp++;}
 
 void Entity::decreaseHp(){
     hp--;
-    if(hp < 0){
+    if(hp <= 0){
         hp = 0;
         isAlive = false;
+        
     }
 }
