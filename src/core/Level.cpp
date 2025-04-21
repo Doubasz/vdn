@@ -130,9 +130,7 @@ void Level::loadGameMap(int lvl){
         case FOREST:
             path = "scripts/mapGeneration/level1.txt";
             break;
-        case CITY:
-            path = "scripts/mapGeneration/level1.txt";
-            break;
+        
     }
 
     std::ifstream file(path);
@@ -271,10 +269,18 @@ void Level::ennemyMovAuto(float deltaTime) {
 
 
 
-
+bool Level::finJeu(){
+    if(level == FOREST){
+        if(isLevelCompleted)
+            return true;
+        
+    }
+    return false;
+}
 
 void Level::deroulementLevel(std::string input, float deltaTime){
 
+    isLevelCompleted = finLevel(player);
     player.seDeplacer(input);
 
     
@@ -329,6 +335,21 @@ int Level::getPlayerState(){
 
 int Level::getLevel(){
     return level;
+}
+
+bool Level::finLevel (Player& player){
+    if(level == DESERT ){
+        if(player.getBox(). x > 199.8){
+            return true;
+        }
+        return false;
+    }else if(level == FOREST){
+        if(player.getBox().x > 59.8){
+            return true;
+        }
+        return false;
+    }
+    return false;
 }
 
 bool Level::isLevelFinished(){
