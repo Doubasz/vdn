@@ -30,7 +30,7 @@ public:
 
     void load() override;
     int unload() override;
-    void handleEvents(SDL_Event& events, float deltaTime) override;
+    void handleEvents(SDL_Event& events) override;
     StateCode update(float dt) override;
     void render(SDL_Renderer* renderer) override;
 
@@ -38,7 +38,7 @@ public:
     void renderBackground(SDL_Renderer* renderer);
     void load_music();
     int playBackgroundMusic();
-    void renderButtons(SDL_Renderer *renderer);
+    void renderButtons();
 
     void loadTextures();
 
@@ -46,6 +46,6 @@ public:
 
 };
 
-SDL_Texture* loadTexture(SDL_Renderer* renderer, const char* path);
+SDL_Texture* loadTextureM(SDL_Renderer* renderer, const char* path);
 
 #endif

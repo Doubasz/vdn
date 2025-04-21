@@ -97,14 +97,11 @@ public:
     /// @return True if player's HP > 0.
     bool getIsAlive() const;
 
-    /// @brief Modifies the player's velocity manually.
-    void changeVelocity(int x, int y);
-
     /// @brief Checks collision with a platform.
     bool checkPlatformCollision(Entity& platform);
 
     /// @brief Checks collision with an enemy and handles damage/knockback.
-    void checkCollisionEnnemy(Entity& ennemy, float deltaTime);
+    void checkCollisionEnnemy(Entity& ennemy);
 
     /// @brief Applies gravity to the player.
     void updateGravity();
@@ -118,25 +115,12 @@ public:
     /// @brief Updates the animation/logic state (IDLE, JUMP, etc).
     void updateState();
 
-    /// @brief Handles left/right movement and acceleration.
-    void updateHorizontalMovement(float deltaTime);
-
-    /// @brief Handles jumping and falling motion.
-    void updateVerticalMovement(float deltaTime);
-
-    /// @brief Resolves horizontal collision with a platform.
-    void checkHorizontalCollision(Entity& platform);
-
-    /// @brief Resolves vertical collision with a platform.
-    bool checkVerticalCollision(Entity& platform);
-
     /// @return Current player state.
     int getState();
 
     /// @brief Sets jump height boost.
     void setJumpBoost(int j);
     
-
     /// @return Direction player is facing (LEFT or RIGHT).
     int getDirection() { return this->direction; }
 

@@ -41,7 +41,6 @@ void MenuState::load(){
 void MenuState::initButtons(){
 
     int screenWidth = 1400;
-    int screenHeight = 900;
 
     int buttonWidth = 400;
     int buttonHeight = 100;
@@ -62,7 +61,7 @@ void MenuState::loadTextures(){
 
     std::string pathBg = "textures/backgroundMenu.png";
 
-    background = loadTexture(renderer, pathBg.c_str());
+    background = loadTextureM(renderer, pathBg.c_str());
 }
 
 
@@ -87,16 +86,18 @@ int MenuState::unload(){
 
     if(Mix_PlayingMusic())
         Mix_HaltMusic();
+
+    return 0;
 }
 
 
-GameState::StateCode MenuState::update(float dt){
+GameState::StateCode MenuState::update(float /*dt*/){
     playBackgroundMusic();
     return whatToDoNow;
 }
 
 
-void MenuState::handleEvents(SDL_Event& events, float deltaTime){
+void MenuState::handleEvents(SDL_Event& events){
     for(Button& b : buttons){
         b.handleEvent(events);
     }
@@ -106,13 +107,13 @@ void MenuState::handleEvents(SDL_Event& events, float deltaTime){
 void MenuState::render(SDL_Renderer* renderer) {
 
     renderBackground(renderer);
-    renderButtons(renderer);
+    renderButtons();
 
     SDL_RenderPresent(renderer);
 }
 
 
-void MenuState::renderButtons(SDL_Renderer* renderer){
+void MenuState::renderButtons(){
     for(Button& b : buttons){
         b.render();
     }
@@ -151,57 +152,7 @@ int MenuState::playBackgroundMusic() {
     return 0;
 }
 
-
-/*void renderMainMenu() {
-    SDL_Event event;
-    bool inMenu = true;
-
-    SDL_Color white = {255, 255, 255, 255};
-
-    while (inMenu) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                inMenu = false;
-                quit = true;
-                return;
-            } else if (event.type == SDL_MOUSEBUTTONDOWN) {
-                int x = event.button.x;
-                int y = event.button.y;
-
-                // Bouton "Start"
-                if (x >= 600 && x <= 800 && y >= 400 && y <= 470) {
-                    inMenu = false;
-                    //gameState = LEVEL;  // On passe à l'état de jeu
-                }
-            }
-        }
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // fond noir
-        SDL_RenderClear(renderer);
-
-        // Titre
-        SDL_Surface* titleSurface = TTF_RenderText_Solid(font, "Vent du Nord", white);
-        SDL_Texture* titleTexture = SDL_CreateTextureFromSurface(renderer, titleSurface);
-        SDL_Rect titleRect = {SCREEN_WIDTH / 2 - titleSurface->w / 2, 200, titleSurface->w, titleSurface->h};
-        SDL_RenderCopy(renderer, titleTexture, NULL, &titleRect);
-        SDL_FreeSurface(titleSurface);
-        SDL_DestroyTexture(titleTexture);
-
-        
-        
-        SDL_Surface* startText = TTF_RenderText_Solid(font, "Start", white);
-        SDL_Texture* startTexture = SDL_CreateTextureFromSurface(renderer, startText);
-        SDL_Rect startTextRect = {startButton.x + 50, startButton.y + 20, startText->w, startText->h};
-        SDL_RenderCopy(renderer, startTexture, NULL, &startTextRect);
-        SDL_FreeSurface(startText);
-        SDL_DestroyTexture(startTexture);
-
-        SDL_RenderPresent(renderer);
-    }
-}*/
-
-
-SDL_Texture* loadTexture(SDL_Renderer* renderer, const char* path){
+SDL_Texture* loadTextureM(SDL_Renderer* renderer, const char* path){
     SDL_Texture* texture;
 
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);

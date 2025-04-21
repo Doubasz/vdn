@@ -13,12 +13,10 @@
 #include <cassert>
 #include <thread>
 #include "../core/Jeu.h"
-#include "../core/Log.h"
 #include "../core/Camera.h"
 #include "../core/Timer.h"  // Jai ajouté ca 
 #include "Button.h"
 
-#include "GameState.h"
 #include "MenuState.h"
 #include "InGameState.h"
 
@@ -38,71 +36,27 @@ const std::string PLAYER_TEXTURE[13] = {
 
 class SDLJeu{
 
-    Jeu jeu;
-
     SDL_Window* window;
     SDL_Renderer* renderer;
 
-
     TTF_Font* font;
-    SDL_Color textColor;
-
-
-
-    std::vector<Button> buttons;
 
     std::unique_ptr<GameState> currentState;
     GameState::StateCode lastState;
     GameState::StateCode currentStateCode;
 
-
-    int state;
     bool quit;
-    Timer gameTimer{1.0};  
-    double gameTime;
-
-   
-
-    
-    
-
-    bool pKeyWasPressed = false; 
-
-    SDL_Rect quitButtonRect = {SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50, 200, 60};
-
-
 
 public:
 
     SDLJeu();
     ~SDLJeu();
 
-
-    void drawLives(); 
-    void drawTimer();
-
-    void renderMainMenu();
-
-    int loadSounds(int niveau);
-
-    int playBackgroundMusic(int niveau, int state);
-
     void loadFont();
-
-    void playSound(std::string input);
     bool isQuit() const { return quit; }
-    void resetGame();
-
-
     void run();
 
-    GameState* loadState(GameState::StateCode state);
+    void loadState(GameState::StateCode state);
 };
-
-
-
-void drawTexture(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect& rect);
-void drawRect(SDL_Renderer*& renderer, SDL_Rect& rect, SDL_Color color);
-
 
 #endif

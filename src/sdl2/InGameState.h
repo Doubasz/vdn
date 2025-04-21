@@ -8,6 +8,9 @@
 #include "Button.h"
 
 
+#define SCREEN_WIDTH 1400
+#define SCREEN_HEIGHT 900
+
 enum WindowState{
     CONTINUE, PAUSE, QUIT,
 };
@@ -41,15 +44,12 @@ private:
     SDL_Rect playerRect;
 
     std::vector<Animation> playerAnimation;
-
     Animation currentAnimation;
 
     std::vector<SDL_Texture*> platformTexture;
-
     std::vector<Button> buttons;
 
     SDL_Texture* ennemySheet;
-
     TTF_Font* font;
     SDL_Color textColor;
 
@@ -70,12 +70,11 @@ private:
     
     int tileSize;
     int state;
-
     int blinkInterval;
-
     int lastPlayerState;
-
     bool quit;
+
+    int gameTime;
 
 public:
 
@@ -85,7 +84,7 @@ public:
     void load() override;
     SDL_Texture *getTileSet() const;
     int unload() override;
-    void handleEvents(SDL_Event& events, float deltaTime) override;
+    void handleEvents(SDL_Event& events) override;
     StateCode update(float dt) override;
     void render(SDL_Renderer* renderer) override;
 
@@ -109,7 +108,7 @@ public:
     void updateEnnemyAnimation(float deltaTime);
     void updateCamera(float deltaTime);
 
-    int playBackgroundMusic(int niveau) ;
+    int playBackgroundMusic() ;
     void playSound(std::string input);
     int loadSounds(int niveau);
 
@@ -123,6 +122,6 @@ public:
 
 };
 
-SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path);
+SDL_Texture* loadTexture(SDL_Renderer* renderer, const char* path);
 
 #endif

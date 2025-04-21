@@ -39,8 +39,8 @@ public:
     /// @param mapWidth Total width of the level.
     /// @param mapHeight Total height of the level.
     Camera(int w, int h, int mapWidth, int mapHeight)
-        : x(0), y(0), targetX(0), targetY(0),
-          w(w), h(h),
+        : x(0), y(0), w(w), h(h),
+          targetX(0), targetY(0),
           smoothFollow(false), followSpeed(5.0f),
           levelWidth(mapWidth), levelHeight(mapHeight) {}
 

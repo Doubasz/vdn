@@ -20,7 +20,7 @@ Button::Button(int x, int y, int width, int height, const std::string& text,
     textWidth(0), textHeight(0), onClick(nullptr)
 {
 
-    box = {x, y, width, height};
+    box = {(float)x, (float)y, width, height};
     updateTextTexture();
 }
 
@@ -84,7 +84,7 @@ Button& Button::operator=(Button&& other) noexcept {
 
 void Button::render() {
     Rectangle temp = getRect();
-    SDL_Rect buttonRect = {temp.x, temp.y, temp.w, temp.h};
+    SDL_Rect buttonRect = {(int)temp.x, (int)temp.y, temp.w, temp.h};
 
     // Choose color based on state
     SDL_Color currentColor;
@@ -136,7 +136,7 @@ void Button::handleEvent(const SDL_Event& e) {
 
     // Get button rectangle
     Rectangle temp = getRect();
-    SDL_Rect buttonRect = {temp.x, temp.y, temp.w, temp.h};
+    SDL_Rect buttonRect = {(int)temp.x, (int)temp.y, temp.w, temp.h};
 
     // Handle different event types
     if (e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONDOWN || e.type == SDL_MOUSEBUTTONUP) {

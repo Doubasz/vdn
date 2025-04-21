@@ -18,14 +18,6 @@ Entity::Entity(){
     isVisible = true;
 }
 
-Entity::Entity(int x, int y, int w, int h, float vx, float vy){
-    velocity = {vx, vy};
-}
-
-Entity::Entity(Vec2 pos, Vec2 dim, Vec2f vel){
-    velocity = vel;
-}
-
 Entity::~Entity(){}
 
 void Entity::setPos(int x, int y) {
@@ -37,6 +29,7 @@ void Entity::setDim(int w, int h) {
     box.w = w;
     box.h = h;
 }
+
 // Dans Entity.cpp
 bool Entity::checkCollision(const Entity& other) const {
     return box.overlaps(other.box);
@@ -105,7 +98,7 @@ void Entity::updateKnockBack(float deltaTime){
 
 
 void Entity::setVel(int x, int y){
-    velocity = {x, y};
+    velocity = {(float)x, (float)y};
 }
 
 void Entity::setHp(int h){hp = h;}
