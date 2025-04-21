@@ -73,9 +73,11 @@ SDL_Texture* InGameState::getEnnemySheet() const {
 SDL_Texture* InGameState::getBackground1() const {
     return background1;
 }
+
 const std::vector<Animation>& InGameState::getPlayerAnimation() const {
     return playerAnimation;
 }
+
 void InGameState::loadAnimations(){
 
     //spriteWidth = 50;
