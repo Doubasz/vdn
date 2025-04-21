@@ -8,6 +8,11 @@
 #include <cassert>
 
 class MenuState : public GameState {
+
+    enum WindowStat{
+        NORMAL, LEVELS, OPTION
+    };
+
 private:
 
     SDL_Renderer* renderer;
@@ -15,6 +20,8 @@ private:
 
     SDL_Texture* background;
     std::vector<Button> buttons;
+
+    std::vector<Button> lvlButtons;
 
     Mix_Music* music;
 
@@ -30,7 +37,7 @@ public:
 
     void load() override;
     int unload() override;
-    void handleEvents(SDL_Event& events, float deltaTime) override;
+    void handleEvents(SDL_Event& events) override;
     StateCode update(float dt) override;
     void render(SDL_Renderer* renderer) override;
 
@@ -38,14 +45,19 @@ public:
     void renderBackground(SDL_Renderer* renderer);
     void load_music();
     int playBackgroundMusic();
-    void renderButtons(SDL_Renderer *renderer);
+    void renderButtons();
+    void renderLevelButtons();
 
     void loadTextures();
 
     void startGame();
+    void chooseLevel();
+    void options();
+    void startLevel1();
+    void startLevel2();
 
 };
 
-SDL_Texture* loadTexture(SDL_Renderer* renderer, const char* path);
+SDL_Texture* loadTextureM(SDL_Renderer* renderer, const char* path);
 
 #endif

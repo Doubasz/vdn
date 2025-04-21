@@ -87,7 +87,6 @@ void Player::updateJump(float deltaTime){
             jumpHoldTime = maxJumpHoldTime;
         }
 
-        float jumpProgress = jumpHoldTime / maxJumpHoldTime;
         float targetVelocity = minJumpBoost + (maxJumpBoost - minJumpBoost) * 1;//jumpProgress;
 
         if(velocity.y > targetVelocity){
@@ -108,6 +107,7 @@ void Player::update(float deltaTime){
 
     box.setX(box.x + velocity.x * deltaTime);
     box.setY(box.y + velocity.y * deltaTime);
+    std::cout << "x : " << box.x << " y : " << box.y << std::endl;
     
     updateState();
 
@@ -137,7 +137,6 @@ void Player::updateState(){
 void Player::seDeplacer(std::string input){
 
     static bool wasSpacePressed = false;
-    static bool wasAttackPressed = false;
 
     bool isAttackPressed = contains(input, 'm');
     bool isSpacePressed = contains(input, ' ');
@@ -199,10 +198,10 @@ void Player::attack(){
 
         switch(direction){
             case LEFT:
-                temp = {(box.leftMost - box.w - 0.5), box.top, 1, 1};
+            temp = {(box.leftMost - box.w - 0.5f), box.top, 1, 1};
                 break;
             case RIGHT:
-                temp = {box.rightMost + 0.5, box.top, 1, 1};
+                temp = {box.rightMost + 0.5f, box.top, 1, 1};
             case UP:
             case DOWN:
                 break;
@@ -234,11 +233,6 @@ void Player::updateAttack(float deltaTime){
         }
     }
     
-}
-
-
-void Player::changeVelocity(int x, int y){
-    velocity = {x, y};
 }
 
 
@@ -281,9 +275,6 @@ bool Player::checkPlatformCollision(Entity& platform) {
     
     // First check if there's an overlap
     if (this->box.overlaps(platform.box)) {
-        // Calculate previous position based on velocity
-        float prevX = this->box.leftMost - velocity.x;
-        float prevY = this->box.top - velocity.y;
         
         // Calculate overlap amounts in each direction
         float overlapLeft = this->box.rightMost - platform.box.leftMost;
@@ -357,7 +348,7 @@ bool Player::checkPlatformCollision(Entity& platform) {
 
 
 
-void Player::checkCollisionEnnemy(Entity& ennemy, float deltaTime){
+void Player::checkCollisionEnnemy(Entity& ennemy){
 
     if(this->attackHitBox.overlaps(ennemy.box)){
 

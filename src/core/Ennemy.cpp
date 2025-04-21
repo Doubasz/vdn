@@ -88,10 +88,6 @@ void Ennemy::followPlayer(Entity& player) {
 }
 
 bool Ennemy::hitWall(Entity & platform){
-
-    bool onGround = false;
-    
-   
     if(this->box.overlaps(platform.box)){
         if(this->box.bottom - velocity.y <= platform.box.top){
             this->box.setY(platform.box.top - (this->box.h));
@@ -109,11 +105,8 @@ bool Ennemy::hitWall(Entity & platform){
            
             return true;
         }
-    
     }
-
     return false;
-    
 }
 bool Ennemy::vaTomber(std::vector<std::vector<int>> &gameMap) {
     Rectangle nextpos = {this->box.x + velocity.x ,this->box.y + 1,1,1};

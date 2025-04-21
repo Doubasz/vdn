@@ -81,6 +81,7 @@ public:
     void checkOutOfBonds();
 
     void ennemyMovAuto(float deltaTime);
+    bool finJeu();
     void deroulementLevel(std::string input, float deltaTime);
 
     /// @brief Gets the player.
@@ -105,6 +106,7 @@ public:
     int getPlayerState();
     /// @brief Returns the current level number.
     int getLevel();
+    bool finLevel(Player &player);
     /// @brief Returns whether the level is completed.
     bool isLevelFinished();
 

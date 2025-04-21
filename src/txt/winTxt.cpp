@@ -117,7 +117,7 @@ void WinTXT::print(int x, int y, char *c)
     }
 }
 
-void WinTXT::draw(int x, int y)
+void WinTXT::draw(int /*x*/, int /*y*/)
 {
     int tempX = camera.x + camera.w;
     int tempY = camera.y + camera.h;

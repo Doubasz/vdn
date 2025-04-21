@@ -12,16 +12,17 @@ class GameState{
 public:
 
     enum StateCode{
-        MAIN_MENU, OPTION, LEVEL, PAUSE, GAME_OVER,
+        MAIN_MENU, OPTION, LEVEL1, LEVEL2, PAUSE, GAME_OVER,
     };
 
     //virtual ~GameState() {};
     virtual void load() = 0;
     virtual int unload() = 0;
-    virtual void handleEvents(SDL_Event& events, float dt) = 0;
+    virtual void handleEvents(SDL_Event& events) = 0;
     virtual StateCode update(float dt) = 0;
     virtual void render(SDL_Renderer* renderer) = 0;
 };
+
 
 
 #endif

@@ -74,11 +74,11 @@ const std::vector<Animation>& InGameState::getPlayerAnimation() const {
 }
 void InGameState::loadAnimations(){
 
-    int spriteWidth = 50;
-    int spriteHeight = 37;
+    //spriteWidth = 50;
+    //spriteHeight = 37;
     
-    int sheetWidth = 350;
-    int sheetHeight = 407;
+    //sheetWidth = 350;
+    //sheetHeight = 407;
 
     Animation idleAnim = {0, 4, 0, 0.3f, 0.0, true};
     Animation runAnim = {8, 6, 0, 0.1f, 0.0, true};
@@ -102,11 +102,11 @@ void InGameState::loadAnimations(){
 
 void InGameState::loadTextures(SDL_Renderer* renderer){
 
-    char* path = "textures/assets/Tiles/Assets/Assets2x.png";
-    char* pathBg = "textures/assets/Tiles/Assets/background1.png";
-    char* pathBg2 = "textures/assets/Tiles/Assets/background2.png";
-    char* pathPlayer = "textures/assets/player/adventurer-Sheet.png";
-    char* pathEnnemy = "textures/assets/ennemy/ennemySheet1.png";
+    const char* path = "textures/assets/Tiles/Assets/Assets2x.png";
+    const char* pathBg = "textures/assets/Tiles/Assets/background1.png";
+    const char* pathBg2 = "textures/assets/Tiles/Assets/background2.png";
+    const char* pathPlayer = "textures/assets/player/adventurer-Sheet.png";
+    const char* pathEnnemy = "textures/assets/ennemy/ennemySheet1.png";
 
     tileSet = loadTexture(renderer, path);
     background = loadTexture(renderer, pathBg);
@@ -119,7 +119,7 @@ void InGameState::loadTextures(SDL_Renderer* renderer){
 void InGameState::initButtons(){
 
     int screenWidth = 1400;
-    int screenHeight = 900;
+    //screenHeight = 900;
 
     int buttonWidth = 400;
     int buttonHeight = 100;
@@ -137,11 +137,11 @@ void InGameState::initButtons(){
 
 
 void InGameState::resumeGame(){
-    this->state = CONTINUE;
+    this->state = WindowState::CONTINUE;
 }
 
 void InGameState::quitGame(){
-    this->state = QUIT;
+    this->state = WindowState::QUIT;
 }
 
 
@@ -154,14 +154,15 @@ int InGameState::unload(){
     if(Mix_PlayingMusic()){
         Mix_HaltMusic();
     }
+    return 0;
 }
 
-void InGameState::handleEvents(SDL_Event& events, float deltaTime){
+void InGameState::handleEvents(SDL_Event& events){
 
     switch(events.type){
         case SDL_KEYDOWN:
             if (events.key.keysym.sym == SDLK_ESCAPE){
-                state = (state == PAUSE) ? CONTINUE : PAUSE; 
+                state = (state == WindowState::PAUSE) ? WindowState::CONTINUE : WindowState::PAUSE; 
             }
     }
 
@@ -172,9 +173,25 @@ void InGameState::handleEvents(SDL_Event& events, float deltaTime){
 
 GameState::StateCode InGameState::update(float dt){
 
+    int lvl = jeu.getCurrentLevel().getLevel();
+    GameState::StateCode ret;
+
+    switch(lvl){
+        case DESERT:
+            ret = GameState::LEVEL1;
+            break;
+        case FOREST:
+            ret = GameState::LEVEL2;
+            break;
+        default:
+            ret = GameState::LEVEL1;
+            std::cout << "InGameState::update : default case in switch attained" << std::endl;
+            break;
+    }
+
     lastPlayerState = jeu.getCurrentLevel().getPlayer().getState();
-    playBackgroundMusic(0);
-    if(state != PAUSE){
+    playBackgroundMusic();
+    if(state != WindowState::PAUSE){
         updateGame(dt);
         updateCamera(dt);
         updateEnnemyAnimation(dt);
@@ -185,7 +202,7 @@ GameState::StateCode InGameState::update(float dt){
     if(state == QUIT){
         return GameState::MAIN_MENU;
     }
-    return GameState::LEVEL;
+    return ret;
 }
 
 
@@ -242,7 +259,7 @@ void InGameState::render(SDL_Renderer* renderer){
     renderLives(renderer);
     renderTimer(renderer);
 
-    if(state == PAUSE){
+    if(state == WindowState::PAUSE){
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);              
         SDL_Rect darkOverlay = {0, 0, 1400, 900};
@@ -274,11 +291,6 @@ void InGameState::renderPlayer(SDL_Renderer* renderer){
     }
 
     Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
-    Rectangle attackHB = jeu.getCurrentLevel().getPlayer().getAttackHitBox();
-
-    SDL_Rect rect = {playerRect.x * tileSize - camera.x, playerRect.y * tileSize - camera.y, tileSize, tileSize};
-    SDL_Rect atkHB = {attackHB.x * tileSize - camera.x, attackHB.y * tileSize - camera.y, attackHB.w * tileSize, attackHB.h * tileSize};
-    
 
     int spriteWidth = 50;
     int spriteHeight = 37;
@@ -286,10 +298,6 @@ void InGameState::renderPlayer(SDL_Renderer* renderer){
     int playerWidth = 200;
     int playerHeight = 125;
 
-    int sheetWidth = 350;
-    int sheetHeight = 407;
-
-    int sprtPerCol = 407 / 37;
     int sprtPerRow = 350 / 50; 
 
 
@@ -300,20 +308,16 @@ void InGameState::renderPlayer(SDL_Renderer* renderer){
 
 
 
-    SDL_Rect dstRect = { ((playerRect.x * tileSize) - (playerWidth - tileSize) / 2) - camera.x,
-                         ((playerRect.y * tileSize) - (playerHeight - 3 - tileSize)) - camera.y,
-                    playerWidth, playerHeight};
-
-    /*int playerState = jeu.getCurrentLevel().getPlayerState();
-    drawTexture(renderer, playerTexture[playerState], playerRect);*/
-
-    
+    SDL_Rect dstRect = {
+        static_cast<int>((playerRect.x * tileSize) - (playerWidth - tileSize) / 2 - camera.x),
+        static_cast<int>((playerRect.y * tileSize) - (playerHeight - 3 - tileSize) - camera.y),
+        playerWidth,
+        playerHeight
+    };
 
     SDL_RenderCopyEx(renderer, playerSheet, &srcRect, &dstRect, 0.0, nullptr, flip);
-
-    //drawRect(renderer, rect, SDL_Color(0, 255, 0));
-    //drawRect(renderer, atkHB, SDL_Color{255, 0, 0});
 }  
+
 
 void InGameState::renderEnnemy(SDL_Renderer* renderer){
     std::vector<Ennemy> ennemies = jeu.getCurrentLevel().getEnnemies();
@@ -324,9 +328,6 @@ void InGameState::renderEnnemy(SDL_Renderer* renderer){
         SDL_RendererFlip flip = (direction == RIGHT) ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 
         Rectangle eBox = e.getBox();
-
-
-        
 
         int spriteWidth = 64;
         int spriteHeight = 64;
@@ -340,19 +341,16 @@ void InGameState::renderEnnemy(SDL_Renderer* renderer){
                             ((ennemyAnimation.startFrame + ennemyAnimation.currentFrame) / sprtPerRow) * spriteHeight,
                             spriteWidth, spriteHeight};
             
-        SDL_Rect dstRect = {((eBox.x * tileSize) - (tileSize / 2)) - camera.x,
-                            ((eBox.y * tileSize)) - 3 - camera.y,
-                            ennemyWidth, ennemyHeight};
+        SDL_Rect dstRect = {
+            static_cast<int>((eBox.x * tileSize) - (tileSize / 2) - camera.x),
+            static_cast<int>((eBox.y * tileSize) - 3 - camera.y),
+            ennemyWidth,
+            ennemyHeight
+        };
+                            
 
 
         SDL_RenderCopyEx(renderer, ennemySheet, &srcRect, &dstRect, 0.0, nullptr, flip);
-
-        SDL_Rect rect = SDL_Rect{
-            (int)(e.box.x * tileSize - camera.x),
-            (int)(e.box.y * tileSize - camera.y),
-            tileSize, tileSize
-        };
-        //drawRect(renderer,rect, SDL_Color{0,255,255});
     }
 }
 
@@ -365,18 +363,12 @@ void InGameState::renderTiles(SDL_Renderer* renderer){
         return;
     }
 
-    SDL_Color color;
-
-    SDL_Rect rect = SDL_Rect{0, 0, tileSize, tileSize};
-
     int tilesetTextureWidth = 800;
     int tilesetWidthInTiles = tilesetTextureWidth / 32;
 
-    
-
-    for(int i = 0; i < gameMap[0].size(); i++){
+    for(size_t i = 0; i < gameMap[0].size(); i++){
         
-        for(int j = 0; j < gameMap.size(); j++){
+        for(size_t j = 0; j < gameMap.size(); j++){
 
             int tileID = gameMap[j][i];
             if(tileID == NONE || tileID == PLAYER) continue;
@@ -385,24 +377,11 @@ void InGameState::renderTiles(SDL_Renderer* renderer){
             int srcX = (tileIndex % tilesetWidthInTiles) * 32;
             int srcY = (tileIndex / tilesetWidthInTiles) * 32;
 
-            /*rect.x = (int)((i * tileSize) - camera.x);
-            rect.y = (int)((j * tileSize) - camera.y);
-
-            switch(gameMap[j][i]){
-                case NONE:
-                    color = SDL_Color{100, 100, 200};
-                    break;
-            }
-
-            if(gameMap[j][i] != NONE && gameMap[j][i] != PLAYER){
-                color = SDL_Color{200, 100, 0};
-            }
-            
-
-            drawRect(renderer, rect, color);*/
-
             SDL_Rect srcRect = { srcX, srcY, 32, 32 };
-            SDL_Rect dstRect = { i * tileSize - camera.x, j * tileSize - camera.y, tileSize, tileSize };
+            SDL_Rect dstRect = { 
+                static_cast<int>(i * tileSize - camera.x),
+                static_cast<int> (j * tileSize - camera.y),
+                tileSize, tileSize };
 
             SDL_RenderCopy(renderer, tileSet, &srcRect, &dstRect);
         }
@@ -415,22 +394,14 @@ void InGameState::renderBackground(SDL_Renderer* renderer){
 
     std::vector<std::vector<int>> gameMap = jeu.getCurrentLevel().getGameMap();
 
-    Rectangle playerRect = jeu.getCurrentLevel().getPlayer().getBox();
-
-    
-
     int width = gameMap[0].size() * tileSize;
     int height = gameMap.size() * tileSize;
 
     float scrollSpeed = 0.2f;
 
-    SDL_Rect destRect = {-camera.x * 0.1, 0, width, height};
-    SDL_Rect rectBg = {-camera.x * scrollSpeed, 0, width, height};
+    SDL_Rect destRect = {static_cast<int>(-camera.x * 0.1f), 0, width, height};
+    SDL_Rect rectBg = {static_cast<int>(-camera.x * scrollSpeed), 0, width, height};
 
-    
-
-    //int textureWidth, textureHeight;
-    //SDL_QueryTexture(background, NULL, NULL, &textureWidth, &textureHeight);
     SDL_RenderCopy(renderer, background1, NULL, &destRect);
     SDL_RenderCopy(renderer, background, NULL, &rectBg);
 }
@@ -438,30 +409,68 @@ void InGameState::renderBackground(SDL_Renderer* renderer){
 
 
 void InGameState::renderLives(SDL_Renderer* renderer){
-
-}   
-void InGameState::renderTimer(SDL_Renderer* renderer){
-
-}
-
-
-
-
-SDL_Texture* loadTexture(SDL_Renderer* renderer, char* path){
-    SDL_Texture* texture;
-
-    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);
-
-    texture = IMG_LoadTexture(renderer, path);
-
-    if (!texture) {
-        std::cerr << "Failed to load texture: " << path << "\n";
-        std::cerr << "Error: " << IMG_GetError() << "\n"; 
-        exit(1);
+    if (!font) return; 
+    
+    int lives = jeu.getCurrentLevel().getPlayer().getHp();
+    std::string livesText = "Lives: " + std::to_string(lives);
+    
+    SDL_Surface* surface = TTF_RenderText_Solid(font, livesText.c_str(), textColor);
+    if (!surface) {
+        std::cout << "Unable to render text: " + std::string(TTF_GetError()) << std::endl;
+        return;
     }
+    
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (!texture) {
+        std::cout << "Unable to create texture from text: " + std::string(SDL_GetError()) << std::endl;
+        SDL_FreeSurface(surface);
+        return;
+    }
+    
+    SDL_Rect destRect = {20, 20, surface->w, surface->h};
+    SDL_RenderCopy(renderer, texture, NULL, &destRect);
+    
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
+}   
 
-    return texture;
+
+
+
+void InGameState::renderTimer(SDL_Renderer* renderer){
+    if (!font) return; 
+    
+    // Convertir le temps en minutes:secondes
+    int minutes = static_cast<int>(gameTime) / 60;
+    int seconds = static_cast<int>(gameTime) % 60;
+    
+    std::string timerText = std::to_string(minutes) + ":" + std::to_string(seconds);
+    
+    SDL_Surface* surface = TTF_RenderText_Solid(font, timerText.c_str(), textColor);
+    if (!surface) {
+        std::cout << "Unable to render timer text: " + std::string(TTF_GetError()) << std::endl;
+        return;
+    }
+    
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+    if (!texture) {
+        std::cout << "Unable to create texture from timer text: " + std::string(SDL_GetError()) << std::endl;
+        SDL_FreeSurface(surface);
+        return;
+    }
+    
+    // Position en haut à droite (SCREEN_WIDTH - largeur_texte - marge)
+    SDL_Rect destRect = {SCREEN_WIDTH - surface->w - 20, 20, surface->w, surface->h};
+    SDL_RenderCopy(renderer, texture, NULL, &destRect);
+    
+    SDL_FreeSurface(surface);
+    SDL_DestroyTexture(texture);
 }
+
+
+
+
+
 
 
 void InGameState::updateAnimation(float deltaTime){
@@ -487,15 +496,6 @@ void InGameState::updateAnimation(float deltaTime){
     if(lastPlayerState != stateAnim){
         currentAnimation = playerAnimation[stateAnim];
     }
-
-    
-
-    //setAnimation(stateAnim);
-
-    
-    /*switch(state){
-        case IDLE:
-    }*/
 }
 
 void InGameState::updateEnnemyAnimation(float deltaTime){
@@ -583,7 +583,7 @@ int InGameState::loadSounds(int niveau) {
     return 0;
 }
 
-int InGameState::playBackgroundMusic(int niveau) {
+int InGameState::playBackgroundMusic() {
 
     if(state == PAUSE){
         Mix_VolumeMusic(8);
@@ -664,4 +664,21 @@ void InGameState::playSound(std::string input){
         Mix_VolumeChunk(gotHit, 128);
         Mix_PlayChannel(-1,gotHit,0);
     }
+}
+
+
+SDL_Texture* loadTexture(SDL_Renderer* renderer, const char* path){
+    SDL_Texture* texture;
+
+    SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", path);
+
+    texture = IMG_LoadTexture(renderer, path);
+
+    if (!texture) {
+        std::cerr << "Failed to load texture: " << path << "\n";
+        std::cerr << "Error: " << IMG_GetError() << "\n"; 
+        exit(1);
+    }
+
+    return texture;
 }

@@ -45,6 +45,9 @@ void Level::unloadLevel(){
     tileMap.clear();
     gameMap.clear();
 
+    ennemies.clear();
+    platforms.clear();
+
 }
 
 
@@ -87,7 +90,7 @@ void Level::loadTileMap(){
 
     switch(level){
         case DESERT:
-            path = "/home/hanni/Desktop/fac/LIFAPP/projet/dos/vent-du-nord/scripts/mapGeneration/map3.txt";
+            path = "scripts/mapGeneration/map3.txt";
     }
 
     if(!path.empty()){
@@ -122,14 +125,12 @@ void Level::loadGameMap(int lvl){
 
     switch(lvl){
         case DESERT:
-            path = "scripts/mapGeneration/desert.txt";
+            path = "scripts/mapGeneration/level1.txt";
             break;
         case FOREST:
             path = "scripts/mapGeneration/level1.txt";
             break;
-        case CITY:
-            path = "scripts/mapGeneration/level1.txt";
-            break;
+        
     }
 
     std::ifstream file(path);
@@ -157,7 +158,9 @@ void Level::loadGameMap(int lvl){
 
 // Check if a coordinate is inside the map bounds
 bool inBounds(int i, int j, const std::vector<std::vector<int>>& map) {
-    return i >= 0 && j >= 0 && i < map.size() && j < map[0].size();
+    return i >= 0 && j >= 0 &&
+           static_cast<size_t>(i) < map.size() &&
+           static_cast<size_t>(j) < map[0].size();
 }
 
 // Check if any of the 4 neighbors of (i, j) are NONE
@@ -183,8 +186,8 @@ void Level::initEntities(){
 
     
 
-    for(int i = 0; i < gameMap[0].size(); i++){
-        for(int j = 0; j < gameMap.size(); j++){
+    for(size_t i = 0; i < gameMap[0].size(); i++){
+        for(size_t j = 0; j < gameMap.size(); j++){
             //std:: cout << "x : " << gameMap.size() << " y : " << gameMap[0].size() << std::endl;
             //std::cout<< "i : " << i << " j : " << j << std::endl;
             switch(gameMap[j][i]){
@@ -266,10 +269,18 @@ void Level::ennemyMovAuto(float deltaTime) {
 
 
 
-
+bool Level::finJeu(){
+    if(level == FOREST){
+        if(isLevelCompleted)
+            return true;
+        
+    }
+    return false;
+}
 
 void Level::deroulementLevel(std::string input, float deltaTime){
 
+    isLevelCompleted = finLevel(player);
     player.seDeplacer(input);
 
     
@@ -294,7 +305,7 @@ void Level::deroulementLevel(std::string input, float deltaTime){
     
     
     for(Ennemy& e : ennemies){
-        player.checkCollisionEnnemy(e, deltaTime);
+        player.checkCollisionEnnemy(e);
     }
     
     
@@ -315,6 +326,21 @@ int Level::getPlayerState(){
 
 int Level::getLevel(){
     return level;
+}
+
+bool Level::finLevel (Player& player){
+    if(level == DESERT ){
+        if(player.getBox(). x > 199.8){
+            return true;
+        }
+        return false;
+    }else if(level == FOREST){
+        if(player.getBox().x > 59.8){
+            return true;
+        }
+        return false;
+    }
+    return false;
 }
 
 bool Level::isLevelFinished(){
