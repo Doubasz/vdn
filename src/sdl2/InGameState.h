@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL_mixer.h>
 #include "GameState.h"
+#include <SDL2/SDL_image.h>
 #include "../core/Jeu.h"
 #include "../core/Camera.h"
 #include "Button.h"
@@ -12,7 +13,7 @@
 #define SCREEN_HEIGHT 900
 
 enum WindowState{
-    CONTINUE, PAUSE, QUIT,
+    CONTINUE, PAUSE, QUIT, END
 };
 
 struct Animation{
@@ -85,6 +86,8 @@ public:
     SDL_Texture *getTileSet() const;
     int unload() override;
     void handleEvents(SDL_Event& events) override;
+    void renderGameOverScreen(SDL_Renderer *renderer);
+   
     StateCode update(float dt) override;
     void render(SDL_Renderer* renderer) override;
 

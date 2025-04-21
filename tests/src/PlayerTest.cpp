@@ -81,7 +81,7 @@ TEST_F(PlayerTest, PlatformCollision) {
     
     // Positionner le joueur au-dessus de la plateforme
     player.changePosition(12, 15);
-    player.changeVelocity(0, 5); // Tomber vers la plateforme
+    player.setVel(0, 5); // Tomber vers la plateforme
     player.setOnGround(false);
     
     bool collision = player.checkPlatformCollision(platform);
@@ -113,7 +113,7 @@ TEST_F(PlayerTest, TakeDamage) {
     Entity enemy;
     enemy.box = Rectangle(player.box.x + 0.5, player.box.y, 1, 1);
     
-    player.checkCollisionEnnemy(enemy, 0.1f);
+    player.checkCollisionEnnemy(enemy);
     
     // Si le joueur prend des dégâts, canGetHit devrait devenir false
     if (player.hp < initialHp) {
@@ -136,7 +136,7 @@ TEST_F(PlayerTest, ChangePosition) {
 
 // Test de la fonction de mise à jour
 TEST_F(PlayerTest, Update) {
-    player.changeVelocity(5, -5);
+    player.setVel(5, -5);
     player.setOnGround(false);
     float deltaTime = 0.1f;
     float initialX = player.box.x;
