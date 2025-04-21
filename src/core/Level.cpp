@@ -45,6 +45,9 @@ void Level::unloadLevel(){
     tileMap.clear();
     gameMap.clear();
 
+    ennemies.clear();
+    platforms.clear();
+
 }
 
 

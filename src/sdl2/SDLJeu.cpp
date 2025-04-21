@@ -112,8 +112,13 @@ void SDLJeu::loadState(GameState::StateCode state){
             currentState = std::make_unique<MenuState>(renderer, font);
             static_cast<MenuState*>(currentState.get())->load();
             break;
-        case GameState::StateCode::LEVEL:
+        case GameState::StateCode::LEVEL1:
             currentState = std::make_unique<InGameState>(renderer, font ,DESERT);
+            static_cast<InGameState*>(currentState.get())->load();
+            break;
+        
+        case GameState::StateCode::LEVEL2:
+            currentState = std::make_unique<InGameState>(renderer, font , FOREST);
             static_cast<InGameState*>(currentState.get())->load();
             break;
         default:

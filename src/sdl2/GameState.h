@@ -12,7 +12,7 @@ class GameState{
 public:
 
     enum StateCode{
-        MAIN_MENU, OPTION, LEVEL, PAUSE, GAME_OVER,
+        MAIN_MENU, OPTION, LEVEL1, LEVEL2, PAUSE, GAME_OVER,
     };
 
     //virtual ~GameState() {};
