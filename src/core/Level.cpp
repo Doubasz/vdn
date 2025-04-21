@@ -125,7 +125,7 @@ void Level::loadGameMap(int lvl){
 
     switch(lvl){
         case DESERT:
-            path = "scripts/mapGeneration/level1.txt";
+            path = "scripts/mapGeneration/desert.txt";
             break;
         case FOREST:
             path = "scripts/mapGeneration/level1.txt";
@@ -306,7 +306,16 @@ void Level::deroulementLevel(std::string input, float deltaTime){
     
     for(Ennemy& e : ennemies){
         player.checkCollisionEnnemy(e);
+        
     }
+
+    for (auto it = ennemies.begin(); it != ennemies.end(); ++it) {
+        if (!it->isAlive) {
+            ennemies.erase(it);
+            break;
+        }
+    }
+    
     
     
     ennemyMovAuto(deltaTime);

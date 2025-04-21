@@ -15,6 +15,8 @@ MenuState::MenuState(){
 MenuState::MenuState(SDL_Renderer* renderer, TTF_Font* font){
     this->renderer = renderer;
     this->font = font;
+
+    state = WindowStat::NORMAL;
 }
 
 

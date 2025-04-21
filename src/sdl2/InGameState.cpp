@@ -8,6 +8,9 @@ InGameState::InGameState(): moveTimer(0.3), attacksound(0.5){
     blinkInterval = 1;
     state = CONTINUE;
 
+    deathTimer = 0.0f;
+    deathDuration = 2.0f;
+
     this->renderer = nullptr;
 }
 
@@ -107,12 +110,14 @@ void InGameState::loadTextures(SDL_Renderer* renderer){
     const char* pathBg2 = "textures/assets/Tiles/Assets/background2.png";
     const char* pathPlayer = "textures/assets/player/adventurer-Sheet.png";
     const char* pathEnnemy = "textures/assets/ennemy/ennemySheet1.png";
+    const char* pathDeath = "textures/darkSouls.png";
 
     tileSet = loadTexture(renderer, path);
     background = loadTexture(renderer, pathBg);
     background1 = loadTexture(renderer, pathBg2);
     playerSheet = loadTexture(renderer, pathPlayer);
     ennemySheet = loadTexture(renderer, pathEnnemy);
+    deathBackground = loadTexture(renderer, pathDeath);
 }
 
 
@@ -191,18 +196,37 @@ GameState::StateCode InGameState::update(float dt){
 
     lastPlayerState = jeu.getCurrentLevel().getPlayer().getState();
     playBackgroundMusic();
-    if(state != WindowState::PAUSE){
+    if(state == WindowState::CONTINUE){
         updateGame(dt);
         updateCamera(dt);
         updateEnnemyAnimation(dt);
         updateAnimation(dt);
     }
 
+    bool isAlive = jeu.getCurrentLevel().getPlayer().getIsAlive();
 
-    if(state == QUIT){
+    if(!isAlive){
+        state = WindowState::DEAD;
+    }
+
+    if(state == WindowState::DEAD){
+        updateDeath(dt);
+    }
+
+    if(state == WindowState::QUIT){
         return GameState::MAIN_MENU;
     }
     return ret;
+}
+
+
+void InGameState::updateDeath(float deltaTime){
+    if(deathTimer < deathDuration){
+        deathTimer += deltaTime;
+        if(deathTimer >= deathDuration){
+            state = WindowState::QUIT;
+        }
+    }
 }
 
 
@@ -268,8 +292,18 @@ void InGameState::render(SDL_Renderer* renderer){
         renderButtons();
     }
 
+    if(state == WindowState::DEAD){
+        renderDeathScreen(renderer);
+    }
+
     SDL_RenderPresent(renderer);
     
+}
+
+
+void InGameState::renderDeathScreen(SDL_Renderer* renderer){
+    SDL_Rect rect = {0, (900 / 2) - 225, 1400, 450};
+    SDL_RenderCopy(renderer, deathBackground, NULL, &rect);
 }
 
 
