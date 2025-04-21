@@ -8,6 +8,11 @@
 #include <cassert>
 
 class MenuState : public GameState {
+
+    enum WindowStat{
+        NORMAL, LEVELS, OPTION
+    };
+
 private:
 
     SDL_Renderer* renderer;
@@ -15,6 +20,8 @@ private:
 
     SDL_Texture* background;
     std::vector<Button> buttons;
+
+    std::vector<Button> lvlButtons;
 
     Mix_Music* music;
 
@@ -39,10 +46,15 @@ public:
     void load_music();
     int playBackgroundMusic();
     void renderButtons();
+    void renderLevelButtons();
 
     void loadTextures();
 
     void startGame();
+    void chooseLevel();
+    void options();
+    void startLevel1();
+    void startLevel2();
 
 };
 

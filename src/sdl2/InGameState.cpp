@@ -137,11 +137,11 @@ void InGameState::initButtons(){
 
 
 void InGameState::resumeGame(){
-    this->state = CONTINUE;
+    this->state = WindowState::CONTINUE;
 }
 
 void InGameState::quitGame(){
-    this->state = QUIT;
+    this->state = WindowState::QUIT;
 }
 
 
@@ -173,9 +173,25 @@ void InGameState::handleEvents(SDL_Event& events){
 
 GameState::StateCode InGameState::update(float dt){
 
+    int lvl = jeu.getCurrentLevel().getLevel();
+    GameState::StateCode ret;
+
+    switch(lvl){
+        case DESERT:
+            ret = GameState::LEVEL1;
+            break;
+        case FOREST:
+            ret = GameState::LEVEL2;
+            break;
+        default:
+            ret = GameState::LEVEL1;
+            std::cout << "InGameState::update : default case in switch attained" << std::endl;
+            break;
+    }
+
     lastPlayerState = jeu.getCurrentLevel().getPlayer().getState();
     playBackgroundMusic();
-    if(state != PAUSE){
+    if(state != WindowState::PAUSE){
         updateGame(dt);
         updateCamera(dt);
         updateEnnemyAnimation(dt);
@@ -186,7 +202,7 @@ GameState::StateCode InGameState::update(float dt){
     if(state == QUIT){
         return GameState::MAIN_MENU;
     }
-    return GameState::LEVEL;
+    return ret;
 }
 
 
@@ -243,7 +259,7 @@ void InGameState::render(SDL_Renderer* renderer){
     renderLives(renderer);
     renderTimer(renderer);
 
-    if(state == PAUSE){
+    if(state == WindowState::PAUSE){
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 150);              
         SDL_Rect darkOverlay = {0, 0, 1400, 900};

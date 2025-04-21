@@ -8,6 +8,8 @@
 MenuState::MenuState(){
     this->renderer = nullptr;
     this->font = nullptr;
+
+    state = WindowStat::NORMAL;
 }
 
 MenuState::MenuState(SDL_Renderer* renderer, TTF_Font* font){
@@ -49,10 +51,24 @@ void MenuState::initButtons(){
     // [this]() { runPerft(); };
     b1.setOnClick([this]() {startGame();});
 
-    Button b2 = {(screenWidth / 2) - (buttonWidth / 2), 500, buttonWidth, buttonHeight, "Options", SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{0xFF, 0xFF, 0xFF, 255}, font, renderer};
-    
+    Button b2 = {(screenWidth / 2) - (buttonWidth / 2), 500, buttonWidth, buttonHeight, "Levels", SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{0xFF, 0xFF, 0xFF, 255}, font, renderer};
+    b2.setOnClick([this]() {chooseLevel();});
+
+    Button b3 = {(screenWidth / 2) - (buttonWidth / 2), 650, buttonWidth, buttonHeight, "Options", SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{0xFF, 0xFF, 0xFF, 255}, font, renderer};
+    b3.setOnClick([this]() {options();});
+
     buttons.push_back(std::move(b1));
     buttons.push_back(std::move(b2));
+    buttons.push_back(std::move(b3));
+
+    Button b4 = {(screenWidth / 2) - (buttonWidth / 2), 350, buttonWidth, buttonHeight, "Level 1", SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{0xFF, 0xFF, 0xFF, 255}, font, renderer};
+    b4.setOnClick([this]() {startLevel1();});
+
+    Button b5 = {(screenWidth / 2) - (buttonWidth / 2), 500, buttonWidth, buttonHeight, "Level 2", SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{100, 100, 255, 255}, SDL_Color{0xFF, 0xFF, 0xFF, 255}, font, renderer};
+    b5.setOnClick([this]() {startLevel2();});
+
+    lvlButtons.push_back(std::move(b4));
+    lvlButtons.push_back(std::move(b5));
 
 }
 
@@ -65,12 +81,26 @@ void MenuState::loadTextures(){
 }
 
 
-
-
-
 void MenuState::startGame(){
-    whatToDoNow = GameState::LEVEL;
+    whatToDoNow = GameState::LEVEL1;
 }
+
+void MenuState::chooseLevel(){
+    this->state = LEVELS;
+}
+
+void MenuState::options(){
+    //this->state = OPTION;
+}
+
+void MenuState::startLevel1(){
+    whatToDoNow = GameState::LEVEL1;
+}
+
+void MenuState::startLevel2(){
+    whatToDoNow = GameState::LEVEL2;
+}
+
 
 MenuState::~MenuState(){
     //delete background;
@@ -98,16 +128,30 @@ GameState::StateCode MenuState::update(float /*dt*/){
 
 
 void MenuState::handleEvents(SDL_Event& events){
-    for(Button& b : buttons){
-        b.handleEvent(events);
+
+    if(state == WindowStat::NORMAL){
+        for(Button& b : buttons){
+            b.handleEvent(events);
+        }
     }
+    else if (state == WindowStat::LEVELS){
+        for(Button& b : lvlButtons){
+            b.handleEvent(events);
+        }
+    }
+    
 }
 
 
 void MenuState::render(SDL_Renderer* renderer) {
 
     renderBackground(renderer);
-    renderButtons();
+    if(state == WindowStat::NORMAL){
+        renderButtons();
+    }
+    else if (state == WindowStat::LEVELS){
+        renderLevelButtons();
+    }
 
     SDL_RenderPresent(renderer);
 }
@@ -115,6 +159,12 @@ void MenuState::render(SDL_Renderer* renderer) {
 
 void MenuState::renderButtons(){
     for(Button& b : buttons){
+        b.render();
+    }
+}
+
+void MenuState::renderLevelButtons(){
+    for(Button& b : lvlButtons){
         b.render();
     }
 }
